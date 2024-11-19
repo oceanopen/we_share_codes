@@ -1,0 +1,22 @@
+{
+    "name": "docs",
+    "type": "module",
+    "version": "0.0.0",
+    "private": true,
+    "description": "文档",
+    "preferGlobal": true,
+    "license": "MIT",
+    "keywords": [
+        "文档",
+        "技术"
+    ],
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build",
+        "build:prod": "vitepress build --base=/docs/",
+        "preview": "vitepress preview"
+    },
+    "devDependencies": {
+        "vitepress": "1.5.0"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "name": "we_share_code",
+    "type": "module",
+    "version": "0.0.0",
+    "private": true,
+    "packageManager": "pnpm@8.15.5",
+    "description": "技术分享",
+    "preferGlobal": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "技术",
+        "分享"
+    ],
+    "scripts": {
+        "bootstrap": "pnpm i",
+        "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
+        "docs:dev": "cd packages/docs && pnpm dev",
+        "docs:build": "cd packages/docs && pnpm build",
+        "docs:preview": "cd packages/docs && pnpm build && pnpm preview",
+        "lint": "eslint --fix",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+        "hooks:sync": "simple-git-hooks"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^3.9.1",
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "commitizen": "^4.3.1",
+        "conventional-changelog-cli": "^5.0.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^9.14.0",
+        "lint-staged": "^15.2.10",
+        "simple-git-hooks": "^2.11.1"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "npx lint-staged",
+        "commit-msg": "npx commitlint --edit $1"
+    },
+    "lint-staged": {
+        "*.{js,jsx,vue,ts,tsx}": [
+            "npm run lint"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}
