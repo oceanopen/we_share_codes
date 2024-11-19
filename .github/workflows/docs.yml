@@ -33,9 +33,7 @@ jobs:
 
             # This project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
             - name: Npm Install and Build 🔧
-              run: |
-                  npm i -g pnpm && pnpm i && pnpm docs:build
-                  mkdir -p /data/web/static/we_share_code/docs
+              run: npm i -g pnpm && pnpm i && pnpm docs:build
 
             - name: Deploy to Server
               uses: easingthemes/ssh-deploy@main # https://github.com/marketplace/actions/ssh-deploy
@@ -51,4 +49,4 @@ jobs:
                   # 腾讯云默认用户名为 root
                   REMOTE_USER: root
                   # 目标目录
-                  TARGET: /data/web/static/we_share_code/docs
+                  TARGET: /data/web/static/${{ github.event.repository.name }}/docs
