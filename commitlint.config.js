@@ -4,7 +4,7 @@
 export default {
     'extends': ['@commitlint/config-conventional'],
     'rules': {
-        'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert', 'release', 'build', 'workflow']],
+        'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert', 'release', 'build', 'ci']],
     },
     'type-case': [0],
     'type-empty': [0],
