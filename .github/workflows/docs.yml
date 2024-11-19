@@ -16,6 +16,12 @@ jobs:
     run:
         name: Docs Build & Deploy
         runs-on: ubuntu-latest
+
+        env:
+            # 配置: https://github.com/oceanopen/we_share_code/settings/secrets/actions
+            remote_ssh_key: ${{ secrets.CVM_PRIVATE_KEY }}
+            remote_host: ${{ secrets.CVM_IP }}
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4 # https://github.com/marketplace/actions/checkout
@@ -27,10 +33,13 @@ jobs:
 
             # This project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
             - name: Npm Install and Build 🔧
-              run: npm i -g pnpm && pnpm i && pnpm docs:build
+              run: |
+                  npm i -g pnpm && pnpm i && pnpm docs:build
+                  mkdir -p /data/web/static/we_share_code/docs
 
             - name: Deploy to Server
               uses: easingthemes/ssh-deploy@main # https://github.com/marketplace/actions/ssh-deploy
+              if: env.remote_ssh_key && env.remote_host
               with:
                   # 本地 .ssh 文件下的私钥 id_rsa，存在 secrets 的 TOKEN 中
                   SSH_PRIVATE_KEY: ${{ secrets.CVM_PRIVATE_KEY }}
