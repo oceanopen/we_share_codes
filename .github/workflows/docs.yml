@@ -8,9 +8,9 @@ on:
         branches:
             - main
             - ci_workflow_deploy_site
-        paths:
-            - packages/docs/**/**
-            - package.json
+        # paths:
+        #     - packages/docs/**/**
+        #     - package.json
 
 jobs:
     run:
