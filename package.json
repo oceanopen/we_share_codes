@@ -15,19 +15,21 @@
         "分享"
     ],
     "scripts": {
+        "prepare": "simple-git-hooks",
         "bootstrap": "pnpm i",
         "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
         "docs:dev": "cd packages/docs && pnpm dev",
         "docs:build": "cd packages/docs && pnpm build",
         "docs:preview": "cd packages/docs && pnpm build && pnpm preview",
+        "release": "bumpp",
         "lint": "eslint --fix",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "hooks:sync": "simple-git-hooks"
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
     },
     "devDependencies": {
         "@antfu/eslint-config": "^3.9.1",
         "@commitlint/cli": "^19.5.0",
         "@commitlint/config-conventional": "^19.5.0",
+        "bumpp": "^9.8.1",
         "commitizen": "^4.3.1",
         "conventional-changelog-cli": "^5.0.0",
         "cz-conventional-changelog": "^3.3.0",
