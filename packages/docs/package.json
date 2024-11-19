@@ -12,7 +12,7 @@
     ],
     "scripts": {
         "dev": "vitepress dev",
-        "build": "vitepress build",
+        "build:local": "vitepress build",
         "build:prod": "vitepress build --base=/docs/",
         "preview": "vitepress preview"
     },
