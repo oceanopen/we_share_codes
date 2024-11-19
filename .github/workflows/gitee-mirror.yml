@@ -52,6 +52,6 @@ jobs:
           # 默认为 account_type，源账户类型，可以设置为 org（组织）或者 user（用户）。
           src_account_type: "org"
           # 默认为 account_type，目的账户类型，可以设置为 org（组织）或者 user（用户）。
-          dst_account_type: "user"
+          dst_account_type: "org"
           # 默认为 https, 可以设置为 ssh 或者 https。当设置为 ssh 时，你需要将 dst_key 所对应的公钥同时配置到源端和目的端。
           clone_style: "https"
