@@ -10,6 +10,7 @@ on:
         paths:
             - packages/docs/**/**
             - package.json
+            - .github/workflows/docs.yml
 
 jobs:
     run:
@@ -48,4 +49,4 @@ jobs:
                   # 腾讯云默认用户名为 root
                   REMOTE_USER: root
                   # 目标目录
-                  TARGET: /data/web/static/${{ github.event.repository.name }}/docs
+                  TARGET: /data/web/${{ github.event.repository.name }}/docs
