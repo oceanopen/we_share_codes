@@ -1,4 +1,4 @@
-## Windows 在线安装 Nvm & Node
+# Windows 在线安装 Nvm & Node
 
 ### 1. Nvm 介绍
 
