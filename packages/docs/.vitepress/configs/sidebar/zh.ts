@@ -70,6 +70,10 @@ export const zh = {
                             text: 'iTerm2 支持 rz 和 sz',
                             link: '/tools/20220812_Mac使用/009_iTerm2支持rz和sz/',
                         },
+                        {
+                            text: 'Go 1.16 中关于 go_get 和 go_install',
+                            link: '/tools/20220812_Mac使用/010_Go1.16中关于go_get和go_install/',
+                        },
                     ],
                 },
             ],
