@@ -19,8 +19,9 @@ jobs:
 
         env:
             # 配置: https://github.com/oceanopen/we_share_code/settings/secrets/actions
-            remote_ssh_key: ${{ secrets.CVM_PRIVATE_KEY }}
             remote_host: ${{ secrets.CVM_IP }}
+            remote_user: ${{ secrets.CVM_USER_NAME }}
+            remote_ssh_key: ${{ secrets.CVM_PRIVATE_KEY }}
 
         steps:
             - name: Checkout
@@ -37,16 +38,16 @@ jobs:
 
             - name: Deploy to Server
               uses: easingthemes/ssh-deploy@main # https://github.com/marketplace/actions/ssh-deploy
-              if: env.remote_ssh_key && env.remote_host
+              if: env.remote_host && env.remote_user && env.remote_ssh_key
               with:
+                  # 服务器域名
+                  REMOTE_HOST: ${{ secrets.CVM_IP }}
+                  # 腾讯云默认用户名为 root
+                  REMOTE_USER: ${{ secrets.CVM_USER_NAME }}
                   # 本地 .ssh 文件下的私钥 id_rsa，存在 secrets 的 TOKEN 中
                   SSH_PRIVATE_KEY: ${{ secrets.CVM_PRIVATE_KEY }}
                   # 复制操作的参数。"-avzr --delete" 意味部署时清空服务器目标目录下的文件
                   # 源目录，相对于 $GITHUB_WORKSPACE 根目录的路径
                   SOURCE: packages/docs/dist/
-                  # 服务器域名
-                  REMOTE_HOST: ${{ secrets.CVM_IP }}
-                  # 腾讯云默认用户名为 root
-                  REMOTE_USER: ${{ secrets.CVM_USER_NAME }}
                   # 目标目录
                   TARGET: /data/web/${{ github.event.repository.name }}/docs
