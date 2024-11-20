@@ -78,6 +78,10 @@ export const zh = {
                             text: 'Mac 卸载 Go',
                             link: '/tools/20220812_Mac使用/011_Mac卸载Go/',
                         },
+                        {
+                            text: 'Mac 确定架构类型',
+                            link: '/tools/20220812_Mac使用/012_Mac确定架构类型/',
+                        },
                     ],
                 },
             ],
