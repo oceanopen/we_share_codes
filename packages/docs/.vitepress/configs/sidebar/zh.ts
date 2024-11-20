@@ -15,18 +15,12 @@ export const zh = {
             link: '/tools/',
         },
         {
-            text: 'Git 配置',
-            collapsed: false,
-            items: [
-                {
-                    text: 'Git 支持多用户',
-                    link: '/tools/20210525_Git支持多用户/',
-                },
-                {
-                    text: 'Git 常用命令总结',
-                    link: '/tools/20210804_Git常用命令总结/',
-                },
-            ],
+            text: 'Git 支持多用户',
+            link: '/tools/20210525_Git支持多用户/',
+        },
+        {
+            text: 'Git 常用命令总结',
+            link: '/tools/20210804_Git常用命令总结/',
         },
         {
             text: 'Nodejs 写 Bash 脚本实践方案',
