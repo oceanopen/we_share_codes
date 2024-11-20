@@ -34,6 +34,16 @@ export const zh = {
                     text: 'Windows 在线安装 Nvm & Node',
                     link: '/tools/20220808_Windows在线安装Nvm+Node/',
                 },
+                {
+                    text: 'Mac 使用',
+                    collapsed: false,
+                    items: [
+                        {
+                            text: '001_常见问题',
+                            link: '/tools/20220812_Mac使用/001_常见问题/',
+                        },
+                    ],
+                },
             ],
         },
     ],
