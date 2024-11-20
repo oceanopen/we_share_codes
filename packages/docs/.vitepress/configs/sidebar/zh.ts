@@ -66,6 +66,10 @@ export const zh = {
                             text: 'Mac 安装 BurpSuite',
                             link: '/tools/20220812_Mac使用/008_Mac安装BurpSuite/',
                         },
+                        {
+                            text: 'iTerm2 支持 rz 和 sz',
+                            link: '/tools/20220812_Mac使用/009_iTerm2支持rz和sz/',
+                        },
                     ],
                 },
             ],
