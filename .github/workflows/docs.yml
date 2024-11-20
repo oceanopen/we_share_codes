@@ -47,6 +47,6 @@ jobs:
                   # 服务器域名
                   REMOTE_HOST: ${{ secrets.CVM_IP }}
                   # 腾讯云默认用户名为 root
-                  REMOTE_USER: root
+                  REMOTE_USER: ${{ secrets.CVM_USER_NAME }}
                   # 目标目录
                   TARGET: /data/web/${{ github.event.repository.name }}/docs
