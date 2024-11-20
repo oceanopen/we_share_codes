@@ -50,6 +50,10 @@ export const zh = {
                             text: 'Mac 设置环境变量 PATH 和查看 PATH',
                             link: '/tools/20220812_Mac使用/003_Mac设置环境变量PATH和查看PATH/',
                         },
+                        {
+                            text: 'Mac 下安装 Go 开发环境',
+                            link: '/tools/20220812_Mac使用/004_Mac下安装Go开发环境/',
+                        },
                     ],
                 },
             ],
