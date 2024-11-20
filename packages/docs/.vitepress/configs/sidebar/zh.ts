@@ -54,6 +54,18 @@ export const zh = {
                             text: 'Mac 下安装 Go 开发环境',
                             link: '/tools/20220812_Mac使用/004_Mac下安装Go开发环境/',
                         },
+                        {
+                            text: 'Mac 安装蚁剑',
+                            link: '/tools/20220812_Mac使用/005_Mac安装蚁剑/',
+                        },
+                        {
+                            text: 'Mac 安装 php',
+                            link: '/tools/20220812_Mac使用/006_Mac安装php/',
+                        },
+                        {
+                            text: 'Mac 安装 BurpSuite',
+                            link: '/tools/20220812_Mac使用/008_Mac安装BurpSuite/',
+                        },
                     ],
                 },
             ],
