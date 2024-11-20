@@ -17,13 +17,13 @@
 
 2. 进入下载页面
 
-![001_点击跳转下载页.png](./images/001_点击跳转下载页.png)
+![](./images/001_点击跳转下载页.png)
 
 其实也可以[直接到下载页](https://github.com/coreybutler/nvm-windows/releases)
 
 3. 点击下载安装包
 
-![002_点击下载.png](./images/002_点击下载.png)
+![](./images/002_点击下载.png)
 
 ### 3. 安装 Nvm
 
@@ -31,11 +31,11 @@
 
 可设置 nvm 的安装路径：
 
-![003_Nvm安装路径设置.png](./images/003_Nvm安装路径设置.png)
+![](./images/003_Nvm安装路径设置.png)
 
 可设置 node 的安装路径：
 
-![004_Node安装路径.png](./images/004_Node安装路径.png)
+![](./images/004_Node安装路径.png)
 
 ### 4. 检查 Nvm 是否安装成功
 

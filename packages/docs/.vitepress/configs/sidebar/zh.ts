@@ -39,8 +39,12 @@ export const zh = {
                     collapsed: false,
                     items: [
                         {
-                            text: '001_常见问题',
+                            text: '常见问题',
                             link: '/tools/20220812_Mac使用/001_常见问题/',
+                        },
+                        {
+                            text: 'Mac 中 .bash_profile 和 .zshrc 区别',
+                            link: '/tools/20220812_Mac使用/002_Mac中.bash_profile和.zshrc区别/',
                         },
                     ],
                 },

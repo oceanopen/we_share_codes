@@ -36,13 +36,13 @@ echo $PATH
 
 - `Command + D`
 
-![001_iTerm当前窗口分屏.png](./images/001_iTerm当前窗口分屏.png)
+![](./images/001_iTerm当前窗口分屏.png)
 
 `iTerm` 新建 tab 窗口:
 
 - `Commnd + T`
 
-![002_iTerm新建tab窗口.png](./images/002_iTerm新建tab窗口.png)
+![](./images/002_iTerm新建tab窗口.png)
 
 ### 2.6 iTerm 设置默认窗口大小
 
@@ -51,7 +51,7 @@ echo $PATH
 3. 选择 `Profiles`
 4. `Windows` 设置
 
-![003_iTerm设置window.png](./images/003_iTerm设置window.png)
+![](./images/003_iTerm设置window.png)
 
 ## 2. Mac 设置 ssh 连接检测，保持连接
 
