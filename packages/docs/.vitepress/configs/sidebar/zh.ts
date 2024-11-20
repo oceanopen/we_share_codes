@@ -82,6 +82,10 @@ export const zh = {
                             text: 'Mac 确定架构类型',
                             link: '/tools/20220812_Mac使用/012_Mac确定架构类型/',
                         },
+                        {
+                            text: 'Mac 设置终端代理',
+                            link: '/tools/20220812_Mac使用/013_Mac设置终端代理/',
+                        },
                     ],
                 },
             ],
