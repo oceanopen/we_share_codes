@@ -311,6 +311,6 @@ npx ts-node test_zx_ts.ts
 # end
 ```
 
-## 5. 参考文章
+## 5. 参考链接
 
 - [👏 nodejs 写 bash 脚本终极方案！](https://juejin.cn/post/6979989936137043999)

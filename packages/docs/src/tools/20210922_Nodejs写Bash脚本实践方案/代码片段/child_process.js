@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const { exec } = require('node:child_process');
 
 exec('ls -la', (error, stdout, stderr) => {

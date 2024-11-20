@@ -1,5 +1,3 @@
-// #!/usr/bin/env node
-
 import { promises as fs } from 'node:fs';
 import process from 'node:process';
 import chalk from 'chalk';

@@ -1,5 +1,3 @@
-#!/usr/bin/env zx
-
 // 可以通过显式导入来使用 $ 和其他函数
 import { $ } from 'zx';
 

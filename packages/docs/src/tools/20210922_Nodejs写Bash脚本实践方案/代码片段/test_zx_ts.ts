@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { $ } from 'zx';
 // Or
 // import 'zx/globals'
