@@ -46,6 +46,10 @@ export const zh = {
                             text: 'Mac 中 .bash_profile 和 .zshrc 区别',
                             link: '/tools/20220812_Mac使用/002_Mac中.bash_profile和.zshrc区别/',
                         },
+                        {
+                            text: 'Mac 设置环境变量 PATH 和查看 PATH',
+                            link: '/tools/20220812_Mac使用/003_Mac设置环境变量PATH和查看PATH/',
+                        },
                     ],
                 },
             ],
