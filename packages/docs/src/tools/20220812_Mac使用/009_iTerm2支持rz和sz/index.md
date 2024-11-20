@@ -1,5 +1,3 @@
-[TOC]
-
 # iTerm2 支持 rz 和 sz
 
 ## 1. 安装 lrzsz
