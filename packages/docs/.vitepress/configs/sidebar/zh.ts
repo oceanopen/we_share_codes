@@ -30,6 +30,10 @@ export const zh = {
                     text: 'Nodejs 写 Bash 脚本实践方案',
                     link: '/tools/20210922_Nodejs写Bash脚本实践方案/',
                 },
+                {
+                    text: 'Windows 在线安装 Nvm & Node',
+                    link: '/tools/20220808_Windows在线安装Nvm+Node/',
+                },
             ],
         },
     ],
