@@ -86,6 +86,10 @@ export const zh = {
                             text: 'Mac 设置终端代理',
                             link: '/tools/20220812_Mac使用/013_Mac设置终端代理/',
                         },
+                        {
+                            text: 'Mac 手动更新 oh-my-zsh',
+                            link: '/tools/20220812_Mac使用/014_Mac手动更新oh-my-zsh/',
+                        },
                     ],
                 },
             ],
