@@ -74,6 +74,10 @@ export const zh = {
                             text: 'Go 1.16 中关于 go_get 和 go_install',
                             link: '/tools/20220812_Mac使用/010_Go1.16中关于go_get和go_install/',
                         },
+                        {
+                            text: 'Mac 卸载 Go',
+                            link: '/tools/20220812_Mac使用/011_Mac卸载Go/',
+                        },
                     ],
                 },
             ],
