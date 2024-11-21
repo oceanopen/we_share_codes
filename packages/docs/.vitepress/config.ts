@@ -1,3 +1,4 @@
+import path from 'node:path';
 import process from 'node:process';
 
 import { defineConfig } from 'vitepress';
@@ -19,7 +20,7 @@ export default defineConfig({
         },
     },
 
-    head: [['link', { rel: 'icon', href: `/vitepress-logo-mini.svg` }]],
+    head: [['link', { rel: 'icon', href: path.resolve(BASE_URL, 'vitepress-logo-mini.svg') }]],
 
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {
