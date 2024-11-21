@@ -34,7 +34,7 @@ jobs:
 
             # This project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
             - name: Npm Install and Build 🔧
-              run: npm i -g pnpm && pnpm bootstrap && pnpm docs:build
+              run: npm i -g pnpm && pnpm bootstrap && pnpm docs:build:prod
 
             - name: Deploy to Server
               uses: easingthemes/ssh-deploy@main # https://github.com/marketplace/actions/ssh-deploy

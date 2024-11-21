@@ -19,7 +19,7 @@
         "bootstrap": "pnpm install",
         "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
         "docs:dev": "cd packages/docs && pnpm dev",
-        "docs:build": "cd packages/docs && pnpm build:prod",
+        "docs:build:prod": "cd packages/docs && pnpm build:prod",
         "docs:preview": "cd packages/docs && pnpm build:local && pnpm preview",
         "release": "pnpm changelog && bumpp",
         "lint": "eslint --fix",
