@@ -43,5 +43,6 @@ export default await antfu({
         'valid-typeof': 'off',
         'regexp/no-super-linear-backtracking': 'off',
         'eslint-comments/no-unlimited-disable': 'off',
+        'regexp/no-unused-capturing-group': 'off',
     },
 });

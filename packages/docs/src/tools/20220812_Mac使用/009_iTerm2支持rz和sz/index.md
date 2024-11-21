@@ -75,7 +75,7 @@ sudo chmod +x /usr/local/bin/iterm2*
 
 进入 `iterm2` 配置项 `Profiles -> Open Profiles -> Edit Profiles -> Profiles -> Advanced` 中的 `Tirgger`:
 
-![001_Triggers.png](./images/001_Triggers.png)
+![](./images/001_Triggers.png)
 
 `triggers` 中增加两项:
 
@@ -89,7 +89,7 @@ Action: Run Silent Coprocess
 Parameters: /usr/local/bin/iterm2-recv-zmodem.sh
 ```
 
-![002_Edit.png](./images/002_Edit.png)
+![](./images/002_Edit.png)
 
 ## 4. 执行 sz rz 命令
 

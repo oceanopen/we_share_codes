@@ -244,7 +244,7 @@ const myProduct: Product2 = creator.createProduct(1);
 
 ### 2.4 抽象工厂模式
 
-![001_产品族&产品等级结构](./images/001_产品族&产品等级结构.png)
+![](./images/001_产品族&产品等级结构.png)
 
 **定义：**
 

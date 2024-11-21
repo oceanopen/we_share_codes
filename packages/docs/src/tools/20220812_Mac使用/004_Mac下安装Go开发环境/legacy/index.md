@@ -13,7 +13,7 @@
 
 ### 1.1 直接下载
 
-![001_Go官网下载.png](./images/001_Go官网下载.png)
+![](./images/001_Go官网下载.png)
 
 ```bash
 ls
@@ -51,7 +51,7 @@ ls
 
 ### 2.1 pkg 直接安装
 
-![002_pkg安装.png](./images/002_pkg安装.png)
+![](./images/002_pkg安装.png)
 
 默认会安装到 `/usr/local/go` 文件夹下。
 
