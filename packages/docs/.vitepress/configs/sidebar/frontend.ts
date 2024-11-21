@@ -39,6 +39,10 @@ export default [
                 text: '基于 Verdaccio + Docker 搭建私有 NPM 仓库',
                 link: '/frontend/20210408_前端工程化/20210626_基于Verdaccio+Docker搭建私有NPM仓库/',
             },
+            {
+                text: '前端项目 Git 提交约束配置',
+                link: '/frontend/20210408_前端工程化/20210629_前端项目Git提交约束配置/',
+            },
         ],
     },
 ];
