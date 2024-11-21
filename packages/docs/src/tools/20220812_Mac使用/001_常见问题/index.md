@@ -61,7 +61,7 @@ mac 使用终端 `ssh` 连接远程服务器，如果长时间没有操作连接
 
 编辑 `/etc/ssh/ssh_config` 添加以下设置可解决这个问题：
 
-```conf
+```txt
 # 断开重连次数
 ServerAliveCountMax 5
 

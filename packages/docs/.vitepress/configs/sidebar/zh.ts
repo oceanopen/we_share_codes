@@ -31,6 +31,30 @@ export const zh = {
             link: '/tools/20220808_Windows在线安装Nvm+Node/',
         },
         {
+            text: 'VSCode 使用',
+            link: '/tools/20230228_VSCode使用/',
+        },
+        {
+            text: 'Npm 常用命令总结',
+            link: '/tools/20230515_Npm常用命令总结/',
+        },
+        {
+            text: '常用 DOS 命令',
+            link: '/tools/20230617_常用DOS命令/',
+        },
+        {
+            text: 'Mysql 客户端 DBeaver 使用',
+            link: '/tools/20240418_Mysql客户端DBeaver使用/',
+        },
+        {
+            text: 'Podman 使用',
+            link: '/tools/20240613_Podman使用/',
+        },
+        {
+            text: 'Nvm 设置镜像源',
+            link: '/tools/20240923_Nvm设置镜像源/',
+        },
+        {
             text: 'Mac 使用',
             collapsed: false,
             items: [
