@@ -24,6 +24,7 @@
         "json",
         "jsonc",
         "yaml",
-        "yml"
+        "yml",
+        "less"
     ]
 }

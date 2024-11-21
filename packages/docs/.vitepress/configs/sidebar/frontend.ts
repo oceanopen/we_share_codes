@@ -16,7 +16,7 @@ export default [
         link: '/frontend/20211223_总结常用的几种设计模式(TypeScript版)/',
     },
     {
-        text: 'Mac 使用',
+        text: '前端工程化',
         collapsed: false,
         items: [
             {
@@ -26,6 +26,10 @@ export default [
             {
                 text: 'Vscode 配置微信小程序开发环境',
                 link: '/frontend/20210408_前端工程化/20210408_Vscode配置微信小程序开发环境/',
+            },
+            {
+                text: '前端模块化的发展历程',
+                link: '/frontend/20210408_前端工程化/20210508_前端模块化的发展历程/',
             },
         ],
     },
