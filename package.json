@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "prepare": "simple-git-hooks",
-        "bootstrap": "pnpm i",
+        "bootstrap": "pnpm install --no-frozen-lockfile",
         "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
         "docs:dev": "cd packages/docs && pnpm dev",
         "docs:build": "cd packages/docs && pnpm build:prod",

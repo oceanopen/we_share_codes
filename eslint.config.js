@@ -41,5 +41,7 @@ export default await antfu({
         'no-func-assign': 'off',
         'no-useless-constructor': 'off',
         'valid-typeof': 'off',
+        'regexp/no-super-linear-backtracking': 'off',
+        'eslint-comments/no-unlimited-disable': 'off',
     },
 });
