@@ -1,0 +1,13 @@
+{
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "start-a": "lerna exec --scope package-a -- yarn start"
+    },
+    "devDependencies": {
+        "lerna": "^4.0.0"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
+}

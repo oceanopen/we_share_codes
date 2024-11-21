@@ -1,0 +1,13 @@
+{
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "preview": "lerna exec --scope examples -- yarn dev"
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "lerna": "^4.0.0"
+    }
+}

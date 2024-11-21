@@ -31,6 +31,10 @@ export default [
                 text: '前端模块化的发展历程',
                 link: '/frontend/20210408_前端工程化/20210508_前端模块化的发展历程/',
             },
+            {
+                text: '基于 Monorepo 的 Lerna 原理和实践',
+                link: '/frontend/20210408_前端工程化/20210526_基于Monorepo的Lerna原理和实践/',
+            },
         ],
     },
 ];
