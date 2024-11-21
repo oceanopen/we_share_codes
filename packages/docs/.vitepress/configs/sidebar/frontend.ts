@@ -43,6 +43,10 @@ export default [
                 text: '前端项目 Git 提交约束配置',
                 link: '/frontend/20210408_前端工程化/20210629_前端项目Git提交约束配置/',
             },
+            {
+                text: 'Webpack5 常见配置实践',
+                link: '/frontend/20210408_前端工程化/20210712_Webpack5常见配置实践/',
+            },
         ],
     },
 ];
