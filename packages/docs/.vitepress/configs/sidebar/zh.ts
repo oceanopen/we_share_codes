@@ -1,3 +1,4 @@
+import backend from './backend';
 import frontend from './frontend';
 import tools from './tools';
 
@@ -14,4 +15,5 @@ export const zh = {
     ],
     '/tools/': tools,
     '/frontend/': frontend,
+    '/backend/': backend,
 };
