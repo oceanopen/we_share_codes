@@ -23,6 +23,10 @@ export default [
                 text: '原生微信小程序中 TypeScript 构建流程的搭建',
                 link: '/frontend/20210408_前端工程化/20210408_原生微信小程序中TypeScript构建流程的搭建/',
             },
+            {
+                text: 'Vscode 配置微信小程序开发环境',
+                link: '/frontend/20210408_前端工程化/20210408_Vscode配置微信小程序开发环境/',
+            },
         ],
     },
 ];
