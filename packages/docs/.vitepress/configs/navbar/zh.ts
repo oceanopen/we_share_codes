@@ -11,26 +11,26 @@ export const zh = [
     },
     {
         text: '前端',
-        link: '/guide/',
+        link: '/frontend/',
     },
     {
         text: '后端',
-        link: '/guide/',
+        link: '/backend/',
     },
     {
         text: '算法',
-        link: '/guide/',
+        link: '/algorithm/',
     },
     {
         text: '运维',
-        link: '/guide/',
+        link: '/operation/',
     },
     {
         text: '安全',
-        link: '/guide/',
+        link: '/security/',
     },
     {
         text: 'AI',
-        link: '/guide/',
+        link: '/ai/',
     },
 ];
