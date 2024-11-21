@@ -38,5 +38,8 @@ export default await antfu({
         'yml/indent': ['error', 4, { indentBlockSequences: true, indicatorValueIndent: 2 }],
         'no-console': 'off',
         'antfu/no-top-level-await': 'off',
+        'no-func-assign': 'off',
+        'no-useless-constructor': 'off',
+        'valid-typeof': 'off',
     },
 });
