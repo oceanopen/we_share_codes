@@ -90,7 +90,7 @@ sudo vi /etc/containers/registries.conf
 
 追加配置内容:
 
-```txt
+```
 ### 取消从默认地址搜索的仓库域名
 unqualified-search-registries = ["docker.io"]
 

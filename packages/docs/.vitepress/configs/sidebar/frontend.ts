@@ -35,6 +35,10 @@ export default [
                 text: '基于 Monorepo 的 Lerna 原理和实践',
                 link: '/frontend/20210408_前端工程化/20210526_基于Monorepo的Lerna原理和实践/',
             },
+            {
+                text: '基于 Verdaccio + Docker 搭建私有 NPM 仓库',
+                link: '/frontend/20210408_前端工程化/20210626_基于Verdaccio+Docker搭建私有NPM仓库/',
+            },
         ],
     },
 ];
