@@ -1,0 +1,51 @@
+{
+    "window.title": "${activeEditorMedium}${separator}${rootName}",
+    // #vscode默认启用了根据文件类型自动设置tabsize的选项
+    "editor.detectIndentation": false,
+    // #重新设定tabsize
+    "editor.tabSize": 2,
+    // #定义一个默认格式化程序, 该格式化程序优先于所有其他格式化程序设置。必须是提供格式化程序的扩展的标识符。
+    "editor.defaultFormatter": null,
+    // #每次保存的时候自动格式化
+    "editor.formatOnSave": true,
+    // #每次保存的时候将代码按eslint格式进行修复
+    "editor.codeActionsOnSave": {
+    // For ESLint
+        "source.fixAll.eslint": "explicit",
+        // 文件保存时开启 stylelint 自动修复程序
+        "source.fixAll.stylelint": "explicit"
+    },
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    // #Enable/disable default JavaScript formatter (For Prettier)
+    "javascript.format.enable": false,
+    // #让函数(名)和后面的括号之间加个空格
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "eslint.run": "onType",
+    "eslint.options": {
+        "extensions": [
+            ".js",
+            ".ts"
+        ]
+    },
+    "eslint.validate": [
+        "javascript",
+        "typescript"
+    ],
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "html.format.enable": false,
+    // 禁用 Vetur，启用 Volar 即可
+    "vetur.format.enable": false,
+    // 防止编辑器内置 linter 与插件冲突设置
+    "css.validate": false,
+    "scss.validate": false
+}

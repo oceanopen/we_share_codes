@@ -47,6 +47,10 @@ export default [
                 text: 'Webpack5 常见配置实践',
                 link: '/frontend/20210408_前端工程化/20210712_Webpack5常见配置实践/',
             },
+            {
+                text: '前端项目 Stylelint 配置',
+                link: '/frontend/20210408_前端工程化/20210917_前端项目Stylelint配置/',
+            },
         ],
     },
 ];
