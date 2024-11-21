@@ -13,7 +13,7 @@
     "scripts": {
         "dev": "vitepress dev",
         "build:local": "vitepress build",
-        "build:prod": "vitepress build --base=/docs/",
+        "build:prod": "BASE_URL=/docs/ vitepress build --base=/docs/",
         "preview": "vitepress preview"
     },
     "devDependencies": {

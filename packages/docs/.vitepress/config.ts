@@ -4,7 +4,8 @@ import process from 'node:process';
 import { defineConfig } from 'vitepress';
 import { navbar, sidebar } from './configs';
 
-const BASE_URL = process.env.BASE ? `/${process.env.BASE}/` : '/';
+const BASE_URL = process.env.BASE_URL ? `${process.env.BASE_URL}` : '/';
+console.log('[vitepress.config] BASE_URL:', BASE_URL);
 
 export default defineConfig({
     base: BASE_URL,
@@ -17,6 +18,11 @@ export default defineConfig({
     vite: {
         resolve: {
             alias: [],
+        },
+        build: {
+            rollupOptions: {
+                external: ['vue/server-renderer'],
+            },
         },
     },
 
