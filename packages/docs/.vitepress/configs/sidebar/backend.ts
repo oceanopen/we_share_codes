@@ -23,6 +23,10 @@ export default [
                 text: '为什么数据库字段建议使用 NOT_NULL',
                 link: '/backend/20210412_数据库/20210412_为什么数据库字段建议使用NOT_NULL/',
             },
+            {
+                text: '常见 MySQL 报错',
+                link: '/backend/20210412_数据库/20230704_常见MySQL报错/',
+            },
         ],
     },
 ];

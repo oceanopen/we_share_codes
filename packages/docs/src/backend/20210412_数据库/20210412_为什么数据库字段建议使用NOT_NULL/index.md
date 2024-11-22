@@ -47,6 +47,8 @@
 > 因为要用实际的 `mysql` 表数据进行测试，所以这里先做下基础设施的搭建。
 
 ```bash
+# mysql>
+
 # 创建测试数据库
 CREATE DATABASE IF NOT EXISTS `d_test`;
 
@@ -99,6 +101,8 @@ mysql -h 127.0.0.1 -u root -p
 继续执行:
 
 ```sql
+-- mysql>
+
 use d_test;
 -- Reading table information for completion of table and column names
 -- You can turn off this feature to get a quicker startup with -A
@@ -109,6 +113,8 @@ use d_test;
 我们插入几条数据作为测试数据：
 
 ```sql
+-- mysql>
+
 INSERT INTO `t_test` (`FuiId`, `FstrName`, `FuiAge`)
 VALUES
   (1, 'test', 10),
@@ -119,6 +125,8 @@ VALUES
 查看下执行结果：
 
 ```sql
+-- mysql>
+
 select * from t_test;
 -- +-------+----------+--------+---------------------+
 -- | FuiId | FstrName | FuiAge | FuiCreateTime       |
@@ -153,6 +161,8 @@ select * from t_test;
 `count(*)` 是对表中的行数进行统计，`count(FstrName)` 则是对表中非 `NULL` 的列进行统计。
 
 ```sql
+-- mysql>
+
 select count(*),count(1),count(FuiId),count(FstrName),count(FuiAge) from t_test;
 -- +----------+----------+--------------+-----------------+---------------+
 -- | count(*) | count(1) | count(FuiId) | count(FstrName) | count(FuiAge) |
@@ -167,6 +177,8 @@ select count(*),count(1),count(FuiId),count(FstrName),count(FuiAge) from t_test;
 对于 `NULL` 值的列，是不能使用 `=` 表达式进行判断的，下面对 `FstrName` 的查询是不成立的，必须使用 `is NULL`。
 
 ```sql
+-- mysql>
+
 select * from t_test where FstrName = NULL;
 -- Empty set (0.00 sec)
 
@@ -187,6 +199,8 @@ select * from t_test where FstrName IS NULL;
 `t_test` 表第二条记录 `FuiAge` 是 NULL，所以 `+1` 之后还是 `NULL`, `FstrName` 是 `NULL`, 进行 `concat` 运算之后结果还是 `NULL`。
 
 ```sql
+-- mysql>
+
 select FuiAge+1, concat(FstrName, NULL) from t_test;
 -- +----------+------------------------+
 -- | FuiAge+1 | concat(FstrName, NULL) |
@@ -201,6 +215,8 @@ select FuiAge+1, concat(FstrName, NULL) from t_test;
 可以再看下下面的例子，任何和 `NULL` 进行运算的话得出的结果都会是 `NULL`, 想象下你设计的某个字段如果是 `NULL` 还不小心进行各种运算，最后得出的结果 `@_@`.
 
 ```sql
+-- mysql>
+
 select 1 IS NULL, 1 IS NOT NULL, 1 = NULL, 1<> NULL, 1 < NULL, 1 > NULL;
 -- +-----------+---------------+----------+----------+----------+----------+
 -- | 1 IS NULL | 1 IS NOT NULL | 1 = NULL | 1<> NULL | 1 < NULL | 1 > NULL |
@@ -215,6 +231,8 @@ select 1 IS NULL, 1 IS NOT NULL, 1 = NULL, 1<> NULL, 1 < NULL, 1 > NULL;
 对于`distinct`和`group by`来说，所有的 `NULL` 值都会被视为相等，对于 `order by` 来说升序 `NULL` 会排在最前
 
 ```sql
+-- mysql>
+
 select FstrName from t_test group by FstrName;
 -- +----------+
 -- | FstrName |
@@ -249,6 +267,8 @@ select * from t_test order by FstrName;
 表中只有一条有名字（即 `FstrName` 字段不为空）的记录，此时查询名字 `!=test` 预期的结果应该是想查出来剩余的两条记录，会发现与预期结果不匹配。
 
 ```sql
+-- mysql>
+
 select * from t_test where FstrName != 'test';
 -- Empty set (0.00 sec)
 ```
@@ -258,6 +278,8 @@ select * from t_test where FstrName != 'test';
 为了验证 `NULL` 字段对索引的影响，分别对 `FstrName` 和 `FuiAge` 添加索引。
 
 ```sql
+-- mysql>
+
 show create table t_test;
 -- +--------+-------------------------------------------+
 -- | Table  |  CreateTable                              |
@@ -278,6 +300,8 @@ show create table t_test;
 数据量少的情况下，使用 `IS NULL`和范围查询都是可以正常使用索引的，看以下例子：
 
 ```sql
+-- mysql>
+
 explain select * from t_test where FstrName <=> NULL;
 -- +----+-------------+--------+------------+------+---------------+----------+---------+-------+------+----------+-----------------------+
 -- | id | select_type | table  | partitions | type | possible_keys | key      | key_len | ref   | rows | filtered | Extra                 |
@@ -299,6 +323,8 @@ explain select * from t_test where FuiAge > 10;
 然后接着我们往数据库中继续插入一些数据进行测试，当 NULL 列值变多之后发现索引失效了。
 
 ```sql
+-- mysql>
+
 select * from t_test;
 -- +-------+----------+--------+---------------------+
 -- | FuiId | FstrName | FuiAge | FuiCreateTime       |
@@ -354,6 +380,8 @@ explain select * from t_test where FstrName <=> NULL;
 为了说明清楚这个存储格式的问题，再建张表 `t_demo` 来测试，这张表只有 `FstrOne` 字段是 `NOT NULL`, 其他都是可以为 `NULL` 的。
 
 ```sql
+-- mysql>
+
 show create table t_demo;
 -- +--------|---------------------------------------+
 -- | Table  | CreateTable                           |
