@@ -20,6 +20,10 @@ export default [
         link: '/frontend/20240710_无损设计协同技术方案梳理/',
     },
     {
+        text: '基于 Headless + Vue3 实现 UI 组件',
+        link: '/frontend/20240910_基于Headless_Vue3实现UI组件/',
+    },
+    {
         text: '前端工程化',
         collapsed: false,
         items: [
