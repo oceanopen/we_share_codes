@@ -35,4 +35,8 @@ export default [
         text: '数据结构之栈和队列实现(TypeScript版)',
         link: '/algorithm/20220209_数据结构之栈和队列实现_TypeScript版/',
     },
+    {
+        text: '数据结构之哈希表_散列_实现(TypeScript版)',
+        link: '/algorithm/20220222_数据结构之哈希表_散列_实现_TypeScript版/',
+    },
 ];
