@@ -7,7 +7,6 @@ on:
     push:
         branches:
             - main
-            - ci_workflow_cache_node-modules
         paths:
             - packages/docs/**/**
             - package.json
