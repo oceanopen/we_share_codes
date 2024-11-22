@@ -39,4 +39,8 @@ export default [
         text: '数据结构之哈希表_散列_实现(TypeScript版)',
         link: '/algorithm/20220222_数据结构之哈希表_散列_实现_TypeScript版/',
     },
+    {
+        text: '数据结构之字典树实现(TypeScript版)',
+        link: '/algorithm/20220224_数据结构之字典树实现_TypeScript版/',
+    },
 ];
