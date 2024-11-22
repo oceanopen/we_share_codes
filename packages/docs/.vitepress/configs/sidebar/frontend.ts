@@ -24,6 +24,10 @@ export default [
         link: '/frontend/20240910_基于Headless_Vue3实现UI组件/',
     },
     {
+        text: '基于 Headless + Tailwind 实现样式变体组件',
+        link: '/frontend/20240913_基于Headless_Tailwind实现样式变体组件/',
+    },
+    {
         text: '前端工程化',
         collapsed: false,
         items: [
