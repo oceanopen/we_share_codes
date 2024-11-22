@@ -7,6 +7,7 @@ on:
     push:
         branches:
             - main
+            - ci_workflow_cache_node-modules
         paths:
             - packages/docs/**/**
             - package.json
@@ -32,9 +33,30 @@ jobs:
               with:
                   node-version: 20
 
+            - name: Cache node modules
+              id: cache-node-modules
+              uses: actions/cache@v4
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-build-${{ env.cache-name }}-
+                      ${{ runner.os }}-build-
+                      ${{ runner.os }}-
+
+            # 'true' - 代表缓存命中, node_modules 没有变化;
+            # '' - 代表没有命中, node_modules 发生变化;
+            - name: Debug Cache Hit
+              run: echo "${{ steps.cache-node-modules.outputs.cache-hit }}"
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+
             # This project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-            - name: Npm Install and Build 🔧
-              run: npm i -g pnpm && pnpm bootstrap && pnpm docs:build:prod
+            - name: Install dependencies and Build 🔧
+              run: pnpm bootstrap && pnpm docs:build:prod
 
             - name: Deploy to Server
               uses: easingthemes/ssh-deploy@main # https://github.com/marketplace/actions/ssh-deploy
