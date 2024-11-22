@@ -7,7 +7,7 @@ export const pwa: () => PwaOptions = () => {
         includeManifestIcons: false, // 不包含清单图标
         workbox: {
             maximumFileSizeToCacheInBytes: 1024 * 1024 * 6, // 默认是 1024 * 1024 * 2
-            globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'], // 匹配需要缓存的文件类型
+            globPatterns: ['**/*.{css,js,html,svg,png,webp,ico,txt,woff2}'], // 匹配需要缓存的文件类型
             runtimeCaching: [],
         },
         manifest: {
