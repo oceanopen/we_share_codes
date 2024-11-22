@@ -16,7 +16,11 @@ export default [
         link: '/algorithm/20220110_前端比较方法的优雅封装/',
     },
     {
-        text: '数据结构之 Heap 实现 ( TypeScript 版)',
+        text: '数据结构之 Heap 实现( TypeScript 版)',
         link: '/algorithm/20220112_数据结构之Heap实现_TypeScript版/',
+    },
+    {
+        text: '常见排序算法实现( TypeScript 版)',
+        link: '/algorithm/20220117_常见排序算法实现_TypeScript版/',
     },
 ];
