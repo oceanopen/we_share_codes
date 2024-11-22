@@ -27,6 +27,10 @@ export default [
                 text: '常见 MySQL 报错',
                 link: '/backend/20210412_数据库/20230704_常见MySQL报错/',
             },
+            {
+                text: 'docker 安装 redis',
+                link: '/backend/20210412_数据库/20230705_docker安装redis/',
+            },
         ],
     },
 ];
