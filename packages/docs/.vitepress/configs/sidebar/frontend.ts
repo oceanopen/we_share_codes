@@ -16,6 +16,10 @@ export default [
         link: '/frontend/20211223_总结常用的几种设计模式(TypeScript版)/',
     },
     {
+        text: '无损设计协同技术方案梳理',
+        link: '/frontend/20240710_无损设计协同技术方案梳理/',
+    },
+    {
         text: '前端工程化',
         collapsed: false,
         items: [
