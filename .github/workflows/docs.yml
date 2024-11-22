@@ -43,13 +43,11 @@ jobs:
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('pnpm-lock.yaml') }}
                   restore-keys: |
                       ${{ runner.os }}-build-${{ env.cache-name }}-
-                      ${{ runner.os }}-build-
-                      ${{ runner.os }}-
 
             # 'true' - 代表缓存命中, node_modules 没有变化;
             # '' - 代表没有命中, node_modules 发生变化;
             - name: Debug Cache Hit
-              run: echo "${{ steps.cache-node-modules.outputs.cache-hit }}"
+              run: echo "cache-node-modules:${{ steps.cache-node-modules.outputs.cache-hit }}"
 
             - name: Install pnpm
               run: npm install -g pnpm
