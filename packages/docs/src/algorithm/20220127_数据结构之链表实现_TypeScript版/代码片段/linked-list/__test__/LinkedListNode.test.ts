@@ -24,7 +24,7 @@ describe('linkedListNode', () => {
         expect(node1.next).toBeDefined();
         expect(node2.next).toBeNull();
         expect(node1.value).toBe(1);
-        expect(node1.next && node1.next.value).toBe(2);
+        expect(node1.next?.value).toBe(2);
     });
 
     it('should convert node to string', () => {

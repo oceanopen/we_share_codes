@@ -27,4 +27,8 @@ export default [
         text: '数据结构之链表实现( TypeScript 版)',
         link: '/algorithm/20220127_数据结构之链表实现_TypeScript版/',
     },
+    {
+        text: '数据结构之双向链表实现( TypeScript 版)',
+        link: '/algorithm/20220127_数据结构之双向链表实现_TypeScript版/',
+    },
 ];
