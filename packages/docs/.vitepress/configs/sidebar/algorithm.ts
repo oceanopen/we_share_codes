@@ -43,4 +43,8 @@ export default [
         text: '数据结构之字典树实现(TypeScript版)',
         link: '/algorithm/20220224_数据结构之字典树实现_TypeScript版/',
     },
+    {
+        text: '数据结构之二叉查找树实现(TypeScript版)',
+        link: '/algorithm/20220225_数据结构之二叉查找树实现_TypeScript版/',
+    },
 ];
