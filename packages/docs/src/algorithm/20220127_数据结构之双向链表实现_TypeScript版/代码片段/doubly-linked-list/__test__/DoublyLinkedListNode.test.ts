@@ -5,8 +5,8 @@ describe('doublyLinkedListNode', () => {
         const node = new DoublyLinkedListNode(1);
 
         expect(node.value).toBe(1);
-        expect(node.next).toBeUndefined();
-        expect(node.previous).toBeUndefined();
+        expect(node.next).toBeNull();
+        expect(node.previous).toBeNull();
     });
 
     it('should create list node with object as a value', () => {
@@ -15,8 +15,8 @@ describe('doublyLinkedListNode', () => {
 
         expect(node.value.value).toBe(1);
         expect(node.value.key).toBe('test');
-        expect(node.next).toBeUndefined();
-        expect(node.previous).toBeUndefined();
+        expect(node.next).toBeNull();
+        expect(node.previous).toBeNull();
     });
 
     it('should link nodes together', () => {
@@ -25,9 +25,9 @@ describe('doublyLinkedListNode', () => {
         const node3 = new DoublyLinkedListNode(10, node1, node2);
 
         expect(node1.next).toBeDefined();
-        expect(node1.previous).toBeUndefined();
-        expect(node2.next).toBeUndefined();
-        expect(node2.previous).toBeUndefined();
+        expect(node1.previous).toBeNull();
+        expect(node2.next).toBeNull();
+        expect(node2.previous).toBeNull();
         expect(node3.next).toBeDefined();
         expect(node3.previous).toBeDefined();
         expect(node1.value).toBe(1);

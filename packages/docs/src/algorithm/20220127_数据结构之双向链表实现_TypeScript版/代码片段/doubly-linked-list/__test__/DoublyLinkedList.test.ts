@@ -237,13 +237,13 @@ describe('doublyLinkedList', () => {
 
         expect(linkedList.toString()).toBe('4,3,2,1');
 
-        expect(linkedList.head?.previous).toBeUndefined();
+        expect(linkedList.head?.previous).toBeNull();
         expect(linkedList.head?.value).toBe(4);
         expect(linkedList.head?.next?.value).toBe(3);
         expect(linkedList.head?.next?.next?.value).toBe(2);
         expect(linkedList.head?.next?.next?.next?.value).toBe(1);
 
-        expect(linkedList.tail?.next).toBeUndefined();
+        expect(linkedList.tail?.next).toBeNull();
         expect(linkedList.tail?.value).toBe(1);
         expect(linkedList.tail?.previous?.value).toBe(2);
         expect(linkedList.tail?.previous?.previous?.value).toBe(3);
@@ -254,13 +254,13 @@ describe('doublyLinkedList', () => {
 
         expect(linkedList.toString()).toBe('1,2,3,4');
 
-        expect(linkedList.head?.previous).toBeUndefined();
+        expect(linkedList.head?.previous).toBeNull();
         expect(linkedList.head?.value).toBe(1);
         expect(linkedList.head?.next?.value).toBe(2);
         expect(linkedList.head?.next?.next?.value).toBe(3);
         expect(linkedList.head?.next?.next?.next?.value).toBe(4);
 
-        expect(linkedList.tail?.next).toBeUndefined();
+        expect(linkedList.tail?.next).toBeNull();
         expect(linkedList.tail?.value).toBe(4);
         expect(linkedList.tail?.previous?.value).toBe(3);
         expect(linkedList.tail?.previous?.previous?.value).toBe(2);

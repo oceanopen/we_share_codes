@@ -3,7 +3,7 @@ export default class DoublyLinkedListNode {
     public next: null | DoublyLinkedListNode;
     public previous: any | DoublyLinkedListNode;
 
-    constructor(value: any, next: any = undefined, previous: any = undefined) {
+    constructor(value: any, next: any = null, previous: any = null) {
         this.value = value;
         this.next = next;
         this.previous = previous;
