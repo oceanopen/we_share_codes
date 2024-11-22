@@ -51,4 +51,8 @@ export default [
         text: '数据结构之平衡二叉树实现(TypeScript版)',
         link: '/algorithm/20220301_数据结构之平衡二叉树实现_TypeScript版/',
     },
+    {
+        text: '数据结构之红黑树实现(TypeScript版)',
+        link: '/algorithm/20220302_数据结构之红黑树实现_TypeScript版/',
+    },
 ];
