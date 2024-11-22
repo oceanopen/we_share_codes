@@ -28,6 +28,10 @@ export default [
         link: '/frontend/20240913_基于Headless_Tailwind实现样式变体组件/',
     },
     {
+        text: 'MasterGo 插件开发初体验',
+        link: '/frontend/20241012_MasterGo插件开发初体验/',
+    },
+    {
         text: '前端工程化',
         collapsed: false,
         items: [
