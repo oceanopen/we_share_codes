@@ -75,9 +75,9 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 
 function buttonVariants({ variant, size, fill, shape, inline }) {
-    return clsx({
-        'inline-flex items-center justify-center rounded-lg ...': true,
-        ...{
+    return clsx(
+        'inline-flex items-center justify-center rounded-lg ...',
+        {
             'bg-primary ...': variant === 'primary',
             'bg-success ...': variant === 'success',
             'bg-danger ...': variant === 'danger',
@@ -85,7 +85,7 @@ function buttonVariants({ variant, size, fill, shape, inline }) {
             'rounded-none': shape === 'square',
             'rounded-md': shape === 'pill',
         }
-    });
+    );
 }
 </script>
 ```
