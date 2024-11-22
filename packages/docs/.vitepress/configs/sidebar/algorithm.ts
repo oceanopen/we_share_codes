@@ -23,4 +23,8 @@ export default [
         text: '常见排序算法实现( TypeScript 版)',
         link: '/algorithm/20220117_常见排序算法实现_TypeScript版/',
     },
+    {
+        text: '数据结构之链表实现( TypeScript 版)',
+        link: '/algorithm/20220127_数据结构之链表实现_TypeScript版/',
+    },
 ];
