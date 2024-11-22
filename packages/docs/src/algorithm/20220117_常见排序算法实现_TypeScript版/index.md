@@ -100,7 +100,7 @@ export function swap3(arr: number[], i: number, j: number) {
 
 **动画演示：**
 
-![001_冒泡排序动画](./images/001_冒泡排序动画.gif)
+![](./images/001_冒泡排序动画.gif)
 
 **代码实现：**
 
@@ -164,8 +164,8 @@ export default class BubbleSort extends Sort {
 
 **动画演示：**
 
-![002_选择排序效果](./images/002_选择排序效果.gif)
-![003_选择排序动画](./images/003_选择排序动画.gif)
+![](./images/002_选择排序效果.gif)
+![](./images/003_选择排序动画.gif)
 
 **代码实现：**
 
@@ -215,11 +215,11 @@ export default class SelectionSort extends Sort {
 
 比较的总数是：
 
-![004_选择排序比较总数](./images/004_选择排序比较总数.png)
+![](./images/004_选择排序比较总数.png)
 
 通过*等差数列求和*得到：
 
-![005_选择排序求和](./images/005_选择排序求和.png)
+![](./images/005_选择排序求和.png)
 
 **稳定性分析：**
 
@@ -244,8 +244,8 @@ export default class SelectionSort extends Sort {
 
 **动画演示：**
 
-![006_插入排序效果](./images/006_插入排序效果.gif)
-![007_插入排序动画](./images/007_插入排序动画.gif)
+![](./images/006_插入排序效果.gif)
+![](./images/007_插入排序动画.gif)
 
 **代码实现：**
 
@@ -305,7 +305,7 @@ export default class InsertionSort extends Sort {
 
 **动画演示：**
 
-![008_堆排序动画](./images/008_堆排序动画.gif)
+![](./images/008_堆排序动画.gif)
 
 **代码实现：**
 
@@ -351,7 +351,7 @@ export default class HeapSort extends Sort {
 
 **复杂度分析：**
 
-![009_heap_bottomup_vs_topdown](./images/009_heap_bottomup_vs_topdown.png)
+![](./images/009_heap_bottomup_vs_topdown.png)
 
 这张图显示了自下而上构建堆（“heapify”）与自上而下构建堆之间的时间复杂度差异。
 每个圆圈中的数字表示将相应节点添加到堆中所需的最大交换次数。
@@ -371,8 +371,8 @@ export default class HeapSort extends Sort {
 
 **动画演示：**
 
-![010_归并排序动画](./images/010_归并排序动画.gif)
-![011_归并排序步骤分解](./images/011_归并排序步骤分解.png)
+![](./images/010_归并排序动画.gif)
+![](./images/011_归并排序步骤分解.png)
 
 **代码实现：**
 
@@ -464,8 +464,8 @@ export default class MergeSort extends Sort {
 
 **动画演示：**
 
-![012_快速排序动画_in_place](./images/012_快速排序动画_in_place.gif)
-![013_快速排序步骤_in_place](./images/013_快速排序步骤_in_place.png)
+![](./images/012_快速排序动画_in_place.gif)
+![](./images/013_快速排序步骤_in_place.png)
 
 **代码实现：**
 
@@ -610,7 +610,7 @@ export default class QuickSortInPlace extends Sort {
 
 **动画演示：**
 
-![014_希尔排序动画](./images/014_希尔排序动画.gif)
+![](./images/014_希尔排序动画.gif)
 
 **工作原理：**
 
@@ -618,26 +618,26 @@ For our example and ease of understanding, we take the interval of `4`.
 Make a virtual sub-list of all values located at theinterval of 4 positions.
 Here these values are `{35, 14}`, `{33, 19}`, `{42, 27}` and `{10, 44}`:
 
-![015_希尔排序步骤01](./images/015_希尔排序步骤01.png)
+![](./images/015_希尔排序步骤01.png)
 
 We compare values in each sub-list and swap them (if necessary) in the original array.
 After this step, the new array should look like this:
 
-![016_希尔排序步骤02](./images/016_希尔排序步骤02.png)
+![](./images/016_希尔排序步骤02.png)
 
 Then, we take interval of 2 and this gap generates two sub-lists `{14, 27, 35, 42}`, `{19, 10, 33, 44}`:
 
-![017_希尔排序步骤03](./images/017_希尔排序步骤03.png)
+![](./images/017_希尔排序步骤03.png)
 
 We compare and swap the values (uses insertion sort), if required, in the original array.
 After this step, the array should look like this:
 
-![018_希尔排序步骤04](./images/018_希尔排序步骤04.png)
+![](./images/018_希尔排序步骤04.png)
 
 Finally, we sort the rest of the array using interval of value 1.
 Shell sort uses insertion sort to sort the array.
 
-![019_希尔排序步骤05](./images/019_希尔排序步骤05.png)
+![](./images/019_希尔排序步骤05.png)
 
 **代码实现：**
 
@@ -707,15 +707,15 @@ export default class ShellSort extends Sort {
 
 1. 我们计算输入数组的所有元素的计数 A。然后将结果存储在计数数组 C 中。我们的计数方式如下所示。
 
-![020_计数排序步骤01](./images/020_计数排序步骤01.gif)
+![](./images/020_计数排序步骤01.gif)
 
 2. 我们计算每个键值在输出序列中的位置。
 
-![021_计数排序步骤02](./images/021_计数排序步骤02.gif)
+![](./images/021_计数排序步骤02.png)
 
 3. 在这一步中，我们借助构造的计数数组 C（即我们在第二步中构造的内容）将输入数组元素放置在排序位置。我们使用结果数组 B 来存储排序后的元素。
 
-![022_计数排序步骤03](./images/022_计数排序步骤03.gif)
+![](./images/022_计数排序步骤03.gif)
 
 **代码实现：**
 
@@ -820,7 +820,7 @@ export default class CountingSort extends Sort {
 
 **动画演示：**
 
-![023_基数排序_数字排序](./images/023_基数排序_数字排序.png)
+![](./images/023_基数排序_数字排序.png)
 
 **代码实现：**
 
