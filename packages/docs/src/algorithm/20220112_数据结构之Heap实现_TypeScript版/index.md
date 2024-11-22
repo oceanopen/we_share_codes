@@ -1,4 +1,4 @@
-# 数据结构之 Heap 实现 ( TypeScript 版)
+# 数据结构之 Heap 实现(TypeScript版)
 
 > `Comparator` 实现见前文 [前端比较方法的优雅封装](../20220110_前端比较方法的优雅封装/index.md)。
 

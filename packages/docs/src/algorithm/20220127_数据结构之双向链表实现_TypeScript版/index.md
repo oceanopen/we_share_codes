@@ -1,4 +1,4 @@
-# 数据结构之双向链表实现( TypeScript 版)
+# 数据结构之双向链表实现(TypeScript版)
 
 - `Comparator` 实现见前文 [前端比较方法的优雅封装](../20220110_前端比较方法的优雅封装/index.md)
 - `单向链表` 实现见前文 [数据结构之链表实现](../20220127_数据结构之链表实现_TypeScript版/index.md)
@@ -34,7 +34,7 @@ export default class DoublyLinkedListNode {
         this.previous = previous;
     }
 
-    toString(callback?: Function) {
+    toString(callback?: (value: any) => any) {
         return callback ? callback(this.value) : `${this.value}`;
     }
 }
@@ -329,10 +329,8 @@ export default class DoublyLinkedList {
 
 O(n)
 
-## 4. 后记
-
-参考：
+## 4. 参考
 
 - [JavaScript 算法与数据结构](https://github.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/heap/README.zh-CN.md)
-- `单向链表` 实现见前文[数据结构之链表实现](https://mp.weixin.qq.com/s/q00qFtNx3PGgURFI8IqsyA '数据结构之链表实现')
-- `Comparator` 实现见前文[前端比较方法的优雅封装](https://mp.weixin.qq.com/s/D42CXtkFZNukh5EDueTWlQ '前端比较方法的优雅封装')
+- [数据结构之链表实现](https://mp.weixin.qq.com/s/q00qFtNx3PGgURFI8IqsyA)
+- [前端比较方法的优雅封装](https://mp.weixin.qq.com/s/D42CXtkFZNukh5EDueTWlQ)
