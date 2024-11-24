@@ -43,4 +43,8 @@ export default [
         text: 'Docker 简单介绍',
         link: '/operation/20211123_Docker简单介绍/',
     },
+    {
+        text: 'Docker 下修改 mysql 容器中的 sql_mode 配置',
+        link: '/operation/20230704_Docker下修改mysql容器中的sql_mode配置/',
+    },
 ];
