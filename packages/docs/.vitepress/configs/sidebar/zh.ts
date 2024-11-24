@@ -4,6 +4,7 @@ import frontend from './frontend';
 import operation from './operation';
 import other from './other';
 import tools from './tools';
+import security from '/security';
 
 export const zh = {
     '/guide/': [
@@ -20,6 +21,7 @@ export const zh = {
     '/frontend/': frontend,
     '/backend/': backend,
     '/algorithm/': algorithm,
-    '/other': other,
-    '/operation': operation,
+    '/other/': other,
+    '/operation/': operation,
+    '/security/': security,
 };
