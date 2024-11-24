@@ -63,6 +63,10 @@ export default [
                 text: 'Mac 环境 ssh 登录',
                 link: '/operation/20230729_腾讯云服务器运维/002_Mac环境ssh登录/',
             },
+            {
+                text: '域名注册及域名备案',
+                link: '/operation/20230729_腾讯云服务器运维/003_域名注册及域名备案/',
+            },
         ],
     },
 ];
