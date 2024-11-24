@@ -1,6 +1,7 @@
 import algorithm from './algorithm';
 import backend from './backend';
 import frontend from './frontend';
+import other from './other';
 import tools from './tools';
 
 export const zh = {
@@ -18,4 +19,5 @@ export const zh = {
     '/frontend/': frontend,
     '/backend/': backend,
     '/algorithm/': algorithm,
+    '/other': other,
 };

@@ -39,4 +39,9 @@ export const zh = [
         link: '/ai/',
         activeMatch: '/ai/',
     },
+    {
+        text: '杂项',
+        link: '/other/',
+        activeMatch: '/other/',
+    },
 ];
