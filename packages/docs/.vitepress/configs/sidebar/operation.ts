@@ -47,4 +47,18 @@ export default [
         text: 'Docker 下修改 mysql 容器中的 sql_mode 配置',
         link: '/operation/20230704_Docker下修改mysql容器中的sql_mode配置/',
     },
+    {
+        text: '如何查找运行进程 PID',
+        link: '/operation/20240925_如何查找运行进程PID/',
+    },
+    {
+        text: '腾讯云服务器运维',
+        collapsed: false,
+        items: [
+            {
+                text: '安装 Docker',
+                link: '/operation/20230729_腾讯云服务器运维/001_安装Docker/',
+            },
+        ],
+    },
 ];
