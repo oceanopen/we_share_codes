@@ -37,6 +37,18 @@ export default withPwa(
         // https://vitepress.dev/reference/default-theme-config
         themeConfig: {
             logo: '/vitepress-logo-mini.svg',
+
+            socialLinks: [
+                {
+                    icon: 'github',
+                    link: 'https://github.com/oceanopen/we_share_code',
+                },
+                {
+                    icon: 'gitee',
+                    link: 'https://gitee.com/ocean-open/we_share_code',
+                },
+            ],
+
             nav: navbar.zh,
             sidebar: sidebar.zh,
 
