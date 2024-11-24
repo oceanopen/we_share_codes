@@ -27,4 +27,8 @@ export default [
         text: '浏览器页面渲染流程浅析',
         link: '/operation/20210628_浏览器页面渲染流程浅析/',
     },
+    {
+        text: '浏览器运行时架构浅析',
+        link: '/operation/20210628_浏览器运行时架构浅析/',
+    },
 ];
