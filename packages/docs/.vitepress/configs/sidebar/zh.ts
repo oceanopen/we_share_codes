@@ -3,8 +3,8 @@ import backend from './backend';
 import frontend from './frontend';
 import operation from './operation';
 import other from './other';
+import security from './security';
 import tools from './tools';
-import security from '/security';
 
 export const zh = {
     '/guide/': [
