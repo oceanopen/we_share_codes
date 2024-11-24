@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>事件委托</title>
+  </head>
+  <body>
+    <ul>
+      <li>字节跳动</li>
+      <li>阿里</li>
+      <li>腾讯</li>
+      <li>京东</li>
+    </ul>
+    <script>
+      window.onload = function () {
+        // good
+        document.querySelector('ul').onclick = (event) => {
+          const target = event.target
+          if (target.nodeName === 'LI') {
+            console.log('proxy:', target.innerHTML)
+          }
+        }
+
+        // bad
+        document.querySelectorAll('li').forEach((item) => {
+          item.onclick = function (event) {
+            const target = event.target
+            console.log('current:', target.innerHTML)
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

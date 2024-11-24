@@ -31,4 +31,8 @@ export default [
         text: '浏览器运行时架构浅析',
         link: '/operation/20210628_浏览器运行时架构浅析/',
     },
+    {
+        text: '前端性能优化总结',
+        link: '/operation/20210708_前端性能优化总结/',
+    },
 ];

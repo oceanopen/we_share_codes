@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>白屏时间+首屏时间计算</title>
+
+    <script>
+      const requestTime = new Date().getTime() - performance.timing.navigationStart
+      console.log('白屏时间：', requestTime)
+    </script>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        const loadTime = new Date().getTime() - performance.timing.navigationStart
+        console.log('首屏时间：', loadTime)
+      }
+    </script>
+  </body>
+</html>
