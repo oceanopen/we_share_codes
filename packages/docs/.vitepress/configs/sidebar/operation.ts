@@ -39,4 +39,8 @@ export default [
         text: '使用 Docker 构建前端应用',
         link: '/operation/20211123_使用Docker构建前端应用/',
     },
+    {
+        text: 'Docker 简单介绍',
+        link: '/operation/20211123_Docker简单介绍/',
+    },
 ];
