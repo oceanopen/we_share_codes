@@ -2,7 +2,7 @@
 
 ## 1. 域名注册
 
-![001_域名注册入口.png](./images/001_域名注册入口.png)
+![](./images/001_域名注册入口.png)
 
 进入[域名注册](https://console.cloud.tencent.com/domain)页面：
 
@@ -11,7 +11,7 @@
 
 ## 2. 域名备案
 
-![002_域名备案入口.png](./images/002_域名备案入口.png)
+![](./images/002_域名备案入口.png)
 
 上一步域名购买完毕后，就可以进行[域名备案](https://console.cloud.tencent.com/beian/manage)流程了。
 
