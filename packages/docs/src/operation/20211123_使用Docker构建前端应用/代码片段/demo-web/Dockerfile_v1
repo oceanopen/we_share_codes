@@ -1,0 +1,7 @@
+# 本地构建，docker 部署
+
+FROM nginx:latest
+LABEL maintainer "***@***.com"
+ADD dist/ /usr/share/nginx/html/
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80

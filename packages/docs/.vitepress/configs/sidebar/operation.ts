@@ -35,4 +35,8 @@ export default [
         text: '前端性能优化总结',
         link: '/operation/20210708_前端性能优化总结/',
     },
+    {
+        text: '使用 Docker 构建前端应用',
+        link: '/operation/20211123_使用Docker构建前端应用/',
+    },
 ];
