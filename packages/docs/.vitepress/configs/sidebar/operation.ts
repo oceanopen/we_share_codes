@@ -19,4 +19,12 @@ export default [
         text: '理解浏览器的缓存机制',
         link: '/operation/20210601_理解浏览器的缓存机制/',
     },
+    {
+        text: 'HTTP 中的 ETag 是如何生成的',
+        link: '/operation/20210603_HTTP中的ETag是如何生成的/',
+    },
+    {
+        text: 'HTTP 中的 ETag 是如何生成的',
+        link: '/operation/20210603_HTTP中的ETag是如何生成的/',
+    },
 ];
