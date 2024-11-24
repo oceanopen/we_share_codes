@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to nginx!</title>
+    <style>
+      body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome fe.nginx-server.com!</h1>
+
+    <script type="text/javascript">
+      var xhr = new XMLHttpRequest()
+      // API文档详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
+      xhr.open('GET', 'http://fe.nginx-server.com:8000/api/index.html', true)
+      xhr.withCredentials = true // 携带跨域cookie
+      xhr.send()
+    </script>
+  </body>
+</html>
