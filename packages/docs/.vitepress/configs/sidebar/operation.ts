@@ -59,6 +59,10 @@ export default [
                 text: '安装 Docker',
                 link: '/operation/20230729_腾讯云服务器运维/001_安装Docker/',
             },
+            {
+                text: 'Mac 环境 ssh 登录',
+                link: '/operation/20230729_腾讯云服务器运维/002_Mac环境ssh登录/',
+            },
         ],
     },
 ];
