@@ -24,7 +24,7 @@ export default [
         link: '/operation/20210603_HTTP中的ETag是如何生成的/',
     },
     {
-        text: 'HTTP 中的 ETag 是如何生成的',
-        link: '/operation/20210603_HTTP中的ETag是如何生成的/',
+        text: '浏览器页面渲染流程浅析',
+        link: '/operation/20210628_浏览器页面渲染流程浅析/',
     },
 ];
