@@ -57,6 +57,10 @@ export default [
                 text: '了解 Go 并发编程',
                 link: '/backend/20240419_Go相关/20241027_了解Go并发编程/',
             },
+            {
+                text: '前端同学快速入门 Go',
+                link: '/backend/20240419_Go相关/20241107_前端同学快速入门Go/',
+            },
         ],
     },
     {

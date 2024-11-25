@@ -44,5 +44,6 @@ export default await antfu({
         'regexp/no-super-linear-backtracking': 'off',
         'eslint-comments/no-unlimited-disable': 'off',
         'regexp/no-unused-capturing-group': 'off',
+        'style/no-tabs': 'off', // 兼容 go 代码风格
     },
 });
