@@ -33,4 +33,14 @@ export default [
             },
         ],
     },
+    {
+        text: '项目实战',
+        collapsed: false,
+        items: [
+            {
+                text: 'go-admin 项目本地运行',
+                link: '/backend/20230714_项目实战/20230714_go-admin项目本地运行/',
+            },
+        ],
+    },
 ];
