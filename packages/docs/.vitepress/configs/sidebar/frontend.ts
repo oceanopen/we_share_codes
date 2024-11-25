@@ -105,6 +105,10 @@ export default [
                 text: 'canvas 实现图片马赛克',
                 link: '/frontend/20210421_项目实战/20211112_canvas实现图片马赛克/',
             },
+            {
+                text: '使用 Vue 的 transition-group 实现一个简单的数字滚动',
+                link: '/frontend/20210421_项目实战/20211118_使用Vue的transition-group实现一个简单的数字滚动/',
+            },
         ],
     },
 ];
