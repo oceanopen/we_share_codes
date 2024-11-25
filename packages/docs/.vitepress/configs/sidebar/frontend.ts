@@ -73,4 +73,15 @@ export default [
             },
         ],
     },
+    {
+        text: '项目实战',
+        collapsed: false,
+        items: [
+            {
+                text: '小程序按序弹窗设计方案及实现',
+                link: '/frontend/20210421_项目实战/20210421_小程序按序弹窗设计方案及实现/',
+            },
+        ],
+    },
+
 ];
