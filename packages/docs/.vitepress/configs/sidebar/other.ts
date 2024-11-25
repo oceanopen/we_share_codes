@@ -4,6 +4,10 @@ export default [
         link: '/other/',
     },
     {
+        text: '社会内卷浅析',
+        link: '/other/20210513_社会内卷浅析/',
+    },
+    {
         text: '团队建设',
         collapsed: false,
         items: [
