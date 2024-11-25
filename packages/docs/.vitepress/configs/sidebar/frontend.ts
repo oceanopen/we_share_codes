@@ -121,6 +121,10 @@ export default [
                 text: 'canvas 实现环形进度条',
                 link: '/frontend/20210421_项目实战/20211221_canvas实现环形进度条/',
             },
+            {
+                text: 'CSS 实现头像与国旗的融合',
+                link: '/frontend/20210421_项目实战/20220106_CSS实现头像与国旗的融合/',
+            },
         ],
     },
 ];

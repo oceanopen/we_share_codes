@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>国旗遮罩头像</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .box {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background: url(images/avatar.png) no-repeat;
+        background-size: cover;
+      }
+      .mix::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: url(images/nation_flag.png) no-repeat;
+        background-size: cover;
+        mask: linear-gradient(135deg, #000 10%, transparent 70%, transparent);
+      }
+
+      .gradient-demo {
+        background: url(images/avatar.png);
+        background-size: cover;
+        mask: linear-gradient(90deg, transparent, #fff);
+      }
+      .cut-nothing-demo {
+        background: linear-gradient(135deg, transparent 15px, red 0) top left,
+          linear-gradient(-135deg, transparent 15px, red 0) top right,
+          linear-gradient(-45deg, transparent 15px, red 0) bottom right,
+          linear-gradient(45deg, transparent 15px, red 0) bottom left;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+      }
+      .cut-demo {
+        background: url(images/black_demo.png) no-repeat;
+        background-size: cover;
+        mask: linear-gradient(135deg, transparent 15px, #fff 0) top left,
+          linear-gradient(-135deg, transparent 15px, #fff 0) top right,
+          linear-gradient(-45deg, transparent 15px, #fff 0) bottom right,
+          linear-gradient(45deg, transparent 15px, #fff 0) bottom left;
+        mask-size: 50% 50%;
+        mask-repeat: no-repeat;
+      }
+
+      .multi-demo {
+        position: relative;
+        background: url(images/black_demo.png) no-repeat;
+        background-size: cover;
+      }
+      .multi-demo::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url(images/black_demo_02.png) no-repeat;
+        background-size: cover;
+        mask: linear-gradient(45deg, #000 50%, transparent 50%);
+      }
+      .multi-gradient-demo::before {
+        mask: linear-gradient(45deg, #000 40%, transparent 60%);
+      }
+
+      .transfer-demo {
+        position: relative;
+        background: url(images/black_demo.png) no-repeat;
+      }
+      .transfer-demo::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url(images/black_demo_02.png);
+        animation: maskRotate 1.2s ease-in-out;
+      }
+      @keyframes maskRotate {
+        0% {
+          -webkit-mask: linear-gradient(45deg, #000 0%, transparent 5%, transparent 1%);
+        }
+        /* ... */
+        30% {
+          -webkit-mask: linear-gradient(45deg, #000 30%, transparent 35%, transparent 1%);
+        }
+        /* ... */
+        60% {
+          -webkit-mask: linear-gradient(45deg, #000 60%, transparent 65%, transparent 1%);
+        }
+        /* ... */
+        100% {
+          -webkit-mask: linear-gradient(45deg, #000 100%, transparent 105%, transparent 1%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box mix"></div>
+
+    <div class="box gradient-demo"></div>
+    <div class="box cut-nothing-demo"></div>
+    <div class="box cut-demo"></div>
+    <div class="box multi-demo"></div>
+    <div class="box multi-demo multi-gradient-demo"></div>
+    <div class="box transfer-demo"></div>
+  </body>
+</html>
