@@ -109,6 +109,10 @@ export default [
                 text: '使用 Vue 的 transition-group 实现一个简单的数字滚动',
                 link: '/frontend/20210421_项目实战/20211118_使用Vue的transition-group实现一个简单的数字滚动/',
             },
+            {
+                text: 'Vite Electron 快速构建一个 Vue3 桌面应用',
+                link: '/frontend/20210421_项目实战/20211122_Vite+Electron快速构建一个Vue3桌面应用/',
+            },
         ],
     },
 ];
