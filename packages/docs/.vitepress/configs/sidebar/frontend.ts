@@ -85,6 +85,10 @@ export default [
                 text: '前端模拟线程池的实现',
                 link: '/frontend/20210421_项目实战/20210805_前端模拟线程池的实现/',
             },
+            {
+                text: 'canvas 实现时钟转动',
+                link: '/frontend/20210421_项目实战/20211026_canvas实现时钟转动/',
+            },
         ],
     },
 
