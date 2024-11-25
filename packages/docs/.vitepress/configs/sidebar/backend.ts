@@ -53,6 +53,10 @@ export default [
                 text: '用 Go 简单实现 Github 授权登录并获取 github 用户信息',
                 link: '/backend/20240419_Go相关/20241017_用Go简单实现Github授权登录并获取github用户信息/',
             },
+            {
+                text: '了解 Go 并发编程',
+                link: '/backend/20240419_Go相关/20241027_了解Go并发编程/',
+            },
         ],
     },
     {
