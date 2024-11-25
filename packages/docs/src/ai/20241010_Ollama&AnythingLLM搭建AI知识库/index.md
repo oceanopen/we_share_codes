@@ -161,7 +161,7 @@ curl http://127.0.0.1:11434
 
 为管理这些文档，`AnythingLLM` 引入`工作区（Workspace）`的概念，作为文档的容器，可以在一个工作区内共享文档，但是工作区之间隔离。
 
-![](./images/013_AnythingLLM_工作区共享文档.png)
+![](./images/013_AnythingLLM_工作区文档入口.png)
 
 ![](./images/014_AnythingLLM_文档管理.png)
 
