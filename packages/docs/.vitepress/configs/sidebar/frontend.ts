@@ -93,6 +93,10 @@ export default [
                 text: 'canvas 实现刮刮卡',
                 link: '/frontend/20210421_项目实战/20211030_canvas实现刮刮卡/',
             },
+            {
+                text: 'canvas 实现画板和保存',
+                link: '/frontend/20210421_项目实战/20211108_canvas实现画板和保存/',
+            },
         ],
     },
 
