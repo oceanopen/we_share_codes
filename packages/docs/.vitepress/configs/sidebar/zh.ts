@@ -1,3 +1,4 @@
+import ai from './ai';
 import algorithm from './algorithm';
 import backend from './backend';
 import frontend from './frontend';
@@ -24,4 +25,5 @@ export const zh = {
     '/other/': other,
     '/operation/': operation,
     '/security/': security,
+    '/ai/': ai,
 };
