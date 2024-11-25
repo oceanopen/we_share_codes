@@ -97,7 +97,10 @@ export default [
                 text: 'canvas 实现画板和保存',
                 link: '/frontend/20210421_项目实战/20211108_canvas实现画板和保存/',
             },
+            {
+                text: 'canvas 实现流星雨',
+                link: '/frontend/20210421_项目实战/20211109_canvas实现流星雨/',
+            },
         ],
     },
-
 ];
