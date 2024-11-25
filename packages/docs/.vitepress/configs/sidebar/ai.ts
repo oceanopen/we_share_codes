@@ -11,4 +11,8 @@ export default [
         text: 'Ollama + Langchingo 实现 LLM 翻译服务',
         link: '/ai/20240925_Ollama+Langchingo实现LLM翻译服务/',
     },
+    {
+        text: 'Building a LLM Command Line Chatbot with Cobra and LangChain',
+        link: '/ai/20241010_Building_a_LLM_Command_Line_Chatbot_with_Cobra_and_LangChain/',
+    },
 ];
