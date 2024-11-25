@@ -41,6 +41,10 @@ export default [
                 text: '基于 gin 的 go 项目支持 swagger',
                 link: '/backend/20240419_Go相关/20240419_基于gin的go项目支持swagger/',
             },
+            {
+                text: 'Go 工具库之 cobra',
+                link: '/backend/20240419_Go相关/20241009_Go工具库之cobra/',
+            },
         ],
     },
     {
