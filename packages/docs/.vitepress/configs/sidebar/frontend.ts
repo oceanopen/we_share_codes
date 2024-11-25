@@ -113,6 +113,10 @@ export default [
                 text: 'Vite Electron 快速构建一个 Vue3 桌面应用',
                 link: '/frontend/20210421_项目实战/20211122_Vite+Electron快速构建一个Vue3桌面应用/',
             },
+            {
+                text: 'JavaScript 实现网页截屏两种方法',
+                link: '/frontend/20210421_项目实战/20211215_JS实现网页截屏两种方法/',
+            },
         ],
     },
 ];
