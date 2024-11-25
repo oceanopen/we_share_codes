@@ -45,6 +45,10 @@ export default [
                 text: 'Go 工具库之 cobra',
                 link: '/backend/20240419_Go相关/20241009_Go工具库之cobra/',
             },
+            {
+                text: 'gofmt 命令使用',
+                link: '/backend/20240419_Go相关/20241009_gofmt命令使用/',
+            },
         ],
     },
     {
