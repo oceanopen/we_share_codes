@@ -117,6 +117,10 @@ export default [
                 text: 'JavaScript 实现网页截屏两种方法',
                 link: '/frontend/20210421_项目实战/20211215_JS实现网页截屏两种方法/',
             },
+            {
+                text: 'canvas 实现环形进度条',
+                link: '/frontend/20210421_项目实战/20211221_canvas实现环形进度条/',
+            },
         ],
     },
 ];
