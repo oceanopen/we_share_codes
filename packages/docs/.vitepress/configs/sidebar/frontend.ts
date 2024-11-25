@@ -135,4 +135,14 @@ export default [
             },
         ],
     },
+    {
+        text: '源码解读',
+        collapsed: false,
+        items: [
+            {
+                text: '包管理器 ni 源码解读',
+                link: '/frontend/20211124_源码解读/20211124_包管理器ni源码解读/',
+            },
+        ],
+    },
 ];
