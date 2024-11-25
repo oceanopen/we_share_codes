@@ -129,6 +129,10 @@ export default [
                 text: 'Node.js 实现图片爬虫',
                 link: '/frontend/20210421_项目实战/20220518_Node.js实现图片爬虫/',
             },
+            {
+                text: 'JavaScript 实现电子签名',
+                link: '/frontend/20210421_项目实战/20241112_JavaScript实现电子签名/',
+            },
         ],
     },
 ];

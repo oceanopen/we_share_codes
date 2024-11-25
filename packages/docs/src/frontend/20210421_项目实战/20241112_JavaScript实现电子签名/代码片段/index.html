@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript签名板</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="signature-container">
+      <canvas id="signature-pad" width="400" height="200"></canvas>
+      <div class="controls">
+        <select id="stroke-style">
+          <option value="pen">钢笔</option>
+          <option value="brush">刷子</option>
+        </select>
+        <button id="clear">清除</button>
+        <button id="export-png">导出 png 格式</button>
+        <button id="export-jpeg">导出 jpeg 格式</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
