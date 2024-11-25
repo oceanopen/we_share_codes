@@ -169,7 +169,7 @@ curl http://127.0.0.1:11434
 
 抓取网页 [如何在前端渲染数学公式?](https://juejin.cn/post/7396118693757927450)：
 
-![](./015_AnythingLLM_抓取网页.png)
+![](./images/015_AnythingLLM_抓取网页.png)
 
 ![](./images/016_AnythingLLM_工作区文件管理.png)
 
