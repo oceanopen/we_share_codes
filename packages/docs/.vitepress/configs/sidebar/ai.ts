@@ -15,4 +15,8 @@ export default [
         text: 'Building a LLM Command Line Chatbot with Cobra and LangChain',
         link: '/ai/20241010_Building_a_LLM_Command_Line_Chatbot_with_Cobra_and_LangChain/',
     },
+    {
+        text: 'Ollama & AnythingLLM 搭建 AI 知识库',
+        link: '/ai/20241010_Ollama&AnythingLLM搭建AI知识库/',
+    },
 ];
