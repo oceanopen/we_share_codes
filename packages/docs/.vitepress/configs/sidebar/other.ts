@@ -8,6 +8,10 @@ export default [
         link: '/other/20210513_社会内卷浅析/',
     },
     {
+        text: '《数学之美》文字和语言 vs 数字和信息',
+        link: '/other/20220112_【数学之美】文字和语言_vs_数字和信息/',
+    },
+    {
         text: '团队建设',
         collapsed: false,
         items: [
