@@ -49,6 +49,10 @@ export default [
                 text: 'gofmt 命令使用',
                 link: '/backend/20240419_Go相关/20241009_gofmt命令使用/',
             },
+            {
+                text: '用 Go 简单实现 Github 授权登录并获取 github 用户信息',
+                link: '/backend/20240419_Go相关/20241017_用Go简单实现Github授权登录并获取github用户信息/',
+            },
         ],
     },
     {
