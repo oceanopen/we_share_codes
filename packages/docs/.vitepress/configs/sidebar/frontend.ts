@@ -101,6 +101,10 @@ export default [
                 text: 'canvas 实现流星雨',
                 link: '/frontend/20210421_项目实战/20211109_canvas实现流星雨/',
             },
+            {
+                text: 'canvas 实现图片马赛克',
+                link: '/frontend/20210421_项目实战/20211112_canvas实现图片马赛克/',
+            },
         ],
     },
 ];
