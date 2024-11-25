@@ -125,6 +125,10 @@ export default [
                 text: 'CSS 实现头像与国旗的融合',
                 link: '/frontend/20210421_项目实战/20220106_CSS实现头像与国旗的融合/',
             },
+            {
+                text: 'Node.js 实现图片爬虫',
+                link: '/frontend/20210421_项目实战/20220518_Node.js实现图片爬虫/',
+            },
         ],
     },
 ];
