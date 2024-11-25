@@ -34,6 +34,16 @@ export default [
         ],
     },
     {
+        text: 'Go 相关',
+        collapsed: false,
+        items: [
+            {
+                text: '基于 gin 的 go 项目支持 swagger',
+                link: '/backend/20240419_Go相关/20240419_基于gin的go项目支持swagger/',
+            },
+        ],
+    },
+    {
         text: '项目实战',
         collapsed: false,
         items: [
