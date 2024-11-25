@@ -89,6 +89,10 @@ export default [
                 text: 'canvas 实现时钟转动',
                 link: '/frontend/20210421_项目实战/20211026_canvas实现时钟转动/',
             },
+            {
+                text: 'canvas 实现刮刮卡',
+                link: '/frontend/20210421_项目实战/20211030_canvas实现刮刮卡/',
+            },
         ],
     },
 
