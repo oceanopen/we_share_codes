@@ -1,0 +1,30 @@
+/**
+ * @font-size-base: 75;
+ * 98rem / @font-size-base = 1.3rem
+ * 32rem / @font-size-base = 0.4267rem
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  min-height: 100vh;
+  margin: 0 auto;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+.title {
+  width: 100%;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  background: green;
+  color: white;
+  text-align: center;
+  font-size: 0.4267rem;
+}
