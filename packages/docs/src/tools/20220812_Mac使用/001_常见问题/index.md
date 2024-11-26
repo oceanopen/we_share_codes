@@ -61,10 +61,41 @@ mac 使用终端 `ssh` 连接远程服务器，如果长时间没有操作连接
 
 编辑 `/etc/ssh/ssh_config` 添加以下设置可解决这个问题：
 
-```
+```ini
 # 断开重连次数
 ServerAliveCountMax 5
 
 # 每隔5秒自动发送一个空请求以保持连接
 ServerAliveInterval 5
 ```
+
+## 3. Mac 环境下 iTerm 使用 Git 命令中文显示乱码
+
+1、设置 `iTerm` 的终端编码方式为 `utf-8`
+
+`iTerm` -> `Settings` -> `Perferences` -> `Profiles` -> `Terminal` -> `Character encoding` 为: `UTF-8`。
+
+2、修改 `Git` 配置
+
+```bash
+git config --global core.quotepath false
+```
+
+可以查看所有配置:
+
+```bash
+git config --global --list
+```
+
+如果还不行（实际没有遇到，到这里就支持中文了），若还不支持，则继续。
+
+3、设置 `.zshrc`
+
+打开配置文件 `~/.zshrc` ，在文件最后面添加如下代码：
+
+```bash
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+
+然后执行 `source ~/.zshrc`，使配置生效。
