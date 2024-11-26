@@ -159,6 +159,10 @@ export default [
                 text: 'TypeScript 类型谓词(is 关键字)',
                 link: '/frontend/20211126_TypeScript相关/20240927_TypeScript类型谓词(is关键字)/',
             },
+            {
+                text: 'TypeScript 中的 as、? 与 ! 的区别',
+                link: '/frontend/20211126_TypeScript相关/20241011_TypeScript中的as_问号_叹号的区别/',
+            },
         ],
     },
     {
