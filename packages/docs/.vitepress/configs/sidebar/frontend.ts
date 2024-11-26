@@ -147,6 +147,10 @@ export default [
                 text: 'TypeScript 入门',
                 link: '/frontend/20211126_TypeScript相关/20211126_TypeScript入门/',
             },
+            {
+                text: 'TypeScript 之类型编程',
+                link: '/frontend/20211126_TypeScript相关/20211126_TypeScript之类型编程/',
+            },
         ],
     },
     {
