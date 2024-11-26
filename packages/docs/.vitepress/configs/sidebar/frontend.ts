@@ -126,6 +126,20 @@ export default [
         ],
     },
     {
+        text: 'Node.js相关',
+        collapsed: false,
+        items: [
+            {
+                text: '浅析 NodeJS 多进程和集群',
+                link: '/frontend/20210708_Node.js相关/20210708_浅析NodeJS多进程和集群/',
+            },
+            {
+                text: 'Node.js 流(Streams) 介绍',
+                link: '/frontend/20210708_Node.js相关/20211119_Node.js流(Streams)介绍/',
+            },
+        ],
+    },
+    {
         text: '源码解读',
         collapsed: false,
         items: [
