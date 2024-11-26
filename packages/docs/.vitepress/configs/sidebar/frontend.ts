@@ -89,6 +89,14 @@ export default [
                 text: 'JavaScript 复杂判断的更优雅写法',
                 link: '/frontend/20210413_JavaScript相关/20210428_JavaScript复杂判断的更优雅写法/',
             },
+            {
+                text: '按 PromisesA+ 规范实现一个 Promise(TypeScript版)',
+                link: '/frontend/20210413_JavaScript相关/20210513_按PromisesA+规范实现一个Promise/',
+            },
+            {
+                text: '按 PromisesA+ 规范实现一个 Promise(ES6版)',
+                link: '/frontend/20210413_JavaScript相关/20210513_按PromisesA+规范实现一个Promise/ES6实现',
+            },
         ],
     },
     {
