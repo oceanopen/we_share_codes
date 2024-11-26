@@ -1,9 +1,13 @@
 English | [简体中文](./README.md)
 
+<p align="center">
+  <img width="120" src="./packages/docs/src/public/vitepress-logo-large.webp">
+</p>
+
+<h1 align="center">Docs</h1>
+
 <div align="center">
-
 Sharing knowledge related to IT.
-
 </div>
 
 ## Wishes
