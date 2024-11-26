@@ -24,7 +24,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            # 配置: https://github.com/oceanopen/we_share_code/settings/secrets/actions
+            # 配置: https://github.com/oceanopen/we_share_codes/settings/secrets/actions
             dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
             dst_token: ${{ secrets.GITEE_TOKEN }}
             gitee_user: ${{ secrets.GITEE_USER }}
@@ -41,7 +41,7 @@ jobs:
                   dst: 'gitee/${{ secrets.GITEE_USER }}'
                   # gitee 端需要配置标题为 hub-mirror 的 ssh 公钥
                   # 这里请填写与 gitee 上公钥匹配的的 ssh private key，参见：https://gitee.com/profile/sshkeys
-                  # https://github.com/oceanopen/we_share_code/settings/secrets/actions
+                  # https://github.com/oceanopen/we_share_codes/settings/secrets/actions
                   dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
                   # 这里请填写 gitee 的令牌，参见：https://gitee.com/profile/personal_access_tokens
                   dst_token: ${{ secrets.GITEE_TOKEN }}

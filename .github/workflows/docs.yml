@@ -18,7 +18,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            # 配置: https://github.com/oceanopen/we_share_code/settings/secrets/actions
+            # 配置: https://github.com/oceanopen/we_share_codes/settings/secrets/actions
             remote_host: ${{ secrets.CVM_IP }}
             remote_user: ${{ secrets.CVM_USER_NAME }}
             remote_ssh_key: ${{ secrets.CVM_PRIVATE_KEY }}

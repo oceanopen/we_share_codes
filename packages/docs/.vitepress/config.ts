@@ -41,11 +41,11 @@ export default withPwa(
             socialLinks: [
                 {
                     icon: 'github',
-                    link: 'https://github.com/oceanopen/we_share_code',
+                    link: 'https://github.com/oceanopen/we_share_codes',
                 },
                 {
                     icon: 'gitee',
-                    link: 'https://gitee.com/ocean-open/we_share_code',
+                    link: 'https://gitee.com/ocean-open/we_share_codes',
                 },
             ],
 
