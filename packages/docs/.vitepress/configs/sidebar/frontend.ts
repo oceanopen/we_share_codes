@@ -109,6 +109,10 @@ export default [
                 text: '浅析 JavaScript 沙箱',
                 link: '/frontend/20210413_JavaScript相关/20211112_浅析JavaScript沙箱',
             },
+            {
+                text: 'JavaScript 中 this 指向问题',
+                link: '/frontend/20210413_JavaScript相关/20211118_JavaScript中this指向问题',
+            },
         ],
     },
     {
