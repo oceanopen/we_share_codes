@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buffer请求数据整合</title>
+  </head>
+  <body>
+    <!-- html部分 -->
+    <button id="btn">Ajax</button>
+
+    <!-- js部分 -->
+    <script>
+      function ajax() {
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', 'ajax', true)
+        xhr.setRequestHeader('Content-Type', 'text/plain')
+
+        xhr.send('Hello World!')
+      }
+
+      document.getElementById('btn').addEventListener(
+        'click',
+        function (e) {
+          ajax()
+        },
+        false
+      )
+    </script>
+  </body>
+</html>
