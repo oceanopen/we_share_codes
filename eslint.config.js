@@ -48,5 +48,6 @@ export default await antfu({
         'no-array-constructor': 'off',
         'prefer-regex-literals': 'off',
         'style/max-statements-per-line': 'off',
+        'no-new-func': 'off',
     },
 });

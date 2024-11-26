@@ -4,15 +4,19 @@
     "version": "0.0.1",
     "private": true,
     "packageManager": "pnpm@8.15.5",
+    "engineStrict": true,
     "description": "技术分享",
-    "preferGlobal": true,
-    "workspaces": [
-        "packages/*"
-    ],
     "license": "MIT",
     "keywords": [
         "技术",
         "分享"
+    ],
+    "engines": {
+        "node": ">= 20.0.0"
+    },
+    "preferGlobal": true,
+    "workspaces": [
+        "packages/*"
     ],
     "scripts": {
         "prepare": "simple-git-hooks",
