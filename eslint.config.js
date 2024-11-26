@@ -47,5 +47,6 @@ export default await antfu({
         'style/no-tabs': 'off', // 兼容 go 代码风格
         'no-array-constructor': 'off',
         'prefer-regex-literals': 'off',
+        'style/max-statements-per-line': 'off',
     },
 });
