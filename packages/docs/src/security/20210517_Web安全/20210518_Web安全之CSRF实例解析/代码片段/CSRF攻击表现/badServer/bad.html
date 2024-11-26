@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第三方网站</title>
+  </head>
+  <body>
+    <div>当前访问地址: http://127.0.0.1:3100</div>
+    <div>
+      哈哈，小样儿，哪有赚大钱的方法，还是踏实努力工作吧！
+      <!-- 
+        Form 表单的提交会伴随着跳转到 action 中指定的 url 链接，
+        为了阻止这一行为，可以通过设置一个隐藏的 iframe 页面，
+        并将 Form 的 target 属性指向这个 iframe，当前页面 iframe 则不会刷新页面 
+      -->
+      <form action="http://127.0.0.1:3200/pay" method="POST" class="form" target="targetIframe" style="display: none">
+        <input type="text" name="userName" value="xiaoming" />
+        <input type="text" name="money" value="100" />
+      </form>
+      <iframe name="targetIframe" style="display: none"></iframe>
+    </div>
+  </body>
+  <script>
+    document.querySelector('.form').submit()
+  </script>
+</html>
