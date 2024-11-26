@@ -74,6 +74,36 @@ export default [
         ],
     },
     {
+        text: 'JavaScript 相关',
+        collapsed: false,
+        items: [
+            {
+                text: '理解执行环境及作用域',
+                link: '/frontend/20210413_JavaScript相关/20210413_理解执行环境及作用域/',
+            },
+        ],
+    },
+    {
+        text: 'CSS 相关',
+        collapsed: false,
+        items: [
+            {
+                text: '响应式布局的常用解决方案对比',
+                link: '/frontend/20210421_CSS相关/20210421_响应式布局的常用解决方案对比/',
+            },
+        ],
+    },
+    {
+        text: '源码解读',
+        collapsed: false,
+        items: [
+            {
+                text: '包管理器 ni 源码解读',
+                link: '/frontend/20211124_源码解读/20211124_包管理器ni源码解读/',
+            },
+        ],
+    },
+    {
         text: '项目实战',
         collapsed: false,
         items: [
@@ -132,26 +162,6 @@ export default [
             {
                 text: 'JavaScript 实现电子签名',
                 link: '/frontend/20210421_项目实战/20241112_JavaScript实现电子签名/',
-            },
-        ],
-    },
-    {
-        text: '源码解读',
-        collapsed: false,
-        items: [
-            {
-                text: '包管理器 ni 源码解读',
-                link: '/frontend/20211124_源码解读/20211124_包管理器ni源码解读/',
-            },
-        ],
-    },
-    {
-        text: 'CSS 相关',
-        collapsed: false,
-        items: [
-            {
-                text: '响应式布局的常用解决方案对比',
-                link: '/frontend/20210421_CSS相关/20210421_响应式布局的常用解决方案对比/',
             },
         ],
     },
