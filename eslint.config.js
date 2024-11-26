@@ -49,5 +49,6 @@ export default await antfu({
         'prefer-regex-literals': 'off',
         'style/max-statements-per-line': 'off',
         'no-new-func': 'off',
+        'style/brace-style': 'off',
     },
 });
