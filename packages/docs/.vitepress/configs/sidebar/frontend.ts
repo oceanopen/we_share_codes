@@ -85,6 +85,10 @@ export default [
                 text: '引用类型介绍',
                 link: '/frontend/20210413_JavaScript相关/20210414_引用类型介绍/',
             },
+            {
+                text: 'JavaScript 复杂判断的更优雅写法',
+                link: '/frontend/20210413_JavaScript相关/20210428_JavaScript复杂判断的更优雅写法/',
+            },
         ],
     },
     {
