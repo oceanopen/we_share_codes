@@ -155,6 +155,10 @@ export default [
                 text: 'TypeScript 中 Interface 与 Type 的区别',
                 link: '/frontend/20211126_TypeScript相关/20211215_TypeScript中Interface与Type的区别/',
             },
+            {
+                text: 'TypeScript 类型谓词(is 关键字)',
+                link: '/frontend/20211126_TypeScript相关/20240927_TypeScript类型谓词(is关键字)/',
+            },
         ],
     },
     {
