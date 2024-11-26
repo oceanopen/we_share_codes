@@ -151,6 +151,10 @@ export default [
                 text: 'TypeScript 之类型编程',
                 link: '/frontend/20211126_TypeScript相关/20211126_TypeScript之类型编程/',
             },
+            {
+                text: 'TypeScript 中 Interface 与 Type 的区别',
+                link: '/frontend/20211126_TypeScript相关/20211215_TypeScript中Interface与Type的区别/',
+            },
         ],
     },
     {
