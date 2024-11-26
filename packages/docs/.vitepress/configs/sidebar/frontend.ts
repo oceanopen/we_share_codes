@@ -81,6 +81,10 @@ export default [
                 text: '理解执行环境及作用域',
                 link: '/frontend/20210413_JavaScript相关/20210413_理解执行环境及作用域/',
             },
+            {
+                text: '引用类型介绍',
+                link: '/frontend/20210413_JavaScript相关/20210414_引用类型介绍/',
+            },
         ],
     },
     {
