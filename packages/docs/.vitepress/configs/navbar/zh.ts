@@ -1,3 +1,7 @@
+import { getPackageJsonVersion } from '../../utils/index';
+
+const currentVersion = getPackageJsonVersion();
+
 export const zh = [
     {
         text: '简介',
@@ -43,5 +47,18 @@ export const zh = [
         text: '杂项',
         link: '/other/',
         activeMatch: '/other/',
+    },
+    {
+        text: `v${currentVersion}`,
+        items: [
+            {
+                text: '更新日志',
+                link: 'https://github.com/oceanopen/we_share_codes/blob/main/CHANGELOG.md',
+            },
+            {
+                text: 'New issue',
+                link: 'https://github.com/oceanopen/we_share_codes/issues/new/choose',
+            },
+        ],
     },
 ];
