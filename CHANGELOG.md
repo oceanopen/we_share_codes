@@ -1,3 +1,20 @@
+## [0.0.4](https://github.com/oceanopen/we_share_codes/compare/v0.0.3...v0.0.4) (2024-12-04)
+
+
+### Features
+
+* 基于 package.json 展示 当前版本号 ([#6](https://github.com/oceanopen/we_share_codes/issues/6)) ([d3309ce](https://github.com/oceanopen/we_share_codes/commit/d3309ceae5ea9221ffa4b1254c3421330280d1b2))
+* typescript 类型谓词(is 关键字) ([d9e417e](https://github.com/oceanopen/we_share_codes/commit/d9e417e86014b78b090066c9fe8e4d63c0834c1b))
+* typescript 入门 ([7777d33](https://github.com/oceanopen/we_share_codes/commit/7777d33a24781290c4ab5715b860c141439de8f6))
+* typescript 之类型编程 ([eee5172](https://github.com/oceanopen/we_share_codes/commit/eee5172eb9c5f12a8ef1c69e3adf22b48b2e847b))
+* typescript 中 Interface 与 Type 的区别 ([6e315f3](https://github.com/oceanopen/we_share_codes/commit/6e315f3fff1942428c0c80de3c5becffb49e646f))
+* typescript 中的 as、? 与 ! 的区别 ([7b25671](https://github.com/oceanopen/we_share_codes/commit/7b25671773b510ef10e20d1c8a0485432948288f))
+* web 安全之 CSRF 实例解析 ([44db5ef](https://github.com/oceanopen/we_share_codes/commit/44db5efe2d813a2d35aaa67b4972ea4199af6c46))
+* web 安全之 XSS 实例解析 ([d52e16e](https://github.com/oceanopen/we_share_codes/commit/d52e16eac3557d413f9323baca0cb1ae686ffdb3))
+* web 安全之 XSS 实例解析 ([f7b23d3](https://github.com/oceanopen/we_share_codes/commit/f7b23d392dc2eae9ddc3ab4e04d440ac9127b568))
+
+
+
 ## [0.0.3](https://github.com/oceanopen/we_share_codes/compare/v0.0.2...v0.0.3) (2024-11-26)
 
 
