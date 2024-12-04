@@ -12,6 +12,10 @@ export default [
         link: '/tools/20210804_Git常用命令总结/',
     },
     {
+        text: 'Git 如何同步本地、远程的分支和 tag 信息',
+        link: '/tools/20241204_Git如何同步本地、远程的分支和tag信息/',
+    },
+    {
         text: 'Nodejs 写 Bash 脚本实践方案',
         link: '/tools/20210922_Nodejs写Bash脚本实践方案/',
     },
