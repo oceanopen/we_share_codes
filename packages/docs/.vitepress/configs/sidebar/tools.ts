@@ -100,8 +100,8 @@ export default [
                 link: '/tools/20220812_Mac使用/013_Mac设置终端代理/',
             },
             {
-                text: 'Mac 手动更新 oh-my-zsh',
-                link: '/tools/20220812_Mac使用/014_Mac手动更新oh-my-zsh/',
+                text: 'Mac iTerm2 安装及配置',
+                link: '/tools/20220812_Mac使用/014_Mac_iTerm2_安装及配置/',
             },
         ],
     },
