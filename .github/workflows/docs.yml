@@ -32,7 +32,7 @@ jobs:
               with:
                   node-version: 20
 
-            - name: Cache node modules
+            - name: Cache node_modules
               id: cache-node-modules
               uses: actions/cache@v4
               env:
