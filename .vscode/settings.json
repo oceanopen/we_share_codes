@@ -1,4 +1,6 @@
 {
+  "window.title": "${activeEditorMedium}${separator}${rootName}",
+
   // Enable the ESlint flat config support
   "eslint.useFlatConfig": true,
 
