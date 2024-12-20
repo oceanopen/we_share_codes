@@ -9,11 +9,11 @@ const count = Number.parseInt(await $`ls -1 | wc -l`);
 console.log(`Files count: ${count}`); // Files count: 11
 
 try {
-    await $`exit 1`;
+  await $`exit 1`;
 }
 catch (p) {
-    console.log(`Exit code: ${p.exitCode}`); // Exit code: 1
-    console.log(`Error: ${p.stderr}`); // Error:
+  console.log(`Exit code: ${p.exitCode}`); // Exit code: 1
+  console.log(`Error: ${p.stderr}`); // Error:
 }
 
 // pipe() 方法可用于重定向标准输出：
@@ -26,7 +26,7 @@ await $`pwd`; // outputs 等价于当前目录下执行`$ pwd`
 // node-fetch 包。
 const resp = await fetch('https://www.baidu.com');
 if (resp.ok) {
-    console.log(await resp.text());
+  console.log(await resp.text());
 }
 
 // readline包

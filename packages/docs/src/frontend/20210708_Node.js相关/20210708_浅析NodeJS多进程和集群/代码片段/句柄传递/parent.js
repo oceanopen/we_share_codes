@@ -6,7 +6,7 @@ const server = createServer();
 const child = fork('./child.js');
 
 server
-    .on('connection', (socket) => {
-        child.send('socket', socket);
-    })
-    .listen(1337);
+  .on('connection', (socket) => {
+    child.send('socket', socket);
+  })
+  .listen(1337);

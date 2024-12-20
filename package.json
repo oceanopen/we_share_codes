@@ -1,63 +1,64 @@
 {
-    "name": "we_share_codes",
-    "type": "module",
-    "version": "0.0.4",
-    "private": true,
-    "packageManager": "pnpm@8.15.5",
-    "engineStrict": true,
-    "description": "技术分享",
-    "license": "MIT",
-    "keywords": [
-        "技术",
-        "分享"
-    ],
-    "engines": {
-        "node": ">= 20.0.0"
-    },
-    "preferGlobal": true,
-    "workspaces": [
-        "packages/*"
-    ],
-    "scripts": {
-        "prepare": "simple-git-hooks",
-        "bootstrap": "pnpm install",
-        "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
-        "docs:dev": "cd packages/docs && npm run dev",
-        "docs:build:local": "cd packages/docs && npm run build:local",
-        "docs:build:prod": "cd packages/docs && npm run build:prod",
-        "docs:preview:local": "cd packages/docs && npm run build:local && npm run preview",
-        "docs:preview:prod": "cd packages/docs && npm run build:prod && npm run preview",
-        "release": "bumpp",
-        "lint": "eslint --fix",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "changelog:versions": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
-    },
-    "devDependencies": {
-        "@antfu/eslint-config": "^3.9.1",
-        "@commitlint/cli": "^19.5.0",
-        "@commitlint/config-conventional": "^19.5.0",
-        "bumpp": "^9.8.1",
-        "chalk": "^5.3.0",
-        "commitizen": "^4.3.1",
-        "conventional-changelog-cli": "^5.0.0",
-        "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^9.14.0",
-        "execa": "^9.5.1",
-        "lint-staged": "^15.2.10",
-        "simple-git-hooks": "^2.11.1"
-    },
-    "simple-git-hooks": {
-        "pre-commit": "npx lint-staged",
-        "commit-msg": "npx commitlint --edit $1"
-    },
-    "lint-staged": {
-        "*.{js,jsx,vue,ts,tsx}": [
-            "npm run lint"
-        ]
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
+  "name": "we_share_codes",
+  "type": "module",
+  "version": "0.0.4",
+  "private": true,
+  "packageManager": "pnpm@8.15.5",
+  "engineStrict": true,
+  "description": "技术分享",
+  "license": "MIT",
+  "keywords": [
+    "技术",
+    "分享"
+  ],
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "preferGlobal": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "simple-git-hooks",
+    "bootstrap": "pnpm install",
+    "clean": "rm -rf ./node_modules && rm -rf packages/**/node_modules",
+    "docs:dev": "cd packages/docs && npm run dev",
+    "docs:build:local": "cd packages/docs && npm run build:local",
+    "docs:build:prod": "cd packages/docs && npm run build:prod",
+    "docs:preview:local": "cd packages/docs && npm run build:local && npm run preview",
+    "docs:preview:prod": "cd packages/docs && npm run build:prod && npm run preview",
+    "release": "bumpp",
+    "lint": "eslint --fix",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "changelog:versions": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.9.1",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "bumpp": "^9.8.1",
+    "chalk": "^5.3.0",
+    "commitizen": "^4.3.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-format": "^0.1.3",
+    "execa": "^9.5.1",
+    "lint-staged": "^15.2.10",
+    "simple-git-hooks": "^2.11.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged",
+    "commit-msg": "npx commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx,css,html}": [
+      "npm run lint"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }

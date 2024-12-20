@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>Welcome to nginx!</title>
@@ -14,11 +14,11 @@
     <h1>Welcome fe.nginx-server.com!</h1>
 
     <script type="text/javascript">
-      var xhr = new XMLHttpRequest()
+      var xhr = new XMLHttpRequest();
       // API文档详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
-      xhr.open('GET', 'http://fe.nginx-server.com:8000/api/index.html', true)
-      xhr.withCredentials = true // 携带跨域cookie
-      xhr.send()
+      xhr.open("GET", "http://fe.nginx-server.com:8000/api/index.html", true);
+      xhr.withCredentials = true; // 携带跨域cookie
+      xhr.send();
     </script>
   </body>
 </html>

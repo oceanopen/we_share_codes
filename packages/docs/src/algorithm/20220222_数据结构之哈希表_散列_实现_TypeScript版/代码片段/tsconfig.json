@@ -1,8 +1,8 @@
 {
-    "extends": "../../../../../../tsconfig.base.json",
-    "compilerOptions": {
-        "types": [
-            "jest" // 或者其他您使用的测试运行器的名称
-        ]
-    }
+  "extends": "../../../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": [
+      "jest" // 或者其他您使用的测试运行器的名称
+    ]
+  }
 }

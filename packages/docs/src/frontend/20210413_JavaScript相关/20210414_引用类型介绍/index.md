@@ -38,8 +38,8 @@ person.age = 29;
 
 ```javascript
 const person = {
-    name: 'Nicholas',
-    age: 29,
+  name: 'Nicholas',
+  age: 29,
 };
 ```
 
@@ -91,7 +91,7 @@ colors[colors.length] = 'brown';
 
 ```javascript
 if (Array.isArray(value)) {
-    // 对数组执行某些操作
+  // 对数组执行某些操作
 }
 ```
 
@@ -99,7 +99,7 @@ if (Array.isArray(value)) {
 
 ```javascript
 if (Array.isArray(value)) {
-    // 对数组执行某些操作
+  // 对数组执行某些操作
 }
 ```
 
@@ -119,20 +119,20 @@ if (Array.isArray(value)) {
 
 ```javascript
 const personl = {
-    toLocaleString() {
-        return 'Nikolaos';
-    },
-    toString() {
-        return 'Nicholas';
-    },
+  toLocaleString() {
+    return 'Nikolaos';
+  },
+  toString() {
+    return 'Nicholas';
+  },
 };
 const person2 = {
-    toLocaleString() {
-        return 'Grigorioa';
-    },
-    toString() {
-        return 'Greg';
-    },
+  toLocaleString() {
+    return 'Grigorioa';
+  },
+  toString() {
+    return 'Greg';
+  },
 };
 const people = [personl, person2];
 
@@ -217,16 +217,16 @@ console.log(values); // [0, 1, 10, 15, 5]
 
 ```javascript
 function compare(value1, value2) {
-    if (value1 < value2) {
-        return -1;
-    }
-    // 交换顺序，则返回正数
-    else if (value1 > value2) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+  if (value1 < value2) {
+    return -1;
+  }
+  // 交换顺序，则返回正数
+  else if (value1 > value2) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 }
 
 // 测试结果如下：
@@ -240,7 +240,7 @@ console.log(values); // [0, 1, 5, 10, 15]
 
 ```javascript
 function compare(value1, value2) {
-    return value2 - value1;
+  return value2 - value1;
 }
 
 // 测试结果如下：
@@ -298,7 +298,7 @@ alert(colors2); // green,blue,yellow,purple
 alert(colors3); // green,blue,yellow
 ```
 
-> `slice`方法的参数中有一个`负数`，则用` 数组长度``加上该数 `来确定相应的`位置`。
+> `slice`方法的参数中有一个`负数`，则用`数组长度``加上该数`来确定相应的`位置`。
 > 例如，在一个包含 5 项的数组上调用`slice(-2, -1)`与调用`slice(3, 4)`得到的结果相同。
 > 如果结束位置`小于`起始位置，则返回`空数组`。
 
@@ -367,7 +367,7 @@ ECMAScript5 还新增了两个归并数组的方法：`reduce()`和 `reduceRight
 ```javascript
 const values = [1, 2, 3, 4, 5];
 const sum = values.reduce((prev, cur, index, array) => {
-    return prev + cur;
+  return prev + cur;
 });
 
 alert(sum); // 15
@@ -379,8 +379,8 @@ alert(sum); // 15
 ```javascript
 const values = [1, 2, 3, 4, 5];
 const sum = values.reduce((prev, cur, index, array) => {
-    console.log('index:', index, ' | prev:', prev, ' | cur:', cur);
-    return prev + cur;
+  console.log('index:', index, ' | prev:', prev, ' | cur:', cur);
+  return prev + cur;
 }, 100);
 console.log(sum);
 
@@ -557,7 +557,7 @@ console.log(matches2); // null
 
 对于 `exec()` 方法而言，即使在模式中设置了`全局标志(g)`,它每次也只会返回一个匹配项。
 在`不设置`全局标志的情况下，在同一个字符串上`多次调用` exec() 将始终返回`第一个匹配项`的信息。
-而在`设置`全局标志的情况下，每次调用 exec() 则都会在字符串中` 继续査找``新匹配项 `，
+而在`设置`全局标志的情况下，每次调用 exec() 则都会在字符串中`继续査找``新匹配项`，
 
 ```javascript
 const text = 'cat, bat, sat, fat';
@@ -585,8 +585,8 @@ console.log(matches[0]); // bat
 console.log(pattern2.lastIndex); // 8
 ```
 
-> 这个例子中的第一个模式` pattern1``不是全局模式 `，因此每次调用`exec()`返回的都是第一个匹配项("cat")。
-> 而第二个模式` pattern2``是全局模式 `，因此每次调用`exec()`都会返回字符串中的`下一个匹配项`，直至搜索到`字符串末尾`为止。
+> 这个例子中的第一个模式`pattern1``不是全局模式`，因此每次调用`exec()`返回的都是第一个匹配项("cat")。
+> 而第二个模式`pattern2``是全局模式`，因此每次调用`exec()`都会返回字符串中的`下一个匹配项`，直至搜索到`字符串末尾`为止。
 > 此外，还应该注意模式的`lastIndex`属性的变化情况。
 > 在`全局匹配模式`下，`lastIndex`的值在每次调用`exec()`后都会增加，而在`非全局模式`下则始终`保持不变`。
 
@@ -602,7 +602,7 @@ console.log(pattern2.lastIndex); // 8
 const text = '000-00-0000';
 const pattern = /\d{3}-\d{2}-\d{4}/;
 if (pattern.test(text)) {
-    console.log('The pattern was matched.');
+  console.log('The pattern was matched.');
 }
 ```
 
@@ -641,16 +641,16 @@ const text = 'this has been a short summer';
 const pattern = /(.)hort/g;
 
 if (pattern.test(text)) {
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.input); // this has been a short summer
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.leftContext); // this has been a
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.rightContext); // " summer"
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.lastMatch); // short
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.lastParen); // s
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.input); // this has been a short summer
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.leftContext); // this has been a
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.rightContext); // " summer"
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.lastMatch); // short
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.lastParen); // s
 }
 ```
 
@@ -662,16 +662,16 @@ const text = 'this has been a short summer';
 const pattern = /(.)hort/g;
 
 if (pattern.test(text)) {
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.$_); // this has been a short summer
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp['$`']); // this has been a
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp[`$'`]); // " summer"
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp['$&']); // short
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp['$+']); // s
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.$_); // this has been a short summer
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp['$`']); // this has been a
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp[`$'`]); // " summer"
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp['$&']); // short
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp['$+']); // s
 }
 ```
 
@@ -687,10 +687,10 @@ const text = 'this has been a short summer';
 const pattern = /(..)or(.)/g;
 
 if (pattern.test(text)) {
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.$1); // "sh"
-    // eslint-disable-next-line regexp/no-legacy-features
-    console.log(RegExp.$2); // "t"
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.$1); // "sh"
+  // eslint-disable-next-line regexp/no-legacy-features
+  console.log(RegExp.$2); // "t"
 }
 ```
 
@@ -709,14 +709,14 @@ if (pattern.test(text)) {
 ```javascript
 // 使用函数声明语法定义
 function sum(num1, num2) {
-    return num1 + num2;
+  return num1 + num2;
 }
 // 函数表达式
 sum = function (num1, num2) {
-    return num1 + num2;
+  return num1 + num2;
 };
 // 使用 Function 构造函数
-// eslint-disable-next-line no-new-func
+
 sum = new Function('num1', 'num2', 'return num1 + num2'); // 不推荐
 ```
 
@@ -736,7 +736,7 @@ sum = new Function('num1', 'num2', 'return num1 + num2'); // 不推荐
 console.log(sum(10, 10)); // 20
 
 function sum(num1, num2) {
-    return num1 + num2;
+  return num1 + num2;
 }
 ```
 
@@ -761,23 +761,23 @@ function sum(num1, num2) {
 
 ```javascript
 function factorial1(num) {
-    if (num <= 1) {
-        return 1;
-    }
-    else {
-        return num * factorial1(num - 1);
-    }
+  if (num <= 1) {
+    return 1;
+  }
+  else {
+    return num * factorial1(num - 1);
+  }
 }
 
 // 这个函数的执行与函数名 factorial 紧紧耦合在了一起。为了消除这种紧密耦合的现象，可简写为：
 function factorial2(num) {
-    if (num <= 1) {
-        return 1;
-    }
-    else {
-        // eslint-disable-next-line no-caller
-        return num * arguments.callee(num - 1);
-    }
+  if (num <= 1) {
+    return 1;
+  }
+  else {
+    // eslint-disable-next-line no-caller
+    return num * arguments.callee(num - 1);
+  }
 }
 
 console.log(factorial1(5)); // 120
@@ -797,13 +797,13 @@ console.log(factorial2(5)); // 120
 
 ```javascript
 function sayName(name) {
-    console.log(name);
+  console.log(name);
 }
 function sum(num1, mun2) {
-    return numl + num2;
+  return numl + num2;
 }
 function sayHi() {
-    console.log('hi');
+  console.log('hi');
 }
 
 console.log(sayName.length); // 1
@@ -820,7 +820,7 @@ console.log(sayHi.length); // 0
 
 **apply() 和 call()**
 
-> 每个函数都包含两个非继承而来的方法：apply() 和 call() 这两个方法的用途都是` 在特定的作用域中``调用函数 `，实际上等于设置函数体内` this 对象`的值。
+> 每个函数都包含两个非继承而来的方法：apply() 和 call() 这两个方法的用途都是`在特定的作用域中``调用函数`，实际上等于设置函数体内` this 对象`的值。
 
 首先，apply() 方法接收两个参数：一个是在其中运行函数的作用域，另一是参数数组。其中，第二个参数可以是 Array 的实例，也可以是 arguments 对象。
 
@@ -1167,7 +1167,7 @@ console.log(result); // word (cat), word (bat), word (sat), word (fat)
 在此，每个以"at"结尾的单词都被替换了，替换结果是"word"后跟一对圆括号，而圆括号中是被字符序列$1 所替换的单词。
 
 `replace()方法`的`第二个参数`也可以是`一个函数`。
-在` 只有一个``匹配项(即与模式匹配的字符串) `的情况下，会向这个函数传递 3 个参数：`模式的匹配项`、`模式匹配项在字符申中的位置`和`原始字符串`。
+在`只有一个``匹配项(即与模式匹配的字符串)`的情况下，会向这个函数传递 3 个参数：`模式的匹配项`、`模式匹配项在字符申中的位置`和`原始字符串`。
 在正则表达式中定义了`多个捕获组`的情况下，传递给函数的参数依次是模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项……，但最后两个参数仍然分别是模式的匹配项在字符串中的位置和原始字符串。
 这个函数应该`返冋一个字符串`，表示应该被替换的匹配项。
 使用函数作为 `replace()方法`的第二个参数可以实现更加精细的替换操作。
@@ -1176,18 +1176,18 @@ console.log(result); // word (cat), word (bat), word (sat), word (fat)
 
 ```javascript
 function htmlEscape(text) {
-    return text.replace(/[<>"&]/g, (match, pos, originalText) => {
-        switch (match) {
-            case '<':
-                return '&lt;';
-            case '>':
-                return '&gt;';
-            case '&':
-                return '&amp;';
-            case '"':
-                return '&quot;';
-        }
-    });
+  return text.replace(/[<>"&]/g, (match, pos, originalText) => {
+    switch (match) {
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      case '&':
+        return '&amp;';
+      case '"':
+        return '&quot;';
+    }
+  });
 }
 
 console.log(htmlEscape('<p class="greeting">Hello world!</p>'));
@@ -1362,7 +1362,7 @@ console.log('hi');
 ```
 
 当`解析器`发现代码中调用 `eval()`方法时，它会将传入的参数当作`实际的 ECMAScript 语句`来解析， 然后把`执行结果`插入到`原位置`。
-通过 `eval()`执行的代码被认为是包含该次调用的执行环境的一部分， 因此`被执行的代码`具有与` 该执行环境``相同的作用域链 `。
+通过 `eval()`执行的代码被认为是包含该次调用的执行环境的一部分， 因此`被执行的代码`具有与`该执行环境``相同的作用域链`。
 这意味着通过 `eval()` 执行的代码可以引用在包含环境中定义的变量。
 
 > 举个例子：
@@ -1397,7 +1397,7 @@ console.log(msg); // "hello world"
 在 eval() 中创建的`任何变量`或`函数`都`不会被提升`，因为在解析代码的时候，它们被包含在一个字符串中；
 它们只在 eval() 执行的时候创建。
 
-`严格模式`下，在` 外部``访问不到 ` eval() 中创建的`任何变量或函数`，因此前面两个例子都会导致错误。
+`严格模式`下，在`外部``访问不到` eval() 中创建的`任何变量或函数`，因此前面两个例子都会导致错误。
 
 同样，在严格模式下，为 eval 赋值也会导致错误：
 
@@ -1408,6 +1408,6 @@ console.log(msg); // "hello world"
 
 > 能够解释代码字符串的能力非常强大，但也非常危险。
 > 因此在使用 `eval()` 时必须极为谨慎，特别是在用它`执行用户输入数据`的情况下。
-> 否则，可能会有` 恶意用户``输入 `威胁你的`站点或应用程序安全`的`代码`(即所谓的`代码注入`)。
+> 否则，可能会有`恶意用户``输入`威胁你的`站点或应用程序安全`的`代码`(即所谓的`代码注入`)。
 
 #### 7.1.3 Global 对象的属性

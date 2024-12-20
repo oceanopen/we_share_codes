@@ -1,3 +1,3 @@
 module.exports = {
-    async: 'async',
+  async: 'async',
 };

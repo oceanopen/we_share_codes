@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -49,81 +49,81 @@
   </body>
 
   <script>
-    const loginInfo = document.querySelector('.loginInfo')
-    const payInfo = document.querySelector('.payInfo')
-    const money = document.querySelector('.money')
-    const btnLogin = document.querySelector('.btnLogin')
-    const btnPay = document.querySelector('.btnPay')
+    const loginInfo = document.querySelector(".loginInfo");
+    const payInfo = document.querySelector(".payInfo");
+    const money = document.querySelector(".money");
+    const btnLogin = document.querySelector(".btnLogin");
+    const btnPay = document.querySelector(".btnPay");
 
-    let currentName = ''
+    let currentName = "";
 
     // 第一次进入判断是否已经登录
-    Fetch('http://127.0.0.1:3200/isLogin', 'POST', {}).then((res) => {
+    Fetch("http://127.0.0.1:3200/isLogin", "POST", {}).then((res) => {
       if (res.data) {
-        payInfo.style.display = 'block'
-        loginInfo.style.display = 'none'
+        payInfo.style.display = "block";
+        loginInfo.style.display = "none";
 
         // 若已登录，则展示用户账户余额
-        Fetch('http://127.0.0.1:3200/pay', 'POST', { userName: currentName, money: 0 }).then((res) => {
-          money.innerHTML = res.data.money
-        })
+        Fetch("http://127.0.0.1:3200/pay", "POST", { userName: currentName, money: 0 }).then((res) => {
+          money.innerHTML = res.data.money;
+        });
       } else {
-        payInfo.style.display = 'none'
-        loginInfo.style.display = 'block'
+        payInfo.style.display = "none";
+        loginInfo.style.display = "block";
       }
-    })
+    });
 
     // 点击登录
     btnLogin.onclick = function () {
-      var userName = document.querySelector('.userName').value
-      currentName = userName
-      var password = document.querySelector('.password').value
+      var userName = document.querySelector(".userName").value;
+      currentName = userName;
+      var password = document.querySelector(".password").value;
 
       // 登录请求
-      Fetch('http://127.0.0.1:3200/login', 'POST', { userName, password }).then((res) => {
-        payInfo.style.display = 'block'
-        loginInfo.style.display = 'none'
-        money.innerHTML = res.data.money
-      })
-    }
+      Fetch("http://127.0.0.1:3200/login", "POST", { userName, password }).then((res) => {
+        payInfo.style.display = "block";
+        loginInfo.style.display = "none";
+        money.innerHTML = res.data.money;
+      });
+    };
 
     // 点击支付10元
     btnPay.onclick = function () {
-      Fetch('http://127.0.0.1:3200/pay', 'POST', { userName: currentName, money: 10 }).then((res) => {
-        console.log(res)
-        money.innerHTML = res.data.money
-      })
-    }
+      Fetch("http://127.0.0.1:3200/pay", "POST", { userName: currentName, money: 10 }).then((res) => {
+        console.log(res);
+        money.innerHTML = res.data.money;
+      });
+    };
 
     // 封装的请求方法
-    function Fetch(url, method = 'POST', data) {
+    function Fetch(url, method = "POST", data) {
       return new Promise((resolve, reject) => {
-        let options = {}
-        if (method !== 'GET') {
+        let options = {};
+        if (method !== "GET") {
           options = {
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-          }
+          };
         }
 
         fetch(url, {
-          mode: 'cors', // no-cors, cors, *same-origin
+          mode: "cors", // no-cors, cors, *same-origin
           method,
           ...options,
-          credentials: 'include', // 带上cookie信息
+          credentials: "include", // 带上cookie信息
         })
           .then((res) => {
-            return res.json() // 结果解析为json格式
+            return res.json(); // 结果解析为json格式
           })
           .then((res) => {
-            resolve(res)
+            resolve(res);
           })
           .catch((err) => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
     }
   </script>
 </html>

@@ -6,5 +6,5 @@ const KoaStatic = require('koa-static');
 app.use(KoaStatic(__dirname));
 
 app.listen(8080, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });

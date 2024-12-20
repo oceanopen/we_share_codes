@@ -85,18 +85,18 @@ Connection: keep-alive
 // package.json
 
 {
-    "scripts": {
-        "start": "node server.js"
-    },
-    "dependencies": {
-        "koa": "^2.13.1",
-        "koa-conditional-get": "^3.0.0",
-        "koa-etag": "^4.0.0",
-        "koa-static": "^5.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.7"
-    }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-conditional-get": "^3.0.0",
+    "koa-etag": "^4.0.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
 ```
 
@@ -115,14 +115,14 @@ const app = new Koa();
 app.use(conditional()); // 使用条件请求中间件
 app.use(etag()); // 使用etag中间件
 app.use(
-    // 使用静态资源中间件
-    koaStatic(path.join(__dirname, '/public'), {
-        maxage: 10 * 1000, // 设置缓存存储的最大周期，单位为秒
-    })
+  // 使用静态资源中间件
+  koaStatic(path.join(__dirname, '/public'), {
+    maxage: 10 * 1000, // 设置缓存存储的最大周期，单位为秒
+  })
 );
 
 app.listen(3000, () => {
-    console.log('app starting at port 3000');
+  console.log('app starting at port 3000');
 });
 ```
 
@@ -139,7 +139,7 @@ app.listen(3000, () => {
 ```html
 <!-- public/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -307,14 +307,14 @@ Connection: keep-alive
 
 ```js
 module.exports = function conditional() {
-    return async function (ctx, next) {
-        await next();
+  return async function (ctx, next) {
+    await next();
 
-        if (ctx.fresh) {
-            ctx.status = 304;
-            ctx.body = null;
-        }
-    };
+    if (ctx.fresh) {
+      ctx.status = 304;
+      ctx.body = null;
+    }
+  };
 };
 ```
 
@@ -326,26 +326,26 @@ module.exports = function conditional() {
 // node_modules/koa/lib/request.js
 
 module.exports = {
-    // ...
+  // ...
 
-    get fresh() {
-        const method = this.method;
-        const s = this.ctx.status;
+  get fresh() {
+    const method = this.method;
+    const s = this.ctx.status;
 
-        // GET or HEAD for weak freshness validation only
-        if (method !== 'GET' && method !== 'HEAD') {
-            return false;
-        }
+    // GET or HEAD for weak freshness validation only
+    if (method !== 'GET' && method !== 'HEAD') {
+      return false;
+    }
 
-        // 2xx or 304 as per rfc2616 14.26
-        if ((s >= 200 && s < 300) || s === 304) {
-            return fresh(this.header, this.response.header);
-        }
+    // 2xx or 304 as per rfc2616 14.26
+    if ((s >= 200 && s < 300) || s === 304) {
+      return fresh(this.header, this.response.header);
+    }
 
-        return false;
-    },
+    return false;
+  },
 
-    // ...
+  // ...
 };
 ```
 
@@ -361,97 +361,97 @@ const CACHE_CONTROL_NO_CACHE_REGEXP = /(?:^|,)\s*no-cache\s*(?:,|$)/;
 module.exports = fresh;
 
 function fresh(reqHeaders, resHeaders) {
-    // fields
-    const modifiedSince = reqHeaders['if-modified-since'];
-    const noneMatch = reqHeaders['if-none-match'];
+  // fields
+  const modifiedSince = reqHeaders['if-modified-since'];
+  const noneMatch = reqHeaders['if-none-match'];
 
-    // unconditional request
-    if (!modifiedSince && !noneMatch) {
-        return false;
+  // unconditional request
+  if (!modifiedSince && !noneMatch) {
+    return false;
+  }
+
+  // Always return stale when Cache-Control: no-cache
+  // to support end-to-end reload requests
+  // https://tools.ietf.org/html/rfc2616#section-14.9.4
+  const cacheControl = reqHeaders['cache-control'];
+  if (cacheControl && CACHE_CONTROL_NO_CACHE_REGEXP.test(cacheControl)) {
+    return false;
+  }
+
+  // if-none-match
+  if (noneMatch && noneMatch !== '*') {
+    const etag = resHeaders.etag;
+
+    if (!etag) {
+      return false;
     }
 
-    // Always return stale when Cache-Control: no-cache
-    // to support end-to-end reload requests
-    // https://tools.ietf.org/html/rfc2616#section-14.9.4
-    const cacheControl = reqHeaders['cache-control'];
-    if (cacheControl && CACHE_CONTROL_NO_CACHE_REGEXP.test(cacheControl)) {
-        return false;
+    let etagStale = true;
+    const matches = parseTokenList(noneMatch);
+    for (let i = 0; i < matches.length; i++) {
+      const match = matches[i];
+      if (match === etag || match === `W/${etag}` || `W/${match}` === etag) {
+        etagStale = false;
+        break;
+      }
     }
 
-    // if-none-match
-    if (noneMatch && noneMatch !== '*') {
-        const etag = resHeaders.etag;
-
-        if (!etag) {
-            return false;
-        }
-
-        let etagStale = true;
-        const matches = parseTokenList(noneMatch);
-        for (let i = 0; i < matches.length; i++) {
-            const match = matches[i];
-            if (match === etag || match === `W/${etag}` || `W/${match}` === etag) {
-                etagStale = false;
-                break;
-            }
-        }
-
-        // 不新鲜资源，则返回false
-        if (etagStale) {
-            return false;
-        }
+    // 不新鲜资源，则返回false
+    if (etagStale) {
+      return false;
     }
+  }
 
-    // if-modified-since
-    if (modifiedSince) {
-        const lastModified = resHeaders['last-modified'];
-        const modifiedStale = !lastModified || !(parseHttpDate(lastModified) <= parseHttpDate(modifiedSince));
+  // if-modified-since
+  if (modifiedSince) {
+    const lastModified = resHeaders['last-modified'];
+    const modifiedStale = !lastModified || !(parseHttpDate(lastModified) <= parseHttpDate(modifiedSince));
 
-        // 不新鲜资源，则返回false
-        if (modifiedStale) {
-            return false;
-        }
+    // 不新鲜资源，则返回false
+    if (modifiedStale) {
+      return false;
     }
+  }
 
-    return true;
+  return true;
 }
 
 // 将字符串日期格式转为日期对象
 function parseHttpDate(date) {
-    const timestamp = date && Date.parse(date);
+  const timestamp = date && Date.parse(date);
 
-    // istanbul ignore next: guard against date.js Date.parse patching
-    return typeof timestamp === 'number' ? timestamp : Number.NaN;
+  // istanbul ignore next: guard against date.js Date.parse patching
+  return typeof timestamp === 'number' ? timestamp : Number.NaN;
 }
 
 // 获取请求头 ETag: W/"2c-1799c10ab70" 的值 W/"2c-1799c10ab70"，这里兼容了返回多个ETag以逗号或者空格分隔的情况。
 function parseTokenList(str) {
-    let end = 0;
-    const list = [];
-    let start = 0;
+  let end = 0;
+  const list = [];
+  let start = 0;
 
-    // gather tokens
-    for (let i = 0, len = str.length; i < len; i++) {
-        switch (str.charCodeAt(i)) {
-            case 0x20 /*   */:
-                if (start === end) {
-                    start = end = i + 1;
-                }
-                break;
-            case 0x2C /* , */:
-                list.push(str.substring(start, end));
-                start = end = i + 1;
-                break;
-            default:
-                end = i + 1;
-                break;
+  // gather tokens
+  for (let i = 0, len = str.length; i < len; i++) {
+    switch (str.charCodeAt(i)) {
+      case 0x20 /*   */:
+        if (start === end) {
+          start = end = i + 1;
         }
+        break;
+      case 0x2C /* , */:
+        list.push(str.substring(start, end));
+        start = end = i + 1;
+        break;
+      default:
+        end = i + 1;
+        break;
     }
+  }
 
-    // final token
-    list.push(str.substring(start, end));
+  // final token
+  list.push(str.substring(start, end));
 
-    return list;
+  return list;
 }
 ```
 
@@ -477,48 +477,48 @@ const Buffer = require('node:buffer').Buffer;
 const stat = promisify(fs.stat);
 
 module.exports = function etag(options) {
-    return async function etag(ctx, next) {
-        await next();
-        const entity = await getResponseEntity(ctx);
-        setEtag(ctx, entity, options);
-    };
+  return async function etag(ctx, next) {
+    await next();
+    const entity = await getResponseEntity(ctx);
+    setEtag(ctx, entity, options);
+  };
 };
 
 async function getResponseEntity(ctx) {
-    // no body
-    const body = ctx.body;
-    if (!body || ctx.response.get('etag')) {
-        return;
-    }
+  // no body
+  const body = ctx.body;
+  if (!body || ctx.response.get('etag')) {
+    return;
+  }
 
-    // type
-    const status = (ctx.status / 100) | 0; // 小数取整
+  // type
+  const status = (ctx.status / 100) | 0; // 小数取整
 
-    // 仅 2xx 校验通过
-    if (status !== 2) {
-        return;
-    }
+  // 仅 2xx 校验通过
+  if (status !== 2) {
+    return;
+  }
 
-    if (body instanceof Stream) {
-        if (!body.path) {
-            return;
-        }
-        return await stat(body.path);
+  if (body instanceof Stream) {
+    if (!body.path) {
+      return;
     }
-    else if (typeof body === 'string' || Buffer.isBuffer(body)) {
-        return body;
-    }
-    else {
-        return JSON.stringify(body);
-    }
+    return await stat(body.path);
+  }
+  else if (typeof body === 'string' || Buffer.isBuffer(body)) {
+    return body;
+  }
+  else {
+    return JSON.stringify(body);
+  }
 }
 
 function setEtag(ctx, entity, options) {
-    if (!entity) {
-        return;
-    }
+  if (!entity) {
+    return;
+  }
 
-    ctx.response.etag = calculate(entity, options);
+  ctx.response.etag = calculate(entity, options);
 }
 ```
 
@@ -548,44 +548,44 @@ const toString = Object.prototype.toString;
 module.exports = etag;
 
 function etag(entity, options) {
-    if (entity == null) {
-        throw new TypeError('argument entity is required');
-    }
+  if (entity == null) {
+    throw new TypeError('argument entity is required');
+  }
 
-    // support fs.Stats object
-    const isStats = isstats(entity);
-    const weak = options && typeof options.weak === 'boolean' ? options.weak : isStats;
+  // support fs.Stats object
+  const isStats = isstats(entity);
+  const weak = options && typeof options.weak === 'boolean' ? options.weak : isStats;
 
-    // validate argument
-    if (!isStats && typeof entity !== 'string' && !Buffer.isBuffer(entity)) {
-        throw new TypeError('argument entity must be string, Buffer, or fs.Stats');
-    }
+  // validate argument
+  if (!isStats && typeof entity !== 'string' && !Buffer.isBuffer(entity)) {
+    throw new TypeError('argument entity must be string, Buffer, or fs.Stats');
+  }
 
-    // generate entity tag
-    const tag = isStats ? stattag(entity) : entitytag(entity);
+  // generate entity tag
+  const tag = isStats ? stattag(entity) : entitytag(entity);
 
-    return weak ? `W/${tag}` : tag;
+  return weak ? `W/${tag}` : tag;
 }
 
 function isstats(obj) {
-    // genuine fs.Stats
-    if (typeof Stats === 'function' && obj instanceof Stats) {
-        return true;
-    }
+  // genuine fs.Stats
+  if (typeof Stats === 'function' && obj instanceof Stats) {
+    return true;
+  }
 
-    // quack quack
-    return (
-        obj
-        && typeof obj === 'object'
-        && 'ctime' in obj
-        && toString.call(obj.ctime) === '[object Date]'
-        && 'mtime' in obj
-        && toString.call(obj.mtime) === '[object Date]'
-        && 'ino' in obj
-        && typeof obj.ino === 'number'
-        && 'size' in obj
-        && typeof obj.size === 'number'
-    );
+  // quack quack
+  return (
+    obj
+    && typeof obj === 'object'
+    && 'ctime' in obj
+    && toString.call(obj.ctime) === '[object Date]'
+    && 'mtime' in obj
+    && toString.call(obj.mtime) === '[object Date]'
+    && 'ino' in obj
+    && typeof obj.ino === 'number'
+    && 'size' in obj
+    && typeof obj.size === 'number'
+  );
 }
 ```
 
@@ -597,10 +597,10 @@ function isstats(obj) {
 // node_modules/etag/index.js
 
 function stattag(stat) {
-    const mtime = stat.mtime.getTime().toString(16);
-    const size = stat.size.toString(16);
+  const mtime = stat.mtime.getTime().toString(16);
+  const size = stat.size.toString(16);
 
-    return `"${size}-${mtime}"`;
+  return `"${size}-${mtime}"`;
 }
 ```
 
@@ -612,18 +612,18 @@ function stattag(stat) {
 const Buffer = require('node:buffer').Buffer;
 
 function entitytag(entity) {
-    if (entity.length === 0) {
+  if (entity.length === 0) {
     // fast-path empty
-        return '"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"';
-    }
+    return '"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"';
+  }
 
-    // compute hash of entity
-    const hash = crypto.createHash('sha1').update(entity, 'utf8').digest('base64').substring(0, 27);
+  // compute hash of entity
+  const hash = crypto.createHash('sha1').update(entity, 'utf8').digest('base64').substring(0, 27);
 
-    // compute length of entity
-    const len = typeof entity === 'string' ? Buffer.byteLength(entity, 'utf8') : entity.length;
+  // compute length of entity
+  const len = typeof entity === 'string' ? Buffer.byteLength(entity, 'utf8') : entity.length;
 
-    return `"${len.toString(16)}-${hash}"`;
+  return `"${len.toString(16)}-${hash}"`;
 }
 ```
 

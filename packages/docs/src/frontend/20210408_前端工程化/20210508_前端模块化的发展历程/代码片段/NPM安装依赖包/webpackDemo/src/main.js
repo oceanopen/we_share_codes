@@ -8,7 +8,7 @@ const data = [1, 2, 2, 3, 4, 5, 5, 5, 6];
 console.log('unique data:', unique(data));
 
 document.querySelector('#btn').addEventListener('click', () => {
-    import('./async.js').then((data) => {
-        console.log(data);
-    });
+  import('./async.js').then((data) => {
+    console.log(data);
+  });
 });

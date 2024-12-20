@@ -169,26 +169,26 @@ pnpm i
 
 ```json
 {
-    "name": "@antfu/ni",
-    "version": "0.10.1",
-    "description": "Use the right package manager",
-    "files": ["dist", "bin"],
-    // 暴露了六个命令
-    "bin": {
-        "ni": "bin/ni.js",
-        "nci": "bin/nci.js",
-        "nr": "bin/nr.js",
-        "nu": "bin/nu.js",
-        "nx": "bin/nx.js",
-        "nrm": "bin/nrm.js"
-    },
-    "scripts": {
-        "ni": "esno src/ni.ts",
-        // 省略了其他的命令 用 esno 执行 ts 文件
-        // 可以加上 ? 便于调试，也可以不加
-        // 或者是终端 npm run dev \?
-        "dev": "esno src/ni.ts"
-    }
+  "name": "@antfu/ni",
+  "version": "0.10.1",
+  "description": "Use the right package manager",
+  "files": ["dist", "bin"],
+  // 暴露了六个命令
+  "bin": {
+    "ni": "bin/ni.js",
+    "nci": "bin/nci.js",
+    "nr": "bin/nr.js",
+    "nu": "bin/nu.js",
+    "nx": "bin/nx.js",
+    "nrm": "bin/nrm.js"
+  },
+  "scripts": {
+    "ni": "esno src/ni.ts",
+    // 省略了其他的命令 用 esno 执行 ts 文件
+    // 可以加上 ? 便于调试，也可以不加
+    // 或者是终端 npm run dev \?
+    "dev": "esno src/ni.ts"
+  }
 }
 ```
 
@@ -234,16 +234,16 @@ runCli(parseNi);
 // src/runner.ts
 
 export async function runCli(fn: Runner, options: DetectOptions = {}) {
-    // process.argv：返回一个数组，成员是当前进程的所有命令行参数。
-    // 其中 process.argv 的第一和第二个元素是 Node 可执行文件和被执行 JavaScript 文件的完全限定的文件系统路径，无论你是否这样输入他们。
-    const args = process.argv.slice(2).filter(Boolean);
-    try {
-        await run(fn, args, options);
-    }
-    catch (error) {
+  // process.argv：返回一个数组，成员是当前进程的所有命令行参数。
+  // 其中 process.argv 的第一和第二个元素是 Node 可执行文件和被执行 JavaScript 文件的完全限定的文件系统路径，无论你是否这样输入他们。
+  const args = process.argv.slice(2).filter(Boolean);
+  try {
+    await run(fn, args, options);
+  }
+  catch (error) {
     // process.exit 方法用来退出当前进程。它可以接受一个数值参数，如果参数大于 0，表示执行失败；如果等于 0 表示执行成功。
-        process.exit(1);
-    }
+    process.exit(1);
+  }
 }
 ```
 
@@ -267,68 +267,68 @@ import execa from 'execa';
 const DEBUG_SIGN = '?';
 
 export async function run(fn: Runner, args: string[], options: DetectOptions = {}) {
-    // 命令参数包含 问号? 则是调试模式，不执行脚本
-    const debug = args.includes(DEBUG_SIGN);
-    // 调试模式下，删除这个问号
-    if (debug) {
-        remove(args, DEBUG_SIGN);
-    }
+  // 命令参数包含 问号? 则是调试模式，不执行脚本
+  const debug = args.includes(DEBUG_SIGN);
+  // 调试模式下，删除这个问号
+  if (debug) {
+    remove(args, DEBUG_SIGN);
+  }
 
-    // cwd 方法返回进程的当前目录（绝对路径）
-    let cwd = process.cwd();
-    let command;
+  // cwd 方法返回进程的当前目录（绝对路径）
+  let cwd = process.cwd();
+  let command;
 
-    // 支持指定 文件目录
-    // ni -C packages/foo vite
-    // nr -C playground dev
-    if (args[0] === '-C') {
-        cwd = resolve(cwd, args[1]);
-        // 删掉这两个参数 -C packages/foo
-        args.splice(0, 2);
-    }
+  // 支持指定 文件目录
+  // ni -C packages/foo vite
+  // nr -C playground dev
+  if (args[0] === '-C') {
+    cwd = resolve(cwd, args[1]);
+    // 删掉这两个参数 -C packages/foo
+    args.splice(0, 2);
+  }
 
-    // 如果是全局安装，那么实用全局的包管理器
-    const isGlobal = args.includes('-g');
-    if (isGlobal) {
-        command = await fn(getGlobalAgent(), args);
-    }
-    else {
+  // 如果是全局安装，那么实用全局的包管理器
+  const isGlobal = args.includes('-g');
+  if (isGlobal) {
+    command = await fn(getGlobalAgent(), args);
+  }
+  else {
     // 猜测使用哪个包管理器，如果没有发现锁文件，会返回 null，则调用 getDefaultAgent 函数，默认返回是让用户选择 prompt
-        let agent = (await detect({ ...options, cwd })) || getDefaultAgent();
-        if (agent === 'prompt') {
-            agent = (
-                await prompts({
-                    name: 'agent',
-                    type: 'select',
-                    message: 'Choose the agent',
-                    choices: agents.map(value => ({ title: value, value })),
-                })
-            ).agent;
-            if (!agent) {
-                return;
-            }
-        }
-        // 这里的 fn 是 传入解析代码的函数
-        command = await fn(agent as Agent, args, {
-            hasLock: Boolean(agent),
-            cwd,
-        });
-    }
-
-    // 如果没有命令，直接返回，上一个 runCli 函数报错，退出进程
-    if (!command) {
+    let agent = (await detect({ ...options, cwd })) || getDefaultAgent();
+    if (agent === 'prompt') {
+      agent = (
+        await prompts({
+          name: 'agent',
+          type: 'select',
+          message: 'Choose the agent',
+          choices: agents.map(value => ({ title: value, value })),
+        })
+      ).agent;
+      if (!agent) {
         return;
+      }
     }
+    // 这里的 fn 是 传入解析代码的函数
+    command = await fn(agent as Agent, args, {
+      hasLock: Boolean(agent),
+      cwd,
+    });
+  }
 
-    // 如果是调试模式，那么直接打印出命令。调试非常有用。
-    if (debug) {
-        console.log(command);
-        return;
-    }
+  // 如果没有命令，直接返回，上一个 runCli 函数报错，退出进程
+  if (!command) {
+    return;
+  }
 
-    // 最终用 execa 执行命令，比如 npm i
-    // https://github.com/sindresorhus/execa
-    await execa.command(command, { stdio: 'inherit', encoding: 'utf-8', cwd });
+  // 如果是调试模式，那么直接打印出命令。调试非常有用。
+  if (debug) {
+    console.log(command);
+    return;
+  }
+
+  // 最终用 execa 执行命令，比如 npm i
+  // https://github.com/sindresorhus/execa
+  await execa.command(command, { stdio: 'inherit', encoding: 'utf-8', cwd });
 }
 ```
 
@@ -359,14 +359,14 @@ run(fn);
 // 源码有删减
 
 export const LOCKS: Record<string, Agent> = {
-    'pnpm-lock.yaml': 'pnpm',
-    'yarn.lock': 'yarn',
-    'package-lock.json': 'npm',
+  'pnpm-lock.yaml': 'pnpm',
+  'yarn.lock': 'yarn',
+  'package-lock.json': 'npm',
 };
 export const INSTALL_PAGE: Record<Agent, string> = {
-    pnpm: 'https://pnpm.js.org/en/installation',
-    yarn: 'https://yarnpkg.com/getting-started/install',
-    npm: 'https://www.npmjs.com/get-npm',
+  pnpm: 'https://pnpm.js.org/en/installation',
+  yarn: 'https://yarnpkg.com/getting-started/install',
+  npm: 'https://www.npmjs.com/get-npm',
 };
 ```
 
@@ -377,43 +377,43 @@ export const INSTALL_PAGE: Record<Agent, string> = {
 import process from 'node:process';
 
 export interface DetectOptions {
-    autoInstall?: boolean;
-    cwd?: string;
+  autoInstall?: boolean;
+  cwd?: string;
 }
 
 export async function detect({ autoInstall, cwd }: DetectOptions) {
-    // 根据当前目录向上一层遍历，找到匹配到的锁文件
-    const result = await findUp(Object.keys(LOCKS), { cwd });
-    // 若匹配到锁文件，则获取对应的包管理器 npm/yarn/pnpm
-    const agent = result ? LOCKS[path.basename(result)] : null;
+  // 根据当前目录向上一层遍历，找到匹配到的锁文件
+  const result = await findUp(Object.keys(LOCKS), { cwd });
+  // 若匹配到锁文件，则获取对应的包管理器 npm/yarn/pnpm
+  const agent = result ? LOCKS[path.basename(result)] : null;
 
-    // 判断包管理命令是否已全局安装，若没有安装，则提示安装
-    if (agent && !cmdExists(agent)) {
-        if (!autoInstall) {
-            console.warn(`Detected ${agent} but it doesn't seem to be installed.\n`);
+  // 判断包管理命令是否已全局安装，若没有安装，则提示安装
+  if (agent && !cmdExists(agent)) {
+    if (!autoInstall) {
+      console.warn(`Detected ${agent} but it doesn't seem to be installed.\n`);
 
-            // 大多数 CI 服务器会自动设置 process.env.CI = true
-            if (process.env.CI) {
-                process.exit(1);
-            }
+      // 大多数 CI 服务器会自动设置 process.env.CI = true
+      if (process.env.CI) {
+        process.exit(1);
+      }
 
-            // 终端可点击官网下载介绍
-            const link = terminalLink(agent, INSTALL_PAGE[agent]);
-            const { tryInstall } = await prompts({
-                name: 'tryInstall',
-                type: 'confirm',
-                message: `Would you like to globally install ${link}?`,
-            });
-            if (!tryInstall) {
-                process.exit(1);
-            }
-        }
-
-        // 全局安装，有 node 环境就会有 npm，所以这里通过 npm 安装即可。
-        await execa.command(`npm i -g ${agent}`, { stdio: 'inherit', cwd });
+      // 终端可点击官网下载介绍
+      const link = terminalLink(agent, INSTALL_PAGE[agent]);
+      const { tryInstall } = await prompts({
+        name: 'tryInstall',
+        type: 'confirm',
+        message: `Would you like to globally install ${link}?`,
+      });
+      if (!tryInstall) {
+        process.exit(1);
+      }
     }
 
-    return agent;
+    // 全局安装，有 node 环境就会有 npm，所以这里通过 npm 安装即可。
+    await execa.command(`npm i -g ${agent}`, { stdio: 'inherit', cwd });
+  }
+
+  return agent;
 }
 ```
 
@@ -426,32 +426,32 @@ export async function detect({ autoInstall, cwd }: DetectOptions) {
 // 源码有删减
 
 export const parseNi = <Runner>((agent, args, ctx) => {
-    // 支持 ni -v 命令行，打印版本号
-    if (args.length === 1 && args[0] === '-v') {
-        console.log(`@antfu/ni v${version}`);
-        process.exit(0);
-    }
+  // 支持 ni -v 命令行，打印版本号
+  if (args.length === 1 && args[0] === '-v') {
+    console.log(`@antfu/ni v${version}`);
+    process.exit(0);
+  }
 
-    // ni 直接运行，默认执行安装
-    if (args.length === 0) {
-        return getCommand(agent, 'install');
-    }
+  // ni 直接运行，默认执行安装
+  if (args.length === 0) {
+    return getCommand(agent, 'install');
+  }
 
-    // 若为全局安装依赖
-    if (args.includes('-g')) {
-        return getCommand(agent, 'global', exclude(args, '-g'));
-    }
+  // 若为全局安装依赖
+  if (args.includes('-g')) {
+    return getCommand(agent, 'global', exclude(args, '-g'));
+  }
 
-    // 省略一些代码
+  // 省略一些代码
 
-    // 即使有 lockfile 的存在，也无法保证在持续集成环境中每次安装依赖都和开发时一致。
-    // 因为可能存在 package.json 和 lockfile 版本号不匹配并需要更新依赖版本的情况。
-    // 必须存在 lockfile 且依赖版本和 package.json 匹配时才会安装依赖，否则报错。
-    if (args.includes('--frozen')) {
-        return getCommand(agent, 'frozen', exclude(args, '--frozen'));
-    }
+  // 即使有 lockfile 的存在，也无法保证在持续集成环境中每次安装依赖都和开发时一致。
+  // 因为可能存在 package.json 和 lockfile 版本号不匹配并需要更新依赖版本的情况。
+  // 必须存在 lockfile 且依赖版本和 package.json 匹配时才会安装依赖，否则报错。
+  if (args.includes('--frozen')) {
+    return getCommand(agent, 'frozen', exclude(args, '--frozen'));
+  }
 
-    return getCommand(agent, 'add', args);
+  return getCommand(agent, 'add', args);
 });
 ```
 
@@ -463,15 +463,15 @@ export const parseNi = <Runner>((agent, args, ctx) => {
 // 一份配置，写个这三种包管理器中的命令。
 
 export const AGENTS = {
-    npm: {
-        install: 'npm i',
-    },
-    yarn: {
-        install: 'yarn install',
-    },
-    pnpm: {
-        install: 'pnpm i',
-    },
+  npm: {
+    install: 'npm i',
+  },
+  yarn: {
+    install: 'yarn install',
+  },
+  pnpm: {
+    install: 'pnpm i',
+  },
 };
 ```
 
@@ -480,29 +480,29 @@ export const AGENTS = {
 // 源码有删减
 
 export function getCommand(agent: Agent, command: Command, args: string[] = []) {
-    // 包管理器不在 AGENTS 中则报错
-    // 比如 npm 不在
-    // 正常不会出现这种情况，代码逻辑校验用
-    if (!(agent in AGENTS)) {
-        throw new Error(`Unsupported agent "${agent}"`);
-    }
+  // 包管理器不在 AGENTS 中则报错
+  // 比如 npm 不在
+  // 正常不会出现这种情况，代码逻辑校验用
+  if (!(agent in AGENTS)) {
+    throw new Error(`Unsupported agent "${agent}"`);
+  }
 
-    // 获取命令 安装则对应 npm install
-    const c = AGENTS[agent][command];
+  // 获取命令 安装则对应 npm install
+  const c = AGENTS[agent][command];
 
-    // 如果是函数，则执行函数。
-    // 目前没有这种场景。
-    if (typeof c === 'function') {
-        return c(args);
-    }
+  // 如果是函数，则执行函数。
+  // 目前没有这种场景。
+  if (typeof c === 'function') {
+    return c(args);
+  }
 
-    // 命令 没找到，则报错
-    if (!c) {
-        throw new Error(`Command "${command}" is not support by agent "${agent}"`);
-    }
+  // 命令 没找到，则报错
+  if (!c) {
+    throw new Error(`Command "${command}" is not support by agent "${agent}"`);
+  }
 
-    // 最终拼接成命令字符串，{0} 代表 参数列表
-    return c.replace('{0}', args.join(' ')).trim();
+  // 最终拼接成命令字符串，{0} 代表 参数列表
+  return c.replace('{0}', args.join(' ')).trim();
 }
 ```
 
@@ -520,12 +520,12 @@ await execa.command(command, { stdio: 'inherit', encoding: 'utf-8', cwd });
 
 ```json
 {
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "build": "rimraf dist && tsup src/ni.ts src/nci.ts src/nr.ts src/nu.ts src/nx.ts src/nrm.ts src/index.ts --format cjs,esm --dts"
-    }
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && tsup src/ni.ts src/nci.ts src/nr.ts src/nu.ts src/nx.ts src/nrm.ts src/index.ts --format cjs,esm --dts"
+  }
 }
 ```
 

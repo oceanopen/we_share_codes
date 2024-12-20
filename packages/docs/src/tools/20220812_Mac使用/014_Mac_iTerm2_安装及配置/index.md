@@ -11,7 +11,7 @@
 ## 2. zsh、iterm2、oh-my-zsh 是什么关系
 
 - `zsh` 是 `终端(Shell)` 的一种，常用的 `Shell` 有 `zsh`、`bash`、`csh` 等，一般电脑默认终端是 `bash`，打开终端，通过
-`cat /etc/shells` 查看自己有几个 `shell`。
+  `cat /etc/shells` 查看自己有几个 `shell`。
 
 ```bash
 cat /etc/shells
@@ -30,8 +30,8 @@ cat /etc/shells
 
 - 默认的 `zsh` 配置有点麻烦。因此有用户在 `GitHub` 上制作了一个配置文件 `oh-my-zsh`，这是目前为止最流行的 `zsh` `配置，说白了oh-my-zsh` 就是一个人做的 `zsh` 的配置文件，因为配置起来很方便，所以现在几乎成为标配。
 
-    - [Github](https://github.com/ohmyzsh/ohmyzsh)
-    - [官网](https://ohmyz.sh/)
+  - [Github](https://github.com/ohmyzsh/ohmyzsh)
+  - [官网](https://ohmyz.sh/)
 
 - `iterm2` 这是一个终端模拟器，是个 `app`，只不过它的作用是模拟终端。
 

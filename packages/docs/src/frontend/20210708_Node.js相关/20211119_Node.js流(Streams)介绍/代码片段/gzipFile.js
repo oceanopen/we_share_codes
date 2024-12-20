@@ -5,5 +5,5 @@ const zlib = require('node:zlib');
 const file = process.argv[2];
 
 fs.createReadStream(file)
-    .pipe(zlib.createGzip())
-    .pipe(fs.createWriteStream(`${file}.gz`));
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream(`${file}.gz`));

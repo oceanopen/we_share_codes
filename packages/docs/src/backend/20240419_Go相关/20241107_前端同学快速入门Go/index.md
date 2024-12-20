@@ -93,24 +93,24 @@ func demo() {
 ```js
 // JS 代码，「非阻塞式 API」
 function demo() {
-    fs.readFile('file.txt', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        console.log(data);
-    });
-    // 以下代码立刻执行
-    execFunc();
+  fs.readFile('file.txt', (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(data);
+  });
+  // 以下代码立刻执行
+  execFunc();
 }
 ```
 
 ```js
 // JS 代码，「阻塞式 API」
 async function demo() {
-    fs.readFileSync('file.txt');
-    // 以下代码将在读取文件结束后才执行
-    execFunc();
+  fs.readFileSync('file.txt');
+  // 以下代码将在读取文件结束后才执行
+  execFunc();
 }
 ```
 
@@ -270,17 +270,17 @@ go run main.go
 
 ```js
 async function demo() {
-    let cnt = 0;
-    const total = 100000;
+  let cnt = 0;
+  const total = 100000;
 
-    async function write(label) {
-        for (let i = 0; i < total; i++) {
-            cnt++;
-        }
+  async function write(label) {
+    for (let i = 0; i < total; i++) {
+      cnt++;
     }
-    // 这样写，看起来更异步
-    await Promise.all([write(), write()]);
-    console.log('cnt:', cnt);
+  }
+  // 这样写，看起来更异步
+  await Promise.all([write(), write()]);
+  console.log('cnt:', cnt);
 }
 ```
 

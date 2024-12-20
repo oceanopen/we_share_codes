@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,89 +17,89 @@
       /*********************** 策略对象 **************************/
       var strategies = {
         isNonEmpty: function (value, errorMsg) {
-          if (value === '') {
-            return errorMsg
+          if (value === "") {
+            return errorMsg;
           }
         },
         minLength: function (value, length, errorMsg) {
           if (value.length < length) {
-            return errorMsg
+            return errorMsg;
           }
         },
         isMobile: function (value, errorMsg) {
           if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) {
-            return errorMsg
+            return errorMsg;
           }
         },
-      }
+      };
 
       /*********************** Validator 类 **************************/
       var Validator = function () {
-        this.cache = []
-      }
+        this.cache = [];
+      };
       Validator.prototype.add = function (dom, rules) {
-        var self = this
+        var self = this;
         for (var i = 0, rule; (rule = rules[i++]); ) {
-          ;(function (rule) {
-            var strategyAry = rule.strategy.split(':') // 把 strategy 和参数分开，兼容 minLength:6 的规则格式
-            var errorMsg = rule.errorMsg
+          (function (rule) {
+            var strategyAry = rule.strategy.split(":"); // 把 strategy 和参数分开，兼容 minLength:6 的规则格式
+            var errorMsg = rule.errorMsg;
             // 把校验的步骤用空函数包装起来，并且放入cache
             self.cache.push(function () {
-              var strategy = strategyAry.shift() // 用户挑选的 strategy
-              strategyAry.unshift(dom.value) // 把 input 的 value 添加进参数列表
-              strategyAry.push(errorMsg) // 把errorMsg 添加进参数列表
-              return strategies[strategy].apply(dom, strategyAry)
-            })
-          })(rule)
+              var strategy = strategyAry.shift(); // 用户挑选的 strategy
+              strategyAry.unshift(dom.value); // 把 input 的 value 添加进参数列表
+              strategyAry.push(errorMsg); // 把errorMsg 添加进参数列表
+              return strategies[strategy].apply(dom, strategyAry);
+            });
+          })(rule);
         }
-      }
+      };
       Validator.prototype.start = function () {
         for (var i = 0, validatorFunc; (validatorFunc = this.cache[i++]); ) {
-          var errorMsg = validatorFunc() // 开始校验，并取得校验后的返回信息
+          var errorMsg = validatorFunc(); // 开始校验，并取得校验后的返回信息
           if (errorMsg) {
             // 如果有确切的返回值，说明校验没有通过
-            return errorMsg
+            return errorMsg;
           }
         }
-      }
+      };
 
       /*********************** 客户调用代码 **************************/
-      var registerForm = document.getElementById('registerForm')
+      var registerForm = document.getElementById("registerForm");
       var validataFunc = function () {
-        var validator = new Validator()
+        var validator = new Validator();
         /*************** 添加一些校验规则 ****************/
         validator.add(registerForm.userName, [
           {
-            strategy: 'isNonEmpty',
-            errorMsg: '用户名不能为空',
+            strategy: "isNonEmpty",
+            errorMsg: "用户名不能为空",
           },
           {
-            strategy: 'minLength:6',
-            errorMsg: '用户名长度不能小于10 位',
+            strategy: "minLength:6",
+            errorMsg: "用户名长度不能小于10 位",
           },
-        ])
+        ]);
         validator.add(registerForm.password, [
           {
-            strategy: 'minLength:6',
-            errorMsg: '密码长度不能小于6 位',
+            strategy: "minLength:6",
+            errorMsg: "密码长度不能小于6 位",
           },
-        ])
+        ]);
 
         // 获得校验结果
-        var errorMsg = validator.start()
+        var errorMsg = validator.start();
         // 返回校验结果
-        return errorMsg
-      }
+        return errorMsg;
+      };
 
       registerForm.onsubmit = function () {
-        var errorMsg = validataFunc() // 如果 errorMsg 有确切的返回值，说明未通过校验
+        var errorMsg = validataFunc(); // 如果 errorMsg 有确切的返回值，说明未通过校验
         if (errorMsg) {
-          alert(errorMsg)
-          return false // 阻止表单提交
+          alert(errorMsg);
+          return false; // 阻止表单提交
         } else {
-          alert('表单校验成功')
+          alert("表单校验成功");
         }
-      }
+      };
     </script>
   </body>
 </html>

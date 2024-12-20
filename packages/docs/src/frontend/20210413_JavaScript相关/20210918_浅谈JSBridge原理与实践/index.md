@@ -76,11 +76,11 @@ document.querySelector('#test').innerHTML = 'I am from native';
 
 ```js
 function evaluateByNative(params) {
-    const p = document.createElement('p');
-    // eslint-disable-next-line unicorn/prefer-dom-node-text-content
-    p.innerText = params;
-    document.body.appendChild(p);
-    return 'Hello Bridge!';
+  const p = document.createElement('p');
+  // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+  p.innerText = params;
+  document.body.appendChild(p);
+  return 'Hello Bridge!';
 }
 ```
 
@@ -134,14 +134,14 @@ Web 端发出请求的方式非常多样，例如 `<a/>` 、`iframe.src`、`loca
 const CUSTOM_PROTOCOL_SCHEME = 'prek';
 
 function web2Native(event) {
-    const messagingIframe = document.createElement('iframe');
-    messagingIframe.style.display = 'none';
-    messagingIframe.src = `${CUSTOM_PROTOCOL_SCHEME}://${event}`;
-    document.documentElement.appendChild(messagingIframe);
+  const messagingIframe = document.createElement('iframe');
+  messagingIframe.style.display = 'none';
+  messagingIframe.src = `${CUSTOM_PROTOCOL_SCHEME}://${event}`;
+  document.documentElement.appendChild(messagingIframe);
 
-    setTimeout(() => {
-        document.documentElement.removeChild(messagingIframe);
-    }, 200);
+  setTimeout(() => {
+    document.documentElement.removeChild(messagingIframe);
+  }, 200);
 }
 ```
 
@@ -163,19 +163,19 @@ function web2Native(event) {
 const CUSTOM_PROTOCOL_SCHEME = 'prek'; // 自定义 url scheme
 
 function web2Native(event_name) {
-    const messagingIframe = document.createElement('iframe');
-    messagingIframe.style.display = 'none';
-    messagingIframe.src = `${CUSTOM_PROTOCOL_SCHEME}://${event_name}`;
-    document.documentElement.appendChild(messagingIframe);
-    setTimeout(() => {
-        document.documentElement.removeChild(messagingIframe);
-    }, 0);
+  const messagingIframe = document.createElement('iframe');
+  messagingIframe.style.display = 'none';
+  messagingIframe.src = `${CUSTOM_PROTOCOL_SCHEME}://${event_name}`;
+  document.documentElement.appendChild(messagingIframe);
+  setTimeout(() => {
+    document.documentElement.removeChild(messagingIframe);
+  }, 0);
 }
 
 const btn = document.querySelector('#btn');
 
 btn.onclick = () => {
-    web2Native('openPhotoAlbum');
+  web2Native('openPhotoAlbum');
 };
 ```
 
@@ -258,14 +258,14 @@ window.getAppInfo(); // 'ggl_2693'
 // Web
 let uniqueID = 1; // 为防止事件名冲突，给每个 callback 设置一个唯一标识
 function webCallNative(event, params, callback) {
-    if (typeof callback === 'Function') {
-        const callbackID = `jsb_cb_${uniqueID++}_${Date.now()}`;
-        window[callbackID] = callback;
-    }
-    const currentParams = { callback: callbackID };
-    // 构造 url scheme
-    const src = `bytedance://getAppInfo?${JSON.stringify(currentParams)}`;
-    // ...
+  if (typeof callback === 'Function') {
+    const callbackID = `jsb_cb_${uniqueID++}_${Date.now()}`;
+    window[callbackID] = callback;
+  }
+  const currentParams = { callback: callbackID };
+  // 构造 url scheme
+  const src = `bytedance://getAppInfo?${JSON.stringify(currentParams)}`;
+  // ...
 }
 ```
 

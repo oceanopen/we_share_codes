@@ -27,128 +27,128 @@
 <!-- OneStar.vue -->
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue'
+  import { defineComponent, onMounted, ref } from "vue";
 
   // 坐标
   class Crood {
-    public x: number
-    public y: number
+    public x: number;
+    public y: number;
 
     constructor(x: number = 0, y: number = 0) {
-      this.x = x
-      this.y = y
+      this.x = x;
+      this.y = y;
     }
     setCrood(x: number, y: number) {
-      this.x = x
-      this.y = y
+      this.x = x;
+      this.y = y;
     }
     copy() {
-      return new Crood(this.x, this.y)
+      return new Crood(this.x, this.y);
     }
   }
 
   // 流星
   class ShootingStar {
-    public init: Crood
-    public final: Crood
-    public size: number
-    public speed: number // 速度：像素/s
-    public dur: number // 飞行总时间，单位 ms
-    public pass: number // 已过去的时间
-    public prev: Crood
-    public now: Crood
-    public onDistory: Function | null
+    public init: Crood;
+    public final: Crood;
+    public size: number;
+    public speed: number; // 速度：像素/s
+    public dur: number; // 飞行总时间，单位 ms
+    public pass: number; // 已过去的时间
+    public prev: Crood;
+    public now: Crood;
+    public onDistory: Function | null;
 
     constructor(init = new Crood(), final = new Crood(), size = 3, speed = 200, onDistory: Function | null = null) {
-      this.init = init // 初始位置
-      this.final = final // 最终位置
-      this.size = size // 大小
-      this.speed = speed // 速度：像素/s
+      this.init = init; // 初始位置
+      this.final = final; // 最终位置
+      this.size = size; // 大小
+      this.speed = speed; // 速度：像素/s
 
       // 飞行总时间
       this.dur =
         (Math.sqrt(Math.pow(this.final.x - this.init.x, 2) + Math.pow(this.final.y - this.init.y, 2)) * 1000) /
-        this.speed
+        this.speed;
 
-      this.pass = 0 // 已过去的时间
-      this.prev = this.init.copy() // 上一帧位置
-      this.now = this.init.copy() // 当前位置
-      this.onDistory = onDistory
+      this.pass = 0; // 已过去的时间
+      this.prev = this.init.copy(); // 上一帧位置
+      this.now = this.init.copy(); // 当前位置
+      this.onDistory = onDistory;
     }
     draw(ctx: CanvasRenderingContext2D, delta: number) {
-      this.pass += delta
-      this.pass = Math.min(this.pass, this.dur)
+      this.pass += delta;
+      this.pass = Math.min(this.pass, this.dur);
 
-      let percent = this.pass / this.dur
+      let percent = this.pass / this.dur;
 
       this.now.setCrood(
         this.init.x + (this.final.x - this.init.x) * percent,
-        this.init.y + (this.final.y - this.init.y) * percent
-      )
+        this.init.y + (this.final.y - this.init.y) * percent,
+      );
 
-      ctx.strokeStyle = '#fff'
-      ctx.lineCap = 'round'
-      ctx.lineWidth = this.size
+      ctx.strokeStyle = "#fff";
+      ctx.lineCap = "round";
+      ctx.lineWidth = this.size;
 
-      ctx.beginPath()
-      ctx.moveTo(this.now.x, this.now.y)
-      ctx.lineTo(this.prev.x, this.prev.y)
-      ctx.stroke()
-      ctx.closePath()
+      ctx.beginPath();
+      ctx.moveTo(this.now.x, this.now.y);
+      ctx.lineTo(this.prev.x, this.prev.y);
+      ctx.stroke();
+      ctx.closePath();
 
-      this.prev.setCrood(this.now.x, this.now.y)
+      this.prev.setCrood(this.now.x, this.now.y);
       if (this.pass === this.dur) {
-        this.distory()
+        this.distory();
       }
     }
     distory() {
-      this.onDistory && this.onDistory()
+      this.onDistory && this.onDistory();
     }
   }
 
   export default defineComponent({
     setup() {
-      const canvasRef = ref<null | HTMLCanvasElement>(null)
+      const canvasRef = ref<null | HTMLCanvasElement>(null);
 
       onMounted(() => {
-        let cvs = canvasRef.value as HTMLCanvasElement
-        let ctx = cvs.getContext('2d') as CanvasRenderingContext2D
+        let cvs = canvasRef.value as HTMLCanvasElement;
+        let ctx = cvs.getContext("2d") as CanvasRenderingContext2D;
 
-        let T: number
+        let T: number;
         let shootingStar = new ShootingStar(new Crood(100, 100), new Crood(400, 400), 3, 200, () => {
-          cancelAnimationFrame(T)
-        })
+          cancelAnimationFrame(T);
+        });
 
         let tick = (function () {
-          let now = new Date().getTime()
-          let last = now
-          let delta: number
+          let now = new Date().getTime();
+          let last = now;
+          let delta: number;
 
           return function () {
-            delta = now - last
-            delta = delta > 500 ? 30 : delta < 16 ? 16 : delta
-            last = now
+            delta = now - last;
+            delta = delta > 500 ? 30 : delta < 16 ? 16 : delta;
+            last = now;
 
-            T = requestAnimationFrame(tick)
+            T = requestAnimationFrame(tick);
 
             // 实现关键点
-            ctx.save()
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)' // 每一帧用 “半透明” 的背景色覆盖画布，使得之前画的内容隐藏一部分
-            ctx.fillRect(0, 0, cvs.width, cvs.height)
-            ctx.restore()
+            ctx.save();
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)"; // 每一帧用 “半透明” 的背景色覆盖画布，使得之前画的内容隐藏一部分
+            ctx.fillRect(0, 0, cvs.width, cvs.height);
+            ctx.restore();
 
-            shootingStar.draw(ctx, delta)
-          }
-        })()
+            shootingStar.draw(ctx, delta);
+          };
+        })();
 
-        tick()
-      })
+        tick();
+      });
 
       return {
         canvasRef,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <template>
@@ -182,120 +182,120 @@
 ```html
 <!-- MeteorShower.vue -->
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue'
+  import { defineComponent, onMounted, ref } from "vue";
 
   // 省略 ...
 
   // 流星雨
   class MeteorShower {
-    public cvs: HTMLCanvasElement
-    public ctx: CanvasRenderingContext2D
-    public stars: ShootingStar[]
-    public T: number
-    public stoped: Boolean
-    public playing: Boolean
+    public cvs: HTMLCanvasElement;
+    public ctx: CanvasRenderingContext2D;
+    public stars: ShootingStar[];
+    public T: number;
+    public stoped: Boolean;
+    public playing: Boolean;
 
     constructor(cvs: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-      this.cvs = cvs
-      this.ctx = ctx
-      this.stars = []
-      this.T = 0
-      this.stoped = false
-      this.playing = false
+      this.cvs = cvs;
+      this.ctx = ctx;
+      this.stars = [];
+      this.T = 0;
+      this.stoped = false;
+      this.playing = false;
     }
 
     // 生成随机位置的流星
     createStar() {
-      let angle = Math.PI / 3
+      let angle = Math.PI / 3;
       // Math.random() 为 (0, 1) 之间的随机值，所以 distance 区间为 (0, 400)
-      let distance = Math.random() * 400 // 移动的距离
-      let init = new Crood((Math.random() * this.cvs.width) | 0, (Math.random() * 100) | 0)
-      let final = new Crood(init.x + distance * Math.cos(angle), init.y + distance * Math.sin(angle))
+      let distance = Math.random() * 400; // 移动的距离
+      let init = new Crood((Math.random() * this.cvs.width) | 0, (Math.random() * 100) | 0);
+      let final = new Crood(init.x + distance * Math.cos(angle), init.y + distance * Math.sin(angle));
 
-      let size = Math.random() * 2
-      let speed = Math.random() * 400 + 100 // 速度： 像素/s
+      let size = Math.random() * 2;
+      let speed = Math.random() * 400 + 100; // 速度： 像素/s
 
       let star = new ShootingStar(init, final, size, speed, () => {
-        this.remove(star)
-      })
-      return star
+        this.remove(star);
+      });
+      return star;
     }
 
     remove(star: ShootingStar) {
       this.stars = this.stars.filter((s) => {
-        return s !== star
-      })
+        return s !== star;
+      });
     }
 
     update(delta: number) {
       if (!this.stoped && this.stars.length < 20) {
-        this.stars.push(this.createStar())
+        this.stars.push(this.createStar());
       }
       this.stars.forEach((star) => {
-        star.draw(this.ctx, delta)
-      })
+        star.draw(this.ctx, delta);
+      });
     }
 
     tick() {
-      if (this.playing) return
-      this.playing = true
+      if (this.playing) return;
+      this.playing = true;
 
-      let now = new Date().getTime()
-      let last = now
-      let delta
+      let now = new Date().getTime();
+      let last = now;
+      let delta;
 
       let _tick = () => {
         if (this.stoped && this.stars.length === 0) {
-          cancelAnimationFrame(this.T)
-          this.playing = false
-          return
+          cancelAnimationFrame(this.T);
+          this.playing = false;
+          return;
         }
 
-        delta = now - last
-        delta = delta > 500 ? 30 : delta < 16 ? 16 : delta
-        last = now
+        delta = now - last;
+        delta = delta > 500 ? 30 : delta < 16 ? 16 : delta;
+        last = now;
 
-        this.T = requestAnimationFrame(_tick)
+        this.T = requestAnimationFrame(_tick);
 
-        this.ctx.save()
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)' // 每一帧用 “半透明” 的背景色清除画布
-        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height)
-        this.ctx.restore()
-        this.update(delta)
-      }
+        this.ctx.save();
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0.2)"; // 每一帧用 “半透明” 的背景色清除画布
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+        this.ctx.restore();
+        this.update(delta);
+      };
 
-      _tick()
+      _tick();
     }
 
     // 开始
     start() {
-      this.stoped = false
-      this.tick()
+      this.stoped = false;
+      this.tick();
     }
 
     // 暂停
     pause() {
-      this.stoped = true
+      this.stoped = true;
     }
   }
 
   export default defineComponent({
     setup() {
-      const canvasRef = ref<null | HTMLCanvasElement>(null)
+      const canvasRef = ref<null | HTMLCanvasElement>(null);
 
       onMounted(() => {
-        let cvs = canvasRef.value as HTMLCanvasElement
-        let ctx = cvs.getContext('2d') as CanvasRenderingContext2D
+        let cvs = canvasRef.value as HTMLCanvasElement;
+        let ctx = cvs.getContext("2d") as CanvasRenderingContext2D;
 
-        let meteorShower = new MeteorShower(cvs, ctx)
-        meteorShower.start()
-      })
+        let meteorShower = new MeteorShower(cvs, ctx);
+        meteorShower.start();
+      });
 
       return {
         canvasRef,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <template>
@@ -366,7 +366,7 @@ ctx.fillRect(0, 0, cvs.width, cvs.height);
 
 ```html
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue'
+  import { defineComponent, onMounted, ref } from "vue";
 
   // 省略...
 
@@ -381,15 +381,15 @@ ctx.fillRect(0, 0, cvs.width, cvs.height);
         // 省略...
 
         // 关键点
-        this.ctx.save()
-        this.ctx.globalCompositeOperation = 'destination-in'
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)' // 每一帧用 “半透明” 的背景色清除画布
-        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height)
-        this.ctx.restore()
-        this.update(delta)
-      }
+        this.ctx.save();
+        this.ctx.globalCompositeOperation = "destination-in";
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0.8)"; // 每一帧用 “半透明” 的背景色清除画布
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+        this.ctx.restore();
+        this.update(delta);
+      };
 
-      _tick()
+      _tick();
     }
     // 省略...
   }
@@ -398,7 +398,7 @@ ctx.fillRect(0, 0, cvs.width, cvs.height);
     setup() {
       // 省略...
     },
-  })
+  });
 </script>
 
 <template>

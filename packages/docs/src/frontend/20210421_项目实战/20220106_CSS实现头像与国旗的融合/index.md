@@ -33,7 +33,7 @@ body {
   background-size: cover;
 }
 .mix::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -100,15 +100,11 @@ body {
 
 ```css
 .cut-nothing-demo {
-  background: linear-gradient(135deg, transparent 15px, red 0) top left, linear-gradient(
-        -135deg,
-        transparent 15px,
-        red 0
-      ) top right, linear-gradient(-45deg, transparent 15px, red 0) bottom right, linear-gradient(
-        45deg,
-        transparent 15px,
-        red 0
-      ) bottom left;
+  background:
+    linear-gradient(135deg, transparent 15px, red 0) top left,
+    linear-gradient(-135deg, transparent 15px, red 0) top right,
+    linear-gradient(-45deg, transparent 15px, red 0) bottom right,
+    linear-gradient(45deg, transparent 15px, red 0) bottom left;
   background-size: 50% 50%;
   background-repeat: no-repeat;
 }
@@ -124,15 +120,11 @@ body {
 .cut-demo {
   background: url(images/black_demo.png) no-repeat;
   background-size: cover;
-  -webkit-mask: linear-gradient(135deg, transparent 15px, #fff 0) top left, linear-gradient(
-        -135deg,
-        transparent 15px,
-        #fff 0
-      ) top right, linear-gradient(-45deg, transparent 15px, #fff 0) bottom right, linear-gradient(
-        45deg,
-        transparent 15px,
-        #fff 0
-      ) bottom left;
+  -webkit-mask:
+    linear-gradient(135deg, transparent 15px, #fff 0) top left,
+    linear-gradient(-135deg, transparent 15px, #fff 0) top right,
+    linear-gradient(-45deg, transparent 15px, #fff 0) bottom right,
+    linear-gradient(45deg, transparent 15px, #fff 0) bottom left;
   -webkit-mask-size: 50% 50%;
   -webkit-mask-repeat: no-repeat;
 }
@@ -156,7 +148,7 @@ body {
 }
 .multi-demo::before {
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   right: 0;
@@ -200,7 +192,7 @@ body {
 }
 .transfer-demo::before {
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   right: 0;
@@ -233,7 +225,7 @@ body {
 @keyframes maskRotate {
   @for $i from 0 through 100 {
     #{$i}% {
-      mask: linear-gradient(45deg, #000 #{$i + '%'}, transparent #{$i + 5 + '%'}, transparent 1%);
+      mask: linear-gradient(45deg, #000 #{$i + "%"}, transparent #{$i + 5 + "%"}, transparent 1%);
     }
   }
 }

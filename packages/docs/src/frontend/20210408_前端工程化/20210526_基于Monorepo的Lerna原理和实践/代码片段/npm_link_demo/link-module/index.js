@@ -1,3 +1,3 @@
 module.exports = function () {
-    console.log('link-module');
+  console.log('link-module');
 };

@@ -39,8 +39,8 @@ const route = require('koa-route');
 app.use(bodyParser()); // 处理post请求的参数
 
 function xssServer(ctx) {
-    // ctx.body 即服务端响应的数据
-    ctx.body = '<script>alert("反射型 XSS 攻击")</script>';
+  // ctx.body 即服务端响应的数据
+  ctx.body = '<script>alert("反射型 XSS 攻击")</script>';
 }
 
 app.use(cors());
@@ -49,7 +49,7 @@ app.use(cors());
 app.use(route.get('/xss-server', xssServer));
 
 app.listen(3000, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });
 ```
 
@@ -63,8 +63,8 @@ app.listen(3000, () => {
 // server.js
 
 function xssParams(ctx) {
-    // ctx.body 即服务端响应的数据
-    ctx.body = ctx.query.userName;
+  // ctx.body 即服务端响应的数据
+  ctx.body = ctx.query.userName;
 }
 
 // XSS反射型之请求恶意参数
@@ -118,7 +118,7 @@ app.use(route.get('/xss-params', xssParams));
 ```html
 <!-- web/static/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -150,35 +150,35 @@ app.use(route.get('/xss-params', xssParams));
     </div>
   </body>
   <script>
-    var btn = document.querySelector('.btn')
+    var btn = document.querySelector(".btn");
 
     btn.onclick = function () {
-      var userName = document.querySelector('.userName').value
-      var password = document.querySelector('.password').value
+      var userName = document.querySelector(".userName").value;
+      var password = document.querySelector(".password").value;
 
-      fetch('http://localhost:3200/login', {
-        method: 'POST',
+      fetch("http://localhost:3200/login", {
+        method: "POST",
         body: JSON.stringify({
           userName,
           password,
         }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        mode: 'cors',
+        mode: "cors",
       })
         .then(function (response) {
-          return response.json()
+          return response.json();
         })
         .then(function (res) {
-          alert(res.msg)
-          window.location.href = 'http://localhost:3200/home'
+          alert(res.msg);
+          window.location.href = "http://localhost:3200/home";
         })
         .catch((err) => {
-          message.error(`本地测试错误 ${err.message}`)
-          console.error('本地测试错误', err)
-        })
-    }
+          message.error(`本地测试错误 ${err.message}`);
+          console.error("本地测试错误", err);
+        });
+    };
   </script>
 </html>
 ```
@@ -196,7 +196,7 @@ const KoaStatic = require('koa-static');
 app.use(KoaStatic(__dirname));
 
 app.listen(8080, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });
 ```
 
@@ -217,17 +217,17 @@ let currentUserName = '';
 app.use(bodyParser()); // 处理post请求的参数
 
 function login(ctx) {
-    const req = ctx.request.body;
-    const userName = req.userName;
-    currentUserName = userName;
+  const req = ctx.request.body;
+  const userName = req.userName;
+  currentUserName = userName;
 
-    ctx.response.body = {
-        msg: '登录成功',
-    };
+  ctx.response.body = {
+    msg: '登录成功',
+  };
 }
 
 function home(ctx) {
-    ctx.body = currentUserName;
+  ctx.body = currentUserName;
 }
 
 app.use(cors());
@@ -236,7 +236,7 @@ app.use(route.post('/login', login));
 app.use(route.get('/home', home));
 
 app.listen(3200, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });
 ```
 
@@ -269,7 +269,7 @@ $ npx nodemon web/index.js
 举个例子：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -300,13 +300,13 @@ $ npx nodemon web/index.js
     </div>
   </body>
   <script>
-    var btn = document.querySelector('.btn')
-    var content = document.querySelector('.content')
+    var btn = document.querySelector(".btn");
+    var content = document.querySelector(".content");
 
     btn.onclick = function () {
-      var url = document.querySelector('.url').value
-      content.innerHTML = `<a href=${url}>跳转到输入的url</a>`
-    }
+      var url = document.querySelector(".url").value;
+      content.innerHTML = `<a href=${url}>跳转到输入的url</a>`;
+    };
   </script>
 </html>
 ```
@@ -347,20 +347,20 @@ onclick=alert('哈哈，你被攻击了')
 // server/index.js
 
 function home(ctx) {
-    // 简单设置一个cookie
-    if (ctx.cookies.get('cid')) {
-        console.log('cookie || cid:', ctx.cookies.get('cid'));
-    } else {
-        ctx.cookies.set('cid', 'hello world', {
-            domain: '127.0.0.1', // 写cookie所在的域名
-            path: '/', // 写cookie所在的路径
-            expires: new Date('2021-05-19'), // cookie失效时间
-            httpOnly: true, // 是否只用于http请求中获取
-            overwrite: false, // 是否允许重写
-        });
-    }
+  // 简单设置一个cookie
+  if (ctx.cookies.get('cid')) {
+    console.log('cookie || cid:', ctx.cookies.get('cid'));
+  } else {
+    ctx.cookies.set('cid', 'hello world', {
+      domain: '127.0.0.1', // 写cookie所在的域名
+      path: '/', // 写cookie所在的路径
+      expires: new Date('2021-05-19'), // cookie失效时间
+      httpOnly: true, // 是否只用于http请求中获取
+      overwrite: false, // 是否允许重写
+    });
+  }
 
-    ctx.body = currentUserName;
+  ctx.body = currentUserName;
 }
 ```
 
@@ -412,8 +412,8 @@ $ npx nodemon server/index.js
 
 ```js
 btn.onclick = function () {
-    const url = document.querySelector('.url').value;
-    content.innerHTML = `<a href=${url}>跳转到输入的url</a>`;
+  const url = document.querySelector('.url').value;
+  content.innerHTML = `<a href=${url}>跳转到输入的url</a>`;
 };
 ```
 

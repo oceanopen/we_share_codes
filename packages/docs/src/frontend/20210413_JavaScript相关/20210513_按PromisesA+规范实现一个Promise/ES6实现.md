@@ -6,16 +6,16 @@
 
 ```js
 class A {
-    static b = '1';
-    static classMethod() {
-        return 'hello';
-    }
+  static b = '1';
+  static classMethod() {
+    return 'hello';
+  }
 }
 
 const a = new A();
 a.c = 5;
 a.sayHello = function () {
-    console.log('welcome');
+  console.log('welcome');
 };
 ```
 
@@ -46,25 +46,25 @@ static：静态属性指的是 Class 本身的属性，即 Class.propName，而�
 
 ```js
 function promiseTest() {
-    const promise = new Promise((resolve, reject) => {
-        const r = Number.parseInt(Math.random() * 10);
-        if (r % 2 === 0) {
-            resolve('成功');
-        }
-        else {
-            reject(new Error('失败'));
-        }
-    });
-    return promise;
+  const promise = new Promise((resolve, reject) => {
+    const r = Number.parseInt(Math.random() * 10);
+    if (r % 2 === 0) {
+      resolve('成功');
+    }
+    else {
+      reject(new Error('失败'));
+    }
+  });
+  return promise;
 }
 const promise = promiseTest();
 promise
-    .then((data) => {
-        console.log(data);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 ```
 
 ### 2.3 Promise 的规范
@@ -106,47 +106,47 @@ promise
 
 ```js
 class MyPromise {
-    constructor(executor) {
-        this.status = 'pending'; // 状态值
-        this.value = undefined; // 成功的返回值
-        this.reason = undefined; // 失败的返回值
+  constructor(executor) {
+    this.status = 'pending'; // 状态值
+    this.value = undefined; // 成功的返回值
+    this.reason = undefined; // 失败的返回值
 
-        // 成功
-        const resolve = (value) => {
-            // pending 最屏蔽的，resolve 和 reject 只能调用一个，不能同时调用，这就是 pending 的作用
-            if (this.status === 'pending') {
-                this.status = 'fullFilled';
-                this.value = value;
-            }
-        };
-        // 失败
-        const reject = (reason) => {
-            // pending 最屏蔽的，resolve 和 reject 只能调用一个，不能同时调用，这就是 pending 的作用
-            if (this.status === 'pending') {
-                this.status = 'rejected';
-                this.reason = reason;
-            }
-        };
-        try {
-            // 执行函数
-            executor(resolve, reject);
-        }
-        catch (err) {
-            // 失败则直接执行 reject 函数
-            reject(err);
-        }
+    // 成功
+    const resolve = (value) => {
+      // pending 最屏蔽的，resolve 和 reject 只能调用一个，不能同时调用，这就是 pending 的作用
+      if (this.status === 'pending') {
+        this.status = 'fullFilled';
+        this.value = value;
+      }
+    };
+    // 失败
+    const reject = (reason) => {
+      // pending 最屏蔽的，resolve 和 reject 只能调用一个，不能同时调用，这就是 pending 的作用
+      if (this.status === 'pending') {
+        this.status = 'rejected';
+        this.reason = reason;
+      }
+    };
+    try {
+      // 执行函数
+      executor(resolve, reject);
     }
+    catch (err) {
+      // 失败则直接执行 reject 函数
+      reject(err);
+    }
+  }
 
-    then(onFullFilled, onRejected) {
+  then(onFullFilled, onRejected) {
     // 状态为 fulfuilled，执行 onFullFilled，传入成功的值
-        if (this.status === 'fullFilled') {
-            onFullFilled(this.value);
-        }
-        // 状态为 rejected，执行 onRejected，传入失败的值
-        if (this.status === 'rejected') {
-            onRejected(this.reason);
-        }
+    if (this.status === 'fullFilled') {
+      onFullFilled(this.value);
     }
+    // 状态为 rejected，执行 onRejected，传入失败的值
+    if (this.status === 'rejected') {
+      onRejected(this.reason);
+    }
+  }
 }
 ```
 
@@ -154,17 +154,17 @@ class MyPromise {
 
 ```js
 const p11 = new MyPromise((resolve, reject) => {
-    // resolve('success')   // 走了成功就不会走失败了
-    // throw new Error('失败'); // 失败了就走resolve
-    reject(new Error('failed')); // 走了失败就不会走成功
+  // resolve('success')   // 走了成功就不会走失败了
+  // throw new Error('失败'); // 失败了就走resolve
+  reject(new Error('failed')); // 走了失败就不会走成功
 });
 p11.then(
-    (res) => {
-        console.log('onFullFilled:', res);
-    },
-    (err) => {
-        console.log('onRejected:', err);
-    }
+  (res) => {
+    console.log('onFullFilled:', res);
+  },
+  (err) => {
+    console.log('onRejected:', err);
+  }
 );
 ```
 
@@ -181,18 +181,18 @@ onRejected: Error: 失败
 
 ```js
 const p12 = new MyPromise((resolve, reject) => {
-    // 异步调用的时候，this.status 一直是 pending 状态，不会执行代码了。
-    setTimeout(() => {
-        resolve('success');
-    }, 1000);
+  // 异步调用的时候，this.status 一直是 pending 状态，不会执行代码了。
+  setTimeout(() => {
+    resolve('success');
+  }, 1000);
 });
 p12.then(
-    (res) => {
-        console.log('onFullFilled:', res);
-    },
-    (err) => {
-        console.log('onRejected:', err);
-    }
+  (res) => {
+    console.log('onFullFilled:', res);
+  },
+  (err) => {
+    console.log('onRejected:', err);
+  }
 );
 ```
 
@@ -211,35 +211,35 @@ p12.then(
 
 ```js
 class MyPromise {
-    constructor(executor) {
+  constructor(executor) {
     // ...
 
-        this.onResolvedCallbacks = []; // 保存成功态要执行的函数
-        this.onRejectedCallbacks = []; // 存放失败态要执行的函数
+    this.onResolvedCallbacks = []; // 保存成功态要执行的函数
+    this.onRejectedCallbacks = []; // 存放失败态要执行的函数
 
+    // ...
+
+    // 成功
+    const resolve = (value) => {
+      if (this.status === 'pending') {
         // ...
 
-        // 成功
-        const resolve = (value) => {
-            if (this.status === 'pending') {
-                // ...
+        // 发布执行函数
+        this.onResolvedCallbacks.forEach(fn => fn());
+      }
+    };
+    // 失败
+    const reject = (reason) => {
+      if (this.status === 'pending') {
+        // ...
 
-                // 发布执行函数
-                this.onResolvedCallbacks.forEach(fn => fn());
-            }
-        };
-        // 失败
-        const reject = (reason) => {
-            if (this.status === 'pending') {
-                // ...
-
-                // 发布执行函数
-                this.onRejectedCallbacks.forEach(fn => fn());
-            }
-        };
+        // 发布执行函数
+        this.onRejectedCallbacks.forEach(fn => fn());
+      }
+    };
 
     // ...
-    }
+  }
 }
 ```
 
@@ -247,24 +247,24 @@ class MyPromise {
 
 ```js
 class MyPromise {
-    // ...
-    then(onFullFilled, onRejected) {
+  // ...
+  then(onFullFilled, onRejected) {
     // ...
 
-        // 异步：状态为 pending 时，将成功的函数和失败的函数存到各自的回调队列数组中
-        if (this.status === 'pending') {
-            // 在 pending 状态的时候先订阅
-            this.onResolvedCallbacks.push(() => {
-                onFulFilled(this.value);
-            });
-            this.onRejectedCallbacks.push(() => {
-                onRejected(this.reason);
-            });
-        }
-
-    // ...
+    // 异步：状态为 pending 时，将成功的函数和失败的函数存到各自的回调队列数组中
+    if (this.status === 'pending') {
+      // 在 pending 状态的时候先订阅
+      this.onResolvedCallbacks.push(() => {
+        onFulFilled(this.value);
+      });
+      this.onRejectedCallbacks.push(() => {
+        onRejected(this.reason);
+      });
     }
+
     // ...
+  }
+  // ...
 }
 ```
 
@@ -272,31 +272,31 @@ class MyPromise {
 
 ```js
 const p21 = new MyPromise((resolve, reject) => {
-    // 异步调用的时候，this.status 一直是 pending 状态，不会执行代码了。
-    setTimeout(() => {
+  // 异步调用的时候，this.status 一直是 pending 状态，不会执行代码了。
+  setTimeout(() => {
     // resolve('success')
-        reject('failed');
-    }, 1000);
+    reject('failed');
+  }, 1000);
 });
 // 这里测试改装成发布订阅者模式调用是否正常
 p21.then(
-    (res) => {
-        console.log('onFullFilled:', res);
-    },
-    (err) => {
-        console.log('onRejected:', err);
-    }
+  (res) => {
+    console.log('onFullFilled:', res);
+  },
+  (err) => {
+    console.log('onRejected:', err);
+  }
 );
 // 这里测试执行完毕后，调用 then 是否执行正常
 setTimeout(() => {
-    p21.then(
-        (res) => {
-            console.log('onFullFilled:', res);
-        },
-        (err) => {
-            console.log('onRejected:', err);
-        }
-    );
+  p21.then(
+    (res) => {
+      console.log('onFullFilled:', res);
+    },
+    (err) => {
+      console.log('onRejected:', err);
+    }
+  );
 }, 2000);
 ```
 
@@ -325,27 +325,27 @@ onRejected: failed
 
 ```js
 const promise = new MyPromise((resolve, reject) => {
-    resolve(100);
+  resolve(100);
 });
 promise
-    .then(
-        (data) => {
-            return 100 * data;
-        },
-        (err) => {
-            console.log('error:', err);
-        }
-    )
-    .then((data) => {
-        return new MyPromise((resolve, reject) => {
-            console.log('data:', data); // data:10000
-            resolve(data);
-        });
-    })
-    .then((data) => {
-        console.log('result:', data); // result:10000
-        return data;
+  .then(
+    (data) => {
+      return 100 * data;
+    },
+    (err) => {
+      console.log('error:', err);
+    }
+  )
+  .then((data) => {
+    return new MyPromise((resolve, reject) => {
+      console.log('data:', data); // data:10000
+      resolve(data);
     });
+  })
+  .then((data) => {
+    console.log('result:', data); // result:10000
+    return data;
+  });
 ```
 
 根据原生 promise 的 then 的用法，我们总结一下：
@@ -359,41 +359,41 @@ promise
 
 ```js
 class MyPromise {
-    // ...
+  // ...
 
-    then(onFullFilled, onRejected) {
+  then(onFullFilled, onRejected) {
     // 这样就是一个递归
-        const nextPromise = new MyPromise((resolve, reject) => {
-            // 函数里面调函数就跟第一次使用一样，主要的是这里面的 this 指向怎么变化的
+    const nextPromise = new MyPromise((resolve, reject) => {
+      // 函数里面调函数就跟第一次使用一样，主要的是这里面的 this 指向怎么变化的
 
-            // 保存同步返回
-            let x; // 这一步 x 只能处理普通值
+      // 保存同步返回
+      let x; // 这一步 x 只能处理普通值
 
-            if (this.status === 'fullFilled') {
-                x = onFullFilled(this.value); // 箭头函数，this 一直是指向最外层的对象
-                resolve(x);
-            }
-            if (this.status === 'rejected') {
-                x = onRejected(this.reason);
-                reject(x);
-            }
+      if (this.status === 'fullFilled') {
+        x = onFullFilled(this.value); // 箭头函数，this 一直是指向最外层的对象
+        resolve(x);
+      }
+      if (this.status === 'rejected') {
+        x = onRejected(this.reason);
+        reject(x);
+      }
 
-            // 异步
-            if (this.status === 'pending') {
-                // 在 pending 状态的时候先订阅
-                this.onResolvedCallbacks.push(() => {
-                    x = onFullFilled(this.value);
-                    resolve(x);
-                });
-                this.onRejectedCallbacks.push(() => {
-                    x = onRejected(this.reason);
-                    resolve(x);
-                });
-            }
+      // 异步
+      if (this.status === 'pending') {
+        // 在 pending 状态的时候先订阅
+        this.onResolvedCallbacks.push(() => {
+          x = onFullFilled(this.value);
+          resolve(x);
         });
+        this.onRejectedCallbacks.push(() => {
+          x = onRejected(this.reason);
+          resolve(x);
+        });
+      }
+    });
 
-        return nextPromise;
-    }
+    return nextPromise;
+  }
 }
 ```
 
@@ -401,24 +401,24 @@ class MyPromise {
 
 ```js
 const promise = new MyPromise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(100);
-    });
+  setTimeout(() => {
+    resolve(100);
+  });
 });
 promise
-    .then(
-        (data) => {
-            return 100 * data;
-        },
-        (err) => {
-            console.log('error:', err);
-        }
-    )
-    .then((data) => {
-        data = 100 * data;
-        console.log('result:', data); // result:1000000
-        return data;
-    });
+  .then(
+    (data) => {
+      return 100 * data;
+    },
+    (err) => {
+      console.log('error:', err);
+    }
+  )
+  .then((data) => {
+    data = 100 * data;
+    console.log('result:', data); // result:1000000
+    return data;
+  });
 ```
 
 #### 3.3.2 Promise 对象传递
@@ -433,81 +433,81 @@ resolvePromise(nextPromise, x, resolve, reject);
 
 ```js
 class MyPromise {
-    // ...
+  // ...
 
-    then(onFullFilled, onRejected) {
+  then(onFullFilled, onRejected) {
     // 这样就是一个递归
-        const nextPromise = new MyPromise((resolve, reject) => {
-            // 箭头函数，this 一直是指向最外层的对象
+    const nextPromise = new MyPromise((resolve, reject) => {
+      // 箭头函数，this 一直是指向最外层的对象
 
-            // 保存同步返回
-            let x;
+      // 保存同步返回
+      let x;
 
-            if (this.status === 'fullFilled') {
-                // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
-                setTimeout(() => {
-                    try {
-                        x = onFullFilled(this.value);
-                        // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
-                        resolvePromise(nextPromise, x, resolve, reject);
-                    }
-                    catch (err) {
-                        // 中间任何一个环节报错都要走 reject()
-                        reject(err);
-                    }
-                }, 0); // MDN 0>=4ms
-            }
-            if (this.status === 'rejected') {
-                // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
-                setTimeout(() => {
-                    try {
-                        x = onRejected(this.reason);
-                        // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
-                        resolvePromise(nextPromise, x, resolve, reject);
-                    }
-                    catch (err) {
-                        // 中间任何一个环节报错都要走 reject()
-                        reject(err);
-                    }
-                }, 0); // MDN 0>=4ms
-            }
+      if (this.status === 'fullFilled') {
+        // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
+        setTimeout(() => {
+          try {
+            x = onFullFilled(this.value);
+            // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
+            resolvePromise(nextPromise, x, resolve, reject);
+          }
+          catch (err) {
+            // 中间任何一个环节报错都要走 reject()
+            reject(err);
+          }
+        }, 0); // MDN 0>=4ms
+      }
+      if (this.status === 'rejected') {
+        // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
+        setTimeout(() => {
+          try {
+            x = onRejected(this.reason);
+            // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
+            resolvePromise(nextPromise, x, resolve, reject);
+          }
+          catch (err) {
+            // 中间任何一个环节报错都要走 reject()
+            reject(err);
+          }
+        }, 0); // MDN 0>=4ms
+      }
 
-            // 异步
-            if (this.status === 'pending') {
-                // 在 pending 状态的时候先订阅
-                this.onResolvedCallbacks.push(() => {
-                    // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
-                    setTimeout(() => {
-                        try {
-                            x = onFullFilled(this.value);
-                            // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
-                            resolvePromise(nextPromise, x, resolve, reject);
-                        }
-                        catch (err) {
-                            // 中间任何一个环节报错都要走 reject()
-                            reject(err);
-                        }
-                    }, 0); // MDN 0>=4ms
-                });
-                this.onRejectedCallbacks.push(() => {
-                    // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
-                    setTimeout(() => {
-                        try {
-                            x = onRejected(this.reason);
-                            // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
-                            resolvePromise(nextPromise, x, resolve, reject);
-                        }
-                        catch (err) {
-                            // 中间任何一个环节报错都要走 reject()
-                            reject(err);
-                        }
-                    }, 0); // MDN 0>=4ms
-                });
+      // 异步
+      if (this.status === 'pending') {
+        // 在 pending 状态的时候先订阅
+        this.onResolvedCallbacks.push(() => {
+          // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
+          setTimeout(() => {
+            try {
+              x = onFullFilled(this.value);
+              // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
+              resolvePromise(nextPromise, x, resolve, reject);
             }
+            catch (err) {
+              // 中间任何一个环节报错都要走 reject()
+              reject(err);
+            }
+          }, 0); // MDN 0>=4ms
         });
+        this.onRejectedCallbacks.push(() => {
+          // 同步无法使用 nextPromise，所以借用 setiTimeout 异步的方式
+          setTimeout(() => {
+            try {
+              x = onRejected(this.reason);
+              // 添加一个 resolvePromise() 的方法来判断 x 跟 nextPromise 的状态，决定 nextPromise 是走成功还是失败
+              resolvePromise(nextPromise, x, resolve, reject);
+            }
+            catch (err) {
+              // 中间任何一个环节报错都要走 reject()
+              reject(err);
+            }
+          }, 0); // MDN 0>=4ms
+        });
+      }
+    });
 
-        return nextPromise;
-    }
+    return nextPromise;
+  }
 }
 ```
 
@@ -518,40 +518,40 @@ class MyPromise {
 
 ```js
 function resolvePromise(nextPromise, x, resolve, reject) {
-    // x 和 nextPromise 不能是同一个Promise实例，如果是同一个就报错，这里作为异常校验，正常不会出现这种情况
-    if (nextPromise === x) {
-        return reject(new TypeError('Chaining cycle detected for promise #<promise>'));
-    }
+  // x 和 nextPromise 不能是同一个Promise实例，如果是同一个就报错，这里作为异常校验，正常不会出现这种情况
+  if (nextPromise === x) {
+    return reject(new TypeError('Chaining cycle detected for promise #<promise>'));
+  }
 
-    // 判断如果 x 是否是对象，判断变量类型的方法有：typeof instanceof constructor toString
-    if (typeof x === 'object' && x != null) {
-        try {
-            // 预防取 .then 的时候错误
-            const then = x.then; // Object.definePropertype
+  // 判断如果 x 是否是对象，判断变量类型的方法有：typeof instanceof constructor toString
+  if (typeof x === 'object' && x != null) {
+    try {
+      // 预防取 .then 的时候错误
+      const then = x.then; // Object.definePropertype
 
-            if (typeof then === 'function') {
-                then.call(
-                    x,
-                    (y) => {
-                        resolve(y); // 采用 promise 的成功结果，并且向下传递
-                    },
-                    (r) => {
-                        reject(r); // 采用 promise 的失败结果，并且向下传递
-                    }
-                );
-            }
-            else {
-                resolve(x); // x 是一个普通对象
-            }
-        }
-        catch (err) {
-            reject(err);
-        }
+      if (typeof then === 'function') {
+        then.call(
+          x,
+          (y) => {
+            resolve(y); // 采用 promise 的成功结果，并且向下传递
+          },
+          (r) => {
+            reject(r); // 采用 promise 的失败结果，并且向下传递
+          }
+        );
+      }
+      else {
+        resolve(x); // x 是一个普通对象
+      }
     }
-    else {
+    catch (err) {
+      reject(err);
+    }
+  }
+  else {
     // x 是一个普通值
-        resolve(x);
-    }
+    resolve(x);
+  }
 }
 ```
 
@@ -559,27 +559,27 @@ function resolvePromise(nextPromise, x, resolve, reject) {
 
 ```js
 const promise = new MyPromise((resolve, reject) => {
-    resolve(100);
+  resolve(100);
 });
 promise
-    .then(
-        (data) => {
-            return 100 * data;
-        },
-        (err) => {
-            console.log('error:', err);
-        }
-    )
-    .then((data) => {
-        return new MyPromise((resolve, reject) => {
-            console.log('data:', data); // data:10000
-            resolve(data);
-        });
-    })
-    .then((data) => {
-        console.log('result:', data); // result:10000
-        return data;
+  .then(
+    (data) => {
+      return 100 * data;
+    },
+    (err) => {
+      console.log('error:', err);
+    }
+  )
+  .then((data) => {
+    return new MyPromise((resolve, reject) => {
+      console.log('data:', data); // data:10000
+      resolve(data);
     });
+  })
+  .then((data) => {
+    console.log('result:', data); // result:10000
+    return data;
+  });
 ```
 
 #### 3.3.3 Promise 对象嵌套传递
@@ -588,16 +588,16 @@ promise
 
 ```js
 const p2 = p.then((data) => {
-    return new MyPromise((resolve, reject) => {
-        resolve(
-            new MyPromise((resolve, reject) => {
-                setTimeout(() => {
-                    // 这里很可能又是一个 promise 函数
-                    resolve(data * 1000);
-                }, 1000);
-            })
-        );
-    });
+  return new MyPromise((resolve, reject) => {
+    resolve(
+      new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          // 这里很可能又是一个 promise 函数
+          resolve(data * 1000);
+        }, 1000);
+      })
+    );
+  });
 });
 ```
 
@@ -605,20 +605,20 @@ const p2 = p.then((data) => {
 
 ```js
 function resolvePromise(nextPromise, x, resolve, reject) {
-    // ...
-    if (typeof then === 'function') {
-        then.call(
-            x,
-            (y) => {
-                // y 有可能是一个 promise，那么我们就要继续使用回调函数,直到解析出来的值是一个普通值
-                resolvePromise(nextPromise, y, resolve, reject);
-            },
-            (r) => {
-                reject(r); // 采用 promise 的失败结果，并且向下传递
-            }
-        );
-    }
-    // ...
+  // ...
+  if (typeof then === 'function') {
+    then.call(
+      x,
+      (y) => {
+        // y 有可能是一个 promise，那么我们就要继续使用回调函数,直到解析出来的值是一个普通值
+        resolvePromise(nextPromise, y, resolve, reject);
+      },
+      (r) => {
+        reject(r); // 采用 promise 的失败结果，并且向下传递
+      }
+    );
+  }
+  // ...
 }
 ```
 
@@ -626,34 +626,34 @@ function resolvePromise(nextPromise, x, resolve, reject) {
 
 ```js
 const promise = new MyPromise((resolve, reject) => {
-    resolve(100);
+  resolve(100);
 });
 promise
-    .then(
-        (data) => {
-            return 100 * data;
-        },
-        (err) => {
-            console.log('error:', err);
-        }
-    )
-    .then((data) => {
-        return new MyPromise((resolve, reject) => {
-            resolve(
-                new MyPromise((resolve, reject) => {
-                    setTimeout(() => {
-                        data = data * 100;
-                        console.log('data:', data); // data:1000000
-                        resolve(data);
-                    }, 1000);
-                })
-            );
-        });
-    })
-    .then((data) => {
-        console.log('result:', data); // result:1000000
-        return data;
+  .then(
+    (data) => {
+      return 100 * data;
+    },
+    (err) => {
+      console.log('error:', err);
+    }
+  )
+  .then((data) => {
+    return new MyPromise((resolve, reject) => {
+      resolve(
+        new MyPromise((resolve, reject) => {
+          setTimeout(() => {
+            data = data * 100;
+            console.log('data:', data); // data:1000000
+            resolve(data);
+          }, 1000);
+        })
+      );
     });
+  })
+  .then((data) => {
+    console.log('result:', data); // result:1000000
+    return data;
+  });
 ```
 
 #### 3.3.4 防止多次调用
@@ -662,61 +662,61 @@ promise
 
 ```js
 function resolvePromise(nextPromise, x, resolve, reject) {
-    // ...
+  // ...
 
-    // 判断如果 x 是否是对象，判断变量类型的方法有：typeof instanceof constructor toString
-    if (typeof x === 'object' && x != null) {
-        let called; // 加一个开关，防止多次调用失败和成功
+  // 判断如果 x 是否是对象，判断变量类型的方法有：typeof instanceof constructor toString
+  if (typeof x === 'object' && x != null) {
+    let called; // 加一个开关，防止多次调用失败和成功
 
-        try {
-            // 预防取 .then 的时候错误
-            const then = x.then; // Object.definePropertype
+    try {
+      // 预防取 .then 的时候错误
+      const then = x.then; // Object.definePropertype
 
-            if (typeof then === 'function') {
-                then.call(
-                    x,
-                    (y) => {
-                        if (called) {
-                            console.log('已经执行过，则忽略处理');
-                            return;
-                        }
-                        called = true;
-
-                        // ...
-                    },
-                    (r) => {
-                        if (called) {
-                            console.log('已经执行过，则忽略处理');
-                            return;
-                        }
-                        called = true;
-
-                        // ...
-                    }
-                );
-            }
-            else {
-                if (called) {
-                    console.log('已经执行过，则忽略处理');
-                    return;
-                }
-                called = true;
-
-                // ...
-            }
-        }
-        catch (err) {
+      if (typeof then === 'function') {
+        then.call(
+          x,
+          (y) => {
             if (called) {
-                console.log('已经执行过，则忽略处理');
-                return;
+              console.log('已经执行过，则忽略处理');
+              return;
             }
             called = true;
 
             // ...
-        }
-    }
+          },
+          (r) => {
+            if (called) {
+              console.log('已经执行过，则忽略处理');
+              return;
+            }
+            called = true;
 
-    // ...
+            // ...
+          }
+        );
+      }
+      else {
+        if (called) {
+          console.log('已经执行过，则忽略处理');
+          return;
+        }
+        called = true;
+
+        // ...
+      }
+    }
+    catch (err) {
+      if (called) {
+        console.log('已经执行过，则忽略处理');
+        return;
+      }
+      called = true;
+
+      // ...
+    }
+  }
+
+  // ...
 }
 ```
 
@@ -725,96 +725,96 @@ function resolvePromise(nextPromise, x, resolve, reject) {
 ```js
 // catch 方法
 MyPromise.prototype.catch = function (onReJected) {
-    // 返回一个没有第一个参数的 then 方法
-    return this.then(undefined, onReJected);
+  // 返回一个没有第一个参数的 then 方法
+  return this.then(undefined, onReJected);
 };
 
 // static all 方法
 MyPromise.all = (lists) => {
-    // 返回一个 promise
-    return new MyPromise((resolve, reject) => {
-        const resArr = []; // 存储处理的结果的数组
-        // 判断每一项是否处理完了
-        let index = 0;
+  // 返回一个 promise
+  return new MyPromise((resolve, reject) => {
+    const resArr = []; // 存储处理的结果的数组
+    // 判断每一项是否处理完了
+    let index = 0;
 
-        function processData(i, data) {
-            resArr[i] = data;
-            index += 1;
-            if (index === lists.length) {
-                // 处理异步，要使用计数器，不能使用 resArr == lists.length
-                resolve(resArr);
-            }
-        }
-        for (let i = 0; i < lists.length; i++) {
-            if (isPromise(lists[i])) {
-                lists[i].then(
-                    (data) => {
-                        processData(i, data);
-                    },
-                    (err) => {
-                        reject(err); // 只要有一个传入的 promise 没执行成功就走 reject
-                    }
-                );
-            }
-            else {
-                processData(i, lists[i]);
-            }
-        }
-    });
+    function processData(i, data) {
+      resArr[i] = data;
+      index += 1;
+      if (index === lists.length) {
+        // 处理异步，要使用计数器，不能使用 resArr == lists.length
+        resolve(resArr);
+      }
+    }
+    for (let i = 0; i < lists.length; i++) {
+      if (isPromise(lists[i])) {
+        lists[i].then(
+          (data) => {
+            processData(i, data);
+          },
+          (err) => {
+            reject(err); // 只要有一个传入的 promise 没执行成功就走 reject
+          }
+        );
+      }
+      else {
+        processData(i, lists[i]);
+      }
+    }
+  });
 };
 
 // promise 的 race 方法
 // 两个方法赛跑，哪个赢了就先返回哪个的状态
 MyPromise.race = (lists) => {
-    return new MyPromise((resolve, reject) => {
-        for (let i = 0; i < lists.length; i++) {
-            if (isPromise(lists[i])) {
-                lists[i].then(
-                    (data) => {
-                        resolve(data); // 哪个先完成就返回哪一个的结果
-                    },
-                    (err) => {
-                        reject(err);
-                    }
-                );
-            }
-            else {
-                resolve(lists[i]);
-            }
-        }
-    });
+  return new MyPromise((resolve, reject) => {
+    for (let i = 0; i < lists.length; i++) {
+      if (isPromise(lists[i])) {
+        lists[i].then(
+          (data) => {
+            resolve(data); // 哪个先完成就返回哪一个的结果
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+      }
+      else {
+        resolve(lists[i]);
+      }
+    }
+  });
 };
 
 // 静态 resolve 方法
 MyPromise.resolve = (value) => {
-    // 如果是一个 promise 对象就直接将这个对象返回
-    if (isPromise(value)) {
-        return value;
-    }
-    else {
+  // 如果是一个 promise 对象就直接将这个对象返回
+  if (isPromise(value)) {
+    return value;
+  }
+  else {
     // 如果是一个普通值就将这个值包装成一个 promise 对象之后返回
-        return new MyPromise((resolve, reject) => {
-            resolve(value);
-        });
-    }
+    return new MyPromise((resolve, reject) => {
+      resolve(value);
+    });
+  }
 };
 
 // 静态 reject 方法
 MyPromise.reject = (value) => {
-    return new MyPromise((resolve, reject) => {
-        reject(value);
-    });
+  return new MyPromise((resolve, reject) => {
+    reject(value);
+  });
 };
 
 // 终极方法 finally finally 其实就是一个 promise 的 then 方法的别名，在执行 then 方法之前，先处理 callback 函数
 MyPromise.prototype.finally = function (cb) {
-    return this.then(
-        value => MyPromise.resolve(cb()).then(() => value),
-        reason =>
-            MyPromise.reject(cb()).then(() => {
-                throw reason;
-            })
-    );
+  return this.then(
+    value => MyPromise.resolve(cb()).then(() => value),
+    reason =>
+      MyPromise.reject(cb()).then(() => {
+        throw reason;
+      })
+  );
 };
 ```
 
@@ -824,24 +824,24 @@ MyPromise.prototype.finally = function (cb) {
 
 ```js
 const p = new MyPromise((resolve, reject) => {
-    setTimeout(() => {
-        console.log('resolve');
-        resolve(222);
-    }, 1000);
+  setTimeout(() => {
+    console.log('resolve');
+    resolve(222);
+  }, 1000);
 });
 
 p.then((data) => {
-    setTimeout(() => {
-        console.log('data:', data);
-    });
-    return 3333;
+  setTimeout(() => {
+    console.log('data:', data);
+  });
+  return 3333;
 })
-    .then((data2) => {
-        console.log('data2:', data2);
-    })
-    .catch((err) => {
-        console.error('err:', err);
-    });
+  .then((data2) => {
+    console.log('data2:', data2);
+  })
+  .catch((err) => {
+    console.error('err:', err);
+  });
 
 // resolve
 // data2: 3333
@@ -854,7 +854,7 @@ p.then((data) => {
 const p1 = MyPromise.reject('出错了');
 
 p1.then(null, (err) => {
-    console.error('err:', err); // 出错了
+  console.error('err:', err); // 出错了
 });
 
 // err: 出错了
@@ -864,17 +864,17 @@ p1.then(null, (err) => {
 
 ```js
 const q1 = new MyPromise((resolve, reject) => {
-    resolve('hello');
+  resolve('hello');
 });
 const q2 = new MyPromise((resolve, reject) => {
-    resolve('world');
+  resolve('world');
 });
 
 MyPromise.all([q1, q2]).then((res) => {
-    console.log(res); // ['hello', 'world']
+  console.log(res); // ['hello', 'world']
 });
 MyPromise.race([q1, q2]).then((res) => {
-    console.log(res); // hello
+  console.log(res); // hello
 });
 ```
 
@@ -890,12 +890,12 @@ $ npm install promises-aplua-tests -D
 
 ```js
 MyPromise.defer = MyPromise.deferred = function () {
-    const dfd = {};
-    dfd.promise = new Promise((resolve, reject) => {
-        dfd.resolve = resolve;
-        dfd.reject = reject;
-    });
-    return dfd;
+  const dfd = {};
+  dfd.promise = new Promise((resolve, reject) => {
+    dfd.resolve = resolve;
+    dfd.reject = reject;
+  });
+  return dfd;
 };
 module.exports = MyPromise;
 ```

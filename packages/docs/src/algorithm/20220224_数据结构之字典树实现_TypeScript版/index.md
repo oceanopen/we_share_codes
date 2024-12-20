@@ -20,73 +20,73 @@
 import HashTable from '../hash-table/HashTable';
 
 export default class TrieNode {
-    public character: string;
-    public isCompleteWord: boolean;
-    private children: HashTable;
+  public character: string;
+  public isCompleteWord: boolean;
+  private children: HashTable;
 
-    constructor(character: string, isCompleteWord = false) {
-        this.character = character;
-        this.isCompleteWord = isCompleteWord;
-        this.children = new HashTable();
+  constructor(character: string, isCompleteWord = false) {
+    this.character = character;
+    this.isCompleteWord = isCompleteWord;
+    this.children = new HashTable();
+  }
+
+  // 获取孩子节点
+  getChild(character: string) {
+    return this.children.get(character);
+  }
+
+  // 增加孩子节点，返回增加的节点
+  addChild(character: string, isCompleteWord = false): TrieNode {
+    if (!this.children.has(character)) {
+      this.children.set(character, new TrieNode(character, isCompleteWord));
     }
 
-    // 获取孩子节点
-    getChild(character: string) {
-        return this.children.get(character);
+    const childNode = this.children.get(character);
+
+    // In cases similar to adding "car" after "carpet" we need to mark "r" character as complete.
+    childNode.isCompleteWord = childNode.isCompleteWord || isCompleteWord;
+
+    return childNode;
+  }
+
+  // 删除孩子节点
+  removeChild(character: string) {
+    const childNode = this.getChild(character);
+
+    // Delete childNode only if:
+    // - childNode has NO children,
+    // - childNode.isCompleteWord === false.
+    if (childNode && !childNode.isCompleteWord && !childNode.hasChildren()) {
+      this.children.delete(character);
     }
 
-    // 增加孩子节点，返回增加的节点
-    addChild(character: string, isCompleteWord = false): TrieNode {
-        if (!this.children.has(character)) {
-            this.children.set(character, new TrieNode(character, isCompleteWord));
-        }
+    return this;
+  }
 
-        const childNode = this.children.get(character);
+  // 是否有指定孩子节点
+  hasChild(character: string) {
+    return this.children.has(character);
+  }
 
-        // In cases similar to adding "car" after "carpet" we need to mark "r" character as complete.
-        childNode.isCompleteWord = childNode.isCompleteWord || isCompleteWord;
+  /**
+   * Check whether current TrieNode has children or not.
+   */
+  hasChildren() {
+    return this.children.getKeys().length !== 0;
+  }
 
-        return childNode;
-    }
+  // 展示孩子节点
+  suggestChildren() {
+    return [...this.children.getKeys()];
+  }
 
-    // 删除孩子节点
-    removeChild(character: string) {
-        const childNode = this.getChild(character);
+  toString() {
+    let childrenAsString = this.suggestChildren().toString();
+    childrenAsString = childrenAsString ? `:${childrenAsString}` : '';
+    const isCompleteString = this.isCompleteWord ? '*' : '';
 
-        // Delete childNode only if:
-        // - childNode has NO children,
-        // - childNode.isCompleteWord === false.
-        if (childNode && !childNode.isCompleteWord && !childNode.hasChildren()) {
-            this.children.delete(character);
-        }
-
-        return this;
-    }
-
-    // 是否有指定孩子节点
-    hasChild(character: string) {
-        return this.children.has(character);
-    }
-
-    /**
-     * Check whether current TrieNode has children or not.
-     */
-    hasChildren() {
-        return this.children.getKeys().length !== 0;
-    }
-
-    // 展示孩子节点
-    suggestChildren() {
-        return [...this.children.getKeys()];
-    }
-
-    toString() {
-        let childrenAsString = this.suggestChildren().toString();
-        childrenAsString = childrenAsString ? `:${childrenAsString}` : '';
-        const isCompleteString = this.isCompleteWord ? '*' : '';
-
-        return `${this.character}${isCompleteString}${childrenAsString}`;
-    }
+    return `${this.character}${isCompleteString}${childrenAsString}`;
+  }
 }
 ```
 
@@ -101,96 +101,96 @@ import TrieNode from './TrieNode';
 const HEAD_CHARACTER = '*';
 
 export default class Trie {
-    public head: TrieNode;
+  public head: TrieNode;
 
-    constructor() {
-        this.head = new TrieNode(HEAD_CHARACTER);
+  constructor() {
+    this.head = new TrieNode(HEAD_CHARACTER);
+  }
+
+  // 增加单词
+  addWord(word: string) {
+    const characters = Array.from(word);
+    let currentNode = this.head;
+
+    for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
+      const isComplete = charIndex === characters.length - 1;
+      currentNode = currentNode.addChild(characters[charIndex], isComplete);
     }
 
-    // 增加单词
-    addWord(word: string) {
-        const characters = Array.from(word);
-        let currentNode = this.head;
+    return this;
+  }
 
-        for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
-            const isComplete = charIndex === characters.length - 1;
-            currentNode = currentNode.addChild(characters[charIndex], isComplete);
-        }
+  // 删除单词
+  deleteWord(word: string) {
+    const depthFirstDelete = (currentNode: TrieNode, charIndex = 0) => {
+      if (charIndex >= word.length) {
+        // Return if we're trying to delete the character that is out of word's scope.
+        return;
+      }
 
-        return this;
+      const character = word[charIndex];
+      const nextNode = currentNode.getChild(character);
+
+      if (nextNode == null) {
+        // Return if we're trying to delete a word that has not been added to the Trie.
+        return;
+      }
+
+      // Go deeper.
+      depthFirstDelete(nextNode, charIndex + 1);
+
+      // Since we're going to delete a word let's un-mark its last character isCompleteWord flag.
+      if (charIndex === word.length - 1) {
+        nextNode.isCompleteWord = false;
+      }
+
+      // childNode is deleted only if:
+      // - childNode has NO children
+      // - childNode.isCompleteWord === false
+      currentNode.removeChild(character);
+    };
+
+    // Start depth-first deletion from the head node.
+    depthFirstDelete(this.head);
+
+    return this;
+  }
+
+  // 根据单词前缀展示后面的子节点
+  suggestNextCharacters(word: string) {
+    const lastCharacter = this.getLastCharacterNode(word);
+
+    if (!lastCharacter) {
+      return null;
     }
 
-    // 删除单词
-    deleteWord(word: string) {
-        const depthFirstDelete = (currentNode: TrieNode, charIndex = 0) => {
-            if (charIndex >= word.length) {
-                // Return if we're trying to delete the character that is out of word's scope.
-                return;
-            }
+    return lastCharacter.suggestChildren();
+  }
 
-            const character = word[charIndex];
-            const nextNode = currentNode.getChild(character);
+  /**
+   * Check if complete word exists in Trie.
+   */
+  doesWordExist(word: string) {
+    const lastCharacter = this.getLastCharacterNode(word);
 
-            if (nextNode == null) {
-                // Return if we're trying to delete a word that has not been added to the Trie.
-                return;
-            }
+    return !!lastCharacter && lastCharacter.isCompleteWord;
+  }
 
-            // Go deeper.
-            depthFirstDelete(nextNode, charIndex + 1);
+  // 根据单词前缀获取最后一个字符对应的节点
+  getLastCharacterNode(word: string) {
+    const characters = Array.from(word);
+    let currentNode = this.head;
 
-            // Since we're going to delete a word let's un-mark its last character isCompleteWord flag.
-            if (charIndex === word.length - 1) {
-                nextNode.isCompleteWord = false;
-            }
+    for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
+      if (!currentNode.hasChild(characters[charIndex])) {
+        return null;
+      }
 
-            // childNode is deleted only if:
-            // - childNode has NO children
-            // - childNode.isCompleteWord === false
-            currentNode.removeChild(character);
-        };
-
-        // Start depth-first deletion from the head node.
-        depthFirstDelete(this.head);
-
-        return this;
+      currentNode = currentNode.getChild(characters[charIndex]);
     }
 
-    // 根据单词前缀展示后面的子节点
-    suggestNextCharacters(word: string) {
-        const lastCharacter = this.getLastCharacterNode(word);
-
-        if (!lastCharacter) {
-            return null;
-        }
-
-        return lastCharacter.suggestChildren();
-    }
-
-    /**
-     * Check if complete word exists in Trie.
-     */
-    doesWordExist(word: string) {
-        const lastCharacter = this.getLastCharacterNode(word);
-
-        return !!lastCharacter && lastCharacter.isCompleteWord;
-    }
-
-    // 根据单词前缀获取最后一个字符对应的节点
-    getLastCharacterNode(word: string) {
-        const characters = Array.from(word);
-        let currentNode = this.head;
-
-        for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
-            if (!currentNode.hasChild(characters[charIndex])) {
-                return null;
-            }
-
-            currentNode = currentNode.getChild(characters[charIndex]);
-        }
-
-        return currentNode;
-    }
+    return currentNode;
+  }
 }
 ```
 

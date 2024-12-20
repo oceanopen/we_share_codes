@@ -1,9 +1,9 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-    <button @click="clickScreenshotHandler">
-        截图
-    </button>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <button @click="clickScreenshotHandler">
+    截图
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -13,9 +13,9 @@ import html2canvas from 'html2canvas';
 import HelloWorld from './components/HelloWorld.vue';
 
 function clickScreenshotHandler() {
-    html2canvas(document.body).then((canvas) => {
-        document.body.appendChild(canvas);
-    });
+  html2canvas(document.body).then((canvas) => {
+    document.body.appendChild(canvas);
+  });
 }
 </script>
 

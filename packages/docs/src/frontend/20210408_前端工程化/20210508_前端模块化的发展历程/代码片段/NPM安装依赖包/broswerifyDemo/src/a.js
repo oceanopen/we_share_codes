@@ -1,3 +1,3 @@
 module.exports = {
-    a: 123,
+  a: 123,
 };

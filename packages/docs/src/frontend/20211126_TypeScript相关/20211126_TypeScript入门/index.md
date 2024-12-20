@@ -138,8 +138,8 @@ arr3 = [1, 'b', 2, 'c'];
 
 ```ts
 interface Arrobj {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 const arr4: Arrobj[] = [{ name: 'jimmy', age: 22 }];
 ```
@@ -150,7 +150,7 @@ const arr4: Arrobj[] = [{ name: 'jimmy', age: 22 }];
 
 ```ts
 function sum(x: number, y: number): number {
-    return x + y;
+  return x + y;
 }
 ```
 
@@ -158,7 +158,7 @@ function sum(x: number, y: number): number {
 
 ```ts
 const mySum: (x: number, y: number) => number = function (x: number, y: number): number {
-    return x + y;
+  return x + y;
 };
 ```
 
@@ -166,10 +166,10 @@ const mySum: (x: number, y: number) => number = function (x: number, y: number):
 
 ```ts
 interface SearchFunc {
-    (source: string, subString: string): boolean;
+  (source: string, subString: string): boolean;
 }
 const myFunc: SearchFunc = (source: string, subString: string): boolean => {
-    return true;
+  return true;
 };
 ```
 
@@ -179,11 +179,11 @@ const myFunc: SearchFunc = (source: string, subString: string): boolean => {
 
 ```ts
 function buildName(firstName: string, lastName?: string) {
-    if (lastName) {
-        return `${firstName} ${lastName}`;
-    } else {
-        return firstName;
-    }
+  if (lastName) {
+    return `${firstName} ${lastName}`;
+  } else {
+    return firstName;
+  }
 }
 const tomcat = buildName('Tom', 'Cat');
 const tom = buildName('Tom');
@@ -195,7 +195,7 @@ const tom = buildName('Tom');
 
 ```ts
 function buildName2(firstName: string, lastName: string = 'Cat') {
-    return `${firstName} ${lastName}`;
+  return `${firstName} ${lastName}`;
 }
 const tomcat2 = buildName('Tom', 'Cat');
 const tom2 = buildName('Tom');
@@ -205,9 +205,9 @@ const tom2 = buildName('Tom');
 
 ```ts
 function push(array: any[], ...items: any[]) {
-    items.forEach((item) => {
-        array.push(item);
-    });
+  items.forEach((item) => {
+    array.push(item);
+  });
 }
 const a = [];
 push(a, 1, 2, 3);
@@ -219,7 +219,7 @@ push(a, 1, 2, 3);
 
 ```ts
 function add(x, y) {
-    return x + y;
+  return x + y;
 }
 add(1, 2); // 3
 add('1', '2'); // "12"
@@ -230,7 +230,7 @@ add('1', '2'); // "12"
 ```json
 // tsconfig.json
 {
-    "noImplicitAny": true
+  "noImplicitAny": true
 }
 ```
 
@@ -249,10 +249,10 @@ type Combinable = string | number;
 
 ```ts
 function add2(a: Combinable, b: Combinable) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString();
-    }
-    return a + b;
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
 add2(1, 2); // 3
 add2('1', '2'); // "12"
@@ -283,10 +283,10 @@ function add3(a: string, b: string): string;
 function add3(a: string, b: number): string;
 function add3(a: number, b: string): string;
 function add3(a: Types, b: Types) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString();
-    }
-    return a + b;
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
 const result2 = add3('Semlinker', ' Kakuqo');
 result2.split(' ');
@@ -422,7 +422,7 @@ a = undefined;
 ```ts
 // 其声明类型不为 "void" 或 "any" 的函数必须返回值。ts(2355)
 function fun(): undefined {
-    console.log('this is TypeScript');
+  console.log('this is TypeScript');
 }
 ```
 
@@ -463,14 +463,14 @@ a = e;
 ```ts
 type Foo = string | number;
 function controlFlowAnalysisWithNever(foo: Foo) {
-    if (typeof foo === 'string') {
+  if (typeof foo === 'string') {
     // 这里 foo 被收窄为 string 类型
-    } else if (typeof foo === 'number') {
+  } else if (typeof foo === 'number') {
     // 这里 foo 被收窄为 number 类型
-    } else {
+  } else {
     // foo 在这里是 never
-        const check: never = foo;
-    }
+    const check: never = foo;
+  }
 }
 ```
 
@@ -480,14 +480,14 @@ function controlFlowAnalysisWithNever(foo: Foo) {
 ```ts
 type Foo2 = string | number | boolean;
 function controlFlowAnalysisWithNever2(foo: Foo2) {
-    if (typeof foo === 'string') {
+  if (typeof foo === 'string') {
     // 这里 foo 被收窄为 string 类型
-    } else if (typeof foo === 'number') {
+  } else if (typeof foo === 'number') {
     // 这里 foo 被收窄为 number 类型
-    } else {
+  } else {
     // 不能将类型“boolean”分配给类型“never”。ts(2322)
-        const check: never = foo;
-    }
+    const check: never = foo;
+  }
 }
 ```
 
@@ -567,7 +567,7 @@ const uncertain4: number = notSure4;
 
 ```ts
 function getDog() {
-    return '123';
+  return '123';
 }
 const dog: unknown = { hello: getDog };
 // 类型“unknown”上不存在属性“hello”。ts(2339)
@@ -578,8 +578,8 @@ dog.hello();
 
 ```ts
 function getDogName() {
-    let x: unknown;
-    return x;
+  let x: unknown;
+  return x;
 }
 const dogName = getDogName();
 // 直接使用
@@ -587,7 +587,7 @@ const dogName = getDogName();
 const upName = dogName.toLowerCase();
 // typeof
 if (typeof dogName === 'string') {
-    const upName2 = dogName.toLowerCase();
+  const upName2 = dogName.toLowerCase();
 }
 // 类型断言
 const upName3 = (dogName as string).toLowerCase();
@@ -690,14 +690,14 @@ ObjectLiteral = upperCaseObject;
 
 ```ts
 {
-    const str: string = 'this is string';
-    const num: number = 1;
-    const bool: boolean = true;
+  const str: string = 'this is string';
+  const num: number = 1;
+  const bool: boolean = true;
 }
 {
-    const str: string = 'this is string';
-    const num: number = 1;
-    const bool: boolean = true;
+  const str: string = 'this is string';
+  const num: number = 1;
+  const bool: boolean = true;
 }
 ```
 
@@ -712,14 +712,14 @@ ObjectLiteral = upperCaseObject;
 
 ```ts
 {
-    const str = 'this is string'; // 等价
-    const num = 1; // 等价
-    const bool = true; // 等价
+  const str = 'this is string'; // 等价
+  const num = 1; // 等价
+  const bool = true; // 等价
 }
 {
-    const str = 'this is string'; // 不等价
-    const num = 1; // 不等价
-    const bool = true; // 不等价
+  const str = 'this is string'; // 不等价
+  const num = 1; // 不等价
+  const bool = true; // 不等价
 }
 ```
 
@@ -731,13 +731,13 @@ ObjectLiteral = upperCaseObject;
 ```ts
 /** 根据参数的类型，推断出返回值的类型也是 number */
 function inferAdd1(a: number, b: number) {
-    return a + b;
+  return a + b;
 }
 const x1 = inferAdd1(1, 1); // 推断出 x1 的类型也是 number
 
 /** 推断参数 b 的类型是数字或者 undefined，返回值的类型也是数字 */
 function inferAdd2(a: number, b = 1) {
-    return a + b;
+  return a + b;
 }
 const x2 = inferAdd2(1);
 // 类型“string”的参数不能赋给类型“number”的参数。ts(2345)
@@ -791,10 +791,10 @@ mayNullOrUndefinedOrString.toString();
 type NumGenerator = () => number;
 
 function myFunc(numGenerator: NumGenerator | undefined) {
-    // 对象可能为“未定义”。ts(2532)
-    // 不能调用可能是“未定义”的对象。ts(2722)
-    const num1 = numGenerator();
-    const num2 = numGenerator!();
+  // 对象可能为“未定义”。ts(2532)
+  // 不能调用可能是“未定义”的对象。ts(2722)
+  const num1 = numGenerator();
+  const num2 = numGenerator!();
 }
 ```
 
@@ -810,7 +810,7 @@ initialize1();
 // strictNullChecks 模式下 Error：在赋值前使用了变量“x”。ts(2454)
 console.log(2 * x * x);
 function initialize1() {
-    x = 10;
+  x = 10;
 }
 
 let y!: number;
@@ -818,7 +818,7 @@ initialize2();
 console.log(2 * y);
 
 function initialize2() {
-    y = 10;
+  y = 10;
 }
 ```
 
@@ -873,7 +873,7 @@ hello = 'hi';
 ```ts
 type Direction = 'up' | 'down';
 function move(dir: Direction) {
-    // ...
+  // ...
 }
 move('up');
 // 类型“"right"”的参数不能赋给类型“Direction”的参数。ts(2345)
@@ -892,9 +892,9 @@ move('right');
 
 ```ts
 interface Config {
-    size: 'small' | 'big';
-    isEnable: true | false;
-    margin: 0 | 2 | 4;
+  size: 'small' | 'big';
+  isEnable: true | false;
+  margin: 0 | 2 | 4;
 }
 ```
 
@@ -985,13 +985,13 @@ const y2 = y; // 类型是 any
 
 ```ts
 interface Vector3 {
-    x: number;
-    y: number;
-    z: number;
+  x: number;
+  y: number;
+  z: number;
 }
 
 function getComponent(vector: Vector3, axis: 'x' | 'y' | 'z') {
-    return vector[axis];
+  return vector[axis];
 }
 
 // eslint-disable-next-line prefer-const
@@ -1050,13 +1050,13 @@ TypeScript 提供了一些控制拓宽过程的方法。
 
 ```ts
 interface Vector3 {
-    x: number;
-    y: number;
-    z: number;
+  x: number;
+  y: number;
+  z: number;
 }
 
 function getComponent(vector: Vector3, axis: 'x' | 'y' | 'z') {
-    return vector[axis];
+  return vector[axis];
 }
 
 const x2 = 'x'; // 类型是 "x"
@@ -1072,7 +1072,7 @@ getComponent(vec, x2);
 
 ```js
 const obj = {
-    x: 1,
+  x: 1,
 };
 obj.x = 6;
 obj.x = '6';
@@ -1090,7 +1090,7 @@ obj.name = 'semlinker';
 
 ```ts
 const obj = {
-    x: 1,
+  x: 1,
 };
 
 obj.x = 6; // OK
@@ -1111,7 +1111,7 @@ TypeScript 试图在具体性和灵活性之间取得平衡。
 ```ts
 // Type is { x: 1 | 3 | 5; }
 const obj: { x: 1 | 3 | 5 } = {
-    x: 1,
+  x: 1,
 };
 ```
 
@@ -1122,18 +1122,18 @@ const obj: { x: 1 | 3 | 5 } = {
 ```ts
 // Type is { x: number; y: number; }
 const obj1 = {
-    x: 1,
-    y: 2,
+  x: 1,
+  y: 2,
 };
 // Type is { x: 1; y: number; }
 const obj2 = {
-    x: 1 as const,
-    y: 2,
+  x: 1 as const,
+  y: 2,
 };
 // Type is { readonly x: 1; readonly y: 2; }
 const obj3 = {
-    x: 1,
-    y: 2,
+  x: 1,
+  y: 2,
 } as const;
 ```
 
@@ -1159,12 +1159,12 @@ const arr2 = [1, 2, 3] as const;
 ```ts
 // const func: (anything: any) => string | number
 function func(anything: any) {
-    if (typeof anything === 'string') {
-        return anything; // 类型是 string
-    } else if (typeof anything === 'number') {
-        return anything; // 类型是 number
-    }
-    return null;
+  if (typeof anything === 'string') {
+    return anything; // 类型是 string
+  } else if (typeof anything === 'number') {
+    return anything; // 类型是 number
+  }
+  return null;
 }
 ```
 
@@ -1175,11 +1175,11 @@ function func(anything: any) {
 ```ts
 // const func2: (anything: string | number) => string | number
 function func2(anything: string | number) {
-    if (typeof anything === 'string') {
-        return anything; // 类型是 string
-    } else {
-        return anything; // 类型是 number
-    }
+  if (typeof anything === 'string') {
+    return anything; // 类型是 string
+  } else {
+    return anything; // 类型是 number
+  }
 }
 ```
 
@@ -1192,13 +1192,13 @@ const getPencilCost = (item: 'pencil') => 4;
 const getRulerCost = (item: 'ruler') => 6;
 // const getRulerCost: (item: 'ruler') => number
 function getCost(item: Goods) {
-    if (item === 'pen') {
-        return getPenCost(item); // const getPenCost: (item: 'pen') => number
-    } else if (item === 'pencil') {
-        return getPencilCost(item); // const getPencilCost: (item: 'pencil') => number
-    } else {
-        return getRulerCost(item); // const getRulerCost: (item: 'ruler') => number
-    }
+  if (item === 'pen') {
+    return getPenCost(item); // const getPenCost: (item: 'pen') => number
+  } else if (item === 'pencil') {
+    return getPencilCost(item); // const getPencilCost: (item: 'pencil') => number
+  } else {
+    return getRulerCost(item); // const getRulerCost: (item: 'ruler') => number
+  }
 }
 ```
 
@@ -1212,11 +1212,11 @@ function getCost(item: Goods) {
 ```ts
 // const getCost2: (item: Goods) => "pen" | "pencil" | "ruler"
 function getCost2(item: Goods) {
-    if (item === 'pen') {
-        item; // (parameter) item: "pen"
-    } else {
-        item; // (parameter) item: "pencil" | "ruler"
-    }
+  if (item === 'pen') {
+    item; // (parameter) item: "pen"
+  } else {
+    item; // (parameter) item: "pencil" | "ruler"
+  }
 }
 ```
 
@@ -1228,7 +1228,7 @@ function getCost2(item: Goods) {
 // const el: HTMLElement | null
 const el = document.getElementById('foo');
 if (typeof el === 'object') {
-    el; // const el: HTMLElement | null
+  el; // const el: HTMLElement | null
 }
 ```
 
@@ -1238,9 +1238,9 @@ if (typeof el === 'object') {
 ```ts
 // function foo(x?: string | number | null | undefined): string | number | null | undefined
 function foo(x?: number | string | null) {
-    if (!x) {
-        return x; // (parameter) x: string | number | null | undefined
-    }
+  if (!x) {
+    return x; // (parameter) x: string | number | null | undefined
+  }
 }
 ```
 
@@ -1249,24 +1249,24 @@ function foo(x?: number | string | null) {
 
 ```ts
 interface UploadEvent {
-    type: 'upload';
-    filename: string;
-    contents: string;
+  type: 'upload';
+  filename: string;
+  contents: string;
 }
 interface DownloadEvent {
-    type: 'download';
-    filename: string;
+  type: 'download';
+  filename: string;
 }
 type AppEvent = UploadEvent | DownloadEvent;
 function handleEvent(e: AppEvent) {
-    switch (e.type) {
-        case 'download':
-            e; // (parameter) e: DownloadEvent
-            break;
-        case 'upload':
-            e; // (parameter) e: UploadEvent
-            break;
-    }
+  switch (e.type) {
+    case 'download':
+      e; // (parameter) e: DownloadEvent
+      break;
+    case 'upload':
+      e; // (parameter) e: UploadEvent
+      break;
+  }
 }
 ```
 
@@ -1285,7 +1285,7 @@ myFavoriteNumber = 7;
 ```ts
 // const sayHello: (name: string | undefined) => void
 function sayHello(name: string | undefined) {
-    /* ... */
+  /* ... */
 }
 sayHello('semlinker');
 sayHello(undefined);
@@ -1310,7 +1310,7 @@ type EventNames = 'click' | 'scroll' | 'mousemove';
 ```ts
 type Message = string | string[];
 function greet(message: Message) {
-    // ...
+  // ...
 }
 ```
 
@@ -1338,9 +1338,9 @@ type Useless = string & number;
 
 type IntersectionType = { id: number; name: string } & { age: number };
 const mixed: IntersectionType = {
-    id: 1,
-    name: 'name',
-    age: 18,
+  id: 1,
+  name: 'name',
+  age: 18,
 };
 ```
 
@@ -1355,10 +1355,10 @@ const mixed: IntersectionType = {
 ```ts
 type IntersectionTypeConfict = { id: number; name: string } & { age: number; name: number };
 const mixedConflict: IntersectionTypeConfict = {
-    id: 1,
-    // 不能将类型“number”分配给类型“never”。ts(2322)
-    name: 2,
-    age: 2,
+  id: 1,
+  // 不能将类型“number”分配给类型“never”。ts(2322)
+  name: 2,
+  age: 2,
 };
 ```
 
@@ -1373,9 +1373,9 @@ const mixedConflict: IntersectionTypeConfict = {
 ```ts
 type IntersectionTypeNotConfict = { id: number; name: 2 } & { age: number; name: number };
 const mixedNotConflict: IntersectionTypeNotConfict = {
-    id: 1,
-    name: 2,
-    age: 2,
+  id: 1,
+  name: 2,
+  age: 2,
 };
 // const mixedNotConflict2: IntersectionTypeNotConfict = {
 //   id: 1,
@@ -1388,21 +1388,21 @@ const mixedNotConflict: IntersectionTypeNotConfict = {
 
 ```ts
 interface A {
-    x: { d: true };
+  x: { d: true };
 }
 interface B {
-    x: { e: string };
+  x: { e: string };
 }
 interface C {
-    x: { f: number };
+  x: { f: number };
 }
 type ABC = A & B & C;
 const abc: ABC = {
-    x: {
-        d: true,
-        e: '',
-        f: 666,
-    },
+  x: {
+    d: true,
+    e: '',
+    f: 666,
+  },
 };
 ```
 
@@ -1421,12 +1421,12 @@ TypeScript 中的接口是一个非常灵活的概念，除了可用于[对类�
 
 ```ts
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 const tom: Person = {
-    name: 'Tom',
-    age: 25,
+  name: 'Tom',
+  age: 25,
 };
 ```
 
@@ -1440,7 +1440,7 @@ const tom: Person = {
 ```ts
 // 类型 "{ name: string; }" 中缺少属性 "age"，但类型 "Person" 中需要该属性。ts(2741)
 const tom2: Person = {
-    name: 'Tom',
+  name: 'Tom',
 };
 ```
 
@@ -1450,9 +1450,9 @@ const tom2: Person = {
 // 不能将类型“{ name: string; age: number; gender: string; }”分配给类型“Person”。
 // 对象文字可以只指定已知属性，并且“gender”不在类型“Person”中。ts(2322)
 const tom3: Person = {
-    name: 'Tom',
-    age: 25,
-    gender: 'male',
+  name: 'Tom',
+  age: 25,
+  gender: 'male',
 };
 ```
 
@@ -1462,8 +1462,8 @@ const tom3: Person = {
 
 ```ts
 interface Person2 {
-    readonly name: string;
-    age?: number;
+  readonly name: string;
+  age?: number;
 }
 ```
 
@@ -1489,14 +1489,14 @@ a = ro;
 
 ```ts
 interface Person3 {
-    name: string;
-    age?: number;
-    [propName: string]: any;
+  name: string;
+  age?: number;
+  [propName: string]: any;
 }
 const tom4: Person3 = {
-    name: 'Tom',
-    age: 25,
-    gender: 'male',
+  name: 'Tom',
+  age: 25,
+  gender: 'male',
 };
 ```
 
@@ -1505,9 +1505,9 @@ const tom4: Person3 = {
 ```ts
 // 类型“number”的属性“age”不能赋给“string”索引类型“string”。ts(2411)
 interface Person4 {
-    name: string;
-    age?: number;
-    [propName: string]: string;
+  name: string;
+  age?: number;
+  [propName: string]: string;
 }
 ```
 
@@ -1517,14 +1517,14 @@ interface Person4 {
 
 ```ts
 interface Person5 {
-    name: string;
-    age?: number; // 这里真实的类型应该为：number | undefined
-    [propName: string]: string | number | undefined;
+  name: string;
+  age?: number; // 这里真实的类型应该为：number | undefined
+  [propName: string]: string | number | undefined;
 }
 const tom5: Person5 = {
-    name: 'Tom',
-    age: 25,
-    gender: 'male',
+  name: 'Tom',
+  age: 25,
+  gender: 'male',
 };
 ```
 
@@ -1536,10 +1536,10 @@ const tom5: Person5 = {
 
 ```ts
 interface LabeledValue {
-    label: string;
+  label: string;
 }
 function printLabel(labeledObj: LabeledValue) {
-    console.log(labeledObj.label);
+  console.log(labeledObj.label);
 }
 const myObj = { size: 10, label: 'Size 10 Object' };
 const myObj2: { size: number; label: string } = { size: 10, label: 'Size 10 Object' };
@@ -1565,15 +1565,15 @@ printLabel({ size: 10, label: 'Size 10 Object' });
 
 ```ts
 interface Props {
-    name: string;
-    age: number;
-    money?: number;
+  name: string;
+  age: number;
+  money?: number;
 }
 const p: Props = {
-    name: '兔神',
-    age: 25,
-    money: -100000,
-    girl: false,
+  name: '兔神',
+  age: 25,
+  money: -100000,
+  girl: false,
 } as Props;
 ```
 
@@ -1581,16 +1581,16 @@ const p: Props = {
 
 ```ts
 interface Props2 {
-    name: string;
-    age: number;
-    money?: number;
-    [key: string]: any;
+  name: string;
+  age: number;
+  money?: number;
+  [key: string]: any;
 }
 const p2: Props2 = {
-    name: '兔神',
-    age: 25,
-    money: -100000,
-    girl: false,
+  name: '兔神',
+  age: 25,
+  money: -100000,
+  girl: false,
 };
 ```
 
@@ -1618,11 +1618,11 @@ const p2: Props2 = {
 
 ```ts
 interface Point {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 interface SetPoint {
-    (x: number, y: number): void;
+  (x: number, y: number): void;
 }
 ```
 
@@ -1630,8 +1630,8 @@ interface SetPoint {
 
 ```ts
 interface Point2 {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 type SetPoint2 = (x: number, y: number) => void;
 ```
@@ -1668,10 +1668,10 @@ type B = typeof div; // type B = HTMLDivElement
 
 ```ts
 interface Point3 {
-    x: number;
+  x: number;
 }
 interface Point3 {
-    y: number;
+  y: number;
 }
 const point: Point3 = { x: 1, y: 2 };
 ```
@@ -1686,10 +1686,10 @@ const point: Point3 = { x: 1, y: 2 };
 
 ```ts
 interface PointX {
-    x: number;
+  x: number;
 }
 interface Point extends PointX {
-    y: number;
+  y: number;
 }
 ```
 
@@ -1697,10 +1697,10 @@ interface Point extends PointX {
 
 ```ts
 interface PointX2 {
-    x: number;
+  x: number;
 }
 type Point2 = PointX2 & {
-    y: number;
+  y: number;
 };
 ```
 
@@ -1708,7 +1708,7 @@ type Point2 = PointX2 & {
 
 ```ts
 interface Point3 extends PointX2 {
-    y: number;
+  y: number;
 }
 ```
 
@@ -1716,7 +1716,7 @@ interface Point3 extends PointX2 {
 
 ```ts
 type Point4 = PointX & {
-    y: number;
+  y: number;
 };
 ```
 
@@ -1765,7 +1765,7 @@ identityAny(null).toString();
 
 ```ts
 function identity<T>(arg: T): T {
-    return arg;
+  return arg;
 }
 ```
 
@@ -1783,8 +1783,8 @@ function identity<T>(arg: T): T {
 
 ```ts
 function identity2<T, U>(value: T, message: U): T {
-    console.log(message);
-    return value;
+  console.log(message);
+  return value;
 }
 console.log(identity2<number, string>(68, 'Semlinker'));
 ```
@@ -1806,9 +1806,9 @@ console.log(identity2(68, 'Semlinker'));
 
 ```ts
 function trace<T>(arg: T): T {
-    // Error: Property 'size doesn't exist on type 'T'
-    console.log(arg.size);
-    return arg;
+  // Error: Property 'size doesn't exist on type 'T'
+  console.log(arg.size);
+  return arg;
 }
 ```
 
@@ -1819,11 +1819,11 @@ function trace<T>(arg: T): T {
 
 ```ts
 interface Sizeable {
-    size: number;
+  size: number;
 }
 function trace2<T extends Sizeable>(arg: T): T {
-    console.log(arg.size);
-    return arg;
+  console.log(arg.size);
+  return arg;
 }
 ```
 
@@ -1834,7 +1834,7 @@ function trace2<T extends Sizeable>(arg: T): T {
 ```ts
 interface HasAge { age: number }
 function getOldest(items: HasAge[]): HasAge {
-    return items.sort((a, b) => b.age - a.age)[0];
+  return items.sort((a, b) => b.age - a.age)[0];
 }
 
 const things = [{ age: 10 }, { age: 20 }, { age: 15 }];
@@ -1843,9 +1843,9 @@ console.log(oldestThing.age); // 20
 
 interface Person { name: string; age: number }
 const people: Person[] = [
-    { name: 'Amir', age: 10 },
-    { name: 'Betty', age: 20 },
-    { name: 'Cecile', age: 15 },
+  { name: 'Amir', age: 10 },
+  { name: 'Betty', age: 20 },
+  { name: 'Cecile', age: 15 },
 ];
 
 // no type errors
@@ -1869,8 +1869,8 @@ typeof 的主要用途是在类型上下文中获取变量或者属性的类型�
 
 ```ts
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 const sem: Person = { name: 'semlinker', age: 30 };
 type Sem = typeof sem; // type Sem = Person
@@ -1886,12 +1886,12 @@ const lolo: Sem = { name: 'lolo', age: 5 };
 
 ```ts
 const Message = {
-    name: 'jimmy',
-    age: 18,
-    address: {
-        province: '四川',
-        city: '成都',
-    },
+  name: 'jimmy',
+  age: 18,
+  address: {
+    province: '四川',
+    city: '成都',
+  },
 };
 /**
   type message = {
@@ -1910,7 +1910,7 @@ type message = typeof Message;
 
 ```ts
 function toArray(x: number): Array<number> {
-    return [x];
+  return [x];
 }
 type Func = typeof toArray; // type Func = (x: number) => Array<number>
 ```
@@ -1921,8 +1921,8 @@ keyof 操作符是在 TypeScript 2.1 版本引入的，该操作符可以用于�
 
 ```ts
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 type K1 = keyof Person; // 等价于："name" | "age"
 type K2 = keyof Person[]; // 等价于："length" | "toString" | "pop" | "push" | "concat" | "join" 等
@@ -1934,14 +1934,14 @@ type K3 = keyof { [x: string]: Person }; // type K3 = string | number
 ```ts
 // 字符串索引
 interface StringArray1 {
-    [index: string]: string;
+  [index: string]: string;
 }
 // type StringArray11 = string | number
 type StringArray11 = keyof StringArray1;
 
 // 数字索引
 interface StringArray2 {
-    [index: number]: string;
+  [index: number]: string;
 }
 // type StringArray21 = number
 type StringArray21 = keyof StringArray2;
@@ -1968,7 +1968,7 @@ JavaScript 是一种高度动态的语言。
 
 ```js
 function prop(obj, key) {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -1981,7 +1981,7 @@ function prop(obj, key) {
 // 元素隐式具有 "any" 类型，因为类型为 "string" 的表达式不能用于索引类型 "{}"。
 // 在类型 "{}" 上找不到具有类型为 "string" 的参数的索引签名。ts(7053)
 function prop(obj: object, key: string) {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -1991,7 +1991,7 @@ function prop(obj: object, key: string) {
 
 ```ts
 function prop2(obj: object, key: string) {
-    return (obj as any)[key];
+  return (obj as any)[key];
 }
 ```
 
@@ -2000,7 +2000,7 @@ function prop2(obj: object, key: string) {
 
 ```ts
 function prop3<T extends object, K extends keyof T>(obj: T, key: K) {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -2011,14 +2011,14 @@ function prop3<T extends object, K extends keyof T>(obj: T, key: K) {
 
 ```ts
 interface Todo {
-    id: number;
-    text: string;
-    done: boolean;
+  id: number;
+  text: string;
+  done: boolean;
 }
 const todo: Todo = {
-    id: 1,
-    text: 'Learn TypeScript keyof',
-    done: false,
+  id: 1,
+  text: 'Learn TypeScript keyof',
+  done: false,
 };
 const id = prop3(todo, 'id'); // const id: number
 const text = prop3(todo, 'text'); // const text: string
@@ -2050,7 +2050,7 @@ type Keys = 'a' | 'b' | 'c';
   }
  */
 type Obj = {
-    [p in Keys]: any
+  [p in Keys]: any
 };
 ```
 
@@ -2073,11 +2073,11 @@ type FunReturnType = ReturnType<Fun>;
 
 ```ts
 interface Lengthwise {
-    length: number;
+  length: number;
 }
 function loggingIdentity<T extends Lengthwise>(arg: T): T {
-    console.log(arg.length);
-    return arg;
+  console.log(arg.length);
+  return arg;
 }
 ```
 
@@ -2100,11 +2100,11 @@ loggingIdentity({ length: 10, value: 3 });
 
 ```ts
 const person = {
-    name: 'musion',
-    age: 35,
+  name: 'musion',
+  age: 35,
 };
 function getValues(person: any, keys: string[]) {
-    return keys.map(key => person[key]);
+  return keys.map(key => person[key]);
 }
 console.log(getValues(person, ['name', 'age'])); // [ 'musion', 35 ]
 console.log(getValues(person, ['gender'])); // [ undefined ]
@@ -2114,15 +2114,15 @@ console.log(getValues(person, ['gender'])); // [ undefined ]
 
 ```ts
 function getValues2<T, K extends keyof T>(person: T, keys: K[]): T[K][] {
-    return keys.map(key => person[key]);
+  return keys.map(key => person[key]);
 }
 interface Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 const person2: Person = {
-    name: 'musion',
-    age: 35,
+  name: 'musion',
+  age: 35,
 };
 console.log(getValues2(person, ['name'])); // [ 'musion' ]
 // 不能将类型“"gender"”分配给类型“"name" | "age"”。ts(2322)
@@ -2136,8 +2136,8 @@ console.log(getValues2(person, ['gender']));
 
 // 通过 [] 索引类型访问操作符, 我们就能得到某个索引的类型
 class Person {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 type MyType = Person['name']; // Person 中 name 的类型为 string // type MyType = string
 ```
@@ -2156,8 +2156,8 @@ type MyType = Person['name']; // Person 中 name 的类型为 string // type MyT
 
 ```ts
 interface TestInterface {
-    name: string;
-    age: number;
+  name: string;
+  age: number;
 }
 ```
 
@@ -2166,7 +2166,7 @@ interface TestInterface {
 ```ts
 // 我们可以通过 + / - 来指定添加还是删除。
 type OptionalTestInterface<T> = {
-    [p in keyof T]+?: T[p]
+  [p in keyof T]+?: T[p]
 };
 /**
   type newTestInterface = {
@@ -2181,7 +2181,7 @@ type newTestInterface = OptionalTestInterface<TestInterface>;
 
 ```ts
 type ReadOnlyOptionalTestInterface<T> = {
-    +readonly [p in keyof T]+?: T[p]
+  +readonly [p in keyof T]+?: T[p]
 };
 /**
   type newTestInterface2 = {
@@ -2204,7 +2204,7 @@ type newTestInterface2 = ReadOnlyOptionalTestInterface<TestInterface>;
 
 ```ts
 type Partial<T> = {
-    [P in keyof T]?: T[P]
+  [P in keyof T]?: T[P]
 };
 ```
 
@@ -2215,12 +2215,12 @@ type Partial<T> = {
 
 ```ts
 interface UserInfo {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 // 类型 "{ name: string; }" 中缺少属性 "id"，但类型 "UserInfo" 中需要该属性。ts(2741)
 const xiaoming: UserInfo = {
-    name: 'xiaoming',
+  name: 'xiaoming',
 };
 ```
 
@@ -2229,7 +2229,7 @@ const xiaoming: UserInfo = {
 ```ts
 type NewUserInfo = Partial<UserInfo>;
 const xiaoming: NewUserInfo = {
-    name: 'xiaoming',
+  name: 'xiaoming',
 };
 ```
 
@@ -2237,8 +2237,8 @@ const xiaoming: NewUserInfo = {
 
 ```ts
 interface NewUserInfo2 {
-    id?: string;
-    name?: string;
+  id?: string;
+  name?: string;
 }
 ```
 
@@ -2246,12 +2246,12 @@ interface NewUserInfo2 {
 
 ```ts
 interface UserInfo2 {
-    id: string;
-    name: string;
-    fruits: {
-        appleNumber: number;
-        orangeNumber: number;
-    };
+  id: string;
+  name: string;
+  fruits: {
+    appleNumber: number;
+    orangeNumber: number;
+  };
 }
 type NewUserInfo3 = Partial<UserInfo2>;
 // 类型 "{ orangeNumber: number; }" 中缺少属性 "appleNumber"，但类型 "{ appleNumber: number; orangeNumber: number; }" 中需要该属性。ts(2741)
@@ -2269,15 +2269,15 @@ type NewUserInfo3 = Partial<UserInfo2>;
 
 ```ts
 type DeepPartial<T> = {
-    // 如果是 object，则递归类型
-    [U in keyof T]?: T[U] extends object ? DeepPartial<T[U]> : T[U]
+  // 如果是 object，则递归类型
+  [U in keyof T]?: T[U] extends object ? DeepPartial<T[U]> : T[U]
 };
 type DeepNewUserInfo = DeepPartial<UserInfo2>;
 const xiaoming2: DeepNewUserInfo = {
-    name: 'xiaoming',
-    fruits: {
-        orangeNumber: 1,
-    },
+  name: 'xiaoming',
+  fruits: {
+    orangeNumber: 1,
+  },
 };
 ```
 
@@ -2289,7 +2289,7 @@ const xiaoming2: DeepNewUserInfo = {
 
 ```ts
 type Required<T> = {
-    [P in keyof T]-?: T[P]
+  [P in keyof T]-?: T[P]
 };
 ```
 
@@ -2303,7 +2303,7 @@ type Required<T> = {
 
 ```ts
 type Readonly<T> = {
-    readonly [P in keyof T]: T[P]
+  readonly [P in keyof T]: T[P]
 };
 ```
 
@@ -2311,10 +2311,10 @@ type Readonly<T> = {
 
 ```ts
 interface Todo {
-    title: string;
+  title: string;
 }
 const todo: Readonly<Todo> = {
-    title: 'Delete inactive users',
+  title: 'Delete inactive users',
 };
 // 无法分配到 "title" ，因为它是只读属性。ts(2540)
 todo.title = 'Hello';
@@ -2328,7 +2328,7 @@ todo.title = 'Hello';
 
 ```ts
 type Pick<T, K extends keyof T> = {
-    [P in K]: T[P]
+  [P in K]: T[P]
 };
 ```
 
@@ -2336,14 +2336,14 @@ type Pick<T, K extends keyof T> = {
 
 ```ts
 interface Todo {
-    title: string;
-    description: string;
-    completed: boolean;
+  title: string;
+  description: string;
+  completed: boolean;
 }
 type TodoPreview = Pick<Todo, 'title' | 'completed'>;
 const todo: TodoPreview = {
-    title: 'Clean room',
-    completed: false,
+  title: 'Clean room',
+  completed: false,
 };
 ```
 
@@ -2355,7 +2355,7 @@ const todo: TodoPreview = {
 
 ```ts
 type Record<K extends keyof any, T> = {
-    [P in K]: T
+  [P in K]: T
 };
 ```
 
@@ -2363,13 +2363,13 @@ type Record<K extends keyof any, T> = {
 
 ```ts
 interface PageInfo {
-    title: string;
+  title: string;
 }
 type Page = 'home' | 'about' | 'contact';
 const x: Record<Page, PageInfo> = {
-    home: { title: 'home' },
-    about: { title: 'about' },
-    contact: { title: 'contact' },
+  home: { title: 'home' },
+  about: { title: 'about' },
+  contact: { title: 'contact' },
 };
 ```
 
@@ -2451,9 +2451,9 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
 ```ts
 interface Todo {
-    title: string;
-    description: string;
-    completed: boolean;
+  title: string;
+  description: string;
+  completed: boolean;
 }
 /**
   type TodoPreview = {
@@ -2463,8 +2463,8 @@ interface Todo {
  */
 type TodoPreview = Omit<Todo, 'description'>;
 const todo: TodoPreview = {
-    title: 'Clean room',
-    completed: false,
+  title: 'Clean room',
+  completed: false,
 };
 ```
 
@@ -2522,56 +2522,56 @@ tsconfig.json 包含 TypeScript 编译的相关配置，通过更改编译配置
 
 ```json
 {
-    "compilerOptions": {
+  "compilerOptions": {
     /* 基本选项 */
-        "target": "es5", // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6'/'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
-        "module": "commonjs", // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
-        "lib": [], // 指定要包含在编译中的库文件
-        "allowJs": true, // 允许编译 javascript 文件
-        "checkJs": true, // 报告 javascript 文件中的错误
-        "jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
-        "declaration": true, // 生成相应的 '.d.ts' 文件
-        "sourceMap": true, // 生成相应的 '.map' 文件
-        "outFile": "./", // 将输出文件合并为一个文件
-        "outDir": "./", // 指定输出目录
-        "rootDir": "./", // 用来控制输出目录结构 --outDir.
-        "removeComments": true, // 删除编译后的所有的注释
-        "noEmit": true, // 不生成输出文件
-        "importHelpers": true, // 从 tslib 导入辅助工具函数
-        "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）.
+    "target": "es5", // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6'/'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
+    "module": "commonjs", // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
+    "lib": [], // 指定要包含在编译中的库文件
+    "allowJs": true, // 允许编译 javascript 文件
+    "checkJs": true, // 报告 javascript 文件中的错误
+    "jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
+    "declaration": true, // 生成相应的 '.d.ts' 文件
+    "sourceMap": true, // 生成相应的 '.map' 文件
+    "outFile": "./", // 将输出文件合并为一个文件
+    "outDir": "./", // 指定输出目录
+    "rootDir": "./", // 用来控制输出目录结构 --outDir.
+    "removeComments": true, // 删除编译后的所有的注释
+    "noEmit": true, // 不生成输出文件
+    "importHelpers": true, // 从 tslib 导入辅助工具函数
+    "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）.
 
-        /* 严格的类型检查选项 */
-        "strict": true, // 启用所有严格类型检查选项
-        "noImplicitAny": true, // 在表达式和声明上有隐含的 any类型时报错
-        "strictNullChecks": true, // 启用严格的 null 检查
-        "noImplicitThis": true, // 当 this 表达式值为 any 类型的时候，生成一个错误
-        "alwaysStrict": true, // 以严格模式检查每个模块，并在每个文件里加入 'use strict'
+    /* 严格的类型检查选项 */
+    "strict": true, // 启用所有严格类型检查选项
+    "noImplicitAny": true, // 在表达式和声明上有隐含的 any类型时报错
+    "strictNullChecks": true, // 启用严格的 null 检查
+    "noImplicitThis": true, // 当 this 表达式值为 any 类型的时候，生成一个错误
+    "alwaysStrict": true, // 以严格模式检查每个模块，并在每个文件里加入 'use strict'
 
-        /* 额外的检查 */
-        "noUnusedLocals": true, // 有未使用的变量时，抛出错误
-        "noUnusedParameters": true, // 有未使用的参数时，抛出错误
-        "noImplicitReturns": true, // 并不是所有函数里的代码都有返回值时，抛出错误
-        "noFallthroughCasesInSwitch": true, // 报告 switch 语句的 fallthrough 错误。（即，不允许 switch 的 case 语句贯穿）
+    /* 额外的检查 */
+    "noUnusedLocals": true, // 有未使用的变量时，抛出错误
+    "noUnusedParameters": true, // 有未使用的参数时，抛出错误
+    "noImplicitReturns": true, // 并不是所有函数里的代码都有返回值时，抛出错误
+    "noFallthroughCasesInSwitch": true, // 报告 switch 语句的 fallthrough 错误。（即，不允许 switch 的 case 语句贯穿）
 
-        /* 模块解析选项 */
-        "moduleResolution": "node", // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
-        "baseUrl": "./", // 用于解析非相对模块名称的基目录
-        "paths": {}, // 模块名到基于 baseUrl 的路径映射的列表
-        "rootDirs": [], // 根文件夹列表，其组合内容表示项目运行时的结构内容
-        "typeRoots": [], // 包含类型声明的文件列表
-        "types": [], // 需要包含的类型声明文件名列表
-        "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。
+    /* 模块解析选项 */
+    "moduleResolution": "node", // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
+    "baseUrl": "./", // 用于解析非相对模块名称的基目录
+    "paths": {}, // 模块名到基于 baseUrl 的路径映射的列表
+    "rootDirs": [], // 根文件夹列表，其组合内容表示项目运行时的结构内容
+    "typeRoots": [], // 包含类型声明的文件列表
+    "types": [], // 需要包含的类型声明文件名列表
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。
 
-        /* Source Map Options */
-        "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
-        "mapRoot": "./", // 指定调试器应该找到映射文件而不是生成文件的位置
-        "inlineSourceMap": true, // 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件
-        "inlineSources": true, // 将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性
+    /* Source Map Options */
+    "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
+    "mapRoot": "./", // 指定调试器应该找到映射文件而不是生成文件的位置
+    "inlineSourceMap": true, // 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件
+    "inlineSources": true, // 将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性
 
-        /* 其他选项 */
-        "experimentalDecorators": true, // 启用装饰器
-        "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
-    }
+    /* 其他选项 */
+    "experimentalDecorators": true, // 启用装饰器
+    "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
+  }
 }
 ```
 
@@ -2583,14 +2583,14 @@ tsconfig.json 包含 TypeScript 编译的相关配置，通过更改编译配置
 
 ```ts
 interface Person {
-    firstName: string;
-    lastName: string;
+  firstName: string;
+  lastName: string;
 }
 
 interface PersonWithBirthDate {
-    firstName: string;
-    lastName: string;
-    birth: Date;
+  firstName: string;
+  lastName: string;
+  birth: Date;
 }
 ```
 
@@ -2599,7 +2599,7 @@ interface PersonWithBirthDate {
 
 ```ts
 interface PersonWithBirthDate2 extends Person {
-    birth: Date;
+  birth: Date;
 }
 ```
 
@@ -2613,17 +2613,17 @@ type PersonWithBirthDate3 = Person & { birth: Date };
 
 ```ts
 const INIT_OPTIONS = {
-    width: 640,
-    height: 480,
-    color: '#00FF00',
-    label: 'VGA',
+  width: 640,
+  height: 480,
+  color: '#00FF00',
+  label: 'VGA',
 };
 
 interface Options {
-    width: number;
-    height: number;
-    color: string;
-    label: string;
+  width: number;
+  height: number;
+  color: string;
+  label: string;
 }
 ```
 
@@ -2637,14 +2637,14 @@ type Options2 = typeof INIT_OPTIONS;
 
 ```ts
 function get(url: string, opts: Options): Promise<string> {
-    return new Promise((resolve) => {
-        resolve('name');
-    });
+  return new Promise((resolve) => {
+    resolve('name');
+  });
 }
 function post(url: string, opts: Options): Promise<string> {
-    return new Promise((resolve) => {
-        resolve('name');
-    });
+  return new Promise((resolve) => {
+    resolve('name');
+  });
 }
 ```
 
@@ -2653,14 +2653,14 @@ function post(url: string, opts: Options): Promise<string> {
 ```ts
 type HTTPFunction = (url: string, opts: Options) => Promise<string>;
 const get2: HTTPFunction = (url, opts) => {
-    return new Promise((resolve) => {
-        resolve('name');
-    });
+  return new Promise((resolve) => {
+    resolve('name');
+  });
 };
 const post2: HTTPFunction = (url, opts) => {
-    return new Promise((resolve) => {
-        resolve('name');
-    });
+  return new Promise((resolve) => {
+    resolve('name');
+  });
 };
 ```
 
@@ -2670,10 +2670,10 @@ const post2: HTTPFunction = (url, opts) => {
 
 ```ts
 interface Album {
-    artist: string; // 艺术家
-    title: string; // 专辑标题
-    releaseDate: string; // 发行日期：YYYY-MM-DD
-    recordingType: string; // 录制类型："live" 或 "studio"
+  artist: string; // 艺术家
+  title: string; // 专辑标题
+  releaseDate: string; // 发行日期：YYYY-MM-DD
+  recordingType: string; // 录制类型："live" 或 "studio"
 }
 ```
 
@@ -2682,10 +2682,10 @@ interface Album {
 
 ```ts
 const dangerous: Album = {
-    artist: 'Michael Jackson',
-    title: 'Dangerous',
-    releaseDate: 'November 31, 1991', // 与预期格式不匹配
-    recordingType: 'Studio', // 与预期格式不匹配
+  artist: 'Michael Jackson',
+  title: 'Dangerous',
+  releaseDate: 'November 31, 1991', // 与预期格式不匹配
+  recordingType: 'Studio', // 与预期格式不匹配
 };
 ```
 
@@ -2694,10 +2694,10 @@ const dangerous: Album = {
 
 ```ts
 interface Album2 {
-    artist: string; // 艺术家
-    title: string; // 专辑标题
-    releaseDate: Date; // 发行日期：YYYY-MM-DD
-    recordingType: 'studio' | 'live'; // 录制类型："live" 或 "studio"
+  artist: string; // 艺术家
+  title: string; // 专辑标题
+  releaseDate: Date; // 发行日期：YYYY-MM-DD
+  recordingType: 'studio' | 'live'; // 录制类型："live" 或 "studio"
 }
 ```
 
@@ -2705,12 +2705,12 @@ interface Album2 {
 
 ```ts
 const dangerous2: Album2 = {
-    artist: 'Michael Jackson',
-    title: 'Dangerous',
-    // 不能将类型“string”分配给类型“Date”。ts(2322)
-    releaseDate: 'November 31, 1991',
-    // 不能将类型“"Studio"”分配给类型“"studio" | "live"”。ts(2322)
-    recordingType: 'Studio',
+  artist: 'Michael Jackson',
+  title: 'Dangerous',
+  // 不能将类型“string”分配给类型“Date”。ts(2322)
+  releaseDate: 'November 31, 1991',
+  // 不能将类型“"Studio"”分配给类型“"studio" | "live"”。ts(2322)
+  recordingType: 'Studio',
 };
 ```
 
@@ -2718,10 +2718,10 @@ const dangerous2: Album2 = {
 
 ```ts
 const dangerous3: Album2 = {
-    artist: 'Michael Jackson',
-    title: 'Dangerous',
-    releaseDate: new Date('1991-11-31'),
-    recordingType: 'studio',
+  artist: 'Michael Jackson',
+  title: 'Dangerous',
+  releaseDate: new Date('1991-11-31'),
+  recordingType: 'studio',
 };
 ```
 
@@ -2731,9 +2731,9 @@ const dangerous3: Album2 = {
 
 ```ts
 interface State {
-    pageContent: string;
-    isLoading: boolean;
-    errorMsg?: string;
+  pageContent: string;
+  isLoading: boolean;
+  errorMsg?: string;
 }
 ```
 
@@ -2741,12 +2741,12 @@ interface State {
 
 ```ts
 function renderPage(state: State) {
-    if (state.errorMsg) {
-        return `呜呜呜，加载页面出现异常了...${state.errorMsg}`;
-    } else if (state.isLoading) {
-        return `页面加载中~~~`;
-    }
-    return `<div>${state.pageContent}</div>`;
+  if (state.errorMsg) {
+    return `呜呜呜，加载页面出现异常了...${state.errorMsg}`;
+  } else if (state.isLoading) {
+    return `页面加载中~~~`;
+  }
+  return `<div>${state.pageContent}</div>`;
 }
 // 输出结果：页面加载中~~~
 console.log(renderPage({ isLoading: true, pageContent: '' }));
@@ -2758,25 +2758,25 @@ console.log(renderPage({ isLoading: false, pageContent: '大家好呀' }));
 
 ```ts
 async function changePage(state: State, newPage: string) {
-    state.isLoading = true;
-    try {
+  state.isLoading = true;
+  try {
     // mock 返回信息
-        const response = await {
-            ok: true,
-            statusText: 'success',
-            text() {
-                return 'hello';
-            },
-        };
-        if (!response.ok) {
-            throw new Error(`Unable to load ${newPage}: ${response.statusText}`);
-        }
-        const text = await response.text();
-        state.isLoading = false;
-        state.pageContent = text;
-    } catch (e) {
-        state.errorMsg = `${e}`;
+    const response = await {
+      ok: true,
+      statusText: 'success',
+      text() {
+        return 'hello';
+      },
+    };
+    if (!response.ok) {
+      throw new Error(`Unable to load ${newPage}: ${response.statusText}`);
     }
+    const text = await response.text();
+    state.isLoading = false;
+    state.pageContent = text;
+  } catch (e) {
+    state.errorMsg = `${e}`;
+  }
 }
 ```
 
@@ -2790,20 +2790,20 @@ async function changePage(state: State, newPage: string) {
 
 ```ts
 interface RequestPending {
-    state: 'pending';
+  state: 'pending';
 }
 interface RequestError {
-    state: 'error';
-    errorMsg: string;
+  state: 'error';
+  errorMsg: string;
 }
 interface RequestSuccess {
-    state: 'ok';
-    pageContent: string;
+  state: 'ok';
+  pageContent: string;
 }
 type RequestState = RequestPending | RequestError | RequestSuccess;
 interface State2 {
-    currentPage: string;
-    requests: { [page: string]: RequestState };
+  currentPage: string;
+  requests: { [page: string]: RequestState };
 }
 ```
 
@@ -2814,16 +2814,16 @@ interface State2 {
 
 ```ts
 function renderPage2(state: State2) {
-    const { currentPage } = state;
-    const requestState = state.requests[currentPage];
-    switch (requestState.state) {
-        case 'pending':
-            return `页面加载中~~~`;
-        case 'error':
-            return `呜呜呜，加载第${currentPage}页出现异常了...${requestState.errorMsg}`;
-        case 'ok':
-            ;`<div>第${currentPage}页的内容：${requestState.pageContent}</div>`;
-    }
+  const { currentPage } = state;
+  const requestState = state.requests[currentPage];
+  switch (requestState.state) {
+    case 'pending':
+      return `页面加载中~~~`;
+    case 'error':
+      return `呜呜呜，加载第${currentPage}页出现异常了...${requestState.errorMsg}`;
+    case 'ok':
+      ;`<div>第${currentPage}页的内容：${requestState.pageContent}</div>`;
+  }
 }
 ```
 
@@ -2831,25 +2831,25 @@ function renderPage2(state: State2) {
 
 ```ts
 async function changePage2(state: State2, newPage: string) {
-    state.requests[newPage] = { state: 'pending' };
-    state.currentPage = newPage;
-    try {
+  state.requests[newPage] = { state: 'pending' };
+  state.currentPage = newPage;
+  try {
     // mock 返回信息
-        const response = await {
-            ok: true,
-            statusText: 'success',
-            text() {
-                return 'hello';
-            },
-        };
-        if (!response.ok) {
-            throw new Error(`无法正常加载页面 ${newPage}: ${response.statusText}`);
-        }
-        const pageContent = await response.text();
-        state.requests[newPage] = { state: 'ok', pageContent };
-    } catch (e) {
-        state.requests[newPage] = { state: 'error', errorMsg: `${e}` };
+    const response = await {
+      ok: true,
+      statusText: 'success',
+      text() {
+        return 'hello';
+      },
+    };
+    if (!response.ok) {
+      throw new Error(`无法正常加载页面 ${newPage}: ${response.statusText}`);
     }
+    const pageContent = await response.text();
+    state.requests[newPage] = { state: 'ok', pageContent };
+  } catch (e) {
+    state.requests[newPage] = { state: 'error', errorMsg: `${e}` };
+  }
 }
 ```
 

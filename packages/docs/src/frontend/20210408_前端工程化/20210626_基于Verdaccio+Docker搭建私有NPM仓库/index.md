@@ -272,9 +272,9 @@ mkdir package && cd package && npm init
 'use strict';
 
 module.exports = {
-    test() {
-        console.log('test');
-    },
+  test() {
+    console.log('test');
+  },
 };
 ```
 
@@ -367,19 +367,19 @@ npm install -S jquery
 
 ```json
 {
-    "name": "demo",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "@test/test": "^1.0.0",
-        "jquery": "^3.6.0"
-    }
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@test/test": "^1.0.0",
+    "jquery": "^3.6.0"
+  }
 }
 ```
 
@@ -387,22 +387,22 @@ npm install -S jquery
 
 ```json
 {
-    "name": "demo",
-    "version": "1.0.0",
-    "lockfileVersion": 1,
-    "requires": true,
-    "dependencies": {
-        "@test/test": {
-            "version": "1.0.0",
-            "resolved": "http://127.0.0.1:4873/@test%2ftest/-/test-1.0.0.tgz",
-            "integrity": "sha512-jPAO+Y3HmpnW5A3sUAdPh44QJPGjUrQUcHNenWCLdIxNTcT0LC4Kl0Hw9GJfYpTDJf3GY49Llnxp9cZU37/PbQ=="
-        },
-        "jquery": {
-            "version": "3.6.0",
-            "resolved": "https://registry.npm.taobao.org/jquery/download/jquery-3.6.0.tgz",
-            "integrity": "sha1-xyoJ8Vwb3OFC9J2/EXC9+K2sJHA="
-        }
+  "name": "demo",
+  "version": "1.0.0",
+  "lockfileVersion": 1,
+  "requires": true,
+  "dependencies": {
+    "@test/test": {
+      "version": "1.0.0",
+      "resolved": "http://127.0.0.1:4873/@test%2ftest/-/test-1.0.0.tgz",
+      "integrity": "sha512-jPAO+Y3HmpnW5A3sUAdPh44QJPGjUrQUcHNenWCLdIxNTcT0LC4Kl0Hw9GJfYpTDJf3GY49Llnxp9cZU37/PbQ=="
+    },
+    "jquery": {
+      "version": "3.6.0",
+      "resolved": "https://registry.npm.taobao.org/jquery/download/jquery-3.6.0.tgz",
+      "integrity": "sha1-xyoJ8Vwb3OFC9J2/EXC9+K2sJHA="
     }
+  }
 }
 ```
 

@@ -1,5 +1,5 @@
 <template>
-    <Draw />
+  <Draw />
 </template>
 
 <script setup lang="ts">

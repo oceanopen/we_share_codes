@@ -24,11 +24,11 @@ NodeJS 提供了 `child_process` 模块，并且提供了 `child_process.fork()`
 const http = require('node:http');
 
 http
-    .createServer((req, res) => {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Hello NodeJS!\n');
-    })
-    .listen(Math.round((1 + Math.random()) * 2000), '127.0.0.1');
+  .createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello NodeJS!\n');
+  })
+  .listen(Math.round((1 + Math.random()) * 2000), '127.0.0.1');
 ```
 
 ```js
@@ -37,7 +37,7 @@ const { fork } = require('node:child_process');
 const { cpus } = require('node:os');
 
 cpus().forEach(() => {
-    fork('./worker.js');
+  fork('./worker.js');
 });
 ```
 
@@ -104,7 +104,7 @@ const { fork } = require('node:child_process');
 const sender = fork(path.resolve(__dirname, 'child.js'));
 
 sender.on('message', (msg) => {
-    console.log('主进程收到子进程的信息：', msg);
+  console.log('主进程收到子进程的信息：', msg);
 });
 
 sender.send('Hey! 子进程');
@@ -113,7 +113,7 @@ sender.send('Hey! 子进程');
 ```js
 // child.js
 process.on('message', (msg) => {
-    console.log('子进程收到来自主进程的信息：', msg);
+  console.log('子进程收到来自主进程的信息：', msg);
 });
 
 process.send('Hey! 主进程');
@@ -184,19 +184,19 @@ const server = createServer();
 const child = fork('./child.js');
 
 server
-    .on('connection', (socket) => {
-        child.send('socket', socket);
-    })
-    .listen(1337);
+  .on('connection', (socket) => {
+    child.send('socket', socket);
+  })
+  .listen(1337);
 ```
 
 ```js
 'use strict';
 
 process.on('message', (message, socket) => {
-    if (message === 'socket') {
-        socket.end('Child handled it.');
-    }
+  if (message === 'socket') {
+    socket.end('Child handled it.');
+  }
 });
 ```
 
@@ -250,43 +250,43 @@ const cluster = require('node:cluster');
 const http = require('node:http');
 
 if (cluster.isMaster) {
-    console.log('isMaster');
+  console.log('isMaster');
 
-    // 跟踪 http 请求。
-    let numReqs = 0;
-    setInterval(() => {
-        console.log(`请求的数量 = ${numReqs}`);
-    }, 1000);
+  // 跟踪 http 请求。
+  let numReqs = 0;
+  setInterval(() => {
+    console.log(`请求的数量 = ${numReqs}`);
+  }, 1000);
 
-    // 对请求计数。
-    function messageHandler(msg) {
-        if (msg.cmd && msg.cmd === 'notifyRequest') {
-            numReqs += 1;
-        }
+  // 对请求计数。
+  function messageHandler(msg) {
+    if (msg.cmd && msg.cmd === 'notifyRequest') {
+      numReqs += 1;
     }
+  }
 
-    // 启动 worker 并监听包含 notifyRequest 的消息。
-    const numCPUs = require('node:os').cpus().length;
-    console.log('numCPUs:', numCPUs);
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork();
-    }
+  // 启动 worker 并监听包含 notifyRequest 的消息。
+  const numCPUs = require('node:os').cpus().length;
+  console.log('numCPUs:', numCPUs);
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
 
-    for (const id in cluster.workers) {
-        cluster.workers[id].on('message', messageHandler);
-    }
+  for (const id in cluster.workers) {
+    cluster.workers[id].on('message', messageHandler);
+  }
 }
 else {
-    // 工作进程有一个 http 服务器。
-    http
-        .Server((req, res) => {
-            res.writeHead(200);
-            res.end('你好世界\n');
+  // 工作进程有一个 http 服务器。
+  http
+    .Server((req, res) => {
+      res.writeHead(200);
+      res.end('你好世界\n');
 
-            // 通知主进程接收到了请求。
-            process.send({ cmd: 'notifyRequest' });
-        })
-        .listen(8000);
+      // 通知主进程接收到了请求。
+      process.send({ cmd: 'notifyRequest' });
+    })
+    .listen(8000);
 }
 ```
 

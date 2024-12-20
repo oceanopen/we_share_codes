@@ -1,10 +1,10 @@
 <template>
-    <button
-        class="el-button" :class="[type ? `el-button--${type}` : '', buttonSize ? `el-button--${buttonSize}` : '']"
-        @click="handleClick"
-    >
-        <span v-if="$slots.default"><slot /></span>
-    </button>
+  <button
+    class="el-button" :class="[type ? `el-button--${type}` : '', buttonSize ? `el-button--${buttonSize}` : '']"
+    @click="handleClick"
+  >
+    <span v-if="$slots.default"><slot /></span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -18,39 +18,39 @@ type IButtonType = PropType<'primary' | 'default'>;
 type EmitFn = (evt: MouseEvent) => void;
 
 export default defineComponent({
-    name: 'TestButton',
+  name: 'TestButton',
 
-    props: {
-        type: {
-            type: String as IButtonType,
-            default: 'default',
-            validator: (val: string) => {
-                return ['default', 'primary'].includes(val);
-            },
-        },
-        size: {
-            type: String as PropType<ComponentSize>,
-            validator: isValidComponentSize,
-        },
+  props: {
+    type: {
+      type: String as IButtonType,
+      default: 'default',
+      validator: (val: string) => {
+        return ['default', 'primary'].includes(val);
+      },
     },
-
-    emits: ['click'],
-
-    setup(props: any, { emit }) {
-        const buttonSize = computed(() => {
-            return props.size || 'medium';
-        });
-
-        // methods
-        const handleClick: EmitFn = (evt: MouseEvent) => {
-            emit('click', evt);
-        };
-
-        return {
-            buttonSize,
-            handleClick,
-        };
+    size: {
+      type: String as PropType<ComponentSize>,
+      validator: isValidComponentSize,
     },
+  },
+
+  emits: ['click'],
+
+  setup(props: any, { emit }) {
+    const buttonSize = computed(() => {
+      return props.size || 'medium';
+    });
+
+    // methods
+    const handleClick: EmitFn = (evt: MouseEvent) => {
+      emit('click', evt);
+    };
+
+    return {
+      buttonSize,
+      handleClick,
+    };
+  },
 });
 </script>
 

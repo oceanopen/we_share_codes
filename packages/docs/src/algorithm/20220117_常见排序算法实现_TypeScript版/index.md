@@ -14,34 +14,34 @@ import type { TypeCompareFun } from '../comparator/Comparator';
 import Comparator, { TypeCompareParam } from '../comparator/Comparator';
 
 export interface ICallbacks {
-    // If provided then all elements comparisons will be done through this callback.
-    compareCallback?: TypeCompareFun;
-    // If provided it will be called each time the sorting function is visiting the next element.
-    visitingCallback?: (a?: any) => void;
+  // If provided then all elements comparisons will be done through this callback.
+  compareCallback?: TypeCompareFun;
+  // If provided it will be called each time the sorting function is visiting the next element.
+  visitingCallback?: (a?: any) => void;
 }
 
 export default class Sort {
-    protected callbacks: ICallbacks;
-    protected comparator: Comparator;
+  protected callbacks: ICallbacks;
+  protected comparator: Comparator;
 
-    constructor(originalCallbacks?: ICallbacks) {
-        this.callbacks = Sort.initSortingCallbacks(originalCallbacks);
-        this.comparator = new Comparator(this.callbacks.compareCallback);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    this.callbacks = Sort.initSortingCallbacks(originalCallbacks);
+    this.comparator = new Comparator(this.callbacks.compareCallback);
+  }
 
-    static initSortingCallbacks(originalCallbacks: ICallbacks): ICallbacks {
-        const callbacks = originalCallbacks || {};
-        const stubCallback = () => {};
+  static initSortingCallbacks(originalCallbacks: ICallbacks): ICallbacks {
+    const callbacks = originalCallbacks || {};
+    const stubCallback = () => {};
 
-        callbacks.compareCallback = callbacks.compareCallback || undefined;
-        callbacks.visitingCallback = callbacks.visitingCallback || stubCallback;
+    callbacks.compareCallback = callbacks.compareCallback || undefined;
+    callbacks.visitingCallback = callbacks.visitingCallback || stubCallback;
 
-        return callbacks;
-    }
+    return callbacks;
+  }
 
-    public sort(array?: TypeCompareParam[]) {
-        throw new Error('sort method must be implemented');
-    }
+  public sort(array?: TypeCompareParam[]) {
+    throw new Error('sort method must be implemented');
+  }
 }
 ```
 
@@ -55,18 +55,18 @@ import { TypeCompareParam } from '../comparator/Comparator';
 // 通过解构运算符进行数据交换
 // 本项目中采用此方式
 export function swap(arr: TypeCompareParam[], i: number, j: number) {
-    ;[arr[j], arr[i]] = [arr[i], arr[j]];
+  ;[arr[j], arr[i]] = [arr[i], arr[j]];
 }
 
 // 根据数组下标进行数据交换
 // 此方式为传统实现方式
 export function swap2(arr: TypeCompareParam[], i: number, j: number) {
-    if (i === j) {
-        return;
-    }
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+  if (i === j) {
+    return;
+  }
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
 }
 
 /**
@@ -81,12 +81,12 @@ export function swap2(arr: TypeCompareParam[], i: number, j: number) {
  * 注意：此方法要求 i !== j，因为没有中间变量保存值，会导致如果是相同索引的话，信息会丢失
  */
 export function swap3(arr: number[], i: number, j: number) {
-    if (i === j) {
-        return;
-    }
-    arr[i] = arr[i] ^ arr[j];
-    arr[j] = arr[i] ^ arr[j];
-    arr[i] = arr[i] ^ arr[j];
+  if (i === j) {
+    return;
+  }
+  arr[i] = arr[i] ^ arr[j];
+  arr[j] = arr[i] ^ arr[j];
+  arr[i] = arr[i] ^ arr[j];
 }
 ```
 
@@ -111,43 +111,43 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 import { swap } from '../../utils/swap/swap';
 
 export default class BubbleSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Flag that holds info about whether the swap has occur or not.
-        let swapped = false;
-        // Clone original array to prevent its modification.
-        const array = [...originalArray];
+    let swapped = false;
+    // Clone original array to prevent its modification.
+    const array = [...originalArray];
 
-        for (let i = 1; i < array.length; i += 1) {
-            swapped = false;
+    for (let i = 1; i < array.length; i += 1) {
+      swapped = false;
 
-            // Call visiting callback.
-            this.callbacks.visitingCallback(array[i]);
+      // Call visiting callback.
+      this.callbacks.visitingCallback(array[i]);
 
-            for (let j = 0; j < array.length - i; j += 1) {
-                // Call visiting callback.
-                this.callbacks.visitingCallback(array[j]);
+      for (let j = 0; j < array.length - i; j += 1) {
+        // Call visiting callback.
+        this.callbacks.visitingCallback(array[j]);
 
-                // Swap elements if they are in wrong order.
-                if (this.comparator.lessThan(array[j + 1], array[j])) {
-                    swap(array, j, j + 1);
+        // Swap elements if they are in wrong order.
+        if (this.comparator.lessThan(array[j + 1], array[j])) {
+          swap(array, j, j + 1);
 
-                    // Register the swap.
-                    swapped = true;
-                }
-            }
-
-            // If there were no swaps then array is already sorted and there is no need to proceed.
-            if (!swapped) {
-                return array;
-            }
+          // Register the swap.
+          swapped = true;
         }
+      }
 
+      // If there were no swaps then array is already sorted and there is no need to proceed.
+      if (!swapped) {
         return array;
+      }
     }
+
+    return array;
+  }
 }
 ```
 
@@ -176,38 +176,38 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 import { swap } from '../../utils/swap/swap';
 
 export default class SelectionSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Clone original array to prevent its modification.
-        const array = [...originalArray];
+    const array = [...originalArray];
 
-        for (let i = 0; i < array.length - 1; i += 1) {
-            let minIndex = i;
+    for (let i = 0; i < array.length - 1; i += 1) {
+      let minIndex = i;
 
-            // Call visiting callback.
-            this.callbacks.visitingCallback(array[i]);
+      // Call visiting callback.
+      this.callbacks.visitingCallback(array[i]);
 
-            // Find minimum element in the rest of array.
-            for (let j = i + 1; j < array.length; j += 1) {
-                // Call visiting callback.
-                this.callbacks.visitingCallback(array[j]);
+      // Find minimum element in the rest of array.
+      for (let j = i + 1; j < array.length; j += 1) {
+        // Call visiting callback.
+        this.callbacks.visitingCallback(array[j]);
 
-                if (this.comparator.lessThan(array[j], array[minIndex])) {
-                    minIndex = j;
-                }
-            }
-
-            // If new minimum element has been found then swap it with current i-th element.
-            if (minIndex !== i) {
-                swap(array, i, minIndex);
-            }
+        if (this.comparator.lessThan(array[j], array[minIndex])) {
+          minIndex = j;
         }
+      }
 
-        return array;
+      // If new minimum element has been found then swap it with current i-th element.
+      if (minIndex !== i) {
+        swap(array, i, minIndex);
+      }
     }
+
+    return array;
+  }
 }
 ```
 
@@ -256,39 +256,39 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 import { swap } from '../../utils/swap/swap';
 
 export default class InsertionSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
+
+  sort(originalArray: TypeCompareParam[]) {
+    const array = [...originalArray];
+
+    // Go through all array elements...
+    for (let i = 1; i < array.length; i += 1) {
+      let currentIndex = i;
+
+      // Call visiting callback.
+      this.callbacks.visitingCallback(array[i]);
+
+      // Check if previous element is greater than current element.
+      // If so, swap the two elements.
+      while (
+        array[currentIndex - 1] !== undefined
+        && this.comparator.lessThan(array[currentIndex], array[currentIndex - 1])
+      ) {
+        // Call visiting callback.
+        this.callbacks.visitingCallback(array[currentIndex - 1]);
+
+        // Swap the elements.
+        swap(array, currentIndex, currentIndex - 1);
+
+        // Shift current index left.
+        currentIndex -= 1;
+      }
     }
 
-    sort(originalArray: TypeCompareParam[]) {
-        const array = [...originalArray];
-
-        // Go through all array elements...
-        for (let i = 1; i < array.length; i += 1) {
-            let currentIndex = i;
-
-            // Call visiting callback.
-            this.callbacks.visitingCallback(array[i]);
-
-            // Check if previous element is greater than current element.
-            // If so, swap the two elements.
-            while (
-                array[currentIndex - 1] !== undefined
-                && this.comparator.lessThan(array[currentIndex], array[currentIndex - 1])
-            ) {
-                // Call visiting callback.
-                this.callbacks.visitingCallback(array[currentIndex - 1]);
-
-                // Swap the elements.
-                swap(array, currentIndex, currentIndex - 1);
-
-                // Shift current index left.
-                currentIndex -= 1;
-            }
-        }
-
-        return array;
-    }
+    return array;
+  }
 }
 ```
 
@@ -317,35 +317,35 @@ import { TypeCompareParam } from '../../utils/comparator/Comparator';
 import Sort, { ICallbacks } from '../../utils/sort/Sort';
 
 export default class HeapSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
+
+  sort(originalArray: TypeCompareParam[]) {
+    const sortedArray = [];
+    const minHeap = new MinHeap(this.callbacks.compareCallback);
+
+    // Insert all array elements to the heap.
+    originalArray.forEach((element) => {
+      // Call visiting callback.
+      this.callbacks.visitingCallback(element);
+
+      minHeap.add(element);
+    });
+
+    // Now we have min heap with minimal element always on top.
+    // Let's poll that minimal element one by one and thus form the sorted array.
+    while (!minHeap.isEmpty()) {
+      const nextMinElement = minHeap.poll();
+
+      // Call visiting callback.
+      this.callbacks.visitingCallback(nextMinElement);
+
+      sortedArray.push(nextMinElement);
     }
 
-    sort(originalArray: TypeCompareParam[]) {
-        const sortedArray = [];
-        const minHeap = new MinHeap(this.callbacks.compareCallback);
-
-        // Insert all array elements to the heap.
-        originalArray.forEach((element) => {
-            // Call visiting callback.
-            this.callbacks.visitingCallback(element);
-
-            minHeap.add(element);
-        });
-
-        // Now we have min heap with minimal element always on top.
-        // Let's poll that minimal element one by one and thus form the sorted array.
-        while (!minHeap.isEmpty()) {
-            const nextMinElement = minHeap.poll();
-
-            // Call visiting callback.
-            this.callbacks.visitingCallback(nextMinElement);
-
-            sortedArray.push(nextMinElement);
-        }
-
-        return sortedArray;
-    }
+    return sortedArray;
+  }
 }
 ```
 
@@ -383,65 +383,65 @@ import { TypeCompareParam } from '../../utils/comparator/Comparator';
 import Sort, { ICallbacks } from '../../utils/sort/Sort';
 
 export default class MergeSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Call visiting callback.
-        this.callbacks.visitingCallback(null);
+    this.callbacks.visitingCallback(null);
 
-        // If array is empty or consists of one element then return this array since it is sorted.
-        if (originalArray.length <= 1) {
-            return originalArray;
-        }
-
-        // Split array on two halves.
-        const middleIndex = Math.floor(originalArray.length / 2);
-        const leftArray = originalArray.slice(0, middleIndex);
-        const rightArray = originalArray.slice(middleIndex, originalArray.length);
-
-        // Sort two halves of split array
-        const leftSortedArray = this.sort(leftArray);
-        const rightSortedArray = this.sort(rightArray);
-
-        // Merge two sorted arrays into one.
-        return this.mergeSortedArrays(leftSortedArray, rightSortedArray);
+    // If array is empty or consists of one element then return this array since it is sorted.
+    if (originalArray.length <= 1) {
+      return originalArray;
     }
 
-    mergeSortedArrays(leftArray: TypeCompareParam[], rightArray: TypeCompareParam[]): TypeCompareParam[] {
-        const sortedArray: TypeCompareParam[] = [];
+    // Split array on two halves.
+    const middleIndex = Math.floor(originalArray.length / 2);
+    const leftArray = originalArray.slice(0, middleIndex);
+    const rightArray = originalArray.slice(middleIndex, originalArray.length);
 
-        // Use array pointers to exclude old elements after they have been added to the sorted array.
-        let leftIndex = 0;
-        let rightIndex = 0;
+    // Sort two halves of split array
+    const leftSortedArray = this.sort(leftArray);
+    const rightSortedArray = this.sort(rightArray);
 
-        while (leftIndex < leftArray.length && rightIndex < rightArray.length) {
-            let minElement = null;
+    // Merge two sorted arrays into one.
+    return this.mergeSortedArrays(leftSortedArray, rightSortedArray);
+  }
 
-            // Find the minimum element between the left and right array.
-            if (this.comparator.lessThanOrEqual(leftArray[leftIndex], rightArray[rightIndex])) {
-                minElement = leftArray[leftIndex];
-                // Increment index pointer to the right
-                leftIndex += 1;
-            }
-            else {
-                minElement = rightArray[rightIndex];
-                // Increment index pointer to the right
-                rightIndex += 1;
-            }
+  mergeSortedArrays(leftArray: TypeCompareParam[], rightArray: TypeCompareParam[]): TypeCompareParam[] {
+    const sortedArray: TypeCompareParam[] = [];
 
-            // Add the minimum element to the sorted array.
-            sortedArray.push(minElement);
+    // Use array pointers to exclude old elements after they have been added to the sorted array.
+    let leftIndex = 0;
+    let rightIndex = 0;
 
-            // Call visiting callback.
-            this.callbacks.visitingCallback(minElement);
-        }
+    while (leftIndex < leftArray.length && rightIndex < rightArray.length) {
+      let minElement = null;
 
-        // There will be elements remaining from either the left OR the right
-        // Concatenate the remaining elements into the sorted array
-        return sortedArray.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex));
+      // Find the minimum element between the left and right array.
+      if (this.comparator.lessThanOrEqual(leftArray[leftIndex], rightArray[rightIndex])) {
+        minElement = leftArray[leftIndex];
+        // Increment index pointer to the right
+        leftIndex += 1;
+      }
+      else {
+        minElement = rightArray[rightIndex];
+        // Increment index pointer to the right
+        rightIndex += 1;
+      }
+
+      // Add the minimum element to the sorted array.
+      sortedArray.push(minElement);
+
+      // Call visiting callback.
+      this.callbacks.visitingCallback(minElement);
     }
+
+    // There will be elements remaining from either the left OR the right
+    // Concatenate the remaining elements into the sorted array
+    return sortedArray.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex));
+  }
 }
 ```
 
@@ -478,52 +478,52 @@ import { TypeCompareParam } from '../../utils/comparator/Comparator';
 import Sort, { ICallbacks } from '../../utils/sort/Sort';
 
 export default class QuickSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Clone original array to prevent it from modification.
-        const array = [...originalArray];
+    const array = [...originalArray];
 
-        // If array has less than or equal to one elements then it is already sorted.
-        if (array.length <= 1) {
-            return array;
-        }
-
-        // Init left and right arrays.
-        const leftArray = [];
-        const rightArray = [];
-
-        // Take the first element of array as a pivot.
-        const pivotElement = array.shift();
-        const centerArray = [pivotElement];
-
-        // Split all array elements between left, center and right arrays.
-        while (array.length) {
-            const currentElement = array.shift();
-
-            // Call visiting callback.
-            this.callbacks.visitingCallback(currentElement);
-
-            if (this.comparator.equal(currentElement, pivotElement)) {
-                centerArray.push(currentElement);
-            }
-            else if (this.comparator.lessThan(currentElement, pivotElement)) {
-                leftArray.push(currentElement);
-            }
-            else {
-                rightArray.push(currentElement);
-            }
-        }
-
-        // Sort left and right arrays.
-        const leftArraySorted = this.sort(leftArray);
-        const rightArraySorted = this.sort(rightArray);
-
-        // Let's now join sorted left array with center array and with sorted right array.
-        return leftArraySorted.concat(centerArray, rightArraySorted);
+    // If array has less than or equal to one elements then it is already sorted.
+    if (array.length <= 1) {
+      return array;
     }
+
+    // Init left and right arrays.
+    const leftArray = [];
+    const rightArray = [];
+
+    // Take the first element of array as a pivot.
+    const pivotElement = array.shift();
+    const centerArray = [pivotElement];
+
+    // Split all array elements between left, center and right arrays.
+    while (array.length) {
+      const currentElement = array.shift();
+
+      // Call visiting callback.
+      this.callbacks.visitingCallback(currentElement);
+
+      if (this.comparator.equal(currentElement, pivotElement)) {
+        centerArray.push(currentElement);
+      }
+      else if (this.comparator.lessThan(currentElement, pivotElement)) {
+        leftArray.push(currentElement);
+      }
+      else {
+        rightArray.push(currentElement);
+      }
+    }
+
+    // Sort left and right arrays.
+    const leftArraySorted = this.sort(leftArray);
+    const rightArraySorted = this.sort(rightArray);
+
+    // Let's now join sorted left array with center array and with sorted right array.
+    return leftArraySorted.concat(centerArray, rightArraySorted);
+  }
 }
 ```
 
@@ -535,64 +535,64 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 import { swap } from '../../utils/swap/swap';
 
 export default class QuickSortInPlace extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    /**
-     * Sorting in place avoids unnecessary use of additional memory, but modifies input array.
-     *
-     * This process is difficult to describe, but much clearer with a visualization:
-     * @see: http://www.algomation.com/algorithm/quick-sort-visualization
-     */
-    sort(
-        originalArray: TypeCompareParam[],
+  /**
+   * Sorting in place avoids unnecessary use of additional memory, but modifies input array.
+   *
+   * This process is difficult to describe, but much clearer with a visualization:
+   * @see: http://www.algomation.com/algorithm/quick-sort-visualization
+   */
+  sort(
+    originalArray: TypeCompareParam[],
     inputLowIndex = 0,
     inputHighIndex = originalArray.length - 1,
     recursiveCall = false
-    ) {
+  ) {
     // Copies array on initial call, and then sorts in place.
-        const array = recursiveCall ? originalArray : [...originalArray];
+    const array = recursiveCall ? originalArray : [...originalArray];
 
-        /**
-         * The partitionArray() operates on the subarray between lowIndex and highIndex, inclusive.
-         * It arbitrarily chooses the last element in the subarray as the pivot.
-         * Then, it partially sorts the subarray into elements than are less than the pivot,
-         * and elements that are greater than or equal to the pivot.
-         * Each time partitionArray() is executed, the pivot element is in its final sorted position.
-         */
-        const partitionArray = (lowIndex: number, highIndex: number) => {
-            const pivot = array[highIndex];
-            // visitingCallback is used for time-complexity analysis.
-            this.callbacks.visitingCallback(pivot);
+    /**
+     * The partitionArray() operates on the subarray between lowIndex and highIndex, inclusive.
+     * It arbitrarily chooses the last element in the subarray as the pivot.
+     * Then, it partially sorts the subarray into elements than are less than the pivot,
+     * and elements that are greater than or equal to the pivot.
+     * Each time partitionArray() is executed, the pivot element is in its final sorted position.
+     */
+    const partitionArray = (lowIndex: number, highIndex: number) => {
+      const pivot = array[highIndex];
+      // visitingCallback is used for time-complexity analysis.
+      this.callbacks.visitingCallback(pivot);
 
-            let partitionIndex = lowIndex;
-            for (let currentIndex = lowIndex; currentIndex < highIndex; currentIndex += 1) {
-                if (this.comparator.lessThan(array[currentIndex], pivot)) {
-                    swap(array, partitionIndex, currentIndex);
-                    partitionIndex += 1;
-                }
-            }
-
-            // The element at the partitionIndex is guaranteed to be greater than or equal to pivot.
-            // All elements to the left of partitionIndex are guaranteed to be less than pivot.
-            // Swapping the pivot with the partitionIndex therefore places the pivot in its
-            // final sorted position.
-            swap(array, partitionIndex, highIndex);
-
-            return partitionIndex;
-        };
-
-        // Base case is when low and high converge.
-        if (inputLowIndex < inputHighIndex) {
-            const partitionIndex = partitionArray(inputLowIndex, inputHighIndex);
-            const RECURSIVE_CALL = true;
-            this.sort(array, inputLowIndex, partitionIndex - 1, RECURSIVE_CALL);
-            this.sort(array, partitionIndex + 1, inputHighIndex, RECURSIVE_CALL);
+      let partitionIndex = lowIndex;
+      for (let currentIndex = lowIndex; currentIndex < highIndex; currentIndex += 1) {
+        if (this.comparator.lessThan(array[currentIndex], pivot)) {
+          swap(array, partitionIndex, currentIndex);
+          partitionIndex += 1;
         }
+      }
 
-        return array;
+      // The element at the partitionIndex is guaranteed to be greater than or equal to pivot.
+      // All elements to the left of partitionIndex are guaranteed to be less than pivot.
+      // Swapping the pivot with the partitionIndex therefore places the pivot in its
+      // final sorted position.
+      swap(array, partitionIndex, highIndex);
+
+      return partitionIndex;
+    };
+
+    // Base case is when low and high converge.
+    if (inputLowIndex < inputHighIndex) {
+      const partitionIndex = partitionArray(inputLowIndex, inputHighIndex);
+      const RECURSIVE_CALL = true;
+      this.sort(array, inputLowIndex, partitionIndex - 1, RECURSIVE_CALL);
+      this.sort(array, partitionIndex + 1, inputHighIndex, RECURSIVE_CALL);
     }
+
+    return array;
+  }
 }
 ```
 
@@ -649,45 +649,45 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 import { swap } from '../../utils/swap/swap';
 
 export default class ShellSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Prevent original array from mutations.
-        const array = [...originalArray];
+    const array = [...originalArray];
 
-        // Define a gap distance.
-        let gap = Math.floor(array.length / 2);
+    // Define a gap distance.
+    let gap = Math.floor(array.length / 2);
 
-        // Until gap is bigger then zero do elements comparisons and swaps.
-        while (gap > 0) {
-            // Go and compare all distant element pairs.
-            for (let i = 0; i < array.length - gap; i += 1) {
-                let currentIndex = i;
-                let gapShiftedIndex = i + gap;
+    // Until gap is bigger then zero do elements comparisons and swaps.
+    while (gap > 0) {
+      // Go and compare all distant element pairs.
+      for (let i = 0; i < array.length - gap; i += 1) {
+        let currentIndex = i;
+        let gapShiftedIndex = i + gap;
 
-                while (currentIndex >= 0) {
-                    // Call visiting callback.
-                    this.callbacks.visitingCallback(array[currentIndex]);
+        while (currentIndex >= 0) {
+          // Call visiting callback.
+          this.callbacks.visitingCallback(array[currentIndex]);
 
-                    // Compare and swap array elements if needed.
-                    if (this.comparator.lessThan(array[gapShiftedIndex], array[currentIndex])) {
-                        swap(array, gapShiftedIndex, currentIndex);
-                    }
+          // Compare and swap array elements if needed.
+          if (this.comparator.lessThan(array[gapShiftedIndex], array[currentIndex])) {
+            swap(array, gapShiftedIndex, currentIndex);
+          }
 
-                    gapShiftedIndex = currentIndex;
-                    currentIndex -= gap;
-                }
-            }
-
-            // Shrink the gap.
-            gap = Math.floor(gap / 2);
+          gapShiftedIndex = currentIndex;
+          currentIndex -= gap;
         }
+      }
 
-        // Return sorted copy of an original array.
-        return array;
+      // Shrink the gap.
+      gap = Math.floor(gap / 2);
     }
+
+    // Return sorted copy of an original array.
+    return array;
+  }
 }
 ```
 
@@ -726,83 +726,83 @@ import Sort, { ICallbacks } from '../../utils/sort/Sort';
 type TCompareParam = number;
 
 export default class CountingSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(
-        originalArray: TCompareParam[],
+  sort(
+    originalArray: TCompareParam[],
     smallestElement: TCompareParam = undefined,
     biggestElement: TCompareParam = undefined
-    ) {
+  ) {
     // Init biggest and smallest elements in array in order to build number bucket array later.
-        let detectedSmallestElement = smallestElement || 0;
-        let detectedBiggestElement = biggestElement || 0;
+    let detectedSmallestElement = smallestElement || 0;
+    let detectedBiggestElement = biggestElement || 0;
 
-        if (smallestElement === undefined || biggestElement === undefined) {
-            originalArray.forEach((element) => {
-                // Visit element.
-                this.callbacks.visitingCallback(element);
+    if (smallestElement === undefined || biggestElement === undefined) {
+      originalArray.forEach((element) => {
+        // Visit element.
+        this.callbacks.visitingCallback(element);
 
-                // Detect biggest element.
-                if (this.comparator.greaterThan(element, detectedBiggestElement)) {
-                    detectedBiggestElement = element;
-                }
-
-                // Detect smallest element.
-                if (this.comparator.lessThan(element, detectedSmallestElement)) {
-                    detectedSmallestElement = element;
-                }
-            });
+        // Detect biggest element.
+        if (this.comparator.greaterThan(element, detectedBiggestElement)) {
+          detectedBiggestElement = element;
         }
 
-        // Init buckets array.
-        // This array will hold frequency of each number from originalArray.
-        const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }, () => 0);
-
-        originalArray.forEach((element) => {
-            // Visit element.
-            this.callbacks.visitingCallback(element);
-
-            buckets[element - detectedSmallestElement] += 1;
-        });
-
-        // Add previous frequencies to the current one for each number in bucket
-        // to detect how many numbers less then current one should be standing to
-        // the left of current one.
-        for (let bucketIndex = 1; bucketIndex < buckets.length; bucketIndex += 1) {
-            buckets[bucketIndex] += buckets[bucketIndex - 1];
+        // Detect smallest element.
+        if (this.comparator.lessThan(element, detectedSmallestElement)) {
+          detectedSmallestElement = element;
         }
-
-        // Now let's shift frequencies to the right so that they show correct numbers.
-        // I.e. if we won't shift right than the value of buckets[5] will display how many
-        // elements less than 5 should be placed to the left of 5 in sorted array
-        // INCLUDING 5th. After shifting though this number will not include 5th anymore.
-        buckets.pop();
-        buckets.unshift(0);
-
-        // Now let's assemble sorted array.
-        const sortedArray = Array.from({ length: originalArray.length }).fill(null);
-        for (let elementIndex = 0; elementIndex < originalArray.length; elementIndex += 1) {
-            // Get the element that we want to put into correct sorted position.
-            const element = originalArray[elementIndex];
-
-            // Visit element.
-            this.callbacks.visitingCallback(element);
-
-            // Get correct position of this element in sorted array.
-            const elementSortedPosition = buckets[element - detectedSmallestElement];
-
-            // Put element into correct position in sorted array.
-            sortedArray[elementSortedPosition] = element;
-
-            // Increase position of current element in the bucket for future correct placements.
-            buckets[element - detectedSmallestElement] += 1;
-        }
-
-        // Return sorted array.
-        return sortedArray;
+      });
     }
+
+    // Init buckets array.
+    // This array will hold frequency of each number from originalArray.
+    const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }, () => 0);
+
+    originalArray.forEach((element) => {
+      // Visit element.
+      this.callbacks.visitingCallback(element);
+
+      buckets[element - detectedSmallestElement] += 1;
+    });
+
+    // Add previous frequencies to the current one for each number in bucket
+    // to detect how many numbers less then current one should be standing to
+    // the left of current one.
+    for (let bucketIndex = 1; bucketIndex < buckets.length; bucketIndex += 1) {
+      buckets[bucketIndex] += buckets[bucketIndex - 1];
+    }
+
+    // Now let's shift frequencies to the right so that they show correct numbers.
+    // I.e. if we won't shift right than the value of buckets[5] will display how many
+    // elements less than 5 should be placed to the left of 5 in sorted array
+    // INCLUDING 5th. After shifting though this number will not include 5th anymore.
+    buckets.pop();
+    buckets.unshift(0);
+
+    // Now let's assemble sorted array.
+    const sortedArray = Array.from({ length: originalArray.length }).fill(null);
+    for (let elementIndex = 0; elementIndex < originalArray.length; elementIndex += 1) {
+      // Get the element that we want to put into correct sorted position.
+      const element = originalArray[elementIndex];
+
+      // Visit element.
+      this.callbacks.visitingCallback(element);
+
+      // Get correct position of this element in sorted array.
+      const elementSortedPosition = buckets[element - detectedSmallestElement];
+
+      // Put element into correct position in sorted array.
+      sortedArray[elementSortedPosition] = element;
+
+      // Increase position of current element in the bucket for future correct placements.
+      buckets[element - detectedSmallestElement] += 1;
+    }
+
+    // Return sorted array.
+    return sortedArray;
+  }
 }
 ```
 
@@ -834,124 +834,124 @@ const NUMBER_OF_POSSIBLE_DIGITS = 10;
 const ENGLISH_ALPHABET_LENGTH = 26;
 
 export default class RadixSort extends Sort {
-    constructor(originalCallbacks?: ICallbacks) {
-        super(originalCallbacks);
-    }
+  constructor(originalCallbacks?: ICallbacks) {
+    super(originalCallbacks);
+  }
 
-    sort(originalArray: TypeCompareParam[]) {
+  sort(originalArray: TypeCompareParam[]) {
     // Assumes all elements of array are of the same type
-        const isArrayOfNumbers = this.isArrayOfNumbers(originalArray);
+    const isArrayOfNumbers = this.isArrayOfNumbers(originalArray);
 
-        let sortedArray = [...originalArray];
-        const numPasses = this.determineNumPasses(sortedArray);
+    let sortedArray = [...originalArray];
+    const numPasses = this.determineNumPasses(sortedArray);
 
-        for (let currentIndex = 0; currentIndex < numPasses; currentIndex += 1) {
-            const buckets = isArrayOfNumbers
-                ? this.placeElementsInNumberBuckets(sortedArray as number[], currentIndex)
-                : this.placeElementsInCharacterBuckets(sortedArray as string[], currentIndex, numPasses);
+    for (let currentIndex = 0; currentIndex < numPasses; currentIndex += 1) {
+      const buckets = isArrayOfNumbers
+        ? this.placeElementsInNumberBuckets(sortedArray as number[], currentIndex)
+        : this.placeElementsInCharacterBuckets(sortedArray as string[], currentIndex, numPasses);
 
-            // Flatten buckets into sortedArray, and repeat at next index
-            sortedArray = buckets.reduce((acc, val) => {
-                return [...acc, ...val];
-            }, []);
-        }
-
-        return sortedArray;
+      // Flatten buckets into sortedArray, and repeat at next index
+      sortedArray = buckets.reduce((acc, val) => {
+        return [...acc, ...val];
+      }, []);
     }
 
-    placeElementsInNumberBuckets(array: number[], index: number) {
+    return sortedArray;
+  }
+
+  placeElementsInNumberBuckets(array: number[], index: number) {
     // See below. These are used to determine which digit to use for bucket allocation
-        const modded = 10 ** (index + 1);
-        const divided = 10 ** index;
-        const buckets = this.createBuckets(NUMBER_OF_POSSIBLE_DIGITS);
+    const modded = 10 ** (index + 1);
+    const divided = 10 ** index;
+    const buckets = this.createBuckets(NUMBER_OF_POSSIBLE_DIGITS);
 
-        array.forEach((element) => {
-            this.callbacks.visitingCallback(element);
-            if (element < divided) {
-                buckets[0].push(element);
-            }
-            else {
-                /**
-                 * Say we have element of 1,052 and are currently on index 1 (starting from 0). This means
-                 * we want to use '5' as the bucket. `modded` would be 10 ** (1 + 1), which
-                 * is 100. So we take 1,052 % 100 (52) and divide it by 10 (5.2) and floor it (5).
-                 */
-                const currentDigit = Math.floor((element % modded) / divided);
-                buckets[currentDigit].push(element);
-            }
-        });
-
-        return buckets;
-    }
-
-    placeElementsInCharacterBuckets(array: string[], index: number, numPasses: number) {
-        const buckets = this.createBuckets(ENGLISH_ALPHABET_LENGTH);
-
-        array.forEach((element) => {
-            this.callbacks.visitingCallback(element);
-            const currentBucket = this.getCharCodeOfElementAtIndex(element, index, numPasses);
-            buckets[currentBucket].push(element);
-        });
-
-        return buckets;
-    }
-
-    getCharCodeOfElementAtIndex(element: string, index: number, numPasses: number) {
-    // Place element in last bucket if not ready to organize
-        if (numPasses - index > element.length) {
-            return 0;
-        }
-
+    array.forEach((element) => {
+      this.callbacks.visitingCallback(element);
+      if (element < divided) {
+        buckets[0].push(element);
+      }
+      else {
         /**
-         * iterate backwards through element
+         * Say we have element of 1,052 and are currently on index 1 (starting from 0). This means
+         * we want to use '5' as the bucket. `modded` would be 10 ** (1 + 1), which
+         * is 100. So we take 1,052 % 100 (52) and divide it by 10 (5.2) and floor it (5).
          */
-        const charPos = numPasses - index - 1;
+        const currentDigit = Math.floor((element % modded) / divided);
+        buckets[currentDigit].push(element);
+      }
+    });
 
-        return element.toLowerCase().charCodeAt(charPos) - BASE_CHAR_CODE;
+    return buckets;
+  }
+
+  placeElementsInCharacterBuckets(array: string[], index: number, numPasses: number) {
+    const buckets = this.createBuckets(ENGLISH_ALPHABET_LENGTH);
+
+    array.forEach((element) => {
+      this.callbacks.visitingCallback(element);
+      const currentBucket = this.getCharCodeOfElementAtIndex(element, index, numPasses);
+      buckets[currentBucket].push(element);
+    });
+
+    return buckets;
+  }
+
+  getCharCodeOfElementAtIndex(element: string, index: number, numPasses: number) {
+    // Place element in last bucket if not ready to organize
+    if (numPasses - index > element.length) {
+      return 0;
     }
 
     /**
-     * Number of passes is determined by the length of the longest element in the array.
-     * For integers, this log10(num), and for strings, this would be the length of the string.
+     * iterate backwards through element
      */
-    determineNumPasses(array: TypeCompareParam[]) {
-        return this.getLengthOfLongestElement(array);
+    const charPos = numPasses - index - 1;
+
+    return element.toLowerCase().charCodeAt(charPos) - BASE_CHAR_CODE;
+  }
+
+  /**
+   * Number of passes is determined by the length of the longest element in the array.
+   * For integers, this log10(num), and for strings, this would be the length of the string.
+   */
+  determineNumPasses(array: TypeCompareParam[]) {
+    return this.getLengthOfLongestElement(array);
+  }
+
+  getLengthOfLongestElement(array: TypeCompareParam[]) {
+    if (this.isArrayOfNumbers(array)) {
+      return Math.floor(Math.log10(Math.max(...(array as number[])))) + 1;
     }
 
-    getLengthOfLongestElement(array: TypeCompareParam[]) {
-        if (this.isArrayOfNumbers(array)) {
-            return Math.floor(Math.log10(Math.max(...(array as number[])))) + 1;
-        }
+    return (array as string[]).reduce((acc, val) => {
+      return val.length > acc ? val.length : acc;
+    }, -Infinity);
+  }
 
-        return (array as string[]).reduce((acc, val) => {
-            return val.length > acc ? val.length : acc;
-        }, -Infinity);
-    }
-
-    isArrayOfNumbers(array: TypeCompareParam[]) {
+  isArrayOfNumbers(array: TypeCompareParam[]) {
     // Assumes all elements of array are of the same type
-        return this.isNumber(array[0]);
-    }
+    return this.isNumber(array[0]);
+  }
 
-    createBuckets(numBuckets: number) {
+  createBuckets(numBuckets: number) {
     /**
      * Mapping buckets to an array instead of filling them with
      * an array prevents each bucket from containing a reference to the same array
      */
-        return Array.from({ length: numBuckets }, () => []);
-    }
+    return Array.from({ length: numBuckets }, () => []);
+  }
 
-    isNumber(element: TypeCompareParam) {
-        return Number.isInteger(element);
-    }
+  isNumber(element: TypeCompareParam) {
+    return Number.isInteger(element);
+  }
 }
 ```
 
 **复杂度：**
 
-| Name           |  Best  | Average | Worst  | Memory | Stable | Comments                  |
-| -------------- | :----: | :-----: | :----: | :----: | :----: | :------------------------ |
-| **Radix sort** | `n*k` | `n*k`  | `n*k` | `n+k`  |  Yes   | k - length of longest key |
+| Name           | Best  | Average | Worst | Memory | Stable | Comments                  |
+| -------------- | :---: | :-----: | :---: | :----: | :----: | :------------------------ |
+| **Radix sort** | `n*k` |  `n*k`  | `n*k` | `n+k`  |  Yes   | k - length of longest key |
 
 ## 3. 后记
 

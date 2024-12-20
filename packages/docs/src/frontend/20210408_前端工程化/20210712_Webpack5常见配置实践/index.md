@@ -42,9 +42,9 @@ npm install -D webpack webpack-cli
 
 ```js
 class Test {
-    constructor() {
-        document.write('hello world');
-    }
+  constructor() {
+    document.write('hello world');
+  }
 }
 
 const test = new Test();
@@ -110,20 +110,20 @@ npm install -S @babel/runtime @babel/runtime-corejs3
 const path = require('node:path');
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.[contenthash:8].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(jsx|js)$/,
-                use: 'babel-loader',
-                exclude: /node_modules/,
-            },
-        ],
-    },
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.[contenthash:8].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(jsx|js)$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
 ```
 
@@ -131,13 +131,13 @@ module.exports = {
 
 ```json
 {
-    "presets": ["@babel/preset-env"],
-    "plugins": [
-        ["@babel/plugin-transform-runtime", { "corejs": 3 }],
-        ["@babel/plugin-proposal-decorators", { "legacy": true }],
-        ["@babel/plugin-proposal-class-properties", { "loose": true }],
-        ["@babel/plugin-proposal-private-methods", { "loose": true }]
-    ]
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    ["@babel/plugin-transform-runtime", { "corejs": 3 }],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    ["@babel/plugin-proposal-private-methods", { "loose": true }]
+  ]
 }
 ```
 
@@ -204,7 +204,7 @@ webpack-demo
 ```
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -222,14 +222,14 @@ webpack-demo
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    // 省略 ...
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './public/index.html'),
-            inject: 'body',
-            scriptLoading: 'blocking',
-        }),
-    ],
+  // 省略 ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './public/index.html'),
+      inject: 'body',
+      scriptLoading: 'blocking',
+    }),
+  ],
 };
 ```
 
@@ -317,21 +317,21 @@ npm install -D webpack-dev-server
 ```js
 // 省略 ...
 module.exports = {
-    // 省略 ...
-    devServer: {
-        port: '3000', // 默认是 8080
-        hot: true,
-        stats: 'errors-only', // 终端仅打印 error
-        compress: true, // 是否启用 gzip 压缩
-        proxy: {
-            '/api': {
-                target: 'http://127.0.0.1:3001',
-                pathRewrite: {
-                    '/api': '',
-                },
-            },
+  // 省略 ...
+  devServer: {
+    port: '3000', // 默认是 8080
+    hot: true,
+    stats: 'errors-only', // 终端仅打印 error
+    compress: true, // 是否启用 gzip 压缩
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3001',
+        pathRewrite: {
+          '/api': '',
         },
+      },
     },
+  },
 };
 ```
 
@@ -339,9 +339,9 @@ module.exports = {
 
 ```json
 {
-    "scripts": {
-        "dev": "webpack serve --open"
-    }
+  "scripts": {
+    "dev": "webpack serve --open"
+  }
 }
 ```
 
@@ -373,8 +373,8 @@ npm run dev
 ```js
 // 省略 ...
 module.exports = {
-    // 省略 ...
-    devtool: 'eval-cheap-module-source-map',
+  // 省略 ...
+  devtool: 'eval-cheap-module-source-map',
 };
 ```
 
@@ -460,28 +460,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootDir = process.cwd();
 
 module.exports = {
-    entry: path.resolve(rootDir, 'src/index.js'),
-    output: {
-        path: path.resolve(rootDir, 'dist'),
-        filename: 'bundle.[contenthash:8].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(jsx|js)$/,
-                use: 'babel-loader',
-                include: path.resolve(rootDir, 'src'),
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(rootDir, 'public/index.html'),
-            inject: 'body',
-            scriptLoading: 'blocking',
-        }),
+  entry: path.resolve(rootDir, 'src/index.js'),
+  output: {
+    path: path.resolve(rootDir, 'dist'),
+    filename: 'bundle.[contenthash:8].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(jsx|js)$/,
+        use: 'babel-loader',
+        include: path.resolve(rootDir, 'src'),
+        exclude: /node_modules/,
+      },
     ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(rootDir, 'public/index.html'),
+      inject: 'body',
+      scriptLoading: 'blocking',
+    }),
+  ],
 };
 ```
 
@@ -498,22 +498,22 @@ const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 
 module.exports = merge(baseConfig, {
-    mode: 'development',
-    devtool: 'eval-cheap-module-source-map',
-    devServer: {
-        port: '3000', // 默认是 8080
-        hot: true,
-        stats: 'errors-only', // 终端仅打印 error
-        compress: true, // 是否启用 gzip 压缩
-        proxy: {
-            '/api': {
-                target: 'http://127.0.0.1:3001',
-                pathRewrite: {
-                    '/api': '',
-                },
-            },
+  mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
+  devServer: {
+    port: '3000', // 默认是 8080
+    hot: true,
+    stats: 'errors-only', // 终端仅打印 error
+    compress: true, // 是否启用 gzip 压缩
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3001',
+        pathRewrite: {
+          '/api': '',
         },
+      },
     },
+  },
 });
 ```
 
@@ -524,8 +524,8 @@ const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 
 module.exports = merge(baseConfig, {
-    mode: 'production',
-    devtool: 'hidden-source-map',
+  mode: 'production',
+  devtool: 'hidden-source-map',
 });
 ```
 
@@ -533,10 +533,10 @@ module.exports = merge(baseConfig, {
 
 ```json
 {
-    "scripts": {
-        "dev": "webpack serve --config build/webpack.dev.js --open",
-        "build:prod": "webpack --config build/webpack.prod.js"
-    }
+  "scripts": {
+    "dev": "webpack serve --config build/webpack.dev.js --open",
+    "build:prod": "webpack --config build/webpack.prod.js"
+  }
 }
 ```
 
@@ -566,11 +566,11 @@ npm install -D clean-webpack-plugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  // 省略 ...
+  plugins: [
     // 省略 ...
-    plugins: [
-    // 省略 ...
-        new CleanWebpackPlugin(),
-    ],
+    new CleanWebpackPlugin(),
+  ],
 };
 ```
 
@@ -617,16 +617,16 @@ webpack-demo
 import './index.less';
 
 class Test {
-    constructor() {
-        this.renderDiv();
-    }
+  constructor() {
+    this.renderDiv();
+  }
 
-    renderDiv() {
-        const div = document.createElement('div');
-        div.className = 'test';
-        div.innerHTML = 'hello world';
-        document.body.appendChild(div);
-    }
+  renderDiv() {
+    const div = document.createElement('div');
+    div.className = 'test';
+    div.innerHTML = 'hello world';
+    document.body.appendChild(div);
+  }
 }
 
 const test = new Test();
@@ -654,18 +654,18 @@ npm install -D less style-loader css-loader less-loader
 // 省略...
 
 module.exports = {
-    // 省略...
-    module: {
-        rules: [
-            // 省略...
-            {
-                test: /\.(le|c)ss$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
-            },
-        ],
-    },
-    // 省略...
+  // 省略...
+  module: {
+    rules: [
+      // 省略...
+      {
+        test: /\.(le|c)ss$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+    ],
+  },
+  // 省略...
 };
 ```
 
@@ -688,28 +688,28 @@ npm install -D autoprefixer postcss postcss-loader
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-    // 省略 ...
-    module: {
-        rules: [
-            // 省略 ...
-            {
-                test: /\.(le|c)ss$/,
-                exclude: /node_modules/,
-                use: [
-                    // 省略 ...
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [['autoprefixer']],
-                            },
-                        },
-                    },
-                ],
+  // 省略 ...
+  module: {
+    rules: [
+      // 省略 ...
+      {
+        test: /\.(le|c)ss$/,
+        exclude: /node_modules/,
+        use: [
+          // 省略 ...
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['autoprefixer']],
+              },
             },
+          },
         ],
-    },
-    // 省略 ...
+      },
+    ],
+  },
+  // 省略 ...
 };
 ```
 
@@ -719,15 +719,15 @@ module.exports = {
 // 省略 ...
 
 class Test {
-    // 省略 ...
+  // 省略 ...
 
-    renderDiv() {
+  renderDiv() {
     // 省略 ...
-        setTimeout(() => {
-            const div = document.querySelector('.test');
-            div.classList.add('dropdown');
-        }, 1000);
-    }
+    setTimeout(() => {
+      const div = document.querySelector('.test');
+      div.classList.add('dropdown');
+    }, 1000);
+  }
 }
 // 省略 ...
 ```
@@ -771,26 +771,26 @@ npm install -D mini-css-extract-plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    // 省略 ...
-    module: {
-        rules: [
-            // 省略 ...
-            {
-                test: /\.(le|c)ss$/,
-                exclude: /node_modules/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    // 省略 ...
-                ],
-            },
+  // 省略 ...
+  module: {
+    rules: [
+      // 省略 ...
+      {
+        test: /\.(le|c)ss$/,
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // 省略 ...
         ],
-    },
-    plugins: [
-    // 省略 ...
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-        }),
+      },
     ],
+  },
+  plugins: [
+    // 省略 ...
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    }),
+  ],
 };
 ```
 
@@ -830,18 +830,18 @@ npm install -D copy-webpack-plugin
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    // 省略...
-    plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: '*.js',
-                    context: path.resolve(rootDir, 'public/js'),
-                    to: path.resolve(rootDir, 'dist/js'),
-                },
-            ],
-        }),
-    ],
+  // 省略...
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '*.js',
+          context: path.resolve(rootDir, 'public/js'),
+          to: path.resolve(rootDir, 'dist/js'),
+        },
+      ],
+    }),
+  ],
 };
 ```
 
@@ -859,15 +859,15 @@ module.exports = {
 import wuhanjiayou from '../public/asset/a.jpeg';
 
 class Test {
-    constructor() {
-        this.renderImg();
-    }
+  constructor() {
+    this.renderImg();
+  }
 
-    renderImg() {
-        const img = document.createElement('img');
-        img.src = wuhanjiayou;
-        document.body.appendChild(img);
-    }
+  renderImg() {
+    const img = document.createElement('img');
+    img.src = wuhanjiayou;
+    document.body.appendChild(img);
+  }
 }
 
 const test = new Test();
@@ -882,17 +882,17 @@ const test = new Test();
 ```js
 // 省略...
 module.exports = {
-    // 省略...
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
-                type: 'asset',
-            },
-            // 省略...
-        ],
-    },
-    // 省略...
+  // 省略...
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
+        type: 'asset',
+      },
+      // 省略...
+    ],
+  },
+  // 省略...
 };
 ```
 
@@ -914,19 +914,19 @@ module.exports = {
 ```js
 // 省略...
 module.exports = {
-    // 省略...
-    module: {
-        rules: [
-            {
-                test: /\.(jsx|js)$/,
-                use: 'babel-loader',
-                include: path.resolve(rootDir, 'src'),
-                exclude: /node_modules/,
-            },
-            // 省略...
-        ],
-    },
-    // 省略...
+  // 省略...
+  module: {
+    rules: [
+      {
+        test: /\.(jsx|js)$/,
+        use: 'babel-loader',
+        include: path.resolve(rootDir, 'src'),
+        exclude: /node_modules/,
+      },
+      // 省略...
+    ],
+  },
+  // 省略...
 };
 ```
 
@@ -941,9 +941,9 @@ module.exports = {
 ```js
 // 省略...
 module.exports = merge(baseConfig, {
-    cache: {
-        type: 'memory',
-    },
+  cache: {
+    type: 'memory',
+  },
 });
 ```
 
@@ -952,12 +952,12 @@ module.exports = merge(baseConfig, {
 ```js
 // 省略...
 module.exports = merge(baseConfig, {
-    cache: {
-        type: 'filesystem',
-        buildDependencies: {
-            config: [__filename],
-        },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
     },
+  },
 });
 ```
 
@@ -1008,10 +1008,10 @@ npm run build:prod
 ```js
 // 省略...
 module.exports = merge(baseConfig, {
-    cache: {
+  cache: {
     // 省略...
-        version: 'new_version',
-    },
+    version: 'new_version',
+  },
 });
 ```
 
@@ -1050,7 +1050,7 @@ npm run build:prod
 
 ```js
 module.exports = {
-    mode: 'development',
+  mode: 'development',
 };
 ```
 
@@ -1087,25 +1087,25 @@ npm install -D thread-loader
 ```js
 // 省略...
 module.exports = {
-    // 省略...
-    module: {
-        rules: [
-            // 省略...
-            {
-                test: /\.(jsx|js)$/,
-                use: ['thread-loader', 'babel-loader'],
-                // 省略...
-            },
-            {
-                test: /\.(le|c)ss$/,
-                exclude: /node_modules/,
-                use: [
-                    'thread-loader',
-                    // 省略...
-                ],
-            },
+  // 省略...
+  module: {
+    rules: [
+      // 省略...
+      {
+        test: /\.(jsx|js)$/,
+        use: ['thread-loader', 'babel-loader'],
+        // 省略...
+      },
+      {
+        test: /\.(le|c)ss$/,
+        exclude: /node_modules/,
+        use: [
+          'thread-loader',
+          // 省略...
         ],
-    },
+      },
+    ],
+  },
 };
 ```
 

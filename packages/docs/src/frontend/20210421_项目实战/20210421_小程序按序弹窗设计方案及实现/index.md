@@ -57,13 +57,13 @@
  */
 // 队列一维数据项
 interface IDialogListItem {
-    type: string; // 消息类型，其实不需要这个字段，不过还是定义下，作为数据校验的依据；
-    list: IDialogItemData[]; // 消息项
+  type: string; // 消息类型，其实不需要这个字段，不过还是定义下，作为数据校验的依据；
+  list: IDialogItemData[]; // 消息项
 }
 // 队列二维数据项
 interface IDialogItemData {
-    data: IAnyObject; // 回调参数
-    handler: (...args: any[]) => void; // 回调函数
+  data: IAnyObject; // 回调参数
+  handler: (...args: any[]) => void; // 回调函数
 }
 
 /**
@@ -71,14 +71,14 @@ interface IDialogItemData {
  * 2. 取出消息按先后顺序取出即可。
  */
 const G_DIALOG_TYPE_MAP = {
-    // 其他弹窗
-    OTHER: 'OTHER',
-    // 有新获得的优惠券
-    HAS_NEW_COUPON: 'HAS_NEW_COUPON',
+  // 其他弹窗
+  OTHER: 'OTHER',
+  // 有新获得的优惠券
+  HAS_NEW_COUPON: 'HAS_NEW_COUPON',
 };
 const G_DIALOG_LIST_STATUS_MAP = {
-    READY: 'READY', // 准备就绪状态
-    OPENING: 'OPENING', // 有正在打开的弹窗
+  READY: 'READY', // 准备就绪状态
+  OPENING: 'OPENING', // 有正在打开的弹窗
 };
 // 弹窗队列状态，初始为准备就绪状态
 const G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.READY;
@@ -87,16 +87,16 @@ const G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.READY;
  * 消息优先级：提额弹窗 > 优惠券弹窗
  */
 const G_DIALOG_LIST: IDialogListItem[] = [
-    {
-        type: G_DIALOG_TYPE_MAP.OTHER,
-        // 提额消息队列
-        list: [] as IDialogItemData[],
-    },
-    {
-        type: G_DIALOG_TYPE_MAP.HAS_NEW_COUPON,
-        // 优惠券消息队列
-        list: [] as IDialogItemData[],
-    },
+  {
+    type: G_DIALOG_TYPE_MAP.OTHER,
+    // 提额消息队列
+    list: [] as IDialogItemData[],
+  },
+  {
+    type: G_DIALOG_TYPE_MAP.HAS_NEW_COUPON,
+    // 优惠券消息队列
+    list: [] as IDialogItemData[],
+  },
 ];
 ```
 
@@ -106,45 +106,45 @@ const G_DIALOG_LIST: IDialogListItem[] = [
 
 ```typescript
 Page({
-    onLoad() {
+  onLoad() {
     // ...
 
-        // 初始化优惠券信息
-        this.initCouponInfo();
+    // 初始化优惠券信息
+    this.initCouponInfo();
 
     // ...
-    },
-    methods: {
+  },
+  methods: {
     /**
      * 初始化优惠券信息
      */
-        async initCouponInfo() {
-            // ...
+    async initCouponInfo() {
+      // ...
 
-            // 弹窗消息处理，这里省略
-            const dialogCouponData = {};
+      // 弹窗消息处理，这里省略
+      const dialogCouponData = {};
 
-            /**
-             * 插入优惠券消息
-             */
-            G_DIALOG_LIST.find(item => item.type === G_DIALOG_TYPE_MAP.HAS_NEW_COUPON).list.push({
-                data: dialogCouponData,
+      /**
+       * 插入优惠券消息
+       */
+      G_DIALOG_LIST.find(item => item.type === G_DIALOG_TYPE_MAP.HAS_NEW_COUPON).list.push({
+        data: dialogCouponData,
 
-                // 这里要绑定下this执行作用域
-                handler: this.dialogCouponHandler.bind(this),
-            });
+        // 这里要绑定下this执行作用域
+        handler: this.dialogCouponHandler.bind(this),
+      });
 
-            // 这里执行消息统一处理函数，稍后具体实现
-            this.handleDialgList();
+      // 这里执行消息统一处理函数，稍后具体实现
+      this.handleDialgList();
 
-            // ...
-        },
-        // 优惠券弹窗回调处理
-        dialogCouponHandler(dialogCouponData = {}) {
-            // 打开优惠券弹窗，这里省略
-            // 发送优惠券已读消息，这里省略
-        },
+      // ...
     },
+    // 优惠券弹窗回调处理
+    dialogCouponHandler(dialogCouponData = {}) {
+      // 打开优惠券弹窗，这里省略
+      // 发送优惠券已读消息，这里省略
+    },
+  },
 });
 ```
 
@@ -152,46 +152,46 @@ Page({
 
 ```typescript
 Page({
-    methods: {
+  methods: {
     // 弹窗关闭回调，继续处理下一个弹窗消息
-        onCloseDialog() {
-            // 先把弹窗状态设置为就绪
-            G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.READY;
+    onCloseDialog() {
+      // 先把弹窗状态设置为就绪
+      G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.READY;
 
-            // 这里执行消息统一处理函数
-            this.handleDialgList();
-        },
-        // 消息统一处理
-        handleDialgList() {
-            if (G_DIALOG_LIST_STATUS === G_DIALOG_LIST_STATUS_MAP.OPENING) {
-                logger.log('已有弹窗在打开，待弹窗关闭后继续处理');
-                return;
-            }
-
-            /**
-             * 遍历二维消息队列，按遍历先后顺序，取出一条消息
-             */
-            let dialogList: IDialogItemData[] = [];
-            for (const typeList of G_DIALOG_LIST) {
-                if (typeList.list.length > 0) {
-                    dialogList = typeList.list;
-                    break;
-                }
-            }
-            if (dialogList.length < 1) {
-                logger.log('弹窗队列为空，忽略处理');
-                return;
-            }
-            // 从队列中取出消息
-            const dialogItem: IDialogItemData = dialogList.shift();
-
-            // 标记弹窗打开状态，以免弹窗冲突
-            G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.OPENING;
-
-            // 根据回调函数和回调参数，直接执行
-            dialogItem.handler(dialogItem.data);
-        },
+      // 这里执行消息统一处理函数
+      this.handleDialgList();
     },
+    // 消息统一处理
+    handleDialgList() {
+      if (G_DIALOG_LIST_STATUS === G_DIALOG_LIST_STATUS_MAP.OPENING) {
+        logger.log('已有弹窗在打开，待弹窗关闭后继续处理');
+        return;
+      }
+
+      /**
+       * 遍历二维消息队列，按遍历先后顺序，取出一条消息
+       */
+      let dialogList: IDialogItemData[] = [];
+      for (const typeList of G_DIALOG_LIST) {
+        if (typeList.list.length > 0) {
+          dialogList = typeList.list;
+          break;
+        }
+      }
+      if (dialogList.length < 1) {
+        logger.log('弹窗队列为空，忽略处理');
+        return;
+      }
+      // 从队列中取出消息
+      const dialogItem: IDialogItemData = dialogList.shift();
+
+      // 标记弹窗打开状态，以免弹窗冲突
+      G_DIALOG_LIST_STATUS = G_DIALOG_LIST_STATUS_MAP.OPENING;
+
+      // 根据回调函数和回调参数，直接执行
+      dialogItem.handler(dialogItem.data);
+    },
+  },
 });
 ```
 

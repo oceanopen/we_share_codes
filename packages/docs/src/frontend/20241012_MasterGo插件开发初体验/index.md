@@ -142,14 +142,14 @@ plugin-demo
 ```json
 // package.json
 {
-    "scripts": {
-        "dev": "yarn dev:ui & yarn dev:main",
-        "dev:ui": "cross-env TARGET=ui NODE_ENV=development vite build --mode development -w",
-        "dev:main": "cross-env TARGET=main NODE_ENV=development vite build --mode development -w",
-        "build": "yarn build:ui && yarn build:main && rm -rf ./dist/assets",
-        "build:ui": "cross-env TARGET=ui vite build",
-        "build:main": "cross-env TARGET=main vite build"
-    }
+  "scripts": {
+    "dev": "yarn dev:ui & yarn dev:main",
+    "dev:ui": "cross-env TARGET=ui NODE_ENV=development vite build --mode development -w",
+    "dev:main": "cross-env TARGET=main NODE_ENV=development vite build --mode development -w",
+    "build": "yarn build:ui && yarn build:main && rm -rf ./dist/assets",
+    "build:ui": "cross-env TARGET=ui vite build",
+    "build:main": "cross-env TARGET=main vite build"
+  }
 }
 ```
 
@@ -163,38 +163,38 @@ plugin-demo
 const target = process.env.TARGET;
 
 export default defineConfig(() => {
-    const buildConfig
+  const buildConfig
     = target === 'ui'
-        ? {
-                target: 'esnext',
-                assetsInlineLimit: 100000000,
-                chunkSizeWarningLimit: 100000000,
-                cssCodeSplit: false,
-                brotliSize: false,
-                rollupOptions: {
-                    inlineDynamicImports: true,
-                    output: {
-                        manualChunks: () => 'ui.js',
-                    },
-                },
-            }
-        : {
-                lib: {
-                    entry: resolve(__dirname, './lib/main.ts'),
-                    name: 'myLib',
-                    formats: ['umd'],
-                    fileName: () => `main.js`,
-                },
-            };
+      ? {
+          target: 'esnext',
+          assetsInlineLimit: 100000000,
+          chunkSizeWarningLimit: 100000000,
+          cssCodeSplit: false,
+          brotliSize: false,
+          rollupOptions: {
+            inlineDynamicImports: true,
+            output: {
+              manualChunks: () => 'ui.js',
+            },
+          },
+        }
+      : {
+          lib: {
+            entry: resolve(__dirname, './lib/main.ts'),
+            name: 'myLib',
+            formats: ['umd'],
+            fileName: () => `main.js`,
+          },
+        };
 
-    return {
+  return {
     // ...
-        build: {
-            ...(buildConfig as BuildOptions),
-            emptyOutDir: false,
-        },
+    build: {
+      ...(buildConfig as BuildOptions),
+      emptyOutDir: false,
+    },
     // ...
-    };
+  };
 });
 ```
 
@@ -220,10 +220,10 @@ mg.showUI(__html__);
 ```json
 // manifest.json
 {
-    "name": "demo",
-    "id": 140904089808559,
-    "main": "dist/main.js",
-    "ui": "dist/index.html"
+  "name": "demo",
+  "id": 140904089808559,
+  "main": "dist/main.js",
+  "ui": "dist/index.html"
 }
 ```
 
@@ -270,9 +270,9 @@ mg.showUI(__html__);
 
 ```vue
 <template>
-    <button @click="handleAddTextNode">
-        Hello, Demo
-    </button>
+  <button @click="handleAddTextNode">
+    Hello, Demo
+  </button>
 </template>
 
 <script lang="ts" setup>
@@ -281,8 +281,8 @@ import { ref } from 'vue';
 const mg = ref('MasterGo');
 
 function handleAddTextNode() {
-    // ui 通过 parent.postMessage 发送消息
-    parent.postMessage(data, '*');
+  // ui 通过 parent.postMessage 发送消息
+  parent.postMessage(data, '*');
 }
 </script>
 ```
@@ -292,11 +292,11 @@ mg.showUI(__html__);
 
 // 主进程通过监听 message 事件 获取消息
 mg.ui.onmessage = (msg: { type: string; data: any }) => {
-    const { type, data } = msg;
-    if (type === 'demo') {
-        const textNode = mg.createText();
-        textNode.characters = data;
-    }
+  const { type, data } = msg;
+  if (type === 'demo') {
+    const textNode = mg.createText();
+    textNode.characters = data;
+  }
 };
 ```
 

@@ -1,7 +1,7 @@
 <template>
-    <OneStar v-if="viewCom === 'OneStar'" />
-    <MeteorShower v-if="viewCom === 'MeteorShower'" />
-    <MeteorShowerBg v-if="viewCom === 'MeteorShowerBg'" />
+  <OneStar v-if="viewCom === 'OneStar'" />
+  <MeteorShower v-if="viewCom === 'MeteorShower'" />
+  <MeteorShowerBg v-if="viewCom === 'MeteorShowerBg'" />
 </template>
 
 <script setup lang="ts">

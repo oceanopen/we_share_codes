@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,21 +16,21 @@
     <script>
       window.onload = function () {
         // good
-        document.querySelector('ul').onclick = (event) => {
-          const target = event.target
-          if (target.nodeName === 'LI') {
-            console.log('proxy:', target.innerHTML)
+        document.querySelector("ul").onclick = (event) => {
+          const target = event.target;
+          if (target.nodeName === "LI") {
+            console.log("proxy:", target.innerHTML);
           }
-        }
+        };
 
         // bad
-        document.querySelectorAll('li').forEach((item) => {
+        document.querySelectorAll("li").forEach((item) => {
           item.onclick = function (event) {
-            const target = event.target
-            console.log('current:', target.innerHTML)
-          }
-        })
-      }
+            const target = event.target;
+            console.log("current:", target.innerHTML);
+          };
+        });
+      };
     </script>
   </body>
 </html>

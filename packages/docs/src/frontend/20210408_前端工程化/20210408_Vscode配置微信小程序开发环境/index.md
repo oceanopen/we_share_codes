@@ -12,24 +12,24 @@ npm install eslint eslint-config-prettier eslint-plugin-prettier prettier
 
 ```javascript
 module.exports = {
-    env: {
+  env: {
     // 脚本目标的运行环境
-        browser: true,
-        node: true,
-        es6: true,
-        commonjs: true,
-    },
-    parserOptions: {
-        ecmaVersion: 2019,
-        sourceType: 'module',
-    },
-    extends: ['prettier', 'prettier/standard'],
-    // 插件
-    plugins: ['prettier'],
-    // 规则
-    rules: {
-        'prettier/prettier': 'error',
-    },
+    browser: true,
+    node: true,
+    es6: true,
+    commonjs: true,
+  },
+  parserOptions: {
+    ecmaVersion: 2019,
+    sourceType: 'module',
+  },
+  extends: ['prettier', 'prettier/standard'],
+  // 插件
+  plugins: ['prettier'],
+  // 规则
+  rules: {
+    'prettier/prettier': 'error',
+  },
 };
 ```
 
@@ -51,10 +51,10 @@ insert_final_newline = true
 
 ```javascript
 module.exports = {
-    tabWidth: 2,
-    semi: false,
-    singleQuote: true,
-    printWidth: 120,
+  tabWidth: 2,
+  semi: false,
+  singleQuote: true,
+  printWidth: 120,
 };
 ```
 
@@ -79,18 +79,18 @@ app
 // .eslintrc.js
 
 module.exports = {
-    // 全局变量
-    globals: {
-        App: true,
-        Page: true,
-        Component: true,
-        Behavior: true,
-        wx: true,
-        getApp: true,
-        getRegExp: true,
-        getCurrentPages: true,
-        requirePlugin: true,
-    },
+  // 全局变量
+  globals: {
+    App: true,
+    Page: true,
+    Component: true,
+    Behavior: true,
+    wx: true,
+    getApp: true,
+    getRegExp: true,
+    getCurrentPages: true,
+    requirePlugin: true,
+  },
 };
 ```
 
@@ -98,7 +98,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-    parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser',
 };
 ```
 
@@ -106,27 +106,27 @@ module.exports = {
 
 ```javascript
 module.exports = {
-    // 规则
-    rules: {
+  // 规则
+  rules: {
     // 拖尾逗号
-        'comma-dangle': ['error', 'only-multiline'],
-        // 注释后面自动加空格
-        'spaced-comment': [
-            'error',
-            'always',
-            {
-                line: {
-                    markers: ['/'],
-                    exceptions: ['-', '+', '='],
-                },
-                block: {
-                    markers: ['!'],
-                    exceptions: ['*', '='],
-                    balanced: true,
-                },
-            },
-        ],
-    },
+    'comma-dangle': ['error', 'only-multiline'],
+    // 注释后面自动加空格
+    'spaced-comment': [
+      'error',
+      'always',
+      {
+        line: {
+          markers: ['/'],
+          exceptions: ['-', '+', '='],
+        },
+        block: {
+          markers: ['!'],
+          exceptions: ['*', '='],
+          balanced: true,
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -135,9 +135,9 @@ module.exports = {
 ```json
 // package.json
 {
-    "scripts": {
-        "lint": "eslint -c .eslintrc.js ./src --fix"
-    }
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js ./src --fix"
+  }
 }
 ```
 
@@ -177,62 +177,62 @@ module.exports = {
 // .vscode/setting.json
 
 {
-    "window.title": "${activeEditorMedium}${separator}${rootName}",
-    // #vscode默认启用了根据文件类型自动设置tabsize的选项
-    "editor.detectIndentation": false,
-    // #重新设定tabsize
-    "editor.tabSize": 2,
-    // #定义一个默认格式化程序, 该格式化程序优先于所有其他格式化程序设置。必须是提供格式化程序的扩展的标识符。
-    "editor.defaultFormatter": null,
-    // #每次保存的时候自动格式化
-    "editor.formatOnSave": true,
-    // #每次保存的时候将代码按eslint格式进行修复
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
+  "window.title": "${activeEditorMedium}${separator}${rootName}",
+  // #vscode默认启用了根据文件类型自动设置tabsize的选项
+  "editor.detectIndentation": false,
+  // #重新设定tabsize
+  "editor.tabSize": 2,
+  // #定义一个默认格式化程序, 该格式化程序优先于所有其他格式化程序设置。必须是提供格式化程序的扩展的标识符。
+  "editor.defaultFormatter": null,
+  // #每次保存的时候自动格式化
+  "editor.formatOnSave": true,
+  // #每次保存的时候将代码按eslint格式进行修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 
-    /**
-     * json自动格式化按prettier规则
-     */
-    "files.associations": {
-        "*.json": "jsonc"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+  /**
+   * json自动格式化按prettier规则
+   */
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
-    /**
-     * js和vue文件，按eslint规则
-     */
-    // #Enable/disable default JavaScript formatter (For Prettier)
-    "javascript.format.enable": false,
-    // #让函数(名)和后面的括号之间加个空格
-    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "eslint.run": "onType",
-    "eslint.options": {
-        "extensions": [".js", ".vue"]
-    },
-    "eslint.validate": ["javascript", "vue"],
+  /**
+   * js和vue文件，按eslint规则
+   */
+  // #Enable/disable default JavaScript formatter (For Prettier)
+  "javascript.format.enable": false,
+  // #让函数(名)和后面的括号之间加个空格
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "eslint.run": "onType",
+  "eslint.options": {
+    "extensions": [".js", ".vue"]
+  },
+  "eslint.validate": ["javascript", "vue"],
 
-    /**
-     * .wxml文件单独配置
-     */
-    // 是否开启保存自动格式化
-    "wxmlConfig.onSaveFormat": true,
-    "wxmlConfig.format": {
-        "editorconfig": true,
-        "wrap_attributes_count": 3,
-        "wrap_attributes": "force",
-        "wrap-attributes-indent-size": 2,
-        "end-with-newline": false,
-        "indent_style": "space",
-        "indent_size": 2,
-        "indent_char": " ",
-        "indent_with_tabs": false
-    }
+  /**
+   * .wxml文件单独配置
+   */
+  // 是否开启保存自动格式化
+  "wxmlConfig.onSaveFormat": true,
+  "wxmlConfig.format": {
+    "editorconfig": true,
+    "wrap_attributes_count": 3,
+    "wrap_attributes": "force",
+    "wrap-attributes-indent-size": 2,
+    "end-with-newline": false,
+    "indent_style": "space",
+    "indent_size": 2,
+    "indent_char": " ",
+    "indent_with_tabs": false
+  }
 }
 ```
 

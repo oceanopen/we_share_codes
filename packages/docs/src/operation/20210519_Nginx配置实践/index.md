@@ -455,7 +455,7 @@ vim html/index.html
 > 内容粘贴自 `nginx` 容器的文件内容 `cat /usr/share/nginx/html/index.html`。
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>Welcome to nginx!</title>
@@ -484,7 +484,7 @@ vim html/index.html
 
     <div id="datetime">
       <script>
-        setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000)
+        setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);
       </script>
     </div>
   </body>
@@ -845,7 +845,7 @@ server {
 ```html
 <!-- /usr/share/nginx/html/server-fe/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>Welcome to nginx!</title>
@@ -861,10 +861,10 @@ server {
     <h1>Welcome fe.nginx-server.com!</h1>
 
     <script type="text/javascript">
-      var xhr = new XMLHttpRequest()
+      var xhr = new XMLHttpRequest();
       // XMLHttpRequest API文档详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
-      xhr.open('GET', 'http://be.nginx-server.com:8000/index.html', true)
-      xhr.send()
+      xhr.open("GET", "http://be.nginx-server.com:8000/index.html", true);
+      xhr.send();
     </script>
   </body>
 </html>
@@ -951,7 +951,7 @@ server {
 ```html
 <!-- /usr/share/nginx/html/server-fe/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>Welcome to nginx!</title>
@@ -967,11 +967,11 @@ server {
     <h1>Welcome fe.nginx-server.com!</h1>
 
     <script type="text/javascript">
-      var xhr = new XMLHttpRequest()
+      var xhr = new XMLHttpRequest();
       // API文档详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
-      xhr.open('GET', 'http://fe.nginx-server.com:8000/api/index.html', true)
-      xhr.withCredentials = true // 携带跨域cookie
-      xhr.send()
+      xhr.open("GET", "http://fe.nginx-server.com:8000/api/index.html", true);
+      xhr.withCredentials = true; // 携带跨域cookie
+      xhr.send();
     </script>
   </body>
 </html>
@@ -1193,17 +1193,17 @@ npm install -D compression-webpack-plugin
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-    // ...
+  // ...
 
-    plugins: [
-        new CompressionWebpackPlugin({
-            test: /\.js$|\.html$|\.css/, // 匹配文件名
-            threshold: 1024, // 文件压缩阈值，对超过1k的进行压缩
-            deleteOriginalAssets: false, // 是否删除源文件
-        }),
-    ],
+  plugins: [
+    new CompressionWebpackPlugin({
+      test: /\.js$|\.html$|\.css/, // 匹配文件名
+      threshold: 1024, // 文件压缩阈值，对超过1k的进行压缩
+      deleteOriginalAssets: false, // 是否删除源文件
+    }),
+  ],
 
-    // ...
+  // ...
 };
 ```
 

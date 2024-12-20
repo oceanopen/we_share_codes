@@ -15,10 +15,10 @@ const ast = parser.parse(code);
 
 // 2. 转换
 const visitor = {
-    // 当遍历到 CallExpression 时候触发
-    CallExpression(path) {
-        const callee = path.node.callee;
-        /**
+  // 当遍历到 CallExpression 时候触发
+  CallExpression(path) {
+    const callee = path.node.callee;
+    /**
       "callee": {
         "type": "MemberExpression",
         "start": 20,
@@ -38,12 +38,12 @@ const visitor = {
         "computed": false,
         "optional": false
       }
-         */
-        // 判断当前执行的函数是否是 MemberExpression
-        if (types.isMemberExpression(callee)) {
-            const { object, property } = callee;
-            if (types.isIdentifier(object, { name: 'console' }) && types.isIdentifier(property, { name: 'log' })) {
-                /**
+     */
+    // 判断当前执行的函数是否是 MemberExpression
+    if (types.isMemberExpression(callee)) {
+      const { object, property } = callee;
+      if (types.isIdentifier(object, { name: 'console' }) && types.isIdentifier(property, { name: 'log' })) {
+        /**
           "type": "FunctionDeclaration",
           "id": {
             "type": "Identifier",
@@ -51,11 +51,11 @@ const visitor = {
             "end": 13,
             "name": "funA"
           }
-                 */
-                // 查找最接近的父函数或程序
-                const parent = path.getFunctionParent();
-                const parentFunName = parent.node.id.name;
-                /**
+         */
+        // 查找最接近的父函数或程序
+        const parent = path.getFunctionParent();
+        const parentFunName = parent.node.id.name;
+        /**
           "arguments": [
             {
               "type": "Literal",
@@ -72,11 +72,11 @@ const visitor = {
               "raw": "1"
             }
           ],
-                 */
-                path.node.arguments.unshift(types.stringLiteral(`from function ${parentFunName}`));
-            }
-        }
-    },
+         */
+        path.node.arguments.unshift(types.stringLiteral(`from function ${parentFunName}`));
+      }
+    }
+  },
 };
 traverse.default(ast, visitor);
 

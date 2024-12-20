@@ -32,31 +32,31 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, computed, onMounted } from 'vue'
+  import { defineComponent, ref, computed, onMounted } from "vue";
 
   export default defineComponent({
     components: {},
     setup() {
-      const todayAmount = ref<string>('0')
+      const todayAmount = ref<string>("0");
 
       const todayAmountComputed = computed(() => {
-        return todayAmount.value.split('')
-      })
+        return todayAmount.value.split("");
+      });
 
       onMounted(() => {
         setInterval(() => {
-          if (todayAmount.value === '0') {
-            todayAmount.value = '1000'
+          if (todayAmount.value === "0") {
+            todayAmount.value = "1000";
           }
-          todayAmount.value = '' + Math.floor(Math.random() * 10000)
-        }, 2000)
-      })
+          todayAmount.value = "" + Math.floor(Math.random() * 10000);
+        }, 2000);
+      });
 
       return {
         todayAmountComputed,
-      }
+      };
     },
-  })
+  });
 </script>
 
 <style scoped lang="scss">
@@ -77,7 +77,9 @@
       :deep {
         .list-enter-active,
         .list-leave-active {
-          transition: transform 1s ease, opacity 1s ease;
+          transition:
+            transform 1s ease,
+            opacity 1s ease;
         }
 
         .list-enter-from {

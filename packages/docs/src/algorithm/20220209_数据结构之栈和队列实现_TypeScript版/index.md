@@ -22,52 +22,52 @@
 import LinkedList from '../linked-list/LinkedList';
 
 export default class Queue {
-    public linkedList: LinkedList;
+  public linkedList: LinkedList;
 
-    constructor() {
+  constructor() {
     // We're going to implement Queue based on LinkedList since the two
     // structures are quite similar. Namely, they both operate mostly on
     // the elements at the beginning and the end. Compare enqueue/dequeue
     // operations of Queue with append/deleteHead operations of LinkedList.
-        this.linkedList = new LinkedList();
+    this.linkedList = new LinkedList();
+  }
+
+  isEmpty() {
+    return !this.linkedList.head;
+  }
+
+  /**
+   * Read the element at the front of the queue without removing it.
+   */
+  peek() {
+    if (this.isEmpty()) {
+      return null;
     }
 
-    isEmpty() {
-        return !this.linkedList.head;
-    }
+    return this.linkedList.head.value;
+  }
 
-    /**
-     * Read the element at the front of the queue without removing it.
-     */
-    peek() {
-        if (this.isEmpty()) {
-            return null;
-        }
+  /**
+   * Add a new element to the end of the queue (the tail of the linked list).
+   * This element will be processed after all elements ahead of it.
+   */
+  enqueue(value: any) {
+    this.linkedList.append(value);
+  }
 
-        return this.linkedList.head.value;
-    }
+  /**
+   * Remove the element at the front of the queue (the head of the linked list).
+   * If the queue is empty, return null.
+   */
+  dequeue() {
+    const removedHead = this.linkedList.deleteHead();
+    return removedHead ? removedHead.value : null;
+  }
 
-    /**
-     * Add a new element to the end of the queue (the tail of the linked list).
-     * This element will be processed after all elements ahead of it.
-     */
-    enqueue(value: any) {
-        this.linkedList.append(value);
-    }
-
-    /**
-     * Remove the element at the front of the queue (the head of the linked list).
-     * If the queue is empty, return null.
-     */
-    dequeue() {
-        const removedHead = this.linkedList.deleteHead();
-        return removedHead ? removedHead.value : null;
-    }
-
-    toString(callback?: (value: any) => any) {
+  toString(callback?: (value: any) => any) {
     // Return string representation of the queue's linked list.
-        return this.linkedList.toString(callback);
-    }
+    return this.linkedList.toString(callback);
+  }
 }
 ```
 
@@ -89,50 +89,50 @@ export default class Queue {
 import LinkedList from '../linked-list/LinkedList';
 
 export default class Stack {
-    public linkedList: LinkedList;
+  public linkedList: LinkedList;
 
-    constructor() {
+  constructor() {
     // We're going to implement Stack based on LinkedList since these
     // structures are quite similar. Compare push/pop operations of the Stack
     // with prepend/deleteHead operations of LinkedList.
-        this.linkedList = new LinkedList();
-    }
+    this.linkedList = new LinkedList();
+  }
 
-    isEmpty() {
+  isEmpty() {
     // The stack is empty if its linked list doesn't have a head.
-        return !this.linkedList.head;
+    return !this.linkedList.head;
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      // If the linked list is empty then there is nothing to peek from.
+      return null;
     }
 
-    peek() {
-        if (this.isEmpty()) {
-            // If the linked list is empty then there is nothing to peek from.
-            return null;
-        }
+    // Just read the value from the start of linked list without deleting it.
+    return this.linkedList.head.value;
+  }
 
-        // Just read the value from the start of linked list without deleting it.
-        return this.linkedList.head.value;
-    }
-
-    push(value: any) {
+  push(value: any) {
     // Pushing means to lay the value on top of the stack. Therefore let's just add
     // the new value at the start of the linked list.
-        this.linkedList.prepend(value);
-    }
+    this.linkedList.prepend(value);
+  }
 
-    pop() {
+  pop() {
     // Let's try to delete the first node (the head) from the linked list.
     // If there is no head (the linked list is empty) just return null.
-        const removedHead = this.linkedList.deleteHead();
-        return removedHead ? removedHead.value : null;
-    }
+    const removedHead = this.linkedList.deleteHead();
+    return removedHead ? removedHead.value : null;
+  }
 
-    toArray() {
-        return this.linkedList.toArray().map(linkedListNode => linkedListNode.value);
-    }
+  toArray() {
+    return this.linkedList.toArray().map(linkedListNode => linkedListNode.value);
+  }
 
-    toString(callback?: (value: any) => any) {
-        return this.linkedList.toString(callback);
-    }
+  toString(callback?: (value: any) => any) {
+    return this.linkedList.toString(callback);
+  }
 }
 ```
 
@@ -161,86 +161,86 @@ import Comparator, { TypeCompareParam } from '../utils/comparator/Comparator';
 // It is the same as min heap except that when comparing two elements
 // we take into account its priority instead of the element's value.
 export default class PriorityQueue extends MinHeap {
-    private priorities: Map<any, number>;
+  private priorities: Map<any, number>;
 
-    constructor() {
+  constructor() {
     // Call MinHeap constructor first.
-        super();
+    super();
 
-        // Setup priorities map.
-        this.priorities = new Map();
+    // Setup priorities map.
+    this.priorities = new Map();
 
-        // Use custom comparator for heap elements that will take element priority
-        // instead of element value into account.
-        this.compare = new Comparator(this.comparePriority.bind(this));
+    // Use custom comparator for heap elements that will take element priority
+    // instead of element value into account.
+    this.compare = new Comparator(this.comparePriority.bind(this));
+  }
+
+  /**
+   * Add item to the priority queue.
+   * @param item - item we're going to add to the queue.
+   * @param priority - items priority.
+   */
+  add(item: TypeCompareParam, priority = 0) {
+    this.priorities.set(item, priority);
+    super.add(item);
+    return this;
+  }
+
+  /**
+   * Remove item from priority queue.
+   * @param item - item we're going to remove.
+   * @param customFindingComparator - custom function for finding the item to remove
+   */
+  remove(item: TypeCompareParam, customFindingComparator?: Comparator) {
+    super.remove(item, customFindingComparator);
+    this.priorities.delete(item);
+    return this;
+  }
+
+  /**
+   * Change priority of the item in a queue.
+   * @param item - item we're going to re-prioritize.
+   * @param priority - new item's priority.
+   */
+  changePriority(item: TypeCompareParam, priority: number) {
+    this.remove(item, new Comparator(this.compareValue));
+    this.add(item, priority);
+    return this;
+  }
+
+  /**
+   * Find item by ite value.
+   */
+  findByValue(item: TypeCompareParam) {
+    return this.find(item, new Comparator(this.compareValue));
+  }
+
+  /**
+   * Check if item already exists in a queue.
+   */
+  hasValue(item: TypeCompareParam) {
+    return this.findByValue(item).length > 0;
+  }
+
+  /**
+   * Compares priorities of two items.
+   */
+  comparePriority(a: TypeCompareParam, b: TypeCompareParam) {
+    if (this.priorities.get(a) === this.priorities.get(b)) {
+      return 0;
     }
+    return this.priorities.get(a) < this.priorities.get(b) ? -1 : 1;
+  }
 
-    /**
-     * Add item to the priority queue.
-     * @param item - item we're going to add to the queue.
-     * @param priority - items priority.
-     */
-    add(item: TypeCompareParam, priority = 0) {
-        this.priorities.set(item, priority);
-        super.add(item);
-        return this;
+  /**
+   * Compares values of two items.
+   */
+  compareValue(a: TypeCompareParam, b: TypeCompareParam) {
+    if (a === b) {
+      return 0;
     }
-
-    /**
-     * Remove item from priority queue.
-     * @param item - item we're going to remove.
-     * @param customFindingComparator - custom function for finding the item to remove
-     */
-    remove(item: TypeCompareParam, customFindingComparator?: Comparator) {
-        super.remove(item, customFindingComparator);
-        this.priorities.delete(item);
-        return this;
-    }
-
-    /**
-     * Change priority of the item in a queue.
-     * @param item - item we're going to re-prioritize.
-     * @param priority - new item's priority.
-     */
-    changePriority(item: TypeCompareParam, priority: number) {
-        this.remove(item, new Comparator(this.compareValue));
-        this.add(item, priority);
-        return this;
-    }
-
-    /**
-     * Find item by ite value.
-     */
-    findByValue(item: TypeCompareParam) {
-        return this.find(item, new Comparator(this.compareValue));
-    }
-
-    /**
-     * Check if item already exists in a queue.
-     */
-    hasValue(item: TypeCompareParam) {
-        return this.findByValue(item).length > 0;
-    }
-
-    /**
-     * Compares priorities of two items.
-     */
-    comparePriority(a: TypeCompareParam, b: TypeCompareParam) {
-        if (this.priorities.get(a) === this.priorities.get(b)) {
-            return 0;
-        }
-        return this.priorities.get(a) < this.priorities.get(b) ? -1 : 1;
-    }
-
-    /**
-     * Compares values of two items.
-     */
-    compareValue(a: TypeCompareParam, b: TypeCompareParam) {
-        if (a === b) {
-            return 0;
-        }
-        return a < b ? -1 : 1;
-    }
+    return a < b ? -1 : 1;
+  }
 }
 ```
 

@@ -153,10 +153,10 @@ cd link-module && npm init -y
 // link-module/package.json
 
 {
-    "name": "link-module",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "ISC"
+  "name": "link-module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "ISC"
 }
 ```
 
@@ -164,7 +164,7 @@ cd link-module && npm init -y
 // link-module/index.js
 
 module.exports = function () {
-    console.log('link-module run here ...');
+  console.log('link-module run here ...');
 };
 ```
 
@@ -239,11 +239,11 @@ cd project && npm unlink link-module
 fs.symlinkSync(target, path, [type]);
 ```
 
-| 参数 | 类型 | 说明 |
-| --- | --- | --- |
-| target | `string`、`Buffer`、`URL` | 为源目录或文件的路径 |
-| path | `string` | `Buffer` | `URL` | 它是存放转换后的目录的路径，默认为当前工作目录 |
-| type | `string` | 默认值: `file`，可选值 `dir`、`file`，或者 `junction`，该项仅用于 `Windows`（在其他平台上忽略）。 |
+| 参数   | 类型                      | 说明                                                                                              |
+| ------ | ------------------------- | ------------------------------------------------------------------------------------------------- | ----- | ---------------------------------------------- |
+| target | `string`、`Buffer`、`URL` | 为源目录或文件的路径                                                                              |
+| path   | `string`                  | `Buffer`                                                                                          | `URL` | 它是存放转换后的目录的路径，默认为当前工作目录 |
+| type   | `string`                  | 默认值: `file`，可选值 `dir`、`file`，或者 `junction`，该项仅用于 `Windows`（在其他平台上忽略）。 |
 
 它会创建名为 `path` 的软链接，该链接指向 `target`。
 
@@ -258,11 +258,11 @@ fs.symlinkSync(target, path, [type]);
 const fs = require('node:fs');
 
 try {
-    fs.symlinkSync('./src/a.js', './b.js');
-    console.log('创建软链成功');
+  fs.symlinkSync('./src/a.js', './b.js');
+  console.log('创建软链成功');
 }
 catch (err) {
-    console.error('创建软链失败 | err:', err);
+  console.error('创建软链失败 | err:', err);
 }
 ```
 
@@ -274,15 +274,15 @@ catch (err) {
 // utils/create-symlink/create-symlink.js
 
 function createSymbolicLink(src, dest, type) {
-    log.silly('createSymbolicLink', [src, dest, type]);
+  log.silly('createSymbolicLink', [src, dest, type]);
 
-    return fs
-        .lstat(dest)
-        .then(() => fs.unlink(dest))
-        .catch(() => {
-            /* nothing exists at destination */
-        })
-        .then(() => fs.symlink(src, dest, type));
+  return fs
+    .lstat(dest)
+    .then(() => fs.unlink(dest))
+    .catch(() => {
+      /* nothing exists at destination */
+    })
+    .then(() => fs.symlink(src, dest, type));
 }
 ```
 
@@ -330,11 +330,11 @@ lerna-demo
 // package.json
 
 {
-    "name": "root",
-    "private": true,
-    "devDependencies": {
-        "lerna": "^4.0.0"
-    }
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
 ```
 
@@ -346,8 +346,8 @@ lerna-demo
 // lerna.json
 
 {
-    "packages": ["packages/*"],
-    "version": "0.0.0"
+  "packages": ["packages/*"],
+  "version": "0.0.0"
 }
 ```
 
@@ -399,30 +399,30 @@ packages
 module.exports = packageA;
 
 function packageA() {
-    //
+  //
 }
 ```
 
 ```json
 // package.json
 {
-    "name": "package-a",
-    "version": "0.0.0",
-    "description": "",
-    "license": "ISC",
-    "main": "lib/package-a.js",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
-    "files": ["lib"],
-    "publishConfig": {
-        "registry": "https://registry.npm.taobao.org"
-    },
-    "repository": {},
-    "scripts": {
-        "test": "echo \"Error: run tests from root\" && exit 1"
-    }
+  "name": "package-a",
+  "version": "0.0.0",
+  "description": "",
+  "license": "ISC",
+  "main": "lib/package-a.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": ["lib"],
+  "publishConfig": {
+    "registry": "https://registry.npm.taobao.org"
+  },
+  "repository": {},
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
 }
 ```
 
@@ -434,7 +434,7 @@ function packageA() {
 const packageA = require('..');
 
 describe('package-a', () => {
-    it('needs tests');
+  it('needs tests');
 });
 ```
 
@@ -468,13 +468,13 @@ cd lerna-demo && lerna add axios
 // package-a/package.json
 
 {
-    // ...
+  // ...
 
-    "dependencies": {
-        "axios": "^0.21.1"
-    }
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 
-    // ...
+  // ...
 }
 ```
 
@@ -514,14 +514,14 @@ lerna add lodash --scope=package-a
 // package-a/package.json
 
 {
-    // ...
+  // ...
 
-    "dependencies": {
-        "axios": "^0.21.1",
-        "lodash": "^4.17.21"
-    }
+  "dependencies": {
+    "axios": "^0.21.1",
+    "lodash": "^4.17.21"
+  }
 
-    // ...
+  // ...
 }
 ```
 
@@ -689,12 +689,12 @@ lerna publish
 
 ```json
 {
-    // ...
+  // ...
 
-    "npmClient": "yarn", // 指定 npmClent 为 yarn
-    "useWorkspaces": true // 将 useWorkspaces 设置为 true
+  "npmClient": "yarn", // 指定 npmClent 为 yarn
+  "useWorkspaces": true // 将 useWorkspaces 设置为 true
 
-    // ...
+  // ...
 }
 ```
 
@@ -702,11 +702,11 @@ lerna publish
 
 ```json
 {
-    // ...
+  // ...
 
-    "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"]
 
-    // ...
+  // ...
 }
 ```
 
@@ -725,13 +725,13 @@ lerna publish
 // package.json
 
 {
-    // ...
+  // ...
 
-    "scripts": {
-        "start-a": "lerna exec --scope package-a -- yarn start"
-    }
+  "scripts": {
+    "start-a": "lerna exec --scope package-a -- yarn start"
+  }
 
-    // ...
+  // ...
 }
 ```
 
@@ -765,13 +765,13 @@ lerna add package-a --scope=package-b
 // package-b/package.json
 
 {
-    // ...
+  // ...
 
-    "dependencies": {
-        "package-a": "^0.0.1"
-    }
+  "dependencies": {
+    "package-a": "^0.0.1"
+  }
 
-    // ...
+  // ...
 }
 ```
 
@@ -854,9 +854,9 @@ cd ui-component/packages/examples && yarn dev
 // ui-component/package.json
 
 {
-    // ...
-    "main": "src/index.ts"
-    // ...
+  // ...
+  "main": "src/index.ts"
+  // ...
 }
 ```
 
@@ -867,16 +867,16 @@ import { App } from 'vue';
 import Button from './components/button/index';
 
 const install = function (app: App) {
-    components.forEach((component) => {
-        app.component(component.name, component);
-    });
+  components.forEach((component) => {
+    app.component(component.name, component);
+  });
 };
 
 const components = [Button];
 
 export default {
-    install,
-    Button,
+  install,
+  Button,
 };
 ```
 
@@ -888,7 +888,7 @@ import { App } from 'vue';
 import Button from './src/button.vue';
 
 Button.install = (app: App): void => {
-    app.component(Button.name, Button);
+  app.component(Button.name, Button);
 };
 
 const _Button: SFCWithInstall<typeof Button> = Button;
@@ -900,12 +900,12 @@ export default _Button;
 <!-- ui-component/src/components/button/src/button.ts -->
 
 <template>
-    <button
-        class="el-button" :class="[type ? `el-button--${type}` : '', buttonSize ? `el-button--${buttonSize}` : '']"
-        @click="handleClick"
-    >
-        <span v-if="$slots.default"><slot /></span>
-    </button>
+  <button
+    class="el-button" :class="[type ? `el-button--${type}` : '', buttonSize ? `el-button--${buttonSize}` : '']"
+    @click="handleClick"
+  >
+    <span v-if="$slots.default"><slot /></span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -919,39 +919,39 @@ type IButtonType = PropType<'primary' | 'default'>;
 type EmitFn = (evt: Event) => void;
 
 export default defineComponent({
-    name: 'TestButton',
+  name: 'TestButton',
 
-    props: {
-        type: {
-            type: String as IButtonType,
-            default: 'default',
-            validator: (val: string) => {
-                return ['default', 'primary'].includes(val);
-            },
-        },
-        size: {
-            type: String as PropType<ComponentSize>,
-            validator: isValidComponentSize,
-        },
+  props: {
+    type: {
+      type: String as IButtonType,
+      default: 'default',
+      validator: (val: string) => {
+        return ['default', 'primary'].includes(val);
+      },
     },
-
-    emits: ['click'],
-
-    setup(props: any, { emit }) {
-        const buttonSize = computed(() => {
-            return props.size || 'medium';
-        });
-
-        // methods
-        const handleClick: EmitFn = (evt: MouseEvent) => {
-            emit('click', evt);
-        };
-
-        return {
-            buttonSize,
-            handleClick,
-        };
+    size: {
+      type: String as PropType<ComponentSize>,
+      validator: isValidComponentSize,
     },
+  },
+
+  emits: ['click'],
+
+  setup(props: any, { emit }) {
+    const buttonSize = computed(() => {
+      return props.size || 'medium';
+    });
+
+    // methods
+    const handleClick: EmitFn = (evt: MouseEvent) => {
+      emit('click', evt);
+    };
+
+    return {
+      buttonSize,
+      handleClick,
+    };
+  },
 });
 </script>
 
@@ -1050,21 +1050,21 @@ app.mount('#app');
 <!-- examples/src/App.vue -->
 
 <template>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <div>
-        <test-button>默认按钮</test-button>
-        <test-button type="primary" size="small">
-            主要按钮
-        </test-button>
-    </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <div>
+    <test-button>默认按钮</test-button>
+    <test-button type="primary" size="small">
+      主要按钮
+    </test-button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'App',
-    components: {},
+  name: 'App',
+  components: {},
 });
 </script>
 
@@ -1086,13 +1086,13 @@ export default defineComponent({
 // 最外层 package.json
 
 {
-    // ...
+  // ...
 
-    "scripts": {
-        "preview": "lerna exec --scope examples -- yarn dev"
-    }
+  "scripts": {
+    "preview": "lerna exec --scope examples -- yarn dev"
+  }
 
-    // ...
+  // ...
 }
 ```
 

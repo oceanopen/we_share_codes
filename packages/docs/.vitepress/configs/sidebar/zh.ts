@@ -8,22 +8,22 @@ import security from './security';
 import tools from './tools';
 
 export const zh = {
-    '/guide/': [
-        {
-            text: '介绍',
-            link: '/guide/',
-        },
-        {
-            text: '快速开始',
-            link: '/guide/getting-started',
-        },
-    ],
-    '/tools/': tools,
-    '/frontend/': frontend,
-    '/backend/': backend,
-    '/algorithm/': algorithm,
-    '/other/': other,
-    '/operation/': operation,
-    '/security/': security,
-    '/ai/': ai,
+  '/guide/': [
+    {
+      text: '介绍',
+      link: '/guide/',
+    },
+    {
+      text: '快速开始',
+      link: '/guide/getting-started',
+    },
+  ],
+  '/tools/': tools,
+  '/frontend/': frontend,
+  '/backend/': backend,
+  '/algorithm/': algorithm,
+  '/other/': other,
+  '/operation/': operation,
+  '/security/': security,
+  '/ai/': ai,
 };

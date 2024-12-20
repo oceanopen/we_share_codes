@@ -51,10 +51,10 @@
 <!-- Button.vue -->
 
 <template>
-    <button :class="buttonVariants({ variant, size, fill, shape, inline })">
-        <IconLoading v-if="loading" />
-        <slot />
-    </button>
+  <button :class="buttonVariants({ variant, size, fill, shape, inline })">
+    <IconLoading v-if="loading" />
+    <slot />
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -63,29 +63,29 @@ import clsx from 'clsx';
 import IconLoading from './IconLoading.vue';
 
 interface Props {
-    variant?: 'primary' | 'success' | 'danger' | 'warning';
-    size?: 'small' | 'large' | 'middle';
-    fill?: 'solid' | 'outline' | 'text';
-    shape?: 'round' | 'square' | 'pill';
-    inline?: boolean;
-    loading?: boolean;
-    disabled?: boolean;
+  variant?: 'primary' | 'success' | 'danger' | 'warning';
+  size?: 'small' | 'large' | 'middle';
+  fill?: 'solid' | 'outline' | 'text';
+  shape?: 'round' | 'square' | 'pill';
+  inline?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
 
 function buttonVariants({ variant, size, fill, shape, inline }) {
-    return clsx(
-        'inline-flex items-center justify-center rounded-lg ...',
-        {
-            'bg-primary ...': variant === 'primary',
-            'bg-success ...': variant === 'success',
-            'bg-danger ...': variant === 'danger',
-            '!rounded-full': shape === 'round',
-            'rounded-none': shape === 'square',
-            'rounded-md': shape === 'pill',
-        }
-    );
+  return clsx(
+    'inline-flex items-center justify-center rounded-lg ...',
+    {
+      'bg-primary ...': variant === 'primary',
+      'bg-success ...': variant === 'success',
+      'bg-danger ...': variant === 'danger',
+      '!rounded-full': shape === 'round',
+      'rounded-none': shape === 'square',
+      'rounded-md': shape === 'pill',
+    }
+  );
 }
 </script>
 ```
@@ -110,10 +110,10 @@ function buttonVariants({ variant, size, fill, shape, inline }) {
 <!-- Button.vue -->
 
 <template>
-    <button :class="twMerge(buttonVariants({ variant, size, fill, shape, inline }), props.class)">
-        <IconLoading v-if="loading" />
-        <slot />
-    </button>
+  <button :class="twMerge(buttonVariants({ variant, size, fill, shape, inline }), props.class)">
+    <IconLoading v-if="loading" />
+    <slot />
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -126,37 +126,37 @@ import IconLoading from './IconLoading.vue';
 const props = withDefaults(defineProps<Props>(), {});
 
 const buttonVariants = cva(
-    'inline-flex rounded-lg items-center justify-center ...',
-    {
-        variants: {
-            type: {
-                primary: 'bg-primary text-primary border-primary',
-                success: 'bg-success text-success border-success',
-                danger: 'bg-danger text-danger border-danger',
-            },
-            shape: {
-                round: 'rounded-full',
-                square: 'rounded-lg',
-            },
-        },
-        defaultVariants: {
-            type: 'primary',
-            shape: 'square',
-        },
-    }
+  'inline-flex rounded-lg items-center justify-center ...',
+  {
+    variants: {
+      type: {
+        primary: 'bg-primary text-primary border-primary',
+        success: 'bg-success text-success border-success',
+        danger: 'bg-danger text-danger border-danger',
+      },
+      shape: {
+        round: 'rounded-full',
+        square: 'rounded-lg',
+      },
+    },
+    defaultVariants: {
+      type: 'primary',
+      shape: 'square',
+    },
+  }
 );
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 interface Props {
-    variant?: ButtonVariants['variant'];
-    size?: ButtonVariants['size'];
-    fill?: ButtonVariants['fill'];
-    shape?: ButtonVariants['shape'];
-    inline?: ButtonVariants['inline'];
-    class?: HTMLAttributes['class'];
-    loading?: boolean;
-    disabled?: boolean;
+  variant?: ButtonVariants['variant'];
+  size?: ButtonVariants['size'];
+  fill?: ButtonVariants['fill'];
+  shape?: ButtonVariants['shape'];
+  inline?: ButtonVariants['inline'];
+  class?: HTMLAttributes['class'];
+  loading?: boolean;
+  disabled?: boolean;
 }
 </script>
 ```
@@ -184,11 +184,11 @@ pnpm run ui:build
 ```json
 // docs/package.json
 {
-    // ...
-    "dependencies": {
-        "components": "workspace:*"
-    }
-    // ...
+  // ...
+  "dependencies": {
+    "components": "workspace:*"
+  }
+  // ...
 }
 ```
 
@@ -205,23 +205,23 @@ pnpm run ui:build
 <!-- packages/docs/components/demo/Button_Variant/tailwind/index.vue -->
 
 <template>
-    <div class="flex flex-wrap flex-col gap-5 justify-start w-full">
-        <Button variant="primary" @click="handleClick">
-            Primary
-        </Button>
-        <Button variant="success" @click="handleClick">
-            Success
-        </Button>
-        <Button variant="warning" @click="handleClick">
-            Warning
-        </Button>
-        <Button variant="danger" @click="handleClick">
-            Danger
-        </Button>
-        <Button @click="handleClick">
-            Default
-        </Button>
-    </div>
+  <div class="flex flex-wrap flex-col gap-5 justify-start w-full">
+    <Button variant="primary" @click="handleClick">
+      Primary
+    </Button>
+    <Button variant="success" @click="handleClick">
+      Success
+    </Button>
+    <Button variant="warning" @click="handleClick">
+      Warning
+    </Button>
+    <Button variant="danger" @click="handleClick">
+      Danger
+    </Button>
+    <Button @click="handleClick">
+      Default
+    </Button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -229,7 +229,7 @@ import { Button } from 'components';
 import 'components/dist/index.css';
 
 function handleClick(e: MouseEvent) {
-    console.log('[Button.Variant] handleClick, e:', e);
+  console.log('[Button.Variant] handleClick, e:', e);
 }
 </script>
 ```
@@ -261,18 +261,18 @@ pnpm run ui:docs:dev
 ```json
 // packages/components/package.json
 {
-    "scripts": {
-        "watch": "vite build --watch"
-    }
+  "scripts": {
+    "watch": "vite build --watch"
+  }
 }
 ```
 
 ```json
 // package.json
 {
-    "scripts": {
-        "ui:build:watch": "rimraf packages/components/dist && pnpm run --filter components watch"
-    }
+  "scripts": {
+    "ui:build:watch": "rimraf packages/components/dist && pnpm run --filter components watch"
+  }
 }
 ```
 
@@ -290,20 +290,20 @@ pnpm run ui:docs:dev
 
 ```vue
 <template>
-    <ButtonRoot
-        :class="cn(buttonVariants({ variant, size, fill, shape, inline }), props.class)"
-        :disabled="disabled || loading"
-        :data-variant="variant"
-        :data-size="size"
-        :data-fill="fill"
-        :data-shape="shape"
-        :data-inline="inline"
-        :data-disabled="disabled"
-        :data-loading="loading"
-    >
-        <IconLoading v-if="loading" />
-        <slot />
-    </ButtonRoot>
+  <ButtonRoot
+    :class="cn(buttonVariants({ variant, size, fill, shape, inline }), props.class)"
+    :disabled="disabled || loading"
+    :data-variant="variant"
+    :data-size="size"
+    :data-fill="fill"
+    :data-shape="shape"
+    :data-inline="inline"
+    :data-disabled="disabled"
+    :data-loading="loading"
+  >
+    <IconLoading v-if="loading" />
+    <slot />
+  </ButtonRoot>
 </template>
 ```
 
@@ -318,7 +318,7 @@ pnpm run ui:docs:dev
 ```js
 // packages/uiComponents/tailwind.config.js
 module.exports = {
-    prefix: 'ui-',
+  prefix: 'ui-',
 };
 ```
 
@@ -327,21 +327,21 @@ module.exports = {
 ```vue
 <script lang="ts">
 const buttonVariants = cva('ui-inline-flex ui-rounded-lg ui-items-center ui-justify-center ...', {
-    variants: {
-        type: {
-            primary: 'ui-bg-primary ui-text-primary ui-border-primary',
-            success: 'ui-bg-success ui-text-success ui-border-success',
-            danger: 'ui-bg-danger ui-text-danger ui-border-danger',
-        },
-        shape: {
-            round: 'ui-rounded-full',
-            square: 'ui-rounded-lg',
-        },
+  variants: {
+    type: {
+      primary: 'ui-bg-primary ui-text-primary ui-border-primary',
+      success: 'ui-bg-success ui-text-success ui-border-success',
+      danger: 'ui-bg-danger ui-text-danger ui-border-danger',
     },
-    defaultVariants: {
-        type: 'ui-primary',
-        shape: 'ui-square',
+    shape: {
+      round: 'ui-rounded-full',
+      square: 'ui-rounded-lg',
     },
+  },
+  defaultVariants: {
+    type: 'ui-primary',
+    shape: 'ui-square',
+  },
 });
 </script>
 ```
@@ -399,21 +399,21 @@ const animate = require('tailwindcss-animate');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    prefix: 'ui-',
-    theme: {
-        extend: {
-            colors: {
-                border: 'hsl(var(--ui-border))',
-                text: 'hsl(var(--ui-text))',
-                background: 'hsl(var(--ui-background))',
-                foreground: 'hsl(var(--ui-foreground))',
-                primary: {
-                    DEFAULT: 'hsl(var(--ui-primary))',
-                    foreground: 'hsl(var(--ui-primary-foreground))',
-                },
-            },
+  prefix: 'ui-',
+  theme: {
+    extend: {
+      colors: {
+        border: 'hsl(var(--ui-border))',
+        text: 'hsl(var(--ui-text))',
+        background: 'hsl(var(--ui-background))',
+        foreground: 'hsl(var(--ui-foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--ui-primary))',
+          foreground: 'hsl(var(--ui-primary-foreground))',
         },
+      },
     },
+  },
 };
 ```
 

@@ -37,7 +37,7 @@ new func(); // Uncaught TypeError: func is not a constructor
 
 ```js
 function func() {
-    console.log(this);
+  console.log(this);
 }
 
 func.bind(1).bind(2)(); // Number {1}
@@ -47,8 +47,8 @@ func.bind(1).bind(2)(); // Number {1}
 
 ```js
 func = () => {
-    // 这里 this 指向取决于外层 this，参考口诀 7 「不在函数里」
-    console.log(this);
+  // 这里 this 指向取决于外层 this，参考口诀 7 「不在函数里」
+  console.log(this);
 };
 
 func.bind(1)(); // Window // 口诀 1 优先
@@ -58,8 +58,8 @@ func.bind(1)(); // Window // 口诀 1 优先
 
 ```js
 function func() {
-    // eslint-disable-next-line no-proto, no-restricted-properties
-    console.log(this, this.__proto__ === func.prototype);
+  // eslint-disable-next-line no-proto, no-restricted-properties
+  console.log(this, this.__proto__ === func.prototype);
 }
 
 boundFunc = func.bind(1);
@@ -75,8 +75,8 @@ new boundFunc(); // func {}[[Prototype]]: Object true  // 口诀 2 优先
 
 ```js
 func = () => {
-    // 这里 this 指向取决于外层 this，参考口诀 7 「不在函数里」
-    console.log(this);
+  // 这里 this 指向取决于外层 this，参考口诀 7 「不在函数里」
+  console.log(this);
 };
 func.apply(1); // Window // 口诀 1 优先
 ```
@@ -85,7 +85,7 @@ func.apply(1); // Window // 口诀 1 优先
 
 ```js
 function func() {
-    console.log(this);
+  console.log(this);
 }
 
 boundFunc = func.bind(1);
@@ -96,7 +96,7 @@ boundFunc.apply(2); // Number {1} // 口诀 3 优先
 
 ```js
 function func() {
-    console.log(this.x);
+  console.log(this.x);
 }
 
 obj = { x: 1 };
@@ -113,7 +113,7 @@ obj.func(); // 1
 
 ```js
 function func() {
-    console.log(this);
+  console.log(this);
 }
 func(); // Window
 ```
@@ -122,12 +122,12 @@ func(); // Window
 
 ```js
 function outerFunc() {
-    console.log(this); // { x: 1 }
+  console.log(this); // { x: 1 }
 
-    function func() {
-        console.log(this); // Window
-    }
-    func();
+  function func() {
+    console.log(this); // Window
+  }
+  func();
 }
 outerFunc.bind({ x: 1 })();
 ```
@@ -150,10 +150,10 @@ outerFunc.bind({ x: 1 })();
 
 ```js
 function a() {
-    console.log('function a:', this)
-    ;(() => {
-        console.log('arrow function:', this);
-    })();
+  console.log('function a:', this)
+  ;(() => {
+    console.log('arrow function:', this);
+  })();
 }
 a(); // function a: Window // arrow function: Window
 a.bind(null)(); // function a: Window // arrow function: Window
@@ -168,10 +168,10 @@ a.apply(); // function a: Window // arrow function: Window
 ```js
 'use strict';
 function a() {
-    console.log('function a:', this)
-    ;(() => {
-        console.log('arrow function: ', this);
-    })();
+  console.log('function a:', this)
+  ;(() => {
+    console.log('arrow function: ', this);
+  })();
 }
 a(); // function a: undefined // arrow function: undefined
 a.bind(null)(); // function a: null // arrow function: null
@@ -190,7 +190,7 @@ a.apply(); // function a: undefined // arrow function: undefined
 
 ```js
 function func(num) {
-    this.count++;
+  this.count++;
 }
 
 func.count = 0;
@@ -211,13 +211,13 @@ func.count 值为 0。
 
 ```js
 obj = {
-    func() {
-        const arrowFunc = () => {
-            console.log(this._name);
-        };
-        return arrowFunc;
-    },
-    _name: 'obj',
+  func() {
+    const arrowFunc = () => {
+      console.log(this._name);
+    };
+    return arrowFunc;
+  },
+  _name: 'obj',
 };
 obj.func()();
 func = obj.func;

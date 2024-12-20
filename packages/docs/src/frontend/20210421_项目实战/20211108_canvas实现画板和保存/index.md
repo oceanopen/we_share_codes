@@ -35,10 +35,10 @@ npm install element-plus --save # 安装 element-plus ui组件库
 ```json
 // tsconfig.json
 {
-    "compilerOptions": {
+  "compilerOptions": {
     // ...
-        "types": ["element-plus/global"]
-    }
+    "types": ["element-plus/global"]
+  }
 }
 ```
 
@@ -54,12 +54,12 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 
 export default {
-    plugins: [
+  plugins: [
     // ...
-        Components({
-            resolvers: [ElementPlusResolver()],
-        }),
-    ],
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
 };
 ```
 
@@ -96,8 +96,8 @@ export default {
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, onMounted } from 'vue'
-  import { ElButton } from 'element-plus'
+  import { defineComponent, reactive, ref, onMounted } from "vue";
+  import { ElButton } from "element-plus";
 
   export default defineComponent({
     components: {
@@ -105,107 +105,107 @@ export default {
     },
     setup() {
       const state = reactive({
-        type: 'huabi',
+        type: "huabi",
         isDraw: false,
         beginX: 0,
         beginY: 0,
-        color: '#000',
+        color: "#000",
         imageData: null as any,
-      })
-      const canvasDom = ref<null | HTMLCanvasElement>(null)
-      const ctx = ref<null | undefined | CanvasRenderingContext2D>(null)
+      });
+      const canvasDom = ref<null | HTMLCanvasElement>(null);
+      const ctx = ref<null | undefined | CanvasRenderingContext2D>(null);
 
       onMounted(() => {
-        ctx.value = canvasDom.value?.getContext('2d')
-      })
+        ctx.value = canvasDom.value?.getContext("2d");
+      });
 
       function changeType(type: string) {
-        state.type = type
+        state.type = type;
       }
 
       function canvasDown(e: MouseEvent) {
-        state.isDraw = true
-        const canvas = canvasDom.value as HTMLCanvasElement
-        state.beginX = e.pageX - canvas.offsetLeft
-        state.beginY = e.pageY - canvas.offsetTop
+        state.isDraw = true;
+        const canvas = canvasDom.value as HTMLCanvasElement;
+        state.beginX = e.pageX - canvas.offsetLeft;
+        state.beginY = e.pageY - canvas.offsetTop;
       }
       function canvasMove(e: MouseEvent) {
-        if (!state.isDraw) return
-        const canvas = canvasDom.value as HTMLCanvasElement
-        const x = e.pageX - canvas.offsetLeft
-        const y = e.pageY - canvas.offsetTop
+        if (!state.isDraw) return;
+        const canvas = canvasDom.value as HTMLCanvasElement;
+        const x = e.pageX - canvas.offsetLeft;
+        const y = e.pageY - canvas.offsetTop;
 
         switch (state.type) {
-          case 'huabi':
-            huabiFn(ctx.value as CanvasRenderingContext2D, x, y)
-            break
-          case 'rect':
-            rectFn(ctx.value as CanvasRenderingContext2D, x, y)
-            break
-          case 'arc':
-            arcFn(ctx.value as CanvasRenderingContext2D, x, y)
-            break
+          case "huabi":
+            huabiFn(ctx.value as CanvasRenderingContext2D, x, y);
+            break;
+          case "rect":
+            rectFn(ctx.value as CanvasRenderingContext2D, x, y);
+            break;
+          case "arc":
+            arcFn(ctx.value as CanvasRenderingContext2D, x, y);
+            break;
         }
       }
       function canvasUp() {
-        state.imageData = (ctx.value as CanvasRenderingContext2D).getImageData(0, 0, 800, 400)
-        state.isDraw = false
+        state.imageData = (ctx.value as CanvasRenderingContext2D).getImageData(0, 0, 800, 400);
+        state.isDraw = false;
       }
 
       function huabiFn(ctx: CanvasRenderingContext2D, x: number, y: number) {
-        ctx.beginPath()
-        ctx.arc(x, y, 5, 0, 2 * Math.PI)
-        ctx.fillStyle = state.color
-        ctx.fill()
-        ctx.closePath()
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = state.color;
+        ctx.fill();
+        ctx.closePath();
       }
 
       function rectFn(ctx: CanvasRenderingContext2D, x: number, y: number) {
-        const beginX = state.beginX
-        const beginY = state.beginY
-        ctx.clearRect(0, 0, 800, 400)
+        const beginX = state.beginX;
+        const beginY = state.beginY;
+        ctx.clearRect(0, 0, 800, 400);
 
-        state.imageData && ctx.putImageData(state.imageData, 0, 0, 0, 0, 800, 400)
+        state.imageData && ctx.putImageData(state.imageData, 0, 0, 0, 0, 800, 400);
 
-        ctx.beginPath()
-        ctx.strokeStyle = state.color
-        ctx.rect(beginX, beginY, x - beginX, y - beginY)
-        ctx.stroke()
-        ctx.closePath()
+        ctx.beginPath();
+        ctx.strokeStyle = state.color;
+        ctx.rect(beginX, beginY, x - beginX, y - beginY);
+        ctx.stroke();
+        ctx.closePath();
       }
 
       function arcFn(ctx: CanvasRenderingContext2D, x: number, y: number) {
-        const beginX = state.beginX
-        const beginY = state.beginY
-        state.isDraw && ctx.clearRect(0, 0, 800, 400)
+        const beginX = state.beginX;
+        const beginY = state.beginY;
+        state.isDraw && ctx.clearRect(0, 0, 800, 400);
 
-        state.imageData && ctx.putImageData(state.imageData, 0, 0, 0, 0, 800, 400)
+        state.imageData && ctx.putImageData(state.imageData, 0, 0, 0, 0, 800, 400);
 
-        ctx.beginPath()
-        ctx.strokeStyle = state.color
+        ctx.beginPath();
+        ctx.strokeStyle = state.color;
         ctx.arc(
           beginX,
           beginY,
           Math.round(Math.sqrt((x - beginX) * (x - beginX) + (y - beginY) * (y - beginY))),
           0,
-          2 * Math.PI
-        )
-        ctx.stroke()
-        ctx.closePath()
+          2 * Math.PI,
+        );
+        ctx.stroke();
+        ctx.closePath();
       }
       function saveImg() {
-        const url = (canvasDom.value as HTMLCanvasElement).toDataURL()
-        const a = document.createElement('a')
-        a.download = 'sunshine'
-        a.href = url
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
+        const url = (canvasDom.value as HTMLCanvasElement).toDataURL();
+        const a = document.createElement("a");
+        a.download = "sunshine";
+        a.href = url;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
 
       function clear() {
-        state.imageData = null
-        ;(ctx.value as CanvasRenderingContext2D).clearRect(0, 0, 800, 400)
+        state.imageData = null;
+        (ctx.value as CanvasRenderingContext2D).clearRect(0, 0, 800, 400);
       }
 
       return {
@@ -217,9 +217,9 @@ export default {
         canvasDown,
         canvasMove,
         canvasUp,
-      }
+      };
     },
-  })
+  });
 </script>
 ```
 

@@ -26,8 +26,8 @@
 
 下面是最各大工具或框架的诞生时间，不知不觉，模块化的发展已有十年之久了。
 
-| 生态           | 诞生时间 |
-| -------------- | -------- |
+| 生态             | 诞生时间 |
+| ---------------- | -------- |
 | `Node.js`        | 2009 年  |
 | `NPM`            | 2010 年  |
 | `requireJS(AMD)` | 2010 年  |
@@ -170,11 +170,11 @@ npm install --save jquery
 ```json
 // package.json
 {
-    // ...
-    "dependencies": {
-        "jquery": "^3.6.0"
-    }
-    // ...
+  // ...
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+  // ...
 }
 ```
 
@@ -218,17 +218,17 @@ npm install --save jquery
 <!-- a.js -->
 <script>
   var module1 = (function () {
-    var x = 1
-    return { a: x }
-  })()
+    var x = 1;
+    return { a: x };
+  })();
 </script>
 
 <!-- b.js -->
 <script>
   var module2 = (function () {
-    var a = module1.a
-    return { b: a }
-  })()
+    var a = module1.a;
+    return { b: a };
+  })();
 </script>
 ```
 
@@ -296,10 +296,10 @@ define('dep2', [], () => {});
 
 // module1.js
 define('module1', ['dep1', 'dep2'], (dep1, dep2) => {
-    // initial setup
-    return {
+  // initial setup
+  return {
     // exports
-    };
+  };
 });
 ```
 
@@ -318,7 +318,7 @@ require(deps, factory);
 
 ```js
 require(['module1', 'module2'], (module1, module2) => {
-    // modules module1 and module2 are now available for use.
+  // modules module1 and module2 are now available for use.
 });
 ```
 
@@ -341,16 +341,16 @@ require(['module1', 'module2'], (module1, module2) => {
 ```js
 // depModule.js
 define('depModule', [], () => {
-    return {
-        printSth() {
-            console.log('something');
-        },
-    };
+  return {
+    printSth() {
+      console.log('something');
+    },
+  };
 });
 
 // app.js
 define('app', ['depModule'], (depModule) => {
-    depModule.printSth();
+  depModule.printSth();
 });
 ```
 
@@ -363,14 +363,14 @@ define('app', ['depModule'], (depModule) => {
 <script>
   require.config({
     paths: {
-      app: 'js/app',
-      depModule: 'js/depModule',
+      app: "js/app",
+      depModule: "js/depModule",
     },
-  })
+  });
 
-  require(['app'], function (app) {
+  require(["app"], function (app) {
     // ...入口文件
-  })
+  });
 </script>
 ```
 
@@ -402,22 +402,22 @@ define('app', ['depModule'], (depModule) => {
 ```js
 // CMD
 define((requie, exports, module) => {
-    // 依赖就近书写
-    const module1 = require('Module1');
-    const result1 = module1.exec();
+  // 依赖就近书写
+  const module1 = require('Module1');
+  const result1 = module1.exec();
 
-    module.exports = {
-        result1,
-    };
+  module.exports = {
+    result1,
+  };
 });
 
 // AMD
 define(['Module1'], (module1) => {
-    const result1 = module1.exec();
+  const result1 = module1.exec();
 
-    return {
-        result1,
-    };
+  return {
+    result1,
+  };
 });
 ```
 
@@ -472,7 +472,7 @@ export const bar = 1; // 输出
 // CommonJS
 const foo = require('./foo'); // 输入
 module.exports = {
-    bar: 1, // 输出
+  bar: 1, // 输出
 };
 ```
 
@@ -563,7 +563,7 @@ const b = require('./b.js');
 ```js
 // a.js
 module.exports = {
-    a: 123,
+  a: 123,
 };
 ```
 
@@ -591,12 +591,12 @@ npm install --save-dev webpack webpack-cli
 ```js
 // webpack.config.js
 module.exports = {
-    mode: 'development', // development为开发环境，production为生产环境
-    entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
-    output: {
-        path: path.resolve(__dirname, 'dist'), // 打包后的文件存放的地方
-        filename: 'bundle.js', // 打包后输出文件的文件名
-    },
+  mode: 'development', // development为开发环境，production为生产环境
+  entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
+  output: {
+    path: path.resolve(__dirname, 'dist'), // 打包后的文件存放的地方
+    filename: 'bundle.js', // 打包后输出文件的文件名
+  },
 };
 ```
 
@@ -640,44 +640,44 @@ npx webpack --config webpack.config.js
 
 ```js
 module.exports = {
-    mode: 'development', // development为开发环境，production为生产环境
-    entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
-    output: {
-        path: path.resolve(__dirname, dist), // 打包后的文件存放的地方
-        filename: 'bundle.js', // 打包后输出文件的文件名
-    },
-    optimization: {
+  mode: 'development', // development为开发环境，production为生产环境
+  entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
+  output: {
+    path: path.resolve(__dirname, dist), // 打包后的文件存放的地方
+    filename: 'bundle.js', // 打包后输出文件的文件名
+  },
+  optimization: {
     // 配置详见：https://webpack.docschina.org/plugins/split-chunks-plugin/
-        splitChunks: {
-            cacheGroups: {
-                // 第三方开源库单独打包
-                commons: {
-                    chunks: 'all',
-                    // 当 webpack 处理文件路径时，它们始终包含 Unix 系统中的 / 和 Windows 系统中的 \。这就是为什么在 {cacheGroup}.test 字段中使用 [\\/] 来表示路径分隔符的原因。{cacheGroup}.test 中的 / 或 \ 会在跨平台使用时产生问题。
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    reuseExistingChunk: true,
-                    // cacheGroupKey here is `commons` as the key of the cacheGroup
-                    name(module, chunks, cacheGroupKey) {
-                        return `${cacheGroupKey}`;
-                    },
-                    filename: '[name].bundle.js',
-                },
-                // 业务项目公共代码单独打包
-                vendors: {
-                    chunks: 'all',
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true,
-                    // cacheGroupKey here is `vendors` as the key of the cacheGroup
-                    name(module, chunks, cacheGroupKey) {
-                        return `${cacheGroupKey}`;
-                    },
-                    filename: '[name].bundle.js',
-                },
-            },
+    splitChunks: {
+      cacheGroups: {
+        // 第三方开源库单独打包
+        commons: {
+          chunks: 'all',
+          // 当 webpack 处理文件路径时，它们始终包含 Unix 系统中的 / 和 Windows 系统中的 \。这就是为什么在 {cacheGroup}.test 字段中使用 [\\/] 来表示路径分隔符的原因。{cacheGroup}.test 中的 / 或 \ 会在跨平台使用时产生问题。
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+          // cacheGroupKey here is `commons` as the key of the cacheGroup
+          name(module, chunks, cacheGroupKey) {
+            return `${cacheGroupKey}`;
+          },
+          filename: '[name].bundle.js',
         },
+        // 业务项目公共代码单独打包
+        vendors: {
+          chunks: 'all',
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+          // cacheGroupKey here is `vendors` as the key of the cacheGroup
+          name(module, chunks, cacheGroupKey) {
+            return `${cacheGroupKey}`;
+          },
+          filename: '[name].bundle.js',
+        },
+      },
     },
+  },
 };
 ```
 
@@ -710,9 +710,9 @@ npx webpack --config webpack.config.js
 
 // ...
 document.querySelector('#btn').addEventListener('click', () => {
-    import('./async.js').then((data) => {
-        console.log(data);
-    });
+  import('./async.js').then((data) => {
+    console.log(data);
+  });
 });
 // ...
 ```
@@ -852,9 +852,9 @@ const minifyCSS = require('gulp-cssnano');
 const less = require('gulp-less');
 
 function buildLess() {
-    return () => {
-        return gulp.src(`src/*.less`).pipe(less()).pipe(minifyCSS()).pipe(gulp.dest(`dist`));
-    };
+  return () => {
+    return gulp.src(`src/*.less`).pipe(less()).pipe(minifyCSS()).pipe(gulp.dest(`dist`));
+  };
 }
 
 gulp.task('default', gulp.series(buildLess()));
@@ -888,20 +888,20 @@ npm install --save-dev style-loader css-loader less less-loader
 ```js
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [
-            {
-                test: /\.css/,
-                use: ['style-loader', { loader: 'css-loader' }],
-            },
-            {
-                test: /\.less$/,
-                exclude: /node_modules/,
-                use: ['style-loader', { loader: 'css-loader' }, { loader: 'less-loader' }],
-            },
-        ],
-    },
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.css/,
+        use: ['style-loader', { loader: 'css-loader' }],
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: ['style-loader', { loader: 'css-loader' }, { loader: 'less-loader' }],
+      },
+    ],
+  },
 };
 ```
 
@@ -961,16 +961,16 @@ npm install --save-dev rollup
 // rollup.config.js
 
 export default {
-    input: 'src/main.js',
-    output: {
-        file: 'dist/bundle.js',
-        /**
-         * You must supply "output.name" for UMD bundles
-         * that have exports so that the exports are accessible in environments without a module loader.
-         */
-        name: 'bundleSDK',
-        format: 'umd',
-    },
+  input: 'src/main.js',
+  output: {
+    file: 'dist/bundle.js',
+    /**
+     * You must supply "output.name" for UMD bundles
+     * that have exports so that the exports are accessible in environments without a module loader.
+     */
+    name: 'bundleSDK',
+    format: 'umd',
+  },
 };
 ```
 
@@ -981,7 +981,7 @@ export default {
 import { cube } from './maths';
 
 export default {
-    cube,
+  cube,
 };
 ```
 
@@ -991,14 +991,14 @@ export default {
 // This function isn't used anywhere, so
 // Rollup excludes it from the bundle...
 export function square(x) {
-    return x * x;
+  return x * x;
 }
 
 // This function gets included
 export function cube(x) {
-    // rewrite this as `square( x ) * x`
-    // and see what happens!
-    return x * x * x;
+  // rewrite this as `square( x ) * x`
+  // and see what happens!
+  return x * x * x;
 }
 ```
 
@@ -1082,12 +1082,12 @@ npx rollup --config rollup.config.js
 // webpack.config.js
 
 module.exports = {
-    mode: 'development', // development为开发环境，production为生产环境
-    entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
-    output: {
-        path: path.resolve(__dirname, 'dist'), // 打包后的文件存放的地方
-        filename: 'bundle-webpack.js', // 打包后输出文件的文件名
-    },
+  mode: 'development', // development为开发环境，production为生产环境
+  entry: path.resolve(__dirname, 'src/main.js'), // 入口文件
+  output: {
+    path: path.resolve(__dirname, 'dist'), // 打包后的文件存放的地方
+    filename: 'bundle-webpack.js', // 打包后输出文件的文件名
+  },
 };
 ```
 
@@ -1117,8 +1117,8 @@ eval("__webpack_require__.r(__webpack_exports__); /** 这里省略 **/");
 // webpack.config.js
 
 module.exports = {
-    // ...
-    devtool: 'source-map',
+  // ...
+  devtool: 'source-map',
 };
 ```
 
@@ -1146,14 +1146,14 @@ createApp(App).mount('#app');
 // webpack.config.js
 
 module.exports = {
+  // ...
+  output: {
     // ...
-    output: {
-    // ...
-        libraryTarget: 'umd',
-        // library并不是必须项。如果没有 library 配置项，那么如果全局引入的话，不会有全局的变量对象。
-        library: 'bundleSDK',
-    },
-    // ...
+    libraryTarget: 'umd',
+    // library并不是必须项。如果没有 library 配置项，那么如果全局引入的话，不会有全局的变量对象。
+    library: 'bundleSDK',
+  },
+  // ...
 };
 ```
 

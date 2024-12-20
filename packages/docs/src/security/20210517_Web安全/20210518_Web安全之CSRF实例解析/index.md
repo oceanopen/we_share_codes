@@ -36,7 +36,7 @@ CSRF 攻击就是利用了用户的登录状态，并通过第三方的站点来
 ```html
 <!-- server/client.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -87,81 +87,81 @@ CSRF 攻击就是利用了用户的登录状态，并通过第三方的站点来
   </body>
 
   <script>
-    const loginInfo = document.querySelector('.loginInfo')
-    const payInfo = document.querySelector('.payInfo')
-    const money = document.querySelector('.money')
-    const btnLogin = document.querySelector('.btnLogin')
-    const btnPay = document.querySelector('.btnPay')
+    const loginInfo = document.querySelector(".loginInfo");
+    const payInfo = document.querySelector(".payInfo");
+    const money = document.querySelector(".money");
+    const btnLogin = document.querySelector(".btnLogin");
+    const btnPay = document.querySelector(".btnPay");
 
-    let currentName = ''
+    let currentName = "";
 
     // 第一次进入判断是否已经登录
-    Fetch('http://127.0.0.1:3200/isLogin', 'POST', {}).then((res) => {
+    Fetch("http://127.0.0.1:3200/isLogin", "POST", {}).then((res) => {
       if (res.data) {
-        payInfo.style.display = 'block'
-        loginInfo.style.display = 'none'
+        payInfo.style.display = "block";
+        loginInfo.style.display = "none";
 
         // 若已登录，则展示用户账户余额
-        Fetch('http://127.0.0.1:3200/pay', 'POST', { userName: currentName, money: 0 }).then((res) => {
-          money.innerHTML = res.data.money
-        })
+        Fetch("http://127.0.0.1:3200/pay", "POST", { userName: currentName, money: 0 }).then((res) => {
+          money.innerHTML = res.data.money;
+        });
       } else {
-        payInfo.style.display = 'none'
-        loginInfo.style.display = 'block'
+        payInfo.style.display = "none";
+        loginInfo.style.display = "block";
       }
-    })
+    });
 
     // 点击登录
     btnLogin.onclick = function () {
-      var userName = document.querySelector('.userName').value
-      currentName = userName
-      var password = document.querySelector('.password').value
+      var userName = document.querySelector(".userName").value;
+      currentName = userName;
+      var password = document.querySelector(".password").value;
 
       // 登录请求
-      Fetch('http://127.0.0.1:3200/login', 'POST', { userName, password }).then((res) => {
-        payInfo.style.display = 'block'
-        loginInfo.style.display = 'none'
-        money.innerHTML = res.data.money
-      })
-    }
+      Fetch("http://127.0.0.1:3200/login", "POST", { userName, password }).then((res) => {
+        payInfo.style.display = "block";
+        loginInfo.style.display = "none";
+        money.innerHTML = res.data.money;
+      });
+    };
 
     // 点击支付10元
     btnPay.onclick = function () {
-      Fetch('http://127.0.0.1:3200/pay', 'POST', { userName: currentName, money: 10 }).then((res) => {
-        console.log(res)
-        money.innerHTML = res.data.money
-      })
-    }
+      Fetch("http://127.0.0.1:3200/pay", "POST", { userName: currentName, money: 10 }).then((res) => {
+        console.log(res);
+        money.innerHTML = res.data.money;
+      });
+    };
 
     // 封装的请求方法
-    function Fetch(url, method = 'POST', data) {
+    function Fetch(url, method = "POST", data) {
       return new Promise((resolve, reject) => {
-        let options = {}
-        if (method !== 'GET') {
+        let options = {};
+        if (method !== "GET") {
           options = {
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-          }
+          };
         }
 
         fetch(url, {
-          mode: 'cors', // no-cors, cors, *same-origin
+          mode: "cors", // no-cors, cors, *same-origin
           method,
           ...options,
-          credentials: 'include', // 带上cookie信息
+          credentials: "include", // 带上cookie信息
         })
           .then((res) => {
-            return res.json() // 结果解析为json格式
+            return res.json(); // 结果解析为json格式
           })
           .then((res) => {
-            resolve(res)
+            resolve(res);
           })
           .catch((err) => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
     }
   </script>
 </html>
@@ -196,80 +196,80 @@ let money = 1000;
 
 // 调用登录的接口
 function login(ctx) {
-    const req = ctx.request.body;
-    const userName = req.userName;
-    currentUserName = userName;
+  const req = ctx.request.body;
+  const userName = req.userName;
+  currentUserName = userName;
 
-    // 简单设置一个cookie
-    ctx.cookies.set('name', userName, {
-        domain: '127.0.0.1', // 写cookie所在的域名
-        path: '/', // 写cookie所在的路径
-        maxAge: 24 * 60 * 60 * 1000, // cookie有效时长，单位毫秒。设置为24小时
-        expires: new Date('2021-12-31'), // cookie失效时间
-        overwrite: false, // 是否允许重写
-        SameSite: 'None',
-    });
-    ctx.response.body = {
-        data: {
-            money,
-        },
-        msg: '登录成功',
-    };
+  // 简单设置一个cookie
+  ctx.cookies.set('name', userName, {
+    domain: '127.0.0.1', // 写cookie所在的域名
+    path: '/', // 写cookie所在的路径
+    maxAge: 24 * 60 * 60 * 1000, // cookie有效时长，单位毫秒。设置为24小时
+    expires: new Date('2021-12-31'), // cookie失效时间
+    overwrite: false, // 是否允许重写
+    SameSite: 'None',
+  });
+  ctx.response.body = {
+    data: {
+      money,
+    },
+    msg: '登录成功',
+  };
 }
 
 // 调用支付的接口
 function pay(ctx) {
-    // 根据有没有 cookie 来简单判断是否登录
-    if (ctx.cookies.get('name')) {
-        if (ctx.method === 'GET') {
-            money = money - Number(ctx.request.query.money);
-        } else {
-            money = money - Number(ctx.request.body.money);
-        }
-
-        ctx.response.body = {
-            data: {
-                money,
-            },
-            msg: '支付成功',
-        };
+  // 根据有没有 cookie 来简单判断是否登录
+  if (ctx.cookies.get('name')) {
+    if (ctx.method === 'GET') {
+      money = money - Number(ctx.request.query.money);
     } else {
-        ctx.response.body = {
-            data: {},
-            msg: '未登录',
-        };
+      money = money - Number(ctx.request.body.money);
     }
+
+    ctx.response.body = {
+      data: {
+        money,
+      },
+      msg: '支付成功',
+    };
+  } else {
+    ctx.response.body = {
+      data: {},
+      msg: '未登录',
+    };
+  }
 }
 
 // 判断是否登录
 function isLogin(ctx) {
-    if (ctx.cookies.get('name')) {
-        ctx.response.body = {
-            data: true,
-            msg: '登录成功',
-        };
-    } else {
-        ctx.response.body = {
-            data: false,
-            msg: '未登录',
-        };
-    }
+  if (ctx.cookies.get('name')) {
+    ctx.response.body = {
+      data: true,
+      msg: '登录成功',
+    };
+  } else {
+    ctx.response.body = {
+      data: false,
+      msg: '未登录',
+    };
+  }
 }
 
 // 处理 options 请求
 app.use(async (ctx, next) => {
-    const headers = ctx.request.headers;
+  const headers = ctx.request.headers;
 
-    ctx.set('Access-Control-Allow-Origin', headers.origin);
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
-    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    ctx.set('Access-Control-Allow-Credentials', 'true');
+  ctx.set('Access-Control-Allow-Origin', headers.origin);
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
+  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  ctx.set('Access-Control-Allow-Credentials', 'true');
 
-    if (ctx.method === 'OPTIONS') {
-        ctx.status = 204;
-    } else {
-        await next();
-    }
+  if (ctx.method === 'OPTIONS') {
+    ctx.status = 204;
+  } else {
+    await next();
+  }
 });
 
 app.use(cors());
@@ -280,7 +280,7 @@ app.use(route.get('/pay', pay));
 app.use(route.post('/isLogin', isLogin));
 
 app.listen(3200, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });
 ```
 
@@ -302,7 +302,7 @@ $ npx nodemon server/server.js
 ```html
 <!-- badServer/bad.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -326,7 +326,7 @@ $ npx nodemon server/server.js
     </div>
   </body>
   <script>
-    document.querySelector('.form').submit()
+    document.querySelector(".form").submit();
   </script>
 </html>
 ```
@@ -358,10 +358,10 @@ CSRF 攻击大致可以分为三种情况，自动发起 Get 请求， 自动发
 在上面的 bad.html 中，我们把代码改成下面这样
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <body>
-    <img src="http://127.0.0.1:3200/payMoney?money=1000">
+    <img src="http://127.0.0.1:3200/payMoney?money=1000" />
   </body>
 </html>
 ```
@@ -381,11 +381,11 @@ CSRF 攻击大致可以分为三种情况，自动发起 Get 请求， 自动发
       <input type="text" name="userName" value="xiaoming" />
       <input type="text" name="money" value="100" />
     </form>
-    <iframe name="targetIfr" style="display:none"></iframe>
+    <iframe name="targetIfr" style="display: none"></iframe>
   </div>
 </body>
 <script>
-  document.querySelector('.form').submit()
+  document.querySelector(".form").submit();
 </script>
 ```
 

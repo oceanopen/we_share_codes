@@ -12,10 +12,10 @@ npm install -D husky
 
 ```json
 {
-    "scripts": {
-        "prepare": "husky install",
-        "lint": "eslint --ext .js,.ts ./src --fix"
-    }
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --ext .js,.ts ./src --fix"
+  }
 }
 ```
 
@@ -47,12 +47,12 @@ npm install -D lint-staged
 
 ```json
 {
-    "scripts": {
-        "lint-staged": "lint-staged --allow-empty"
-    },
-    "lint-staged": {
-        "src/**/*.{js,ts}": ["eslint --fix"]
-    }
+  "scripts": {
+    "lint-staged": "lint-staged --allow-empty"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": ["eslint --fix"]
+  }
 }
 ```
 
@@ -102,11 +102,11 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
 
   ```json
   {
-      "config": {
-          "commitizen": {
-              "path": "./node_modules/cz-conventional-changelog"
-          }
+    "config": {
+      "commitizen": {
+        "path": "./node_modules/cz-conventional-changelog"
       }
+    }
   }
   ```
 
@@ -114,9 +114,9 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
 
 ```json
 {
-    "scripts": {
-        "commit": "git cz"
-    }
+  "scripts": {
+    "commit": "git cz"
+  }
 }
 ```
 
@@ -137,9 +137,9 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] }" > commi
 
 ```json
 {
-    "scripts": {
-        "commitlint": "commitlint --config commitlint.config.js -e -V"
-    }
+  "scripts": {
+    "commitlint": "commitlint --config commitlint.config.js -e -V"
+  }
 }
 ```
 

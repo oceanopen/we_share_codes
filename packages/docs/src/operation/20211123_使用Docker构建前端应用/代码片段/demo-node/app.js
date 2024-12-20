@@ -7,14 +7,14 @@ const HOST = '0.0.0.0';
 
 const app = express();
 app.get('/', (req, res) => {
-    res.send('Hello world\n');
+  res.send('Hello world\n');
 });
 
 app.get('/json', (req, res) => {
-    res.json({
-        code: 0,
-        data: 'This is message from node container',
-    });
+  res.json({
+    code: 0,
+    data: 'This is message from node container',
+  });
 });
 
 app.listen(PORT, HOST);

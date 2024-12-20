@@ -15,11 +15,11 @@ const ast = parser.parse(code);
 
 // 2. 转换
 const visitor = {
-    // traverse 会遍历树节点，只要节点的 type 在 visitor 对象中出现，就会调用该方法
-    DebuggerStatement(path) {
+  // traverse 会遍历树节点，只要节点的 type 在 visitor 对象中出现，就会调用该方法
+  DebuggerStatement(path) {
     // 删除该抽象语法树节点
-        path.remove();
-    },
+    path.remove();
+  },
 };
 traverse.default(ast, visitor);
 

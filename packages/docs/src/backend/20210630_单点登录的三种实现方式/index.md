@@ -98,10 +98,10 @@ document.body.append(iframe);
 
 // 使用postMessage()方法将token传递给iframe
 setTimeout(() => {
-    iframe.contentWindow.postMessage(token, 'http://app1.com');
+  iframe.contentWindow.postMessage(token, 'http://app1.com');
 }, 4000);
 setTimeout(() => {
-    iframe.remove();
+  iframe.remove();
 }, 6000);
 ```
 
@@ -110,11 +110,11 @@ setTimeout(() => {
 
 // 在这个iframe所加载的HTML中绑定一个事件监听器，当事件被触发时，把接收到的token数据写入localStorage
 window.addEventListener(
-    'message',
-    (event) => {
-        localStorage.setItem('token', event.data);
-    },
-    false
+  'message',
+  (event) => {
+    localStorage.setItem('token', event.data);
+  },
+  false
 );
 ```
 

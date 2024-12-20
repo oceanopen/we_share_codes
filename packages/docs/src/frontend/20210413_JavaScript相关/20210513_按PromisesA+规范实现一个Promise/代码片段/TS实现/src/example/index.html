@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,15 +9,15 @@
 
   <body>
     <script type="module">
-      import { _Promise } from '../../dist/example/index.js'
+      import { _Promise } from "../../dist/example/index.js";
 
-      console.log('first')
+      console.log("first");
       const p1 = new _Promise(function (resolve) {
-        console.log('second')
-        resolve('third')
-      })
-      p1.then(console.log)
-      console.log('fourth')
+        console.log("second");
+        resolve("third");
+      });
+      p1.then(console.log);
+      console.log("fourth");
 
       // 不支持微任务
     </script>

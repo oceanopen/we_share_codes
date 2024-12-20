@@ -1,5 +1,5 @@
 <template>
-    <Mosaic />
+  <Mosaic />
 </template>
 
 <script setup lang="ts">

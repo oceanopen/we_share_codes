@@ -10,16 +10,16 @@ const code = `
 `;
 
 const result = babel.transform(code, {
-    plugins: [
-        [
-            visitor,
-            {
-                libraryName: 'xxx-ui',
-                camel2DashComponentName: true,
-                customSourceFunc: componentName => `xxx-ui/src/components/ui-base/${componentName}/${componentName}`,
-            },
-        ],
+  plugins: [
+    [
+      visitor,
+      {
+        libraryName: 'xxx-ui',
+        camel2DashComponentName: true,
+        customSourceFunc: componentName => `xxx-ui/src/components/ui-base/${componentName}/${componentName}`,
+      },
     ],
+  ],
 });
 
 console.log(result.code);

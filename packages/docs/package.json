@@ -1,23 +1,23 @@
 {
-    "name": "docs",
-    "type": "module",
-    "version": "0.0.4",
-    "private": true,
-    "description": "文档",
-    "preferGlobal": true,
-    "license": "MIT",
-    "keywords": [
-        "文档",
-        "技术"
-    ],
-    "scripts": {
-        "dev": "vitepress dev",
-        "build:local": "vitepress build",
-        "build:prod": "BASE_URL=/docs/ vitepress build --base=/docs/",
-        "preview": "vitepress preview"
-    },
-    "devDependencies": {
-        "@vite-pwa/vitepress": "^0.5.3",
-        "vitepress": "1.5.0"
-    }
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.4",
+  "private": true,
+  "description": "文档",
+  "preferGlobal": true,
+  "license": "MIT",
+  "keywords": [
+    "文档",
+    "技术"
+  ],
+  "scripts": {
+    "dev": "vitepress dev",
+    "build:local": "vitepress build",
+    "build:prod": "BASE_URL=/docs/ vitepress build --base=/docs/",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "@vite-pwa/vitepress": "^0.5.3",
+    "vitepress": "1.5.0"
+  }
 }

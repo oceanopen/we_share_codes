@@ -1,5 +1,5 @@
 <template>
-    <Amount />
+  <Amount />
 </template>
 
 <script setup lang="ts">

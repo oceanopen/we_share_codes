@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -12,20 +12,20 @@
 
     <!-- js部分 -->
     <script>
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var file = this.files[0]
-          const reader = new FileReader()
+          var file = this.files[0];
+          const reader = new FileReader();
 
           reader.onload = function () {
-            const content = reader.result
-            console.log(content)
-          }
-          reader.readAsText(file)
+            const content = reader.result;
+            console.log(content);
+          };
+          reader.readAsText(file);
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>

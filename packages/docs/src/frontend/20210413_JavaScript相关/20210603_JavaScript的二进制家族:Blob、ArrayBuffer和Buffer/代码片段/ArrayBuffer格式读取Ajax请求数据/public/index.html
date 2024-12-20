@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -13,23 +13,23 @@
     <!-- js部分 -->
     <script>
       function ajax() {
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', '/ajax', true)
-        xhr.responseType = 'arraybuffer'
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ajax", true);
+        xhr.responseType = "arraybuffer";
 
         xhr.onload = function () {
-          console.log(xhr.response)
-        }
-        xhr.send()
+          console.log(xhr.response);
+        };
+        xhr.send();
       }
 
-      document.getElementById('btn').addEventListener(
-        'click',
+      document.getElementById("btn").addEventListener(
+        "click",
         function (e) {
-          ajax()
+          ajax();
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>

@@ -2,5 +2,5 @@
 import { cube } from './maths';
 
 export default {
-    cube,
+  cube,
 };

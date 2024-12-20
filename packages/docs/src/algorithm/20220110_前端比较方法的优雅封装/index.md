@@ -26,69 +26,69 @@ type TypeCompareParam = string | number;
 type TypeCompareFun = (a: TypeCompareParam, b: TypeCompareParam) => number;
 
 export default class Comparator {
-    private compare: TypeCompareFun;
+  private compare: TypeCompareFun;
 
-    /**
-     * Constructor.
-     * @param compareFunction - It may be custom compare function that, let's say may compare custom objects together.
-     */
-    constructor(compareFunction?: (a: any, b: any) => number) {
-        this.compare = compareFunction || Comparator.defaultCompareFunction;
+  /**
+   * Constructor.
+   * @param compareFunction - It may be custom compare function that, let's say may compare custom objects together.
+   */
+  constructor(compareFunction?: (a: any, b: any) => number) {
+    this.compare = compareFunction || Comparator.defaultCompareFunction;
+  }
+
+  /**
+   * Default comparison function.
+   */
+  static defaultCompareFunction(a: TypeCompareParam, b: TypeCompareParam): number {
+    if (a === b) {
+      return 0;
     }
 
-    /**
-     * Default comparison function.
-     */
-    static defaultCompareFunction(a: TypeCompareParam, b: TypeCompareParam): number {
-        if (a === b) {
-            return 0;
-        }
+    return a < b ? -1 : 1;
+  }
 
-        return a < b ? -1 : 1;
-    }
+  /**
+   * Checks if two variables are equal.
+   */
+  equal(a: TypeCompareParam, b: TypeCompareParam): boolean {
+    return this.compare(a, b) === 0;
+  }
 
-    /**
-     * Checks if two variables are equal.
-     */
-    equal(a: TypeCompareParam, b: TypeCompareParam): boolean {
-        return this.compare(a, b) === 0;
-    }
+  /**
+   * Checks if variable "a" is less than "b".
+   */
+  lessThan(a: TypeCompareParam, b: TypeCompareParam): boolean {
+    return this.compare(a, b) < 0;
+  }
 
-    /**
-     * Checks if variable "a" is less than "b".
-     */
-    lessThan(a: TypeCompareParam, b: TypeCompareParam): boolean {
-        return this.compare(a, b) < 0;
-    }
+  /**
+   * Checks if variable "a" is greater than "b".
+   */
+  greaterThan(a: TypeCompareParam, b: TypeCompareParam): boolean {
+    return this.compare(a, b) > 0;
+  }
 
-    /**
-     * Checks if variable "a" is greater than "b".
-     */
-    greaterThan(a: TypeCompareParam, b: TypeCompareParam): boolean {
-        return this.compare(a, b) > 0;
-    }
+  /**
+   * Checks if variable "a" is less than or equal to "b".
+   */
+  lessThanOrEqual(a: TypeCompareParam, b: TypeCompareParam): boolean {
+    return this.lessThan(a, b) || this.equal(a, b);
+  }
 
-    /**
-     * Checks if variable "a" is less than or equal to "b".
-     */
-    lessThanOrEqual(a: TypeCompareParam, b: TypeCompareParam): boolean {
-        return this.lessThan(a, b) || this.equal(a, b);
-    }
+  /**
+   * Checks if variable "a" is greater than or equal to "b".
+   */
+  greaterThanOrEqual(a: TypeCompareParam, b: TypeCompareParam): boolean {
+    return this.greaterThan(a, b) || this.equal(a, b);
+  }
 
-    /**
-     * Checks if variable "a" is greater than or equal to "b".
-     */
-    greaterThanOrEqual(a: TypeCompareParam, b: TypeCompareParam): boolean {
-        return this.greaterThan(a, b) || this.equal(a, b);
-    }
-
-    /**
-     * Reverses the comparison order.
-     */
-    reverse() {
-        const compareOriginal = this.compare;
-        this.compare = (a: TypeCompareParam, b: TypeCompareParam) => compareOriginal(b, a);
-    }
+  /**
+   * Reverses the comparison order.
+   */
+  reverse() {
+    const compareOriginal = this.compare;
+    this.compare = (a: TypeCompareParam, b: TypeCompareParam) => compareOriginal(b, a);
+  }
 }
 ```
 
@@ -115,13 +115,13 @@ yarn test __test__/Comparator.test.ts
 
 ```json
 {
-    // ...
-    "compilerOptions": {
-        "types": [
-            "jest" // 或者其他您使用的测试运行器的名称
-        ]
-    }
-    // ...
+  // ...
+  "compilerOptions": {
+    "types": [
+      "jest" // 或者其他您使用的测试运行器的名称
+    ]
+  }
+  // ...
 }
 ```
 
@@ -133,52 +133,52 @@ yarn test __test__/Comparator.test.ts
 import Comparator from '../Comparator';
 
 describe('Comparator', () => {
-    it('should compare with default comparator function', () => {
-        const comparator = new Comparator();
+  it('should compare with default comparator function', () => {
+    const comparator = new Comparator();
 
-        expect(comparator.equal(0, 0)).toBe(true);
-        expect(comparator.equal(0, 1)).toBe(false);
-        expect(comparator.equal('a', 'a')).toBe(true);
-        expect(comparator.lessThan(1, 2)).toBe(true);
-        expect(comparator.lessThan(-1, 2)).toBe(true);
-        expect(comparator.lessThan('a', 'b')).toBe(true);
-        expect(comparator.lessThan('a', 'ab')).toBe(true);
-        expect(comparator.lessThan(10, 2)).toBe(false);
-        expect(comparator.lessThanOrEqual(10, 2)).toBe(false);
-        expect(comparator.lessThanOrEqual(1, 1)).toBe(true);
-        expect(comparator.lessThanOrEqual(0, 0)).toBe(true);
-        expect(comparator.greaterThan(0, 0)).toBe(false);
-        expect(comparator.greaterThan(10, 0)).toBe(true);
-        expect(comparator.greaterThanOrEqual(10, 0)).toBe(true);
-        expect(comparator.greaterThanOrEqual(10, 10)).toBe(true);
-        expect(comparator.greaterThanOrEqual(0, 10)).toBe(false);
+    expect(comparator.equal(0, 0)).toBe(true);
+    expect(comparator.equal(0, 1)).toBe(false);
+    expect(comparator.equal('a', 'a')).toBe(true);
+    expect(comparator.lessThan(1, 2)).toBe(true);
+    expect(comparator.lessThan(-1, 2)).toBe(true);
+    expect(comparator.lessThan('a', 'b')).toBe(true);
+    expect(comparator.lessThan('a', 'ab')).toBe(true);
+    expect(comparator.lessThan(10, 2)).toBe(false);
+    expect(comparator.lessThanOrEqual(10, 2)).toBe(false);
+    expect(comparator.lessThanOrEqual(1, 1)).toBe(true);
+    expect(comparator.lessThanOrEqual(0, 0)).toBe(true);
+    expect(comparator.greaterThan(0, 0)).toBe(false);
+    expect(comparator.greaterThan(10, 0)).toBe(true);
+    expect(comparator.greaterThanOrEqual(10, 0)).toBe(true);
+    expect(comparator.greaterThanOrEqual(10, 10)).toBe(true);
+    expect(comparator.greaterThanOrEqual(0, 10)).toBe(false);
+  });
+
+  it('should compare with custom comparator function', () => {
+    const comparator = new Comparator((a, b) => {
+      if (a.length === b.length) {
+        return 0;
+      }
+
+      return a.length < b.length ? -1 : 1;
     });
 
-    it('should compare with custom comparator function', () => {
-        const comparator = new Comparator((a, b) => {
-            if (a.length === b.length) {
-                return 0;
-            }
+    expect(comparator.equal('a', 'b')).toBe(true);
+    expect(comparator.equal('a', '')).toBe(false);
+    expect(comparator.lessThan('b', 'aa')).toBe(true);
+    expect(comparator.greaterThanOrEqual('a', 'aa')).toBe(false);
+    expect(comparator.greaterThanOrEqual('aa', 'a')).toBe(true);
+    expect(comparator.greaterThanOrEqual('a', 'a')).toBe(true);
 
-            return a.length < b.length ? -1 : 1;
-        });
+    comparator.reverse();
 
-        expect(comparator.equal('a', 'b')).toBe(true);
-        expect(comparator.equal('a', '')).toBe(false);
-        expect(comparator.lessThan('b', 'aa')).toBe(true);
-        expect(comparator.greaterThanOrEqual('a', 'aa')).toBe(false);
-        expect(comparator.greaterThanOrEqual('aa', 'a')).toBe(true);
-        expect(comparator.greaterThanOrEqual('a', 'a')).toBe(true);
-
-        comparator.reverse();
-
-        expect(comparator.equal('a', 'b')).toBe(true);
-        expect(comparator.equal('a', '')).toBe(false);
-        expect(comparator.lessThan('b', 'aa')).toBe(false);
-        expect(comparator.greaterThanOrEqual('a', 'aa')).toBe(true);
-        expect(comparator.greaterThanOrEqual('aa', 'a')).toBe(false);
-        expect(comparator.greaterThanOrEqual('a', 'a')).toBe(true);
-    });
+    expect(comparator.equal('a', 'b')).toBe(true);
+    expect(comparator.equal('a', '')).toBe(false);
+    expect(comparator.lessThan('b', 'aa')).toBe(false);
+    expect(comparator.greaterThanOrEqual('a', 'aa')).toBe(true);
+    expect(comparator.greaterThanOrEqual('aa', 'a')).toBe(false);
+    expect(comparator.greaterThanOrEqual('a', 'a')).toBe(true);
+  });
 });
 ```
 

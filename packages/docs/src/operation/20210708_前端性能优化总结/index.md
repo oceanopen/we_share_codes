@@ -26,7 +26,7 @@
 
 ```html
 <script>
-  new Date().getTime() - performance.timing.navigationStart
+  new Date().getTime() - performance.timing.navigationStart;
 </script>
 ```
 
@@ -36,7 +36,7 @@
 
 ```js
 window.onload = function () {
-    new Date().getTime() - performance.timing.navigationStart;
+  new Date().getTime() - performance.timing.navigationStart;
 };
 ```
 
@@ -168,30 +168,30 @@ window.onload = function () {
 
 ```js
 const config = {
-    // ...
-    optimization: {
-        runtimeChunk: {
-            name: 'manifest', // 将 webpack 的 runtime 代码拆分为一个单独的 chunk。
-        },
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    name: 'chunk-vendors',
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    chunks: 'initial',
-                },
-                common: {
-                    name: 'chunk-common',
-                    minChunks: 2,
-                    priority: -20,
-                    chunks: 'initial',
-                    reuseExistingChunk: true,
-                },
-            },
-        },
+  // ...
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest', // 将 webpack 的 runtime 代码拆分为一个单独的 chunk。
     },
-    // ...
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'chunk-vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: 'initial',
+        },
+        common: {
+          name: 'chunk-common',
+          minChunks: 2,
+          priority: -20,
+          chunks: 'initial',
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+  // ...
 };
 ```
 
@@ -213,13 +213,13 @@ const config = {
 
 ```js
 const config = {
-    // ...
-    output: {
-        filename: '[name].[contenthash].js',
-        chunkFilename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, '../dist'),
-    },
-    // ...
+  // ...
+  output: {
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, '../dist'),
+  },
+  // ...
 };
 ```
 
@@ -240,13 +240,13 @@ class Person {}
 'use strict';
 
 function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError('Cannot call a class as a function');
-    }
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError('Cannot call a class as a function');
+  }
 }
 
 const Person = function Person() {
-    _classCallCheck(this, Person);
+  _classCallCheck(this, Person);
 };
 ```
 
@@ -260,11 +260,11 @@ const _classCallCheck2 = require('@babel/runtime/helpers/classCallCheck');
 const _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
 function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 const Person = function Person() {
-    ;(0, _classCallCheck3.default)(this, Person);
+  ;(0, _classCallCheck3.default)(this, Person);
 };
 ```
 
@@ -282,9 +282,9 @@ npm i -D @babel/plugin-transform-runtime @babel/runtime
 
 ```js
 const config = {
-    // ...
-    plugins: ['@babel/plugin-transform-runtime'],
-    // ...
+  // ...
+  plugins: ['@babel/plugin-transform-runtime'],
+  // ...
 };
 ```
 
@@ -508,7 +508,7 @@ el.style.cssText = 'left: 10px;top: 10px; width: 20px;';
 看一下下面这段代码：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -526,21 +526,21 @@ el.style.cssText = 'left: 10px;top: 10px; width: 20px;';
     <script>
       window.onload = function () {
         // good
-        document.querySelector('ul').onclick = (event) => {
-          const target = event.target
-          if (target.nodeName === 'LI') {
-            console.log('proxy:', target.innerHTML)
+        document.querySelector("ul").onclick = (event) => {
+          const target = event.target;
+          if (target.nodeName === "LI") {
+            console.log("proxy:", target.innerHTML);
           }
-        }
+        };
 
         // bad
-        document.querySelectorAll('li').forEach((item) => {
+        document.querySelectorAll("li").forEach((item) => {
           item.onclick = function (event) {
-            const target = event.target
-            console.log('current:', target.innerHTML)
-          }
-        })
-      }
+            const target = event.target;
+            console.log("current:", target.innerHTML);
+          };
+        });
+      };
     </script>
   </body>
 </html>
@@ -556,32 +556,32 @@ el.style.cssText = 'left: 10px;top: 10px; width: 20px;';
 const state = '';
 
 if (state === 0) {
-    console.log('待开通');
+  console.log('待开通');
 }
 else if (state === 1) {
-    console.log('学习中');
+  console.log('学习中');
 }
 else if (state === 2) {
-    console.log('休学中');
+  console.log('休学中');
 }
 else if (state === 3) {
-    console.log('已过期');
+  console.log('已过期');
 }
 else if (state === 4) {
-    console.log('未购买');
+  console.log('未购买');
 }
 
 switch (state) {
-    case 0:
-        break;
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
+  case 0:
+    break;
+  case 1:
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  case 4:
+    break;
 }
 ```
 

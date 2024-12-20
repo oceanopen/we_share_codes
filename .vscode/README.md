@@ -49,7 +49,7 @@ Problems loading reference 'https://json.schemastore.org/tsconfig': Unable to lo
 
 ```json
 {
-    "http.proxyAuthorization": "false"
+  "http.proxyAuthorization": "false"
 }
 ```
 

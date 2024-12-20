@@ -1,14 +1,14 @@
 <template>
-    <div id="app">
-        <img class="logo px2rem" alt="Vue logo" src="./assets/logo.png">
-        <img class="viewport-logo viewport" alt="Vue logo" src="./assets/logo.png">
-    </div>
+  <div id="app">
+    <img class="logo px2rem" alt="Vue logo" src="./assets/logo.png">
+    <img class="viewport-logo viewport" alt="Vue logo" src="./assets/logo.png">
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'App',
-    components: {},
+  name: 'App',
+  components: {},
 };
 </script>
 
@@ -20,6 +20,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 .logo.px2rem {
   width: 100px;
   height: 100px;

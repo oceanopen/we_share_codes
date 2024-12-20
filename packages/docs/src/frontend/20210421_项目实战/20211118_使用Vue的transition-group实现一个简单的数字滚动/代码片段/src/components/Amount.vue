@@ -1,51 +1,51 @@
 <template>
-    <div class="wrapper">
-        <div class="amount">
-            <div style="display: flex">
-                <span>￥</span>
-                <transition-group name="list" tag="p" style="position: relative">
-                    <div
-                        v-for="(item, index) in todayAmountComputed"
-                        :key="item + index"
-                        style="display: inline-block; position: absolute"
-                        :style="{
-                            left: `${index * 53}px`,
-                            transitionDelay: `${0.1 * index}s`,
-                        }"
-                    >
-                        {{ item }}
-                    </div>
-                </transition-group>
-            </div>
-        </div>
+  <div class="wrapper">
+    <div class="amount">
+      <div style="display: flex">
+        <span>￥</span>
+        <transition-group name="list" tag="p" style="position: relative">
+          <div
+            v-for="(item, index) in todayAmountComputed"
+            :key="item + index"
+            style="display: inline-block; position: absolute"
+            :style="{
+              left: `${index * 53}px`,
+              transitionDelay: `${0.1 * index}s`,
+            }"
+          >
+            {{ item }}
+          </div>
+        </transition-group>
+      </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
-    components: {},
-    setup() {
-        const todayAmount = ref<string>('0');
+  components: {},
+  setup() {
+    const todayAmount = ref<string>('0');
 
-        const todayAmountComputed = computed(() => {
-            return todayAmount.value.split('');
-        });
+    const todayAmountComputed = computed(() => {
+      return todayAmount.value.split('');
+    });
 
-        onMounted(() => {
-            setInterval(() => {
-                if (todayAmount.value === '0') {
-                    todayAmount.value = '1000';
-                }
-                todayAmount.value = `${Math.floor(Math.random() * 10000)}`;
-            }, 2000);
-        });
+    onMounted(() => {
+      setInterval(() => {
+        if (todayAmount.value === '0') {
+          todayAmount.value = '1000';
+        }
+        todayAmount.value = `${Math.floor(Math.random() * 10000)}`;
+      }, 2000);
+    });
 
-        return {
-            todayAmountComputed,
-        };
-    },
+    return {
+      todayAmountComputed,
+    };
+  },
 });
 </script>
 
@@ -66,7 +66,9 @@ export default defineComponent({
 
     :deep(.list-enter-active),
     :deep(.list-leave-active) {
-      transition: transform 1s ease, opacity 1s ease;
+      transition:
+        transform 1s ease,
+        opacity 1s ease;
     }
 
     :deep(.list-enter-from) {

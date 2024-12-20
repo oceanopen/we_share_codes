@@ -8,13 +8,13 @@ const route = require('koa-route');
 app.use(bodyParser()); // 处理post请求的参数
 
 function xssServer(ctx) {
-    // ctx.body 即服务端响应的数据
-    ctx.body = '<script>alert("反射型 XSS 攻击")</script>';
+  // ctx.body 即服务端响应的数据
+  ctx.body = '<script>alert("反射型 XSS 攻击")</script>';
 }
 
 function xssParams(ctx) {
-    // ctx.body 即服务端响应的数据
-    ctx.body = ctx.query.userName;
+  // ctx.body 即服务端响应的数据
+  ctx.body = ctx.query.userName;
 }
 
 app.use(cors());
@@ -25,5 +25,5 @@ app.use(route.get('/xss-server', xssServer));
 app.use(route.get('/xss-params', xssParams));
 
 app.listen(3000, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });

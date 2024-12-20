@@ -45,7 +45,7 @@ history.pipe(grep);
 const fs = require('node:fs');
 const file = fs.createWriteStream('./big.text');
 for (let i = 0; i <= 1e6; i++) {
-    file.write('Lorem ipsum dolor sit amet, consectetur adipisicing elit. \n');
+  file.write('Lorem ipsum dolor sit amet, consectetur adipisicing elit. \n');
 }
 file.end();
 ```
@@ -67,10 +67,10 @@ node createBigFile.js
 const fs = require('node:fs');
 const server = require('node:http').createServer();
 server.on('request', (req, res) => {
-    fs.readFile('./big.text', (err, data) => {
-        if (err) { throw err; }
-        res.end(data);
-    });
+  fs.readFile('./big.text', (err, data) => {
+    if (err) { throw err; }
+    res.end(data);
+  });
 });
 server.listen(8000);
 ```
@@ -112,8 +112,8 @@ const fs = require('node:fs');
 const server = require('node:http').createServer();
 
 server.on('request', (req, res) => {
-    const src = fs.createReadStream('./big.text');
-    src.pipe(res);
+  const src = fs.createReadStream('./big.text');
+  src.pipe(res);
 });
 
 server.listen(8000);
@@ -198,10 +198,10 @@ $ a | b | c | d
 ```js
 // readable.pipe(writable)
 readable.on('data', (chunk) => {
-    writable.write(chunk);
+  writable.write(chunk);
 });
 readable.on('end', () => {
-    writable.end();
+  writable.end();
 });
 ```
 
@@ -281,10 +281,10 @@ class myWritableStream extends Writable {}
 // outStream.js
 const { Writable } = require('node:stream');
 const outStream = new Writable({
-    write(chunk, encoding, callback) {
-        console.log(chunk.toString());
-        callback();
-    },
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString());
+    callback();
+  },
 });
 
 process.stdin.pipe(outStream);
@@ -368,9 +368,9 @@ node inStream.js
 
 ```js
 const inStream = new Readable({
-    read(size) {
+  read(size) {
     // there is a demand on the data... Someone wants to read it.
-    },
+  },
 });
 ```
 
@@ -382,12 +382,12 @@ const inStream = new Readable({
 const { Readable } = require('node:stream');
 
 const inStream = new Readable({
-    read(size) {
-        this.push(String.fromCharCode(this.currentCharCode++));
-        if (this.currentCharCode > 90) {
-            this.push(null);
-        }
-    },
+  read(size) {
+    this.push(String.fromCharCode(this.currentCharCode++));
+    if (this.currentCharCode > 90) {
+      this.push(null);
+    }
+  },
 });
 inStream.currentCharCode = 65;
 
@@ -415,17 +415,17 @@ node inStream_same.js
 const { Duplex } = require('node:stream');
 
 const inoutStream = new Duplex({
-    write(chunk, encoding, callback) {
-        console.log(chunk.toString());
-        callback();
-    },
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString());
+    callback();
+  },
 
-    read(size) {
-        this.push(String.fromCharCode(this.currentCharCode++));
-        if (this.currentCharCode > 90) {
-            this.push(null);
-        }
-    },
+  read(size) {
+    this.push(String.fromCharCode(this.currentCharCode++));
+    if (this.currentCharCode > 90) {
+      this.push(null);
+    }
+  },
 });
 inoutStream.currentCharCode = 65;
 
@@ -460,10 +460,10 @@ node inoutStream.js
 const { Transform } = require('node:stream');
 
 const upperCaseTr = new Transform({
-    transform(chunk, encoding, callback) {
-        this.push(chunk.toString().toUpperCase());
-        callback();
-    },
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase());
+    callback();
+  },
 });
 
 process.stdin.pipe(upperCaseTr).pipe(process.stdout);
@@ -492,32 +492,32 @@ node upperCaseTr.js
 const { Transform } = require('node:stream');
 
 const commaSplitter = new Transform({
-    readableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        this.push(chunk.toString().trim().split(','));
-        callback();
-    },
+  readableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().trim().split(','));
+    callback();
+  },
 });
 
 const arrayToObject = new Transform({
-    readableObjectMode: true,
-    writableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        const obj = {};
-        for (let i = 0; i < chunk.length; i += 2) {
-            obj[chunk[i]] = chunk[i + 1];
-        }
-        this.push(obj);
-        callback();
-    },
+  readableObjectMode: true,
+  writableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    const obj = {};
+    for (let i = 0; i < chunk.length; i += 2) {
+      obj[chunk[i]] = chunk[i + 1];
+    }
+    this.push(obj);
+    callback();
+  },
 });
 
 const objectToString = new Transform({
-    writableObjectMode: true,
-    transform(chunk, encoding, callback) {
-        this.push(`${JSON.stringify(chunk)}\n`);
-        callback();
-    },
+  writableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    this.push(`${JSON.stringify(chunk)}\n`);
+    callback();
+  },
 });
 
 process.stdin.pipe(commaSplitter).pipe(arrayToObject).pipe(objectToString).pipe(process.stdout);
@@ -555,8 +555,8 @@ const zlib = require('node:zlib');
 const file = process.argv[2];
 
 fs.createReadStream(file)
-    .pipe(zlib.createGzip())
-    .pipe(fs.createWriteStream(`${file}.gz`));
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream(`${file}.gz`));
 ```
 
 你可以使用这个脚本 `gzip` 压缩任何你在参数中传递的文件。
@@ -582,10 +582,10 @@ const zlib = require('node:zlib');
 const file = process.argv[2];
 
 fs.createReadStream(file)
-    .pipe(zlib.createGzip())
-    .on('data', () => process.stdout.write('.'))
-    .pipe(fs.createWriteStream(`${file}.gzip`))
-    .on('finish', () => console.log('Done'));
+  .pipe(zlib.createGzip())
+  .on('data', () => process.stdout.write('.'))
+  .pipe(fs.createWriteStream(`${file}.gzip`))
+  .on('finish', () => console.log('Done'));
 ```
 
 执行结果：
@@ -609,17 +609,17 @@ const file = process.argv[2];
 const { Transform } = require('node:stream');
 
 const reportProgress = new Transform({
-    transform(chunk, encoding, callback) {
-        process.stdout.write('.');
-        callback(null, chunk);
-    },
+  transform(chunk, encoding, callback) {
+    process.stdout.write('.');
+    callback(null, chunk);
+  },
 });
 
 fs.createReadStream(file)
-    .pipe(zlib.createGzip())
-    .pipe(reportProgress)
-    .pipe(fs.createWriteStream(`${file}.gzip`))
-    .on('finish', () => console.log('Done'));
+  .pipe(zlib.createGzip())
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(`${file}.gzip`))
+  .on('finish', () => console.log('Done'));
 ```
 
 执行结果：
@@ -637,11 +637,11 @@ node streamProcess_v2.js big.text
 // streamProcess_v3.js
 // ...
 const reportProgress = new Transform({
-    transform(chunk, encoding, callback) {
-        process.stdout.write('.');
-        this.push(chunk);
-        callback();
-    },
+  transform(chunk, encoding, callback) {
+    process.stdout.write('.');
+    this.push(chunk);
+    callback();
+  },
 });
 // ...
 ```
@@ -655,11 +655,11 @@ const reportProgress = new Transform({
 const crypto = require('node:crypto');
 // ...
 fs.createReadStream(file)
-    .pipe(zlib.createGzip())
-    .pipe(crypto.createCipheriv('aes192', 'a_secret'))
-    .pipe(reportProgress)
-    .pipe(fs.createWriteStream(`${file}.gzip`))
-    .on('finish', () => console.log('Done'));
+  .pipe(zlib.createGzip())
+  .pipe(crypto.createCipheriv('aes192', 'a_secret'))
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(`${file}.gzip`))
+  .on('finish', () => console.log('Done'));
 ```
 
 上面的脚本压缩然后加密一个传入的文件，仅仅那些使用输出文件的有密码。
@@ -671,11 +671,11 @@ fs.createReadStream(file)
 // cryptoGunzip.js
 // ...
 fs.createReadStream(file)
-    .pipe(crypto.createDecipheriv('aes192', 'a_secret'))
-    .pipe(zlib.createGunzip())
-    .pipe(reportProgress)
-    .pipe(fs.createWriteStream(file.slice(0, -3)))
-    .on('finish', () => console.log('Done'));
+  .pipe(crypto.createDecipheriv('aes192', 'a_secret'))
+  .pipe(zlib.createGunzip())
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(file.slice(0, -3)))
+  .on('finish', () => console.log('Done'));
 ```
 
 假设传递的文件是压缩的版本，上面的代码将会创建一个可读流，将它导入到 `crypto createDecipher() 流`中（使用相同的密码），将输出导入到 `zlib createGunzip() 流`中，然后写一个东西到一个文件中，即为加密前压缩前的原始内容。

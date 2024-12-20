@@ -8,9 +8,9 @@
 
 ```javascript
 function setName(obj) {
-    obj.name = 'Nick';
-    obj = new Object();
-    obj.name = 'Greg';
+  obj.name = 'Nick';
+  obj = new Object();
+  obj.name = 'Greg';
 }
 
 const person = new Object();
@@ -57,17 +57,17 @@ alert(person.name); // Nick
 let color = 'blue';
 
 function changeColor() {
-    let anotherColor = 'red';
+  let anotherColor = 'red';
 
-    function swapColors() {
-        const tempColor = anotherColor;
-        anotherColor = color;
-        color = tempColor;
+  function swapColors() {
+    const tempColor = anotherColor;
+    anotherColor = color;
+    color = tempColor;
 
     // 这里可以访问 color、antherColor和tempColor
-    }
+  }
 
-    // 这里可以访问color和anotherColor，但不能访问tempColor
+  // 这里可以访问color和anotherColor，但不能访问tempColor
 }
 ```
 
@@ -162,9 +162,9 @@ JavaScript 具有自动垃圾收集机制，也就是说，执行环境会负责
 
 ```javascript
 function createPerson(name) {
-    const localPerson = new Object();
-    localPerson.name = name;
-    return localPerson;
+  const localPerson = new Object();
+  localPerson.name = name;
+  return localPerson;
 }
 
 let globalPerson = creacePerson('Nicholas');

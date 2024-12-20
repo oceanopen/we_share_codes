@@ -77,8 +77,8 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: path.resolve(__dirname, './dist/'), // 新增
-    plugins: [vue()],
+  base: path.resolve(__dirname, './dist/'), // 新增
+  plugins: [vue()],
 });
 ```
 
@@ -92,43 +92,43 @@ const path = require('node:path');
 const { app, BrowserWindow } = require('electron');
 
 function createWindow() {
-    // 创建浏览器窗口
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-        },
-    });
+  // 创建浏览器窗口
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
 
-    // 加载 index.html
-    mainWindow.loadFile('dist/index.html'); // 此处跟electron官网路径不同，需要注意
+  // 加载 index.html
+  mainWindow.loadFile('dist/index.html'); // 此处跟electron官网路径不同，需要注意
 
-    // 打开开发工具
-    mainWindow.webContents.openDevTools();
+  // 打开开发工具
+  mainWindow.webContents.openDevTools();
 }
 
 // 这段程序将会在 Electron 结束初始化
 // 和创建浏览器窗口的时候调用
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
-    createWindow();
+  createWindow();
 
-    app.on('activate', () => {
+  app.on('activate', () => {
     // 通常在 macOS 上，当点击 dock 中的应用程序图标时，如果没有其他
     // 打开的窗口，那么程序会重新创建一个窗口。
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    });
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 // 除了 macOS 外，当所有窗口都被关闭的时候退出程序。 因此，通常对程序和它们在
 // 任务栏上的图标来说，应当保持活跃状态，直到用户使用 Cmd + Q 退出。
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 // 在这个文件中，你可以包含应用程序剩余的所有部分的代码，
@@ -143,16 +143,16 @@ app.on('window-all-closed', () => {
 // 所有 Node.js API 都可以在预加载过程中使用。
 // 它拥有与 Chrome 扩展一样的沙盒。
 window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-        const element = document.getElementById(selector);
-        if (element) {
-            element.textContent = text;
-        }
-    };
-
-    for (const type of ['chrome', 'node', 'electron']) {
-        replaceText(`${type}-version`, process.versions[type]);
+  const replaceText = (selector, text) => {
+    const element = document.getElementById(selector);
+    if (element) {
+      element.textContent = text;
     }
+  };
+
+  for (const type of ['chrome', 'node', 'electron']) {
+    replaceText(`${type}-version`, process.versions[type]);
+  }
 });
 ```
 
@@ -182,25 +182,25 @@ window.addEventListener('DOMContentLoaded', () => {
 // package.json
 
 {
-    "version": "0.0.0",
-    "main": "main.js", // 新增
-    "scripts": {
-        "dev": "vite",
-        "build": "vue-tsc --noEmit && vite build",
-        "serve": "vite preview",
-        "electron:serve": "electron ." // 新增
-    },
-    "dependencies": {
-        "vue": "^3.0.5"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^1.2.5",
-        "@vue/compiler-sfc": "^3.0.5",
-        "electron": "^16.0.1",
-        "typescript": "^4.3.2",
-        "vite": "^2.4.2",
-        "vue-tsc": "^0.0.24"
-    }
+  "version": "0.0.0",
+  "main": "main.js", // 新增
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "electron:serve": "electron ." // 新增
+  },
+  "dependencies": {
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.5",
+    "@vue/compiler-sfc": "^3.0.5",
+    "electron": "^16.0.1",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.2",
+    "vue-tsc": "^0.0.24"
+  }
 }
 ```
 

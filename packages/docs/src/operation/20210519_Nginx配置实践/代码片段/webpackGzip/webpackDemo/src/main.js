@@ -4,7 +4,7 @@ require('./main.less');
 document.querySelector('#app').appendChild(greeter());
 
 document.querySelector('#btn').addEventListener('click', () => {
-    import('./async.js').then((data) => {
-        console.log(data);
-    });
+  import('./async.js').then((data) => {
+    console.log(data);
+  });
 });

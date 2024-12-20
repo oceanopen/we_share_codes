@@ -51,7 +51,7 @@ function foo(args: unknown): unknown { /* ... */ }
 
 ```ts
 function foo<T>(args: T): T {
-    return args;
+  return args;
 }
 ```
 
@@ -91,11 +91,11 @@ const foo = <T extends SomeBasicType>(arg: T): T => arg;
 
 ```ts
 class Foo<T, U> {
-    constructor(public arg1: T, public arg2: U) {}
+  constructor(public arg1: T, public arg2: U) {}
 
-    public method(): T {
-        return this.arg1;
-    }
+  public method(): T {
+    return this.arg1;
+  }
 }
 ```
 
@@ -123,9 +123,9 @@ export const isString = (arg: unknown): boolean => typeof arg === 'string';
 
 ```ts
 function useIt(numOrStr: number | string) {
-    if (isString(numOrStr)) {
-        console.log(numOrStr.length);
-    }
+  if (isString(numOrStr)) {
+    console.log(numOrStr.length);
+  }
 }
 ```
 
@@ -147,18 +147,18 @@ export const isFalsy = (val: unknown): val is Falsy => !val;
 
 ```ts
 class A {
-    public a() {}
+  public a() {}
 
-    public useA() {
-        return 'A';
-    }
+  public useA() {
+    return 'A';
+  }
 }
 class B {
-    public b() {}
+  public b() {}
 
-    public useB() {
-        return 'B';
-    }
+  public useB() {
+    return 'B';
+  }
 }
 ```
 
@@ -166,7 +166,7 @@ class B {
 
 ```ts
 function useIt(arg: A | B): void {
-    'a' in arg ? arg.useA() : arg.useB();
+  'a' in arg ? arg.useA() : arg.useB();
 }
 ```
 
@@ -177,19 +177,19 @@ function useIt(arg: A | B): void {
 
 ```ts
 interface IBoy {
-    name: 'mike';
-    gf: string;
+  name: 'mike';
+  gf: string;
 }
 interface IGirl {
-    name: 'sofia';
-    bf: string;
+  name: 'sofia';
+  bf: string;
 }
 function getLover(child: IBoy | IGirl): string {
-    if (child.name === 'mike') {
-        return child.gf;
-    } else {
-        return child.bf;
-    }
+  if (child.name === 'mike') {
+    return child.gf;
+  } else {
+    return child.bf;
+  }
 }
 ```
 
@@ -205,16 +205,16 @@ function getLover(child: IBoy | IGirl): string {
 
 ```ts
 interface ILogInUserProps {
-    isLogin: boolean;
-    name: string;
+  isLogin: boolean;
+  name: string;
 }
 interface IUnLoginUserProps {
-    isLogin: boolean;
-    from: string;
+  isLogin: boolean;
+  from: string;
 }
 type UserProps = ILogInUserProps | IUnLoginUserProps;
 function getUserInfo(user: UserProps): string {
-    return 'name' in user ? user.name : user.from;
+  return 'name' in user ? user.name : user.from;
 }
 ```
 
@@ -222,16 +222,16 @@ function getUserInfo(user: UserProps): string {
 
 ```ts
 interface ICommonUserProps {
-    type: 'common';
-    accountLevel: string;
+  type: 'common';
+  accountLevel: string;
 }
 interface IVIPUserProps {
-    type: 'vip';
-    vipLevel: string;
+  type: 'vip';
+  vipLevel: string;
 }
 type UserProps = ICommonUserProps | IVIPUserProps;
 function getUserInfo(user: UserProps): string {
-    return user.type === 'common' ? user.accountLevel : user.vipLevel;
+  return user.type === 'common' ? user.accountLevel : user.vipLevel;
 }
 ```
 
@@ -247,7 +247,7 @@ function getUserInfo(user: UserProps): string {
 ```js
 // 假设 key 是 obj 键名
 function pickSingleValue(obj, key) {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -266,7 +266,7 @@ function pickSingleValue(obj, key) {
 
 ```ts
 function pickSingleValue<T>(obj: T, key: keyof T) {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -274,8 +274,8 @@ function pickSingleValue<T>(obj: T, key: keyof T) {
 
 ```ts
 interface foo {
-    a: number;
-    b: string;
+  a: number;
+  b: string;
 }
 type KEY_OF_FOO = keyof foo; // "a" | "b"
 ```
@@ -290,8 +290,8 @@ type KEY_OF_FOO = keyof foo; // "a" | "b"
 const fooObj = { a: 1, b: '1' };
 
 for (const key in fooObj) {
-    console.log(key);
-    console.log(fooObj[key]);
+  console.log(key);
+  console.log(fooObj[key]);
 }
 ```
 
@@ -299,7 +299,7 @@ for (const key in fooObj) {
 
 ```ts
 function pickSingleValue<T>(obj: T, key: keyof T): T[keyof T] {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -307,8 +307,8 @@ function pickSingleValue<T>(obj: T, key: keyof T): T[keyof T] {
 
 ```ts
 interface T {
-    a: number;
-    b: string;
+  a: number;
+  b: string;
 }
 type TKeys = keyof T; // "a" | "b"
 type PropAType = T['a']; // number
@@ -321,7 +321,7 @@ type PropAType = T['a']; // number
 
 ```ts
 function pickSingleValue<T extends object, U extends keyof T>(obj: T, key: U): T[U] {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -331,7 +331,7 @@ function pickSingleValue<T extends object, U extends keyof T>(obj: T, key: U): T
 
 ```ts
 function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
-    return keys.map(key => obj[key]);
+  return keys.map(key => obj[key]);
 }
 // pick(obj, ['a', 'b'])
 ```
@@ -352,7 +352,7 @@ function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
 
 ```ts
 interface Foo {
-    [keys: string]: string;
+  [keys: string]: string;
 }
 ```
 
@@ -362,7 +362,7 @@ interface Foo {
 
 ```ts
 const o: Foo = {
-    1: '芜湖！',
+  1: '芜湖！',
 };
 o[1] === o['1']; // true
 ```
@@ -381,10 +381,10 @@ o[1] === o['1']; // true
 
 ```ts
 interface A {
-    a: boolean;
-    b: string;
-    c: number;
-    d: () => void;
+  a: boolean;
+  b: string;
+  c: number;
+  d: () => void;
 }
 ```
 
@@ -395,7 +395,7 @@ interface A {
 
 ```ts
 type StringifyA<T> = {
-    [K in keyof T]: string
+  [K in keyof T]: string
 };
 ```
 
@@ -403,7 +403,7 @@ type StringifyA<T> = {
 
 ```ts
 type ClonedA<T> = {
-    [K in keyof T]: T[K]
+  [K in keyof T]: T[K]
 };
 ```
 
@@ -416,7 +416,7 @@ type ClonedA<T> = {
 ```ts
 // 将接口下的字段全部变为可选的
 type Partial<T> = {
-    [K in keyof T]?: T[K]
+  [K in keyof T]?: T[K]
 };
 ```
 
@@ -430,7 +430,7 @@ type Partial<T> = {
 
 ```js
 if (condition) {
-    execute();
+  execute();
 }
 ```
 
@@ -468,7 +468,7 @@ type LiteralType<T> = T extends string ? 'foo' : 'bar';
 
 ```ts
 function pickSingleValue<T extends object, U extends keyof T>(obj: T, key: U): T[U] {
-    return obj[key];
+  return obj[key];
 }
 ```
 
@@ -477,9 +477,9 @@ function pickSingleValue<T extends object, U extends keyof T>(obj: T, key: U): T
 
 ```js
 function checkArgFirst(arg) {
-    if (typeof arg !== 'number') {
-        throw new TypeError('arg must be number type!');
-    }
+  if (typeof arg !== 'number') {
+    throw new TypeError('arg must be number type!');
+  }
 }
 ```
 
@@ -503,17 +503,17 @@ const numReturnType = strOrNum(false);
 
 ```ts
 type TypeName<T> = T extends string
-    ? 'string'
-    : T extends number
-        ? 'number'
-        : T extends boolean
-            ? 'boolean'
-            : T extends undefined
-                ? 'undefined'
-                // eslint-disable-next-line ts/no-unsafe-function-type
-                : T extends Function
-                    ? 'function'
-                    : 'object';
+  ? 'string'
+  : T extends number
+    ? 'number'
+    : T extends boolean
+      ? 'boolean'
+      : T extends undefined
+        ? 'undefined'
+      // eslint-disable-next-line ts/no-unsafe-function-type
+        : T extends Function
+          ? 'function'
+          : 'object';
 ```
 
 ### 5.2 分布式条件类型 Distributive Conditional Types
@@ -606,7 +606,7 @@ type NotDistributed = Wrapped<number | boolean>;
 
 ```ts
 function foo(): string {
-    return 'linbudu';
+  return 'linbudu';
 }
 
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
@@ -640,7 +640,7 @@ infer 也是这个思路，类型系统在获得足够的信息（通常来自�
 
 ```ts
 type Partial<T> = {
-    [K in keyof T]?: T[K]
+  [K in keyof T]?: T[K]
 };
 ```
 
@@ -654,11 +654,11 @@ type Partial<T> = {
 
 ```ts
 type Required<T> = {
-    [K in keyof T]-?: T[K]
+  [K in keyof T]-?: T[K]
 };
 
 type Readonly<T> = {
-    readonly [K in keyof T]: T[K]
+  readonly [K in keyof T]: T[K]
 };
 ```
 
@@ -666,7 +666,7 @@ type Readonly<T> = {
 
 ```ts
 function pick<T extends object, U extends keyof T>(obj: T, keys: U[]): T[U][] {
-    return keys.map(key => obj[key]);
+  return keys.map(key => obj[key]);
 }
 console.log(pick({ a: 123, b: 'name' }, ['a', 'b'])); // [ 123, 'name' ]
 ```
@@ -675,7 +675,7 @@ console.log(pick({ a: 123, b: 'name' }, ['a', 'b'])); // [ 123, 'name' ]
 
 ```ts
 type Pick<T, K extends keyof T> = {
-    [P in K]: T[P]
+  [P in K]: T[P]
 };
 
 // 期望用法
@@ -687,10 +687,10 @@ type Pick<T, K extends keyof T> = {
  * }
  */
 interface A {
-    a: boolean;
-    b: string;
-    c: number;
-    d: () => void;
+  a: boolean;
+  b: string;
+  c: number;
+  d: () => void;
 }
 type Part = Pick<A, 'a' | 'b'>;
 ```
@@ -734,10 +734,10 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
  * }
  */
 interface A {
-    a: boolean;
-    b: string;
-    c: number;
-    d: () => void;
+  a: boolean;
+  b: string;
+  c: number;
+  d: () => void;
 }
 type OmitPart = Omit<A, 'a' | 'b'>;
 ```
@@ -755,14 +755,14 @@ type MyExtractFields = Extract<'1' | '2' | '3' | '4' | '5', '1' | '2'>;
 ```ts
 type MyNav = 'a' | 'b' | 'c';
 interface INavWidgets {
-    widgets: string[];
-    title?: string;
-    keepAlive?: boolean;
+  widgets: string[];
+  title?: string;
+  keepAlive?: boolean;
 }
 const router: Record<MyNav, INavWidgets> = {
-    a: { widgets: [''] },
-    b: { widgets: [''] },
-    c: { widgets: [''] },
+  a: { widgets: [''] },
+  b: { widgets: [''] },
+  c: { widgets: [''] },
 };
 ```
 
@@ -771,7 +771,7 @@ const router: Record<MyNav, INavWidgets> = {
 ```ts
 // K extends keyof any 约束 K 必须为联合类型
 type Record<K extends keyof any, T> = {
-    [P in K]: T
+  [P in K]: T
 };
 ```
 
@@ -787,7 +787,7 @@ type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) 
 
 ```ts
 function foo(name: string, sex: string): string {
-    return `${name}_${sex}`;
+  return `${name}_${sex}`;
 }
 type Parameters<T extends (...args: any[]) => any> = T extends (...args: infer P) => any ? P : never;
 // [ name: string, sex: string ]
@@ -798,9 +798,9 @@ type FooParameters = Parameters<typeof foo>;
 
 ```ts
 class ClassB {
-    constructor(public name: string) {
-        this.name = name;
-    }
+  constructor(public name: string) {
+    this.name = name;
+  }
 }
 type ConstructorParameters<T extends new (...args: any[]) => any> = T extends new (...args: infer P) => any ? P : never;
 // [ name: string ]
@@ -813,9 +813,9 @@ type ClassBConstructorParameters = ConstructorParameters<typeof ClassB>;
 
 ```ts
 class ClassB {
-    constructor(public name: string) {
-        this.name = name;
-    }
+  constructor(public name: string) {
+    this.name = name;
+  }
 }
 type InstanceType<T extends new (...args: any[]) => any> = T extends new (...args: any[]) => infer R ? R : any;
 // ClassB
@@ -835,15 +835,15 @@ type ClassBInstanceType = InstanceType<typeof ClassB>;
 export type Primitive = string | number | bigint | boolean | symbol | null | undefined;
 
 export function isPrimitive(val: unknown): val is Primitive {
-    if (val === null || val === undefined) {
-        return true;
-    }
+  if (val === null || val === undefined) {
+    return true;
+  }
 
-    const typeDef = typeof val;
+  const typeDef = typeof val;
 
-    const primitiveNonNullishTypes = ['string', 'number', 'bigint', 'boolean', 'symbol'];
+  const primitiveNonNullishTypes = ['string', 'number', 'bigint', 'boolean', 'symbol'];
 
-    return primitiveNonNullishTypes.includes(typeDef);
+  return primitiveNonNullishTypes.includes(typeDef);
 }
 
 // null 或 undefined 别名
@@ -858,9 +858,9 @@ export type NonNullable<T> = T extends null ? never : T;
 
 ```ts
 function foo(): Promise<string> {
-    return new Promise((resolve, reject) => {
-        resolve('name');
-    });
+  return new Promise((resolve, reject) => {
+    resolve('name');
+  });
 }
 
 export type PromiseType<T extends Promise<any>> = T extends Promise<infer U> ? U : never;
@@ -879,7 +879,7 @@ type NakedFooReturnType = PromiseType<FooReturnType>;
 
 ```ts
 type Partial<T> = {
-    [P in keyof T]?: T[P]
+  [P in keyof T]?: T[P]
 };
 ```
 
@@ -893,7 +893,7 @@ type Partial<T> = {
 
 ```ts
 export type DeepPartial<T> = {
-    [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
 };
 ```
 
@@ -903,16 +903,16 @@ export type DeepPartial<T> = {
 
 ```ts
 export type DeepMutable<T> = {
-    -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P]
+  -readonly [P in keyof T]: T[P] extends object ? DeepMutable<T[P]> : T[P]
 };
 
 // 即 DeepReadonly
 export type DeepImmutable<T> = {
-    +readonly [P in keyof T]: T[P] extends object ? DeepImmutable<T[P]> : T[P]
+  +readonly [P in keyof T]: T[P] extends object ? DeepImmutable<T[P]> : T[P]
 };
 
 export type DeepRequired<T> = {
-    [P in keyof T]-?: T[P] extends object ? DeepRequired<T[P]> : T[P]
+  [P in keyof T]-?: T[P] extends object ? DeepRequired<T[P]> : T[P]
 };
 ```
 
@@ -927,15 +927,15 @@ export type DeepRequired<T> = {
 
 ```ts
 interface IObjWithFuncKeys {
-    a: string;
-    b: number;
-    c: boolean;
-    d: () => void;
-    e: () => void;
+  a: string;
+  b: number;
+  c: boolean;
+  d: () => void;
+  e: () => void;
 }
 export type FunctTypeKeys<T extends object> = {
-    // eslint-disable-next-line ts/no-unsafe-function-type
-    [K in keyof T]-?: T[K] extends Function ? K : never
+  // eslint-disable-next-line ts/no-unsafe-function-type
+  [K in keyof T]-?: T[K] extends Function ? K : never
 }[keyof T];
 // "d" | "e"
 type FunKeys = FunctTypeKeys<IObjWithFuncKeys>;
@@ -945,15 +945,15 @@ type FunKeys = FunctTypeKeys<IObjWithFuncKeys>;
 
 ```ts
 interface IObjWithFuncKeys {
-    a: string;
-    b: number;
-    c: boolean;
-    d: () => void;
+  a: string;
+  b: number;
+  c: boolean;
+  d: () => void;
 }
 
 type WithFunKeysIsThis<T extends object> = {
-    // eslint-disable-next-line ts/no-unsafe-function-type
-    [K in keyof T]-?: T[K] extends Function ? K : never
+  // eslint-disable-next-line ts/no-unsafe-function-type
+  [K in keyof T]-?: T[K] extends Function ? K : never
 };
 
 type UseIt = WithFunKeysIsThis<IObjWithFuncKeys>;
@@ -963,10 +963,10 @@ type UseIt = WithFunKeysIsThis<IObjWithFuncKeys>;
 
 ```ts
 interface UseIt {
-    a: never;
-    b: never;
-    c: never;
-    d: 'd';
+  a: never;
+  b: never;
+  c: never;
+  d: 'd';
 }
 ```
 
@@ -1007,13 +1007,13 @@ type JUDGE2 = {} extends { prop?: number } ? 'Y' : 'N';
 
 ```ts
 interface IObjKeys {
-    a?: string;
-    b: number;
-    c: boolean;
+  a?: string;
+  b: number;
+  c: boolean;
 }
 export type RequiredKeys<T> = {
-    // eslint-disable-next-line ts/no-empty-object-type
-    [K in keyof T]-?: {} extends MyPick<T, K> ? never : K
+  // eslint-disable-next-line ts/no-empty-object-type
+  [K in keyof T]-?: {} extends MyPick<T, K> ? never : K
 }[keyof T];
 // "b" | "c"
 type IObjRequiredKeys = RequiredKeys<IObjKeys>;
@@ -1023,13 +1023,13 @@ type IObjRequiredKeys = RequiredKeys<IObjKeys>;
 
 ```ts
 interface IObjKeys {
-    a?: string;
-    b: number;
-    c: boolean;
+  a?: string;
+  b: number;
+  c: boolean;
 }
 export type OptionalKeys<T> = {
-    // eslint-disable-next-line ts/no-empty-object-type
-    [K in keyof T]-?: {} extends Pick<T, K> ? K : never
+  // eslint-disable-next-line ts/no-empty-object-type
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never
 }[keyof T];
 // "a"
 type IObjOptionalKeys = OptionalKeys<IObjKeys>;
@@ -1039,8 +1039,8 @@ type IObjOptionalKeys = OptionalKeys<IObjKeys>;
 
 ```ts
 interface MutableKeys {
-    readonlyKeys: never;
-    notReadonlyKeys: 'notReadonlyKeys';
+  readonlyKeys: never;
+  notReadonlyKeys: 'notReadonlyKeys';
 }
 ```
 
@@ -1050,18 +1050,18 @@ interface MutableKeys {
 
 ```ts
 interface IEqualKeys {
-    a?: string;
-    b: number;
-    c: boolean;
+  a?: string;
+  b: number;
+  c: boolean;
 }
 type Equal<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 // "never"
 type EqualKeys1 = Equal<IEqualKeys, { [P in keyof IEqualKeys]-?: IEqualKeys[P] }>;
 // "hahaha"
 type EqualKeys2 = Equal<
-    { [P in keyof IEqualKeys]-?: IEqualKeys[P] },
-    { [P in keyof IEqualKeys]-?: IEqualKeys[P] },
-    'hahaha'
+  { [P in keyof IEqualKeys]-?: IEqualKeys[P] },
+  { [P in keyof IEqualKeys]-?: IEqualKeys[P] },
+  'hahaha'
 >;
 ```
 
@@ -1074,13 +1074,13 @@ type EqualKeys2 = Equal<
 
 ```ts
 interface IReadonlyKeys {
-    readonly a: string;
-    b: number;
-    c: boolean;
+  readonly a: string;
+  b: number;
+  c: boolean;
 }
 // 非只读的 Keys
 export type MutableKeys<T extends object> = {
-    [P in keyof T]-?: Equal<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, P, never>
+  [P in keyof T]-?: Equal<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, P, never>
 }[keyof T];
 // "b" | "c"
 type MutableKeys1 = MutableKeys<IReadonlyKeys>;
@@ -1095,12 +1095,12 @@ type MutableKeys1 = MutableKeys<IReadonlyKeys>;
 
 ```ts
 interface IReadonlyKeys {
-    readonly a: string;
-    b: number;
-    c: boolean;
+  readonly a: string;
+  b: number;
+  c: boolean;
 }
 export type IMmutableKeys<T extends object> = {
-    [P in keyof T]-?: Equal<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, never, P>
+  [P in keyof T]-?: Equal<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, never, P>
 }[keyof T];
 // "a"
 type MutableKeys2 = IMmutableKeys<IReadonlyKeys>;
@@ -1116,20 +1116,20 @@ type MutableKeys2 = IMmutableKeys<IReadonlyKeys>;
 
 ```ts
 interface IValueTypeKeys {
-    a: string;
-    b: number;
-    c: boolean;
+  a: string;
+  b: number;
+  c: boolean;
 }
 export type PickByValueType<T, ValueType> = Pick<
-    T,
-    { [Key in keyof T]-?: T[Key] extends ValueType ? Key : never }[keyof T]
+  T,
+  { [Key in keyof T]-?: T[Key] extends ValueType ? Key : never }[keyof T]
 >;
 // { a: string; }
 type PickByValueType1 = PickByValueType<IValueTypeKeys, string>;
 
 export type OmitByValueType<T, ValueType> = Pick<
-    T,
-    { [Key in keyof T]-?: T[Key] extends ValueType ? never : Key }[keyof T]
+  T,
+  { [Key in keyof T]-?: T[Key] extends ValueType ? never : Key }[keyof T]
 >;
 // { b: number; c: boolean; }
 type PickByValueType2 = OmitByValueType<IValueTypeKeys, string>;
@@ -1229,8 +1229,8 @@ type Tmp = CutStr<'HelloWorld'>;
 
 ```ts
 type ExtractMember<Str extends string> = Str extends `[${infer Member1}, ${infer Member2}, ${infer Member3}]`
-    ? [Member1, Member2, Member3]
-    : unknown;
+  ? [Member1, Member2, Member3]
+  : unknown;
 
 // ["1", "2", "3"]
 type Tmp = ExtractMember<'[1, 2, 3]'>;
@@ -1240,8 +1240,8 @@ type Tmp = ExtractMember<'[1, 2, 3]'>;
 
 ```ts
 type ExtractMember<Str extends string> = Str extends `[${infer Member1}${infer Member2}${infer Member3}]`
-    ? [Member1, Member2, Member3]
-    : unknown;
+  ? [Member1, Member2, Member3]
+  : unknown;
 
 // ["1", ",", " 2, 3"]
 type Tmp = ExtractMember<'[1, 2, 3]'>;
@@ -1251,12 +1251,12 @@ type Tmp = ExtractMember<'[1, 2, 3]'>;
 
 ```ts
 type JoinArrayMember<T extends unknown[], D extends string> = T extends []
-    ? ''
-    : T extends [any]
-        ? `${T[0]}`
-        : T extends [any, ...infer U]
-            ? `${T[0]}${D}${JoinArrayMember<U, D>}`
-            : string;
+  ? ''
+  : T extends [any]
+    ? `${T[0]}`
+    : T extends [any, ...infer U]
+      ? `${T[0]}${D}${JoinArrayMember<U, D>}`
+      : string;
 
 // ""
 type Tmp1 = JoinArrayMember<[], '.'>;
@@ -1272,12 +1272,12 @@ type Tmp2 = JoinArrayMember<[1, 2, 3, 4], '.'>;
 
 ```ts
 type SplitArrayMember<S extends string, D extends string> = string extends S
-    ? string[]
-    : S extends ''
-        ? []
-        : S extends `${infer T}${D}${infer U}`
-            ? [T, ...SplitArrayMember<U, D>]
-            : [S];
+  ? string[]
+  : S extends ''
+    ? []
+    : S extends `${infer T}${D}${infer U}`
+      ? [T, ...SplitArrayMember<U, D>]
+      : [S];
 // ["foo"]
 type Tmp1 = SplitArrayMember<'foo', '.'>;
 // ["foo", "bar", "baz"]
@@ -1293,23 +1293,23 @@ type Tmp4 = SplitArrayMember<any, '.'>;
 
 ```ts
 type PropType<T, Path extends string> = string extends Path
-    ? unknown
-    : Path extends keyof T
-        ? T[Path]
-        : Path extends `${infer K}.${infer R}`
-            ? K extends keyof T
-                ? PropType<T[K], R>
-                : unknown
-            : unknown;
+  ? unknown
+  : Path extends keyof T
+    ? T[Path]
+    : Path extends `${infer K}.${infer R}`
+      ? K extends keyof T
+        ? PropType<T[K], R>
+        : unknown
+      : unknown;
 declare function getPropValue<T, P extends string>(obj: T, path: P): PropType<T, P>;
 declare const s: string;
 const propTypeObj = {
-    a: {
-        b: {
-            c: 42,
-            d: 'hello',
-        },
+  a: {
+    b: {
+      c: 42,
+      d: 'hello',
     },
+  },
 };
 getPropValue(propTypeObj, 'a'); // { b: { c: number; d: string; } }
 getPropValue(propTypeObj, 'a.b'); // { c: number; d: string; }
@@ -1325,13 +1325,13 @@ getPropValue(propTypeObj, s); // unknown
 
 ```ts
 type Getters<T> = {
-    [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
 };
 interface Person {
-    name: string;
-    age: number;
-    location: string;
-    fun: () => void;
+  name: string;
+  age: number;
+  location: string;
+  fun: () => void;
 }
 // type LazyPerson = {
 //   getName: () => string
@@ -1345,9 +1345,9 @@ type LazyPerson = Getters<Person>;
 
 ```ts
 interface LazyPerson {
-    getName: () => string;
-    getAge: () => number;
-    getLocation: () => string;
+  getName: () => string;
+  getAge: () => number;
+  getLocation: () => string;
 }
 ```
 
@@ -1357,11 +1357,11 @@ interface LazyPerson {
 
 ```ts
 type RemoveKindField<T> = {
-    [K in keyof T as Exclude<K, 'kind'>]: T[K]
+  [K in keyof T as Exclude<K, 'kind'>]: T[K]
 };
 interface Circle {
-    kind: 'circle';
-    radius: number;
+  kind: 'circle';
+  radius: number;
 }
 // type KindlessCircle = {
 //   radius: number
@@ -1373,7 +1373,7 @@ type KindlessCircle = RemoveKindField<Circle>;
 
 ```ts
 type DoubleProp<T> = {
-    [P in keyof T & string as `${P}1` | `${P}2`]: T[P]
+  [P in keyof T & string as `${P}1` | `${P}2`]: T[P]
 };
 // type TmpDubleProp = {
 //   a1: string

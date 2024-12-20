@@ -4,7 +4,7 @@
 
 ```json
 {
-    "strictNullChecks": true
+  "strictNullChecks": true
 }
 ```
 
@@ -23,12 +23,12 @@ const strLength: number = (someValue as string).length;
 
 ```typescript
 interface SquareConfig {
-    color: string;
-    width?: number;
+  color: string;
+  width?: number;
 }
 function createSquare(config: SquareConfig) {
-    config.color = undefined; // 不能将类型“undefined”分配给类型“string”。ts(2322)
-    console.log(config.color);
+  config.color = undefined; // 不能将类型“undefined”分配给类型“string”。ts(2322)
+  console.log(config.color);
 }
 ```
 
@@ -36,12 +36,12 @@ function createSquare(config: SquareConfig) {
 
 ```typescript
 interface SquareConfig {
-    color?: string;
-    width?: number;
+  color?: string;
+  width?: number;
 }
 function createSquare(config: SquareConfig) {
-    config.color = undefined;
-    console.log(config.color);
+  config.color = undefined;
+  console.log(config.color);
 }
 ```
 
@@ -50,12 +50,12 @@ function createSquare(config: SquareConfig) {
 
 ```typescript
 interface SquareConfig {
-    color?: string;
-    width?: number;
+  color?: string;
+  width?: number;
 }
 function createSquare(config: SquareConfig) {
-    config.color = null; // 不能将类型“null”分配给类型“string | undefined”。ts(2322)
-    console.log(config.color);
+  config.color = null; // 不能将类型“null”分配给类型“string | undefined”。ts(2322)
+  console.log(config.color);
 }
 ```
 
@@ -70,8 +70,8 @@ function createSquare(config: SquareConfig) {
 
 ```typescript
 interface SquareConfig {
-    color: string | undefined;
-    width: number | undefined;
+  color: string | undefined;
+  width: number | undefined;
 }
 ```
 
@@ -81,18 +81,18 @@ interface SquareConfig {
 // index.ts
 
 interface SquareConfig {
-    color?: string;
-    width?: number;
+  color?: string;
+  width?: number;
 }
 function createSquare(config: SquareConfig) {
-    console.log('config.color?.length:');
-    console.log(config.color?.length);
+  console.log('config.color?.length:');
+  console.log(config.color?.length);
 
-    console.log('(config.color as string).length:');
-    console.log((config.color as string).length);
+  console.log('(config.color as string).length:');
+  console.log((config.color as string).length);
 
-    console.log('config.color!.length:');
-    console.log(config.color!.length);
+  console.log('config.color!.length:');
+  console.log(config.color!.length);
 }
 ```
 
@@ -108,16 +108,16 @@ npx tsc index.ts
 // index.js
 
 function createSquare(config) {
-    let _a;
-    console.log('config.color?.length:');
-    // eslint-disable-next-line no-cond-assign
-    console.log((_a = config.color) === null || _a === void 0 ? void 0 : _a.length);
+  let _a;
+  console.log('config.color?.length:');
+  // eslint-disable-next-line no-cond-assign
+  console.log((_a = config.color) === null || _a === void 0 ? void 0 : _a.length);
 
-    console.log('(config.color as string).length:');
-    console.log(config.color.length);
+  console.log('(config.color as string).length:');
+  console.log(config.color.length);
 
-    console.log('config.color!.length:');
-    console.log(config.color.length);
+  console.log('config.color!.length:');
+  console.log(config.color.length);
 }
 ```
 
@@ -129,10 +129,10 @@ function createSquare(config) {
 
 ```typescript
 interface Cat {
-    action: string;
+  action: string;
 }
 interface Dog {
-    action: string;
+  action: string;
 }
 type Animal = Cat | Dog;
 const action: Animal = {} as Cat;

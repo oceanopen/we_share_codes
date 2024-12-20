@@ -68,10 +68,10 @@
 <!-- CustomButton.vue -->
 
 <template>
-    <Primitive as="button" :as-child="false" class="button button-type-primary button-size-medium">
-        <IconLoading v-if="loading" />
-        <slot />
-    </Primitive>
+  <Primitive as="button" :as-child="false" class="button button-type-primary button-size-medium">
+    <IconLoading v-if="loading" />
+    <slot />
+  </Primitive>
 </template>
 
 <script setup lang="ts">
@@ -79,7 +79,7 @@ import { IconLoading } from 'icon/xxx';
 import { Primitive, type PrimitiveProps } from 'radix-vue';
 
 interface ButtonProps extends PrimitiveProps {
-    loading?: boolean;
+  loading?: boolean;
 }
 </script>
 ```
@@ -161,12 +161,12 @@ pnpm story:dev
 // index.ts
 
 export {
-    type ButtonContentProps,
-    default as ButtonContent,
+  type ButtonContentProps,
+  default as ButtonContent,
 } from './ButtonContent.vue';
 export {
-    type ButtonLoadingProps,
-    default as ButtonLoading,
+  type ButtonLoadingProps,
+  default as ButtonLoading,
 } from './ButtonLoading.vue';
 export { type ButtonRootProps, default as ButtonRoot } from './ButtonRoot.vue';
 ```
@@ -175,9 +175,9 @@ export { type ButtonRootProps, default as ButtonRoot } from './ButtonRoot.vue';
 <!-- ButtonRoot.vue -->
 
 <template>
-    <Primitive :as-child="asChild" :as="as" role="button">
-        <slot />
-    </Primitive>
+  <Primitive :as-child="asChild" :as="as" role="button">
+    <slot />
+  </Primitive>
 </template>
 
 <script lang="ts">
@@ -191,13 +191,13 @@ import { Primitive } from '@/Primitive';
 import { toRefs } from 'vue';
 
 export interface ButtonRootProps extends PrimitiveProps {
-    loading?: boolean;
+  loading?: boolean;
 }
 export interface ButtonRootContext {
-    loading?: Ref<boolean>;
+  loading?: Ref<boolean>;
 }
 const props = withDefaults(defineProps<ButtonRootProps>(), {
-    as: 'button',
+  as: 'button',
 });
 
 const [injectButtonRootContext, provideButtonRootContext] = createContext<ButtonRootContext>('ButtonRoot');
@@ -206,7 +206,7 @@ useForwardExpose();
 
 const { loading } = toRefs(props);
 provideButtonRootContext({
-    loading,
+  loading,
 });
 </script>
 ```
@@ -215,9 +215,9 @@ provideButtonRootContext({
 <!-- ButtonLoading.vue -->
 
 <template>
-    <Primitive v-show="loading" role="icon" :as-child="asChild" :as="as" :data-hidden="loading ? true : false">
-        <slot />
-    </Primitive>
+  <Primitive v-show="loading" role="icon" :as-child="asChild" :as="as" :data-hidden="loading ? true : false">
+    <slot />
+  </Primitive>
 </template>
 
 <script lang="ts">
@@ -242,9 +242,9 @@ const { loading } = injectButtonRootContext();
 <!-- ButtonContent.vue -->
 
 <template>
-    <Primitive :as-child="asChild" :as="as" role="text">
-        <slot />
-    </Primitive>
+  <Primitive :as-child="asChild" :as="as" role="text">
+    <slot />
+  </Primitive>
 </template>
 
 <script lang="ts">
@@ -258,7 +258,7 @@ import { Primitive } from '@/Primitive';
 export interface ButtonContentProps extends PrimitiveProps {}
 
 withDefaults(defineProps<ButtonContentProps>(), {
-    as: 'span',
+  as: 'span',
 });
 
 useForwardExpose();
@@ -273,14 +273,14 @@ useForwardExpose();
 <!-- Button.story.vue -->
 
 <template>
-    <Story title="Button/Demo">
-        <Variant title="default">
-            <ButtonRoot :loading="state.loading">
-                <ButtonLoading> Loading </ButtonLoading>
-                <ButtonContent> 按钮 </ButtonContent>
-            </ButtonRoot>
-        </Variant>
-    </Story>
+  <Story title="Button/Demo">
+    <Variant title="default">
+      <ButtonRoot :loading="state.loading">
+        <ButtonLoading> Loading </ButtonLoading>
+        <ButtonContent> 按钮 </ButtonContent>
+      </ButtonRoot>
+    </Variant>
+  </Story>
 </template>
 
 <script setup lang="ts">
@@ -288,7 +288,7 @@ import { reactive } from 'vue';
 import { ButtonContent, ButtonLoading, ButtonRoot } from '../';
 
 const state = reactive({
-    loading: false,
+  loading: false,
 });
 </script>
 ```
@@ -301,7 +301,7 @@ const state = reactive({
 我们也可以很方便的根据内部状态进行样式控制，如:
 
 ```css
-[data-hidden='false'] {
+[data-hidden="false"] {
   /* 添加内部状态样式 */
 }
 ```
@@ -319,13 +319,13 @@ const state = reactive({
 ```vue
 <!-- docs/components/demo/Button_General/css/index.vue -->
 <template>
-    <div>
-        <ButtonRoot class="ButtonRoot">
-            <ButtonContent class="ButtonContent">
-                查看
-            </ButtonContent>
-        </ButtonRoot>
-    </div>
+  <div>
+    <ButtonRoot class="ButtonRoot">
+      <ButtonContent class="ButtonContent">
+        查看
+      </ButtonContent>
+    </ButtonRoot>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -335,8 +335,8 @@ import './styles.scss';
 ```
 
 ```scss
-@import '@radix-ui/colors/black-alpha.css';
-@import '@radix-ui/colors/grass.css';
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/grass.css";
 
 .ButtonRoot {
   width: 100%;

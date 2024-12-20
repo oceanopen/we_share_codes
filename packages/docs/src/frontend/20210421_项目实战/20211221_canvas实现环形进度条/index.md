@@ -46,10 +46,10 @@ canvasSize === 2 * (pointRadius + circleRadius);
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { computed, defineComponent } from "vue";
 
   export default defineComponent({
-    name: 'Progress',
+    name: "Progress",
     props: {
       circleRadius: {
         type: Number,
@@ -61,18 +61,18 @@ canvasSize === 2 * (pointRadius + circleRadius);
       },
     },
     setup(props) {
-      const { circleRadius, pointRadius } = props
+      const { circleRadius, pointRadius } = props;
 
       // 外围半径
-      const outerRadius = computed(() => circleRadius + pointRadius)
+      const outerRadius = computed(() => circleRadius + pointRadius);
       // canvas 宽度/高度
-      const canvasSize = computed(() => 2 * outerRadius.value)
+      const canvasSize = computed(() => 2 * outerRadius.value);
 
       return {
         canvasSize,
-      }
+      };
     },
-  })
+  });
 </script>
 ```
 
@@ -80,7 +80,7 @@ canvasSize === 2 * (pointRadius + circleRadius);
 <!-- App.vue -->
 
 <script setup lang="ts">
-  import Progress from './components/Progress.vue'
+  import Progress from "./components/Progress.vue";
 </script>
 
 <template>
@@ -111,31 +111,31 @@ canvasSize === 2 * (pointRadius + circleRadius);
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
+  import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
 
   export default defineComponent({
     // ...
     setup(props) {
-      const canvasRef = ref<null | HTMLCanvasElement>(null)
-      const ctx = ref<null | CanvasRenderingContext2D>(null)
+      const canvasRef = ref<null | HTMLCanvasElement>(null);
+      const ctx = ref<null | CanvasRenderingContext2D>(null);
 
       // ...
 
       // 初始化 canvas
       function initCanvas() {
-        ctx.value = (canvasRef.value as HTMLCanvasElement).getContext('2d')
+        ctx.value = (canvasRef.value as HTMLCanvasElement).getContext("2d");
       }
 
       onMounted(async () => {
         // 画布渲染完毕
-        await nextTick()
+        await nextTick();
 
-        initCanvas()
-      })
+        initCanvas();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -166,10 +166,10 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 <!-- components/Progress.vue -->
 
 <script lang="ts">
-  import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
+  import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
 
   export default defineComponent({
-    name: 'Progress',
+    name: "Progress",
     props: {
       circleRadius: {
         type: Number,
@@ -181,7 +181,7 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       },
       circleColor: {
         type: String,
-        default: '#E5E5E5',
+        default: "#E5E5E5",
       },
       pointRadius: {
         type: Number,
@@ -189,36 +189,36 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       },
     },
     setup(props) {
-      const { circleRadius, circleWidth, circleColor, pointRadius } = props
+      const { circleRadius, circleWidth, circleColor, pointRadius } = props;
       // ...
 
       // deg 转弧度
       function deg2Arc(deg: number) {
-        return (deg / 180) * Math.PI
+        return (deg / 180) * Math.PI;
       }
 
       // 画圆环
       function drawCircle() {
-        const ctx = canvasCtx.value as CanvasRenderingContext2D
+        const ctx = canvasCtx.value as CanvasRenderingContext2D;
 
-        ctx.strokeStyle = circleColor
-        ctx.lineWidth = circleWidth
-        ctx.beginPath()
-        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, 0, deg2Arc(360))
-        ctx.stroke()
-        ctx.closePath()
+        ctx.strokeStyle = circleColor;
+        ctx.lineWidth = circleWidth;
+        ctx.beginPath();
+        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, 0, deg2Arc(360));
+        ctx.stroke();
+        ctx.closePath();
       }
 
       onMounted(async () => {
         // ...
 
         // 画圆环
-        drawCircle()
-      })
+        drawCircle();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -250,7 +250,7 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       },
       fontColor: {
         type: String,
-        default: '#333',
+        default: "#333",
       },
       formatText: {
         type: Function,
@@ -261,34 +261,34 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 
       // 画文字
       function drawText() {
-        const { showText, fontColor, fontSize } = props
-        const ctx = canvasCtx.value as CanvasRenderingContext2D
+        const { showText, fontColor, fontSize } = props;
+        const ctx = canvasCtx.value as CanvasRenderingContext2D;
 
         if (!showText) {
-          return
+          return;
         }
 
-        ctx.font = `${fontSize}px Arial,"Microsoft YaHei"`
-        ctx.fillStyle = fontColor
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'middle'
-        let text = ''
-        if (typeof props.formatText === 'function') {
-          text = props.formatText()
+        ctx.font = `${fontSize}px Arial,"Microsoft YaHei"`;
+        ctx.fillStyle = fontColor;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        let text = "";
+        if (typeof props.formatText === "function") {
+          text = props.formatText();
         }
-        ctx.fillText(text, outerRadius.value, outerRadius.value)
+        ctx.fillText(text, outerRadius.value, outerRadius.value);
       }
 
       onMounted(async () => {
         // ...
 
         // 画文字
-        drawText()
-      })
+        drawText();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -296,11 +296,11 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 <!-- App.vue -->
 
 <script setup lang="ts">
-  import Progress from './components/Progress.vue'
+  import Progress from "./components/Progress.vue";
 
   const formatText = () => {
-    return '0%'
-  }
+    return "0%";
+  };
 </script>
 
 <template>
@@ -326,15 +326,15 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 ```html
 <!-- components/Progress.vue -->
 <script lang="ts">
-  import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
+  import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
 
   interface IProgressLineColorStopsItem {
-    percent: number
-    color: string
+    percent: number;
+    color: string;
   }
 
   export default defineComponent({
-    name: 'Progress',
+    name: "Progress",
     props: {
       // ...
       progressLineWidth: {
@@ -347,14 +347,14 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       },
       progressLineColor: {
         type: String,
-        default: '#3B77E3',
+        default: "#3B77E3",
       },
       // 若 progressUseGradient 为 true，则需要定义此项
       progressLineColorStops: {
         type: Array,
         default: (): IProgressLineColorStopsItem[] => [
-          { percent: 0, color: '#13CDE3' },
-          { percent: 1, color: '#3B77E3' },
+          { percent: 0, color: "#13CDE3" },
+          { percent: 1, color: "#3B77E3" },
         ],
       },
     },
@@ -363,22 +363,27 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
         // ...
         progressUseGradient,
         progressLineColorStops,
-      } = props
+      } = props;
       // ...
-      const progressGradient = ref<null | CanvasGradient>(null)
+      const progressGradient = ref<null | CanvasGradient>(null);
 
       // ...
 
       // 初始化 canvas
       function initCanvas() {
-        canvasCtx.value = (canvasRef.value as HTMLCanvasElement).getContext('2d') as CanvasRenderingContext2D
+        canvasCtx.value = (canvasRef.value as HTMLCanvasElement).getContext("2d") as CanvasRenderingContext2D;
 
         // 设置渐变色
         if (progressUseGradient) {
-          progressGradient.value = canvasCtx.value.createLinearGradient(circleRadius, 0, circleRadius, circleRadius * 2)
-          ;(progressLineColorStops as IProgressLineColorStopsItem[]).forEach((item) => {
-            ;(progressGradient.value as CanvasGradient).addColorStop(item.percent, item.color)
-          })
+          progressGradient.value = canvasCtx.value.createLinearGradient(
+            circleRadius,
+            0,
+            circleRadius,
+            circleRadius * 2,
+          );
+          (progressLineColorStops as IProgressLineColorStopsItem[]).forEach((item) => {
+            (progressGradient.value as CanvasGradient).addColorStop(item.percent, item.color);
+          });
         }
       }
 
@@ -386,28 +391,28 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 
       // 画进度弧线
       function drawProgressLine() {
-        const { progressUseGradient, progressLineColor, progressLineWidth } = props
-        const ctx = canvasCtx.value as CanvasRenderingContext2D
+        const { progressUseGradient, progressLineColor, progressLineWidth } = props;
+        const ctx = canvasCtx.value as CanvasRenderingContext2D;
 
-        ctx.strokeStyle = progressUseGradient ? (progressGradient.value as CanvasGradient) : progressLineColor
-        ctx.lineWidth = progressLineWidth
-        ctx.lineCap = 'round'
-        ctx.beginPath()
-        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, deg2Arc(270), deg2Arc(90))
-        ctx.stroke()
-        ctx.closePath()
+        ctx.strokeStyle = progressUseGradient ? (progressGradient.value as CanvasGradient) : progressLineColor;
+        ctx.lineWidth = progressLineWidth;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, deg2Arc(270), deg2Arc(90));
+        ctx.stroke();
+        ctx.closePath();
       }
 
       onMounted(async () => {
         // ...
 
         // 画进度弧线
-        drawProgressLine()
-      })
+        drawProgressLine();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -435,7 +440,7 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
   // ...
 
   export default defineComponent({
-    name: 'Progress',
+    name: "Progress",
     props: {
       // ...
       // 开始角度
@@ -443,7 +448,7 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
         type: Number,
         default: 270,
         validator: (value: number) => {
-          return value >= 0 && value < 360
+          return value >= 0 && value < 360;
         },
       },
       // 百分比
@@ -451,7 +456,7 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
         type: Number,
         default: 50,
         validator: (value: number) => {
-          return value >= 0 && value <= 100
+          return value >= 0 && value <= 100;
         },
       },
     },
@@ -461,10 +466,10 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       // 根据开始角度和进度百分比求取目标角度
       function getTargetDegByPercentage(percentage: number) {
         if (percentage === 100) {
-          return startDeg + 360
+          return startDeg + 360;
         } else {
-          const targetDeg = (startDeg + (360 * percentage) / 100) % 360
-          return targetDeg
+          const targetDeg = (startDeg + (360 * percentage) / 100) % 360;
+          return targetDeg;
         }
       }
       // ...
@@ -472,17 +477,17 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       // 画进度弧线
       function drawProgressLine() {
         // ...
-        const nextDeg = getTargetDegByPercentage(percentage)
-        const startArc = deg2Arc(startDeg)
-        const nextArc = deg2Arc(nextDeg)
+        const nextDeg = getTargetDegByPercentage(percentage);
+        const startArc = deg2Arc(startDeg);
+        const nextArc = deg2Arc(nextDeg);
 
         // ...
-        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, startArc, nextArc)
+        ctx.arc(outerRadius.value, outerRadius.value, circleRadius, startArc, nextArc);
         // ...
       }
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -518,14 +523,14 @@ ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 
 ```ts
 function drawPointDeg90() {
-    const ctx = canvasCtx.value as CanvasRenderingContext2D;
-    const { pointColor, progressUseGradient } = props;
+  const ctx = canvasCtx.value as CanvasRenderingContext2D;
+  const { pointColor, progressUseGradient } = props;
 
-    ctx.fillStyle = progressUseGradient ? (progressGradient.value as CanvasGradient) : pointColor;
-    ctx.beginPath();
-    ctx.arc(outerRadius.value, outerRadius.value + circleRadius, pointRadius, 0, deg2Arc(360));
-    ctx.fill();
-    ctx.closePath();
+  ctx.fillStyle = progressUseGradient ? (progressGradient.value as CanvasGradient) : pointColor;
+  ctx.beginPath();
+  ctx.arc(outerRadius.value, outerRadius.value + circleRadius, pointRadius, 0, deg2Arc(360));
+  ctx.fill();
+  ctx.closePath();
 }
 ```
 
@@ -553,26 +558,26 @@ function drawPointDeg90() {
 
       // 根据角度获取圆点的位置
       function getPointPositionByDeg(deg: number) {
-        let x = 0
-        let y = 0
+        let x = 0;
+        let y = 0;
         if (deg >= 0 && deg <= 90) {
           // 0 ~ 90
-          x = circleRadius * (1 + Math.cos(deg2Arc(deg)))
-          y = circleRadius * (1 + Math.sin(deg2Arc(deg)))
+          x = circleRadius * (1 + Math.cos(deg2Arc(deg)));
+          y = circleRadius * (1 + Math.sin(deg2Arc(deg)));
         } else if (deg > 90 && deg <= 180) {
           // 90 ~ 180
-          x = circleRadius * (1 - Math.cos(deg2Arc(180 - deg)))
-          y = circleRadius * (1 + Math.sin(deg2Arc(180 - deg)))
+          x = circleRadius * (1 - Math.cos(deg2Arc(180 - deg)));
+          y = circleRadius * (1 + Math.sin(deg2Arc(180 - deg)));
         } else if (deg > 180 && deg <= 270) {
           // 180 ~ 270
-          x = circleRadius * (1 - Math.sin(deg2Arc(270 - deg)))
-          y = circleRadius * (1 - Math.cos(deg2Arc(270 - deg)))
+          x = circleRadius * (1 - Math.sin(deg2Arc(270 - deg)));
+          y = circleRadius * (1 - Math.cos(deg2Arc(270 - deg)));
         } else {
           // 270 ~ 360
-          x = circleRadius * (1 + Math.cos(deg2Arc(360 - deg)))
-          y = circleRadius * (1 - Math.sin(deg2Arc(360 - deg)))
+          x = circleRadius * (1 + Math.cos(deg2Arc(360 - deg)));
+          y = circleRadius * (1 - Math.sin(deg2Arc(360 - deg)));
         }
-        return { x, y }
+        return { x, y };
       }
       // ...
 
@@ -580,11 +585,11 @@ function drawPointDeg90() {
       function drawPoint() {
         // ...
 
-        const nextDeg = getTargetDegByPercentage(percentage)
-        const pointPosition = getPointPositionByDeg(nextDeg)
+        const nextDeg = getTargetDegByPercentage(percentage);
+        const pointPosition = getPointPositionByDeg(nextDeg);
 
         // ...
-        ctx.arc(pointPosition.x + pointRadius, pointPosition.y + pointRadius, pointRadius, 0, deg2Arc(360))
+        ctx.arc(pointPosition.x + pointRadius, pointPosition.y + pointRadius, pointRadius, 0, deg2Arc(360));
         // ...
       }
 
@@ -592,12 +597,12 @@ function drawPointDeg90() {
         // ...
 
         // 画进度圆点
-        drawPoint()
-      })
+        drawPoint();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -622,7 +627,7 @@ function drawPointDeg90() {
   // ...
 
   export default defineComponent({
-    name: 'Progress',
+    name: "Progress",
     props: {
       // ...
       animated: {
@@ -640,53 +645,53 @@ function drawPointDeg90() {
     setup(props) {
       // ...
 
-      let animationId: number = 0
+      let animationId: number = 0;
       // ...
       // 动画绘制
       function animateDrawProgress(beginPercent: number, endPercent: number, stepNo: number, stepTotal: number) {
-        const ctx = canvasCtx.value as CanvasRenderingContext2D
-        const canvasInstance = canvasRef.value as HTMLCanvasElement
+        const ctx = canvasCtx.value as CanvasRenderingContext2D;
+        const canvasInstance = canvasRef.value as HTMLCanvasElement;
 
-        ctx.clearRect(0, 0, canvasInstance.width, canvasInstance.height)
+        ctx.clearRect(0, 0, canvasInstance.width, canvasInstance.height);
 
-        const nextPercent = beginPercent + (endPercent - beginPercent) * (stepNo / stepTotal)
-        const nextDeg = getTargetDegByPercentage(nextPercent)
+        const nextPercent = beginPercent + (endPercent - beginPercent) * (stepNo / stepTotal);
+        const nextDeg = getTargetDegByPercentage(nextPercent);
 
         // 画圆环
-        drawCircle()
+        drawCircle();
 
         // 画文字
-        drawText()
+        drawText();
 
         // 画进度弧线
-        drawProgressLine(nextDeg)
+        drawProgressLine(nextDeg);
 
         // 画进度圆点
-        drawPoint(nextDeg)
+        drawPoint(nextDeg);
 
         if (stepNo !== stepTotal) {
-          stepNo++
+          stepNo++;
           animationId = window.requestAnimationFrame(
-            animateDrawProgress.bind(null, beginPercent, endPercent, stepNo, stepTotal)
-          )
+            animateDrawProgress.bind(null, beginPercent, endPercent, stepNo, stepTotal),
+          );
         } else {
-          window.cancelAnimationFrame(animationId)
-          animationId = 0
+          window.cancelAnimationFrame(animationId);
+          animationId = 0;
         }
       }
 
       // 渲染内容
       function renderContent() {
-        const { percentage, animated } = props
+        const { percentage, animated } = props;
 
         if (percentage === 0) {
-          animateDrawProgress(0, 0, 0, 0)
+          animateDrawProgress(0, 0, 0, 0);
         } else {
           if (animated) {
             // 用动画来画动态内容
-            animateDrawProgress(0, percentage, 1, steps.value)
+            animateDrawProgress(0, percentage, 1, steps.value);
           } else {
-            animateDrawProgress(0, percentage, steps.value, steps.value)
+            animateDrawProgress(0, percentage, steps.value, steps.value);
           }
         }
       }
@@ -695,12 +700,12 @@ function drawPointDeg90() {
         // ...
 
         // 渲染内容
-        renderContent()
-      })
+        renderContent();
+      });
 
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -714,8 +719,8 @@ function drawPointDeg90() {
 
 这里仅支持以下动画：
 
-| 动画名称    | 特点                           | 描述                                                                                   |
-| ----------- | ------------------------------ | -------------------------------------------------------------------------------------- |
+| 动画名称      | 特点                           | 描述                                                                                   |
+| ------------- | ------------------------------ | -------------------------------------------------------------------------------------- |
 | `linear`      | 匀速                           | 规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。                     |
 | `ease`        | 相对于匀速，中间快，两头慢     | 规定慢速开始，然后变快，然后慢速结束的过渡效果（等于 cubic-bezier(0.25,0.1,0.25,1)）。 |
 | `ease-in`     | 相对于匀速，开始时慢，结束时快 | 规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。                            |
@@ -728,19 +733,19 @@ function drawPointDeg90() {
 <!-- components/Progress.vue -->
 <script lang="ts">
   // ...
-  import BezierEasing from 'bezier-easing'
+  import BezierEasing from "bezier-easing";
 
   // ...
 
   const EASING_MAP = {
     linear: [0, 0, 1, 1] as const,
     ease: [0.25, 0.1, 0.25, 1] as const,
-    'ease-in': [0.42, 0, 1, 1] as const,
-    'ease-out': [0, 0, 0.58, 1] as const,
-    'ease-in-out': [0.42, 0, 0.58, 1] as const,
-  }
+    "ease-in": [0.42, 0, 1, 1] as const,
+    "ease-out": [0, 0, 0.58, 1] as const,
+    "ease-in-out": [0.42, 0, 0.58, 1] as const,
+  };
 
-  type EASING_KEY = keyof typeof EASING_MAP
+  type EASING_KEY = keyof typeof EASING_MAP;
 
   export default defineComponent({
     // ...
@@ -748,31 +753,31 @@ function drawPointDeg90() {
       // ...
       easing: {
         type: String,
-        default: 'linear',
+        default: "linear",
         validator: (value: string) => {
-          return Object.keys(EASING_MAP).includes(value)
+          return Object.keys(EASING_MAP).includes(value);
         },
       },
     },
     setup(props) {
       // ...
       const easingFunc = computed(() => {
-        const easingInfo = EASING_MAP[easing as EASING_KEY]
-        return BezierEasing(easingInfo[0], easingInfo[1], easingInfo[2], easingInfo[3])
-      })
+        const easingInfo = EASING_MAP[easing as EASING_KEY];
+        return BezierEasing(easingInfo[0], easingInfo[1], easingInfo[2], easingInfo[3]);
+      });
       // ...
 
       // 动画绘制
       function animateDrawProgress(beginPercent: number, endPercent: number, stepNo: number, stepTotal: number) {
         // ...
 
-        const nextPercent = beginPercent + (endPercent - beginPercent) * easingFunc.value(stepNo / stepTotal)
-        const nextDeg = getTargetDegByPercentage(nextPercent)
+        const nextPercent = beginPercent + (endPercent - beginPercent) * easingFunc.value(stepNo / stepTotal);
+        const nextDeg = getTargetDegByPercentage(nextPercent);
         // ...
       }
       // ...
     },
-  })
+  });
 </script>
 ```
 
@@ -818,15 +823,15 @@ function drawPointDeg90() {
 
       // 处理 dpx
       function handleDpx() {
-        const canvasInstance = canvasRef.value as HTMLCanvasElement
-        canvasCtx.value = canvasInstance.getContext('2d') as CanvasRenderingContext2D
+        const canvasInstance = canvasRef.value as HTMLCanvasElement;
+        canvasCtx.value = canvasInstance.getContext("2d") as CanvasRenderingContext2D;
 
-        const dpr = Math.max(window.devicePixelRatio, 1)
+        const dpr = Math.max(window.devicePixelRatio, 1);
         // 调整画布物理像素
-        canvasInstance.width = canvasSize.value * dpr
-        canvasInstance.height = canvasSize.value * dpr
+        canvasInstance.width = canvasSize.value * dpr;
+        canvasInstance.height = canvasSize.value * dpr;
         // 同时用 scale 处理倍率
-        canvasCtx.value.scale(dpr, dpr)
+        canvasCtx.value.scale(dpr, dpr);
       }
 
       // 初始化 canvas
@@ -834,11 +839,11 @@ function drawPointDeg90() {
         // ...
 
         // 处理 dpx
-        handleDpx()
+        handleDpx();
       }
       // ...
     },
-  })
+  });
 </script>
 ```
 

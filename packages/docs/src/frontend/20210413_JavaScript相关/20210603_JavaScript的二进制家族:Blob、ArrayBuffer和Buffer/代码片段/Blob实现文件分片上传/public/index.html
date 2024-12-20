@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -13,29 +13,29 @@
     <!-- js部分 -->
     <script>
       function upload(blob) {
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', '/ajax', true)
-        xhr.setRequestHeader('Content-Type', 'text/plain')
-        xhr.send(blob)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/ajax", true);
+        xhr.setRequestHeader("Content-Type", "text/plain");
+        xhr.send(blob);
       }
 
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var blob = this.files[0]
-          const CHUNK_SIZE = 20
-          const SIZE = blob.size
-          var start = 0
-          var end = CHUNK_SIZE
+          var blob = this.files[0];
+          const CHUNK_SIZE = 20;
+          const SIZE = blob.size;
+          var start = 0;
+          var end = CHUNK_SIZE;
 
           while (start < SIZE) {
-            upload(blob.slice(start, end))
-            start = end
-            end = start + CHUNK_SIZE
+            upload(blob.slice(start, end));
+            start = end;
+            end = start + CHUNK_SIZE;
           }
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>

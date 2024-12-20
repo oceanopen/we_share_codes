@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -14,21 +14,21 @@
 
     <!-- js部分 -->
     <script>
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var file = this.files[0]
-          const img = document.getElementById('img')
-          const url = window.URL.createObjectURL(file)
+          var file = this.files[0];
+          const img = document.getElementById("img");
+          const url = window.URL.createObjectURL(file);
 
-          img.src = url
+          img.src = url;
           img.onload = function () {
             // 释放一个之前通过调用 URL.createObjectURL创建的 URL 对象
-            window.URL.revokeObjectURL(url)
-          }
+            window.URL.revokeObjectURL(url);
+          };
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>

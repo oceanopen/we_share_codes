@@ -26,7 +26,7 @@
 
 ```html
 <!-- index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -63,10 +63,10 @@ PC 端效果：
 
 下表表示 `css` 像素和物理像素的具体区别：
 
-| 像素类型 | 描述                                                 |
-| -------- | ---------------------------------------------------- |
-| `css` 像素 | 为 `web` 开发者提供，在 `css` 中使用的一个抽象单位       |
-| 物理像素 | 只与设备的硬件密度有关，任何设备的物理像素都是固定的 |
+| 像素类型   | 描述                                                 |
+| ---------- | ---------------------------------------------------- |
+| `css` 像素 | 为 `web` 开发者提供，在 `css` 中使用的一个抽象单位   |
+| 物理像素   | 只与设备的硬件密度有关，任何设备的物理像素都是固定的 |
 
 > 那么 `css` 像素与物理像素的转换关系是怎么样的呢？为了明确 `css 像素`和`物理像素`的`转换关系`，必须先了解`视口`是什么。
 
@@ -222,7 +222,7 @@ iphone6：1 CSS像素 = 物理像素 ／分辨率 = 750 ／ 375 = 2 px
 子元素的 height 或 width 中使用百分比，是相对于子元素的`直接父元素`，width 相对于父元素的 width，height 相对于父元素的 height。比如：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -260,7 +260,7 @@ iphone6：1 CSS像素 = 物理像素 ／分辨率 = 750 ／ 375 = 2 px
 子元素的 left 和 right 如果设置百分比，则相对于`直接非 static 定位(默认定位的)父元素`的宽度。
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -302,7 +302,7 @@ iphone6：1 CSS像素 = 物理像素 ／分辨率 = 750 ／ 375 = 2 px
 举例来说：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -346,7 +346,7 @@ iphone6：1 CSS像素 = 物理像素 ／分辨率 = 750 ／ 375 = 2 px
 border-radius 不一样，如果设置 border-radius 为百分比，则是相对于`自身的宽度`，举例来说：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -380,7 +380,7 @@ border-radius 不一样，如果设置 border-radius 为百分比，则是相对
 因为 padding 不管是垂直方向还是水平方向，百分比单位都相对于`父元素的宽度`，因此我们可以设置 padding-top 为百分比来实现，长宽自适应的长方形。
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <title>Hello World</title>
@@ -458,7 +458,7 @@ rem 单位都是相对于根元素 html 的 font-size 来决定大小的，根�
 ```html
 <!-- index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -487,46 +487,46 @@ rem 单位都是相对于根元素 html 的 font-size 来决定大小的，根�
 // flexible.js
 
 ;(function (win) {
-    const doc = win.document;
-    const docEl = doc.documentElement;
-    const metaEl = doc.querySelector('meta[name="viewport"]');
-    // 设备像素比：1 DPR = 物理像素／分辨率
-    let dpr = 0;
-    let scale = 0;
-    let resizeTimer = null;
+  const doc = win.document;
+  const docEl = doc.documentElement;
+  const metaEl = doc.querySelector('meta[name="viewport"]');
+  // 设备像素比：1 DPR = 物理像素／分辨率
+  let dpr = 0;
+  let scale = 0;
+  let resizeTimer = null;
 
-    if (metaEl) {
-        const match = metaEl.getAttribute('content').match(/initial-scale=([\d.]+)/);
-        if (match) {
-            scale = Number.parseFloat(match[1]);
-            dpr = Number.parseInt(1 / scale);
-        }
+  if (metaEl) {
+    const match = metaEl.getAttribute('content').match(/initial-scale=([\d.]+)/);
+    if (match) {
+      scale = Number.parseFloat(match[1]);
+      dpr = Number.parseInt(1 / scale);
     }
-    else {
-        console.warn('仅支持根据已有的meta标签来设置缩放比例，完整实现请参考 https://www.npmjs.com/package/lib-flexible ');
+  }
+  else {
+    console.warn('仅支持根据已有的meta标签来设置缩放比例，完整实现请参考 https://www.npmjs.com/package/lib-flexible ');
+  }
+
+  // 更新 html 根元素的 font-size
+  function refreshRem() {
+    let width = docEl.getBoundingClientRect().width;
+    if (width / dpr > 750) {
+      width = 750 * dpr;
     }
+    const rem = width / 10;
+    docEl.style.fontSize = `${rem}px`;
+    win.rem = rem;
+  }
 
-    // 更新 html 根元素的 font-size
-    function refreshRem() {
-        let width = docEl.getBoundingClientRect().width;
-        if (width / dpr > 750) {
-            width = 750 * dpr;
-        }
-        const rem = width / 10;
-        docEl.style.fontSize = `${rem}px`;
-        win.rem = rem;
-    }
+  win.addEventListener(
+    'resize',
+    () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(refreshRem, 300);
+    },
+    false
+  );
 
-    win.addEventListener(
-        'resize',
-        () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(refreshRem, 300);
-        },
-        false
-    );
-
-    refreshRem();
+  refreshRem();
 })(window);
 ```
 
@@ -570,10 +570,10 @@ rem 单位都是相对于根元素 html 的 font-size 来决定大小的，根�
 这里看下实现效果：
 
 > PC 端：
-> ![](./images/008_移动端自适应(不依赖第三个框架)_PC端.png)
+> ![](<./images/008_移动端自适应(不依赖第三个框架)_PC端.png>)
 
 > 移动端：
-> ![](./images/009_移动端自适应(不依赖第三个框架)_移动端.png)
+> ![](<./images/009_移动端自适应(不依赖第三个框架)_移动端.png>)
 
 我们发现，尽管 PC 端和移动端，屏幕大小不一样，但展示效果是一致的。
 
@@ -585,11 +585,11 @@ rem 单位都是相对于根元素 html 的 font-size 来决定大小的，根�
  * 比如 0.5rem 转为 37.5px
  */
 const rem2px = function (d) {
-    let val = Number.parseFloat(d) * this.rem;
-    if (typeof d === 'string' && d.match(/rem$/)) {
-        val += 'px';
-    }
-    return val;
+  let val = Number.parseFloat(d) * this.rem;
+  if (typeof d === 'string' && d.match(/rem$/)) {
+    val += 'px';
+  }
+  return val;
 };
 
 /**
@@ -597,11 +597,11 @@ const rem2px = function (d) {
  * 比如 75px 转为 1rem
  */
 const px2rem = function (d) {
-    let val = Number.parseFloat(d) / this.rem;
-    if (typeof d === 'string' && d.match(/px$/)) {
-        val += 'rem';
-    }
-    return val;
+  let val = Number.parseFloat(d) / this.rem;
+  if (typeof d === 'string' && d.match(/px$/)) {
+    val += 'rem';
+  }
+  return val;
 };
 ```
 
@@ -632,23 +632,23 @@ npm install px2rem-loader
 
 ```javascript
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /\.css$/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader'
-            }, {
-                loader: 'px2rem-loader',
-                // options here
-                options: {
-                    remUni: 75,
-                }
-            }]
-        }]
-    }
+  // ...
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }, {
+        loader: 'px2rem-loader',
+        // options here
+        options: {
+          remUni: 75,
+        }
+      }]
+    }]
+  }
 };
 ```
 
@@ -664,21 +664,21 @@ npm install postcss-loader
 const px2rem = require('postcss-px2rem');
 
 module.exports = {
-    module: {
-        loaders: [
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader!postcss-loader',
-            },
-        ],
-    },
-    postcss() {
-        return [
-            px2rem({
-                remUnit: 75,
-            }),
-        ];
-    },
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!postcss-loader',
+      },
+    ],
+  },
+  postcss() {
+    return [
+      px2rem({
+        remUnit: 75,
+      }),
+    ];
+  },
 };
 ```
 
@@ -716,16 +716,16 @@ npm install -D postcss-plugin-px2rem
 
 ```json
 {
-    "rootValue": 100,
-    "unitPrecision": 5,
-    "propWhiteList": [],
-    "propBlackList": [],
-    "exclude": false,
-    "selectorBlackList": [],
-    "ignoreIdentifier": false,
-    "replace": true,
-    "mediaQuery": false,
-    "minPixelValue": 0
+  "rootValue": 100,
+  "unitPrecision": 5,
+  "propWhiteList": [],
+  "propBlackList": [],
+  "exclude": false,
+  "selectorBlackList": [],
+  "ignoreIdentifier": false,
+  "replace": true,
+  "mediaQuery": false,
+  "minPixelValue": 0
 }
 ```
 
@@ -761,7 +761,7 @@ npm install -D postcss-plugin-px2rem
 ```html
 <!-- public/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <!-- more -->
@@ -778,30 +778,30 @@ npm install -D postcss-plugin-px2rem
 // vue.config.js
 
 module.exports = {
-    /**
-     * css中px相关修改保存后，是否页面实时刷新。px转rem的配置（postcss-plugin-px2rem插件）
-     */
-    lintOnSave: true,
-    css: {
-        loaderOptions: {
-            postcss: {
-                plugins: [
-                    require('postcss-plugin-px2rem')({
-                        rootValue: 37.5, // 换算基数，默认100。iphone6视觉稿宽度。vant-ui也是这个宽度。
-                        // unitPrecision: 5, // 允许REM单位增长到的十进制数字。
-                        // propWhiteList: [],  // 默认值是一个空数组，这意味着禁用白名单并启用所有属性。
-                        // propBlackList: [], // 黑名单
-                        exclude: /(node_module)/, // 默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)/ 。如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值
-                        selectorBlackList: ['viewport'], // 要忽略并保留为px的选择器
-                        // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
-                        // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
-                        mediaQuery: false, // （布尔值）允许在媒体查询中转换px。
-                        minPixelValue: 3, // 设置要替换的最小像素值(3px会被转rem)。 默认 0
-                    }),
-                ],
-            },
-        },
+  /**
+   * css中px相关修改保存后，是否页面实时刷新。px转rem的配置（postcss-plugin-px2rem插件）
+   */
+  lintOnSave: true,
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [
+          require('postcss-plugin-px2rem')({
+            rootValue: 37.5, // 换算基数，默认100。iphone6视觉稿宽度。vant-ui也是这个宽度。
+            // unitPrecision: 5, // 允许REM单位增长到的十进制数字。
+            // propWhiteList: [],  // 默认值是一个空数组，这意味着禁用白名单并启用所有属性。
+            // propBlackList: [], // 黑名单
+            exclude: /(node_module)/, // 默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)/ 。如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值
+            selectorBlackList: ['viewport'], // 要忽略并保留为px的选择器
+            // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
+            // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
+            mediaQuery: false, // （布尔值）允许在媒体查询中转换px。
+            minPixelValue: 3, // 设置要替换的最小像素值(3px会被转rem)。 默认 0
+          }),
+        ],
+      },
     },
+  },
 };
 ```
 
@@ -819,7 +819,7 @@ import 'lib-flexible';
 Vue.config.productionTip = false;
 
 new Vue({
-    render: h => h(App),
+  render: h => h(App),
 }).$mount('#app');
 ```
 
@@ -848,7 +848,7 @@ new Vue({
 $ npm run serve
 ```
 
-![](./images/010_移动端自适应效果展示(基于vue-cli).png)
+![](<./images/010_移动端自适应效果展示(基于vue-cli).png>)
 
 我们发现，元素单位，100px 转为了 2.66667rem，和我们自己计算的结果 100 / 37.5 = 2.66667 结果一致。
 
@@ -904,20 +904,20 @@ css3 中引入了一个新的单位 vw/vh，与`视图窗口`有关，vw 表示�
 
 ```json
 {
-    "unitToConvert": "px",
-    "viewportWidth": 320,
-    "unitPrecision": 5,
-    "propList": ["*"],
-    "viewportUnit": "vw",
-    "fontViewportUnit": "vw",
-    "selectorBlackList": [],
-    "minPixelValue": 1,
-    "mediaQuery": false,
-    "replace": true,
-    "exclude": [],
-    "landscape": false,
-    "landscapeUnit": "vw",
-    "landscapeWidth": 568
+  "unitToConvert": "px",
+  "viewportWidth": 320,
+  "unitPrecision": 5,
+  "propList": ["*"],
+  "viewportUnit": "vw",
+  "fontViewportUnit": "vw",
+  "selectorBlackList": [],
+  "minPixelValue": 1,
+  "mediaQuery": false,
+  "replace": true,
+  "exclude": [],
+  "landscape": false,
+  "landscapeUnit": "vw",
+  "landscapeWidth": 568
 }
 ```
 
@@ -967,35 +967,35 @@ npm install -D postcss-px-to-viewport
 // vue.config.js
 
 module.exports = {
-    /**
-     * css中px相关修改保存后，是否页面实时刷新。
-     * px转rem的配置（postcss-plugin-px2rem插件）
-     * px转vw的配置（postcss-px-to-viewport插件）
-     */
-    lintOnSave: true,
-    css: {
-        loaderOptions: {
-            postcss: {
-                plugins: [
-                    // more
-                    require('postcss-px-to-viewport')({
-                        unitToConvert: 'px', // 要转化的单位
-                        viewportWidth: 375, // UI设计稿的宽度
-                        unitPrecision: 6, // 转换后的精度，即小数点位数
-                        propList: ['*'], // 指定转换的css属性的单位，*代表全部css属性的单位都进行转换
-                        viewportUnit: 'vw', // 指定需要转换成的视窗单位，默认vw
-                        fontViewportUnit: 'vw', // 指定字体需要转换成的视窗单位，默认vw
-                        selectorBlackList: ['px2rem'], // 指定不转换为视窗单位的类名，
-                        minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
-                        mediaQuery: true, // 是否在媒体查询的css代码中也进行转换，默认false
-                        replace: true, // 是否转换后直接更换属性值
-                        exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
-                        landscape: false, // 是否处理横屏情况
-                    }),
-                ],
-            },
-        },
+  /**
+   * css中px相关修改保存后，是否页面实时刷新。
+   * px转rem的配置（postcss-plugin-px2rem插件）
+   * px转vw的配置（postcss-px-to-viewport插件）
+   */
+  lintOnSave: true,
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [
+          // more
+          require('postcss-px-to-viewport')({
+            unitToConvert: 'px', // 要转化的单位
+            viewportWidth: 375, // UI设计稿的宽度
+            unitPrecision: 6, // 转换后的精度，即小数点位数
+            propList: ['*'], // 指定转换的css属性的单位，*代表全部css属性的单位都进行转换
+            viewportUnit: 'vw', // 指定需要转换成的视窗单位，默认vw
+            fontViewportUnit: 'vw', // 指定字体需要转换成的视窗单位，默认vw
+            selectorBlackList: ['px2rem'], // 指定不转换为视窗单位的类名，
+            minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
+            mediaQuery: true, // 是否在媒体查询的css代码中也进行转换，默认false
+            replace: true, // 是否转换后直接更换属性值
+            exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
+            landscape: false, // 是否处理横屏情况
+          }),
+        ],
+      },
     },
+  },
 };
 ```
 
@@ -1021,7 +1021,7 @@ module.exports = {
 
 4. 看下展示效果：
 
-![](./images/011_移动端自适应效果展示(vue-cli+vw).png)
+![](<./images/011_移动端自适应效果展示(vue-cli+vw).png>)
 
 我们发现，虽然采用的转换方案不同，但自适应效果是一致的。
 

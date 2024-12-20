@@ -50,7 +50,7 @@ yarn add axios
 </template>
 
 <script lang="ts">
-  import axios from 'axios'
+  import axios from "axios";
   // ...
 
   export default defineComponent({
@@ -58,18 +58,18 @@ yarn add axios
     setup() {
       onMounted(() => {
         axios
-          .get('/api/json', {
+          .get("/api/json", {
             params: {},
           })
           .then((res) => {
-            console.log(res)
+            console.log(res);
           })
           .catch((error) => {
-            console.log(error)
-          })
-      })
+            console.log(error);
+          });
+      });
     },
-  })
+  });
 </script>
 ```
 
@@ -323,14 +323,14 @@ const HOST = '0.0.0.0';
 
 const app = express();
 app.get('/', (req, res) => {
-    res.send('Hello world\n');
+  res.send('Hello world\n');
 });
 
 app.get('/json', (req, res) => {
-    res.json({
-        code: 0,
-        data: 'This is message from node container',
-    });
+  res.json({
+    code: 0,
+    data: 'This is message from node container',
+  });
 });
 
 app.listen(PORT, HOST);
@@ -440,24 +440,24 @@ docker inspect cc322d093f80
 
 ```json
 {
-    // ...
-    "Networks": {
-        "bridge": {
-            "IPAMConfig": null,
-            "Links": null,
-            "Aliases": null,
-            "NetworkID": "b1b55419db220e91eeca216f9076063789dc14e1021d6a2b9222732c817b1893",
-            "EndpointID": "72810be9fadfc3844f31cb2c85078aad3929f4892800e4309a0b9f1995b165b3",
-            "Gateway": "172.17.0.1",
-            "IPAddress": "172.17.0.2",
-            "IPPrefixLen": 16,
-            "IPv6Gateway": "",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "MacAddress": "02:42:ac:11:00:02",
-            "DriverOpts": null
-        }
+  // ...
+  "Networks": {
+    "bridge": {
+      "IPAMConfig": null,
+      "Links": null,
+      "Aliases": null,
+      "NetworkID": "b1b55419db220e91eeca216f9076063789dc14e1021d6a2b9222732c817b1893",
+      "EndpointID": "72810be9fadfc3844f31cb2c85078aad3929f4892800e4309a0b9f1995b165b3",
+      "Gateway": "172.17.0.1",
+      "IPAddress": "172.17.0.2",
+      "IPPrefixLen": 16,
+      "IPv6Gateway": "",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "MacAddress": "02:42:ac:11:00:02",
+      "DriverOpts": null
     }
+  }
 }
 ```
 

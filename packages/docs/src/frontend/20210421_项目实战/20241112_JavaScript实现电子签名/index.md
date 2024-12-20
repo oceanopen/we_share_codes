@@ -11,7 +11,7 @@
 首先，`HTML` 文件 —— 在你的工作目录中创建一个 `index.html` 文件：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -67,29 +67,29 @@ body {
 
 ```js
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('signature-pad');
-    const ctx = canvas.getContext('2d');
-    let drawing = false;
-    canvas.addEventListener('mousedown', (e) => {
-        drawing = true;
-        ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
-    });
-    canvas.addEventListener('mousemove', (e) => {
-        if (drawing) {
-            ctx.lineTo(e.offsetX, e.offsetY);
-            ctx.stroke();
-        }
-    });
-    canvas.addEventListener('mouseup', () => {
-        drawing = false;
-    });
-    canvas.addEventListener('mouseout', () => {
-        drawing = false;
-    });
-    document.getElementById('clear').addEventListener('click', () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
+  const canvas = document.getElementById('signature-pad');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  });
+  canvas.addEventListener('mousemove', (e) => {
+    if (drawing) {
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+  });
+  canvas.addEventListener('mouseup', () => {
+    drawing = false;
+  });
+  canvas.addEventListener('mouseout', () => {
+    drawing = false;
+  });
+  document.getElementById('clear').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
 });
 ```
 
@@ -107,48 +107,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ```js
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('signature-pad');
-    const ctx = canvas.getContext('2d');
-    let drawing = false;
+  const canvas = document.getElementById('signature-pad');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
 
-    function startDrawing(e) {
-        drawing = true;
-        ctx.beginPath();
-        ctx.moveTo(
-            e.offsetX || e.touches[0].clientX - canvas.offsetLeft,
-            e.offsetY || e.touches[0].clientY - canvas.offsetTop
-        );
+  function startDrawing(e) {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(
+      e.offsetX || e.touches[0].clientX - canvas.offsetLeft,
+      e.offsetY || e.touches[0].clientY - canvas.offsetTop
+    );
+  }
+
+  function draw(e) {
+    if (drawing) {
+      ctx.lineTo(
+        e.offsetX || e.touches[0].clientX - canvas.offsetLeft,
+        e.offsetY || e.touches[0].clientY - canvas.offsetTop
+      );
+      ctx.stroke();
     }
+  }
 
-    function draw(e) {
-        if (drawing) {
-            ctx.lineTo(
-                e.offsetX || e.touches[0].clientX - canvas.offsetLeft,
-                e.offsetY || e.touches[0].clientY - canvas.offsetTop
-            );
-            ctx.stroke();
-        }
-    }
+  function stopDrawing() {
+    drawing = false;
+  }
 
-    function stopDrawing() {
-        drawing = false;
-    }
+  // 鼠标事件
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', stopDrawing);
 
-    // 鼠标事件
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('mouseout', stopDrawing);
+  // 触摸事件
+  canvas.addEventListener('touchstart', startDrawing);
+  canvas.addEventListener('touchmove', draw);
+  canvas.addEventListener('touchend', stopDrawing);
+  canvas.addEventListener('touchcancel', stopDrawing);
 
-    // 触摸事件
-    canvas.addEventListener('touchstart', startDrawing);
-    canvas.addEventListener('touchmove', draw);
-    canvas.addEventListener('touchend', stopDrawing);
-    canvas.addEventListener('touchcancel', stopDrawing);
-
-    document.getElementById('clear').addEventListener('click', () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
+  document.getElementById('clear').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
 });
 ```
 
@@ -195,15 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ```js
 document.getElementById('stroke-style').addEventListener('change', (e) => {
-    strokeStyle = e.target.value;
-    if (strokeStyle === 'pen') {
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-    }
-    else if (strokeStyle === 'brush') {
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-    }
+  strokeStyle = e.target.value;
+  if (strokeStyle === 'pen') {
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+  }
+  else if (strokeStyle === 'brush') {
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+  }
 });
 
 // 设置初始笔画样式
@@ -246,11 +246,11 @@ ctx.lineCap = 'round';
 
 ```js
 function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    // 设置初始笔画样式
-    ctx.lineWidth = strokeStyle === 'pen' ? 2 : 5;
-    ctx.lineCap = 'round';
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  // 设置初始笔画样式
+  ctx.lineWidth = strokeStyle === 'pen' ? 2 : 5;
+  ctx.lineCap = 'round';
 }
 
 // 初始画布设置
@@ -275,13 +275,13 @@ canvas.addEventListener('touchmove', draw, { passive: true });
 
 ```js
 function startDrawing(e) {
-    e.preventDefault();
-    // ...
+  e.preventDefault();
+  // ...
 }
 
 function draw(e) {
-    e.preventDefault();
-    // ...
+  e.preventDefault();
+  // ...
 }
 ```
 
@@ -318,53 +318,53 @@ canvas.addEventListener('touchmove', draw, { passive: false });
 let signatureData = null;
 
 function setStrokeStyle() {
-    if (strokeStyle === 'pen') {
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-    }
-    else if (strokeStyle === 'brush') {
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-    }
+  if (strokeStyle === 'pen') {
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+  }
+  else if (strokeStyle === 'brush') {
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+  }
 }
 
 function resizeCanvas() {
-    if (signatureData) {
-        const img = new Image();
-        img.src = signatureData;
-        img.onload = function () {
-            // 因为设置尺寸会清除画布内容，所以以下代码可不必要
-            // ctx.clearRect(0, 0, canvas.width, canvas.height)
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+  if (signatureData) {
+    const img = new Image();
+    img.src = signatureData;
+    img.onload = function () {
+      // 因为设置尺寸会清除画布内容，所以以下代码可不必要
+      // ctx.clearRect(0, 0, canvas.width, canvas.height)
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
 
-            // 缓存绘制内容
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      // 缓存绘制内容
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-            setStrokeStyle();
-        };
-    }
-    else {
+      setStrokeStyle();
+    };
+  }
+  else {
     // 默认会自动清除绘制内容
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        setStrokeStyle();
-    }
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    setStrokeStyle();
+  }
 }
 
 function stopDrawing() {
-    // ...
-    signatureData = canvas.toDataURL();
+  // ...
+  signatureData = canvas.toDataURL();
 }
 
 document.getElementById('clear').addEventListener('click', () => {
-    // ...
-    signatureData = null;
+  // ...
+  signatureData = null;
 });
 
 document.getElementById('stroke-style').addEventListener('change', (e) => {
-    // ...
-    setStrokeStyle();
+  // ...
+  setStrokeStyle();
 });
 ```
 
@@ -394,32 +394,32 @@ document.getElementById('stroke-style').addEventListener('change', (e) => {
 
 ```js
 function exportCanvas(format) {
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = canvas.width;
-    exportCanvas.height = canvas.height;
-    const exportCtx = exportCanvas.getContext('2d');
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = canvas.width;
+  exportCanvas.height = canvas.height;
+  const exportCtx = exportCanvas.getContext('2d');
 
-    // 用白色填充背景
-    exportCtx.fillStyle = '#fff';
-    exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+  // 用白色填充背景
+  exportCtx.fillStyle = '#fff';
+  exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
 
-    // 绘制签名
-    exportCtx.drawImage(canvas, 0, 0);
+  // 绘制签名
+  exportCtx.drawImage(canvas, 0, 0);
 
-    // 导出画布
-    const dataURL = exportCanvas.toDataURL(`image/${format}`);
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = `signature.${format}`;
-    link.click();
+  // 导出画布
+  const dataURL = exportCanvas.toDataURL(`image/${format}`);
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = `signature.${format}`;
+  link.click();
 }
 
 document.getElementById('export-png').addEventListener('click', () => {
-    exportCanvas('png');
+  exportCanvas('png');
 });
 
 document.getElementById('export-jpeg').addEventListener('click', () => {
-    exportCanvas('jpeg');
+  exportCanvas('jpeg');
 });
 ```
 
@@ -436,7 +436,7 @@ document.getElementById('export-jpeg').addEventListener('click', () => {
 然后添加必要的按钮。这是最终 `HTML` 的样子：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -512,101 +512,101 @@ body {
 
 ```js
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('signature-pad');
-    const signaturePad = new SignaturePad(canvas);
-    let undoStack = [];
-    let redoStack = [];
+  const canvas = document.getElementById('signature-pad');
+  const signaturePad = new SignaturePad(canvas);
+  let undoStack = [];
+  let redoStack = [];
 
-    function deepCopy(data) {
-        return JSON.parse(JSON.stringify(data));
+  function deepCopy(data) {
+    return JSON.parse(JSON.stringify(data));
+  }
+
+  function saveState() {
+    console.log('endStroke || signaturePad.toData:', signaturePad.toData());
+    undoStack.push(deepCopy(signaturePad.toData()));
+    redoStack = [];
+  }
+  // 撤销
+  function undo() {
+    if (undoStack.length > 0) {
+      // 撤销后，支持重做操作恢复当前状态
+      redoStack.push(deepCopy(signaturePad.toData()));
+
+      // 因为停止绘制后，会自动保存当前状态，所以需要把当前状态给忽略
+      undoStack.pop();
+
+      // 重置为上一个状态
+      signaturePad.clear();
+      if (undoStack.length) {
+        const lastStroke = undoStack[undoStack.length - 1];
+        signaturePad.fromData(lastStroke, {
+          clear: false,
+        });
+      }
     }
+  }
+  // 重做
+  function redo() {
+    if (redoStack.length > 0) {
+      // 重做后，支持撤销操作恢复当前状态
+      undoStack.push(deepCopy(signaturePad.toData()));
 
-    function saveState() {
-        console.log('endStroke || signaturePad.toData:', signaturePad.toData());
-        undoStack.push(deepCopy(signaturePad.toData()));
-        redoStack = [];
+      const nextState = redoStack.pop();
+      signaturePad.clear();
+      signaturePad.fromData(nextState);
     }
-    // 撤销
-    function undo() {
-        if (undoStack.length > 0) {
-            // 撤销后，支持重做操作恢复当前状态
-            redoStack.push(deepCopy(signaturePad.toData()));
+  }
 
-            // 因为停止绘制后，会自动保存当前状态，所以需要把当前状态给忽略
-            undoStack.pop();
+  document.getElementById('undo').addEventListener('click', undo);
+  document.getElementById('redo').addEventListener('click', redo);
+  document.getElementById('clear').addEventListener('click', () => {
+    signaturePad.clear();
+    undoStack = [];
+    redoStack = [];
+  });
 
-            // 重置为上一个状态
-            signaturePad.clear();
-            if (undoStack.length) {
-                const lastStroke = undoStack[undoStack.length - 1];
-                signaturePad.fromData(lastStroke, {
-                    clear: false,
-                });
-            }
-        }
+  document.getElementById('save-png').addEventListener('click', () => {
+    if (!signaturePad.isEmpty()) {
+      const dataURL = signaturePad.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'signature.png';
+      link.click();
     }
-    // 重做
-    function redo() {
-        if (redoStack.length > 0) {
-            // 重做后，支持撤销操作恢复当前状态
-            undoStack.push(deepCopy(signaturePad.toData()));
+  });
 
-            const nextState = redoStack.pop();
-            signaturePad.clear();
-            signaturePad.fromData(nextState);
-        }
+  document.getElementById('save-jpeg').addEventListener('click', () => {
+    if (!signaturePad.isEmpty()) {
+      const dataURL = signaturePad.toDataURL('image/jpeg');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'signature.jpeg';
+      link.click();
     }
+  });
 
-    document.getElementById('undo').addEventListener('click', undo);
-    document.getElementById('redo').addEventListener('click', redo);
-    document.getElementById('clear').addEventListener('click', () => {
-        signaturePad.clear();
-        undoStack = [];
-        redoStack = [];
-    });
+  // 绘图结束时保存状态
+  signaturePad.addEventListener('endStroke', () => {
+    saveState();
+  });
 
-    document.getElementById('save-png').addEventListener('click', () => {
-        if (!signaturePad.isEmpty()) {
-            const dataURL = signaturePad.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'signature.png';
-            link.click();
-        }
-    });
+  // 初始画布设置
+  function resizeCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
-    document.getElementById('save-jpeg').addEventListener('click', () => {
-        if (!signaturePad.isEmpty()) {
-            const dataURL = signaturePad.toDataURL('image/jpeg');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'signature.jpeg';
-            link.click();
-        }
-    });
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext('2d').scale(ratio, ratio);
 
-    // 绘图结束时保存状态
-    signaturePad.addEventListener('endStroke', () => {
-        saveState();
-    });
+    signaturePad.clear(); // 否则 isEmpty() 可能会返回错误值
 
-    // 初始画布设置
-    function resizeCanvas() {
-        const ratio = Math.max(window.devicePixelRatio || 1, 1);
-
-        canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio;
-        canvas.getContext('2d').scale(ratio, ratio);
-
-        signaturePad.clear(); // 否则 isEmpty() 可能会返回错误值
-
-        if (undoStack.length > 0) {
-            signaturePad.fromData(undoStack[undoStack.length - 1]);
-        }
+    if (undoStack.length > 0) {
+      signaturePad.fromData(undoStack[undoStack.length - 1]);
     }
+  }
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 });
 ```
 

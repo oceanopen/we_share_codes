@@ -29,7 +29,7 @@
 如图， 以下 `HTML` 通过 `DOM` 解析器解析成 `DOM` 树结构：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -59,7 +59,7 @@
 
 #### 2.2.1 把 CSS 转换为浏览器能够理解的结构
 
-和 `HTML` 文件一样，浏览器也是无法直接理解这些纯文本的 `CSS` 样式，所以当渲染引擎接收到 CS`S 文本时，会执行一个转换操作，将 `CSS` 文本转换为浏览器可以理解的结构 ———— `styleSheets`。
+和 `HTML` 文件一样，浏览器也是无法直接理解这些纯文本的 `CSS` 样式，所以当渲染引擎接收到 CS`S 文本时，会执行一个转换操作，将 `CSS`文本转换为浏览器可以理解的结构 ————`styleSheets`。
 
 `styleSheets` 也是一种树形结构，我们可以在浏览器 `console` 面板输入： `document.styleSheets` 后回车，就可以看到对应的树形结构。
 
@@ -68,12 +68,24 @@
 我们编写样式的时候，可能经常会用到 `em`, `bold`, `red` 等 `css` 的值或单位， 这些是浏览器不认识的， 那么就需要将这些解析成标准的属性值。
 
 ```css
-body { font-size: 2em }
-p { color:blue; }
-span  { display: none }
-div { font-weight: bold }
-div  p { color:green; }
-div { color:red; }
+body {
+  font-size: 2em;
+}
+p {
+  color: blue;
+}
+span {
+  display: none;
+}
+div {
+  font-weight: bold;
+}
+div p {
+  color: green;
+}
+div {
+  color: red;
+}
 ```
 
 ![](./images/003_CSS属性值标准化.png)

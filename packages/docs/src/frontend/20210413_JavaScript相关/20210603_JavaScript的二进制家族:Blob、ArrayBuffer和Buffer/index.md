@@ -77,7 +77,7 @@ npm install -D http-server
 ```html
 <!-- index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -91,12 +91,12 @@ npm install -D http-server
 
     <!-- js部分 -->
     <script>
-      var blob = new Blob(['Hello World'])
-      var url = window.URL.createObjectURL(blob)
-      var a = document.getElementById('h')
+      var blob = new Blob(["Hello World"]);
+      var url = window.URL.createObjectURL(blob);
+      var a = document.getElementById("h");
 
-      a.download = 'helloworld.txt'
-      a.href = url
+      a.download = "helloworld.txt";
+      a.href = url;
     </script>
   </body>
 </html>
@@ -119,7 +119,7 @@ npx http-server -p 3100 -c-1
 ```html
 <!-- index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -135,21 +135,21 @@ npx http-server -p 3100 -c-1
 
     <!-- js部分 -->
     <script>
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var file = this.files[0]
-          const img = document.getElementById('img')
-          const url = window.URL.createObjectURL(file)
+          var file = this.files[0];
+          const img = document.getElementById("img");
+          const url = window.URL.createObjectURL(file);
 
-          img.src = url
+          img.src = url;
           img.onload = function () {
             // 释放一个之前通过调用 URL.createObjectURL创建的 URL 对象
-            window.URL.revokeObjectURL(url)
-          }
+            window.URL.revokeObjectURL(url);
+          };
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -174,23 +174,23 @@ npx http-server -p 3100 -c-1
 // package.json
 
 {
-    "scripts": {
-        "start": "npx nodemon server.js"
-    },
-    "dependencies": {
-        "koa": "^2.13.1",
-        "koa-static": "^5.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.7"
-    }
+  "scripts": {
+    "start": "npx nodemon server.js"
+  },
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
 ```
 
 ```html
 <!-- public/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -205,29 +205,29 @@ npx http-server -p 3100 -c-1
     <!-- js部分 -->
     <script>
       function upload(blob) {
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', '/ajax', true)
-        xhr.setRequestHeader('Content-Type', 'text/plain')
-        xhr.send(blob)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/ajax", true);
+        xhr.setRequestHeader("Content-Type", "text/plain");
+        xhr.send(blob);
       }
 
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var blob = this.files[0]
-          const CHUNK_SIZE = 20
-          const SIZE = blob.size
-          var start = 0
-          var end = CHUNK_SIZE
+          var blob = this.files[0];
+          const CHUNK_SIZE = 20;
+          const SIZE = blob.size;
+          var start = 0;
+          var end = CHUNK_SIZE;
 
           while (start < SIZE) {
-            upload(blob.slice(start, end))
-            start = end
-            end = start + CHUNK_SIZE
+            upload(blob.slice(start, end));
+            start = end;
+            end = start + CHUNK_SIZE;
           }
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -245,41 +245,41 @@ const koaStatic = require('koa-static');
 const app = new Koa();
 
 app.use(
-    // 使用静态资源中间件
-    koaStatic(path.join(__dirname, '/public'))
+  // 使用静态资源中间件
+  koaStatic(path.join(__dirname, '/public'))
 );
 
 function parse(req) {
-    return new Promise((resolve, reject) => {
-        const chunks = [];
+  return new Promise((resolve, reject) => {
+    const chunks = [];
 
-        req.on('data', (buf) => {
-            chunks.push(buf);
-            console.log(buf);
-        });
-        req.on('end', () => {
-            const buffer = Buffer.concat(chunks);
-            resolve(buffer.toString());
-        });
+    req.on('data', (buf) => {
+      chunks.push(buf);
+      console.log(buf);
     });
+    req.on('end', () => {
+      const buffer = Buffer.concat(chunks);
+      resolve(buffer.toString());
+    });
+  });
 }
 
 app.use(async (ctx, next) => {
-    await next();
+  await next();
 
-    if (ctx.path === '/ajax') {
-        const req = ctx.req;
+  if (ctx.path === '/ajax') {
+    const req = ctx.req;
 
-        const body = await parse(req);
-        ctx.status = 200;
+    const body = await parse(req);
+    ctx.status = 200;
 
-        console.log(body);
-        console.log('---------------');
-    }
+    console.log(body);
+    console.log('---------------');
+  }
 });
 
 app.listen(3000, () => {
-    console.log('app starting at port 3000');
+  console.log('app starting at port 3000');
 });
 ```
 
@@ -337,7 +337,7 @@ npm start
 下面我们尝试把一个文件的内容通过字符串的方式读取出来：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -351,20 +351,20 @@ npm start
 
     <!-- js部分 -->
     <script>
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          var file = this.files[0]
-          const reader = new FileReader()
+          var file = this.files[0];
+          const reader = new FileReader();
 
           reader.onload = function () {
-            const content = reader.result
-            console.log(content)
-          }
-          reader.readAsText(file)
+            const content = reader.result;
+            console.log(content);
+          };
+          reader.readAsText(file);
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -413,7 +413,7 @@ npx http-server -p 3100 -c-1
 #### 3.2.1 通过 ArrayBuffer 的格式读取本地数据
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -427,20 +427,20 @@ npx http-server -p 3100 -c-1
 
     <!-- js部分 -->
     <script>
-      document.getElementById('f').addEventListener(
-        'change',
+      document.getElementById("f").addEventListener(
+        "change",
         function (e) {
-          const file = this.files[0]
-          const fileReader = new FileReader()
+          const file = this.files[0];
+          const fileReader = new FileReader();
 
           fileReader.onload = function () {
-            const result = fileReader.result
-            console.log(result)
-          }
-          fileReader.readAsArrayBuffer(file)
+            const result = fileReader.result;
+            console.log(result);
+          };
+          fileReader.readAsArrayBuffer(file);
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -465,23 +465,23 @@ npx http-server -p 3100 -c-1
 // package.json
 
 {
-    "scripts": {
-        "start": "npx nodemon server.js"
-    },
-    "dependencies": {
-        "koa": "^2.13.1",
-        "koa-static": "^5.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.7"
-    }
+  "scripts": {
+    "start": "npx nodemon server.js"
+  },
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
 ```
 
 ```html
 <!-- public/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -496,23 +496,23 @@ npx http-server -p 3100 -c-1
     <!-- js部分 -->
     <script>
       function ajax() {
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', '/ajax', true)
-        xhr.responseType = 'arraybuffer'
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ajax", true);
+        xhr.responseType = "arraybuffer";
 
         xhr.onload = function () {
-          console.log(xhr.response)
-        }
-        xhr.send()
+          console.log(xhr.response);
+        };
+        xhr.send();
       }
 
-      document.getElementById('btn').addEventListener(
-        'click',
+      document.getElementById("btn").addEventListener(
+        "click",
         function (e) {
-          ajax()
+          ajax();
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -529,21 +529,21 @@ const koaStatic = require('koa-static');
 const app = new Koa();
 
 app.use(
-    // 使用静态资源中间件
-    koaStatic(path.join(__dirname, '/public'))
+  // 使用静态资源中间件
+  koaStatic(path.join(__dirname, '/public'))
 );
 
 app.use(async (ctx, next) => {
-    await next();
+  await next();
 
-    if (ctx.path === '/ajax') {
-        ctx.body = 'hello world';
-        ctx.status = 200;
-    }
+  if (ctx.path === '/ajax') {
+    ctx.body = 'hello world';
+    ctx.status = 200;
+  }
 });
 
 app.listen(3000, () => {
-    console.log('app starting at port 3000');
+  console.log('app starting at port 3000');
 });
 ```
 
@@ -606,7 +606,7 @@ console.log(view);
 ```html
 <!-- public/index.html -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
@@ -621,20 +621,20 @@ console.log(view);
     <!-- js部分 -->
     <script>
       function ajax() {
-        const xhr = new XMLHttpRequest()
-        xhr.open('POST', 'ajax', true)
-        xhr.setRequestHeader('Content-Type', 'text/plain')
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax", true);
+        xhr.setRequestHeader("Content-Type", "text/plain");
 
-        xhr.send('Hello World!')
+        xhr.send("Hello World!");
       }
 
-      document.getElementById('btn').addEventListener(
-        'click',
+      document.getElementById("btn").addEventListener(
+        "click",
         function (e) {
-          ajax()
+          ajax();
         },
-        false
-      )
+        false,
+      );
     </script>
   </body>
 </html>
@@ -652,39 +652,39 @@ const koaStatic = require('koa-static');
 const app = new Koa();
 
 app.use(
-    // 使用静态资源中间件
-    koaStatic(path.join(__dirname, '/public'))
+  // 使用静态资源中间件
+  koaStatic(path.join(__dirname, '/public'))
 );
 
 function parse(req) {
-    return new Promise((resolve, reject) => {
-        const chunks = [];
+  return new Promise((resolve, reject) => {
+    const chunks = [];
 
-        req.on('data', (buf) => {
-            chunks.push(buf);
-        });
-        req.on('end', () => {
-            const buffer = Buffer.concat(chunks);
-            resolve(buffer.toString());
-        });
+    req.on('data', (buf) => {
+      chunks.push(buf);
     });
+    req.on('end', () => {
+      const buffer = Buffer.concat(chunks);
+      resolve(buffer.toString());
+    });
+  });
 }
 
 app.use(async (ctx, next) => {
-    await next();
+  await next();
 
-    if (ctx.path === '/ajax') {
-        const req = ctx.req;
+  if (ctx.path === '/ajax') {
+    const req = ctx.req;
 
-        const body = await parse(req);
-        ctx.status = 200;
+    const body = await parse(req);
+    ctx.status = 200;
 
-        console.log(body);
-    }
+    console.log(body);
+  }
 });
 
 app.listen(3000, () => {
-    console.log('app starting at port 3000');
+  console.log('app starting at port 3000');
 });
 ```
 

@@ -20,23 +20,23 @@ npm install -D typescript gulp-typescript @typescript-eslint/parser miniprogram-
 
 ```json
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "ESNext",
-        "esModuleInterop": true,
-        "declaration": true,
-        "noImplicitAny": false,
-        "outDir": "dist",
-        "baseUrl": ".",
-        "allowJs": true, // 允许JS文件，兼容老项目
-        "checkJs": false, // 不检查JS文件，兼容老项目
-        "types": ["miniprogram-api-typings"], // 小程序类型定义引入
-        "paths": {
-            "@/*": ["./src/*"] // 设置路径别名
-        },
-        "skipLibCheck": true
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "allowJs": true, // 允许JS文件，兼容老项目
+    "checkJs": false, // 不检查JS文件，兼容老项目
+    "types": ["miniprogram-api-typings"], // 小程序类型定义引入
+    "paths": {
+      "@/*": ["./src/*"] // 设置路径别名
     },
-    "include": ["src/**/*.ts"]
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"]
 }
 ```
 
@@ -46,9 +46,9 @@ npm install -D typescript gulp-typescript @typescript-eslint/parser miniprogram-
 // package.json
 
 {
-    "scripts": {
-        "ts:build:src": "gulp -f build/compiler.js --series buildSrc"
-    }
+  "scripts": {
+    "ts:build:src": "gulp -f build/compiler.js --series buildSrc"
+  }
 }
 ```
 
@@ -67,19 +67,19 @@ const distDir = path.resolve(__dirname, '../dist');
  * ts 构建
  */
 function gulpTsCompiler(dist, tsConfig, srcList = [`${srcDir}/**/*.ts`]) {
-    return function compileTs() {
-        const project = typescript.createProject(tsConfig);
-        const compiled = gulp.src(srcList).pipe(project());
-        return compiled.js.pipe(gulp.dest(dist));
-    };
+  return function compileTs() {
+    const project = typescript.createProject(tsConfig);
+    const compiled = gulp.src(srcList).pipe(project());
+    return compiled.js.pipe(gulp.dest(dist));
+  };
 }
 
 /**
  * 构建任务
  */
 const tasks = [['buildSrc', distDir, tsConfig]].reduce((prev, [name, ...args]) => {
-    prev[name] = gulp.series(gulpTsCompiler(...args));
-    return prev;
+  prev[name] = gulp.series(gulpTsCompiler(...args));
+  return prev;
 }, {});
 
 module.exports = tasks;
@@ -104,56 +104,56 @@ const tap = require('gulp-tap');
  * ts文件内容处理
  */
 function tsFileHandler({ file }) {
-    const filePath = path.dirname(file.path);
-    const fileBase = file.base;
-    let relativePath = path.relative(filePath, fileBase);
-    let fileContents = String(file.contents);
+  const filePath = path.dirname(file.path);
+  const fileBase = file.base;
+  let relativePath = path.relative(filePath, fileBase);
+  let fileContents = String(file.contents);
 
-    /**
-     * 为了保持代码风格统一，这里仅支持`@别名`
-     * 为了保证`@别名`和`npm包的别名`冲突，这里用`@/`做下区分
-     */
-    if (fileContents.includes('@/')) {
-        fileContents = fileContents.replace(/(import\s+.+\s+from\s+['|"])(@)(\/.+)(['|"])/g, ($1, $2, $3, $4, $5) => {
-            switch ($3) {
-                case '@':
-                    break;
-                default:
-                    // 这里留个彩蛋，但后面功能扩展
-                    relativePath = $3;
-                    break;
-            }
-            return `${$2}${relativePath || '.'}${$4}${$5}`;
-        });
-    }
+  /**
+   * 为了保持代码风格统一，这里仅支持`@别名`
+   * 为了保证`@别名`和`npm包的别名`冲突，这里用`@/`做下区分
+   */
+  if (fileContents.includes('@/')) {
+    fileContents = fileContents.replace(/(import\s+.+\s+from\s+['|"])(@)(\/.+)(['|"])/g, ($1, $2, $3, $4, $5) => {
+      switch ($3) {
+        case '@':
+          break;
+        default:
+          // 这里留个彩蛋，但后面功能扩展
+          relativePath = $3;
+          break;
+      }
+      return `${$2}${relativePath || '.'}${$4}${$5}`;
+    });
+  }
 
-    /**
-     * 支持 ts 文件自动引入 async/await  支持，如：
-     * import regeneratorRuntime from '../../libs/runtime';
-     */
-    if (fileContents.includes('async') && !fileContents.includes('regeneratorRuntime')) {
-        fileContents = `import regeneratorRuntime from '${relativePath}/libs/runtime';\n${fileContents}`;
-    }
+  /**
+   * 支持 ts 文件自动引入 async/await  支持，如：
+   * import regeneratorRuntime from '../../libs/runtime';
+   */
+  if (fileContents.includes('async') && !fileContents.includes('regeneratorRuntime')) {
+    fileContents = `import regeneratorRuntime from '${relativePath}/libs/runtime';\n${fileContents}`;
+  }
 
-    return Buffer.from(fileContents);
+  return Buffer.from(fileContents);
 }
 
 /**
  * 支持 ts 文件通过路径路径别名引入方式
  */
 function gulpTsCompiler(dist, tsConfig, srcList = [`${srcDir}/**/*.ts`]) {
-    return function compileTs() {
-        const project = typescript.createProject(tsConfig);
-        const compiled = gulp.src(srcList).pipe(project());
-        return compiled.js
-            .pipe(gulp.dest(dist))
-            .pipe(
-                tap((file) => {
-                    file.contents = tsFileHandler({ file });
-                })
-            )
-            .pipe(gulp.dest(dist));
-    };
+  return function compileTs() {
+    const project = typescript.createProject(tsConfig);
+    const compiled = gulp.src(srcList).pipe(project());
+    return compiled.js
+      .pipe(gulp.dest(dist))
+      .pipe(
+        tap((file) => {
+          file.contents = tsFileHandler({ file });
+        })
+      )
+      .pipe(gulp.dest(dist));
+  };
 }
 ```
 
@@ -175,8 +175,8 @@ npm install -D gulp-sass
 // build/compiler.js
 
 const tasks = [['buildSrc', distDir, tsConfig]].reduce((prev, [name, ...args]) => {
-    prev[name] = gulp.series(gulpTsCompiler(...args), sassCompiler(...args));
-    return prev;
+  prev[name] = gulp.series(gulpTsCompiler(...args), sassCompiler(...args));
+  return prev;
 }, {});
 ```
 
@@ -188,16 +188,16 @@ const tasks = [['buildSrc', distDir, tsConfig]].reduce((prev, [name, ...args]) =
 const sass = require('gulp-sass');
 
 function sassCompiler(dist) {
-    return function compileSass() {
-        return gulp
-            .src(`${srcDir}/**/*.scss`)
-            .pipe(
-                rename({
-                    extname: '.wxss',
-                })
-            )
-            .pipe(gulp.dest(dist));
-    };
+  return function compileSass() {
+    return gulp
+      .src(`${srcDir}/**/*.scss`)
+      .pipe(
+        rename({
+          extname: '.wxss',
+        })
+      )
+      .pipe(gulp.dest(dist));
+  };
 }
 ```
 
@@ -233,39 +233,39 @@ const Buffer = require('node:buffer').Buffer;
 const SASS_DIRECT_IMPORT = ['variable', 'mixin'];
 
 function sassCompiler(dist) {
-    return function compileSass() {
-        return (
-            gulp
-                .src(`${srcDir}/**/*.scss`)
-            /**
-             * 开始处理 import
-             * `@import`语法忽略解析
-             */
-                .pipe(
-                    tap((file) => {
-                        const filePath = path.dirname(file.path);
-                        file.contents = Buffer.from(
-                            String(file.contents).replace(/@import\s+['|"](.+)['|"];/g, ($1, $2) => {
-                                const imPath = path.resolve(`${filePath}/${$2}`);
-                                return SASS_DIRECT_IMPORT.some((item) => {
-                                    return imPath.includes(item);
-                                })
-                                    ? $1
-                                    : `/** ${$1} **/`;
-                            })
-                        );
-                    })
-                )
-                .pipe(sass().on('error', sass.logError))
-            /**
-             * 结束处理 import
-             * `@import`语法忽略解析
-             */
-                .pipe(replace(/(\/\*\*\s*)(@.+)(\s*\*\*\/)/g, ($1, $2, $3) => $3.replace(/\.scss/g, '.wxss')))
-                .pipe(rename({ extname: '.wxss' }))
-                .pipe(gulp.dest(dist))
-        );
-    };
+  return function compileSass() {
+    return (
+      gulp
+        .src(`${srcDir}/**/*.scss`)
+      /**
+       * 开始处理 import
+       * `@import`语法忽略解析
+       */
+        .pipe(
+          tap((file) => {
+            const filePath = path.dirname(file.path);
+            file.contents = Buffer.from(
+              String(file.contents).replace(/@import\s+['|"](.+)['|"];/g, ($1, $2) => {
+                const imPath = path.resolve(`${filePath}/${$2}`);
+                return SASS_DIRECT_IMPORT.some((item) => {
+                  return imPath.includes(item);
+                })
+                  ? $1
+                  : `/** ${$1} **/`;
+              })
+            );
+          })
+        )
+        .pipe(sass().on('error', sass.logError))
+      /**
+       * 结束处理 import
+       * `@import`语法忽略解析
+       */
+        .pipe(replace(/(\/\*\*\s*)(@.+)(\s*\*\*\/)/g, ($1, $2, $3) => $3.replace(/\.scss/g, '.wxss')))
+        .pipe(rename({ extname: '.wxss' }))
+        .pipe(gulp.dest(dist))
+    );
+  };
 }
 ```
 
@@ -277,10 +277,10 @@ function sassCompiler(dist) {
 // build/compiler.js
 
 function copier(dist, ext, src = '') {
-    return function copy() {
-        src = src || srcDir;
-        return gulp.src(`${src}/**/*.${ext}`).pipe(gulp.dest(dist));
-    };
+  return function copy() {
+    src = src || srcDir;
+    return gulp.src(`${src}/**/*.${ext}`).pipe(gulp.dest(dist));
+  };
 }
 
 /**
@@ -288,12 +288,12 @@ function copier(dist, ext, src = '') {
  */
 
 function staticCopier(dist) {
-    return gulp.parallel(copier(dist, '{js,wxml,wxss,wxs,json}'), copier(`${dist}/assets`, '*', `${srcDir}/assets`));
+  return gulp.parallel(copier(dist, '{js,wxml,wxss,wxs,json}'), copier(`${dist}/assets`, '*', `${srcDir}/assets`));
 }
 
 const tasks = [['buildSrc', distDir, tsConfig]].reduce((prev, [name, ...args]) => {
-    prev[name] = gulp.series(gulpTsCompiler(...args), sassCompiler(...args), staticCopier(...args));
-    return prev;
+  prev[name] = gulp.series(gulpTsCompiler(...args), sassCompiler(...args), staticCopier(...args));
+  return prev;
 }, {});
 ```
 
@@ -313,9 +313,9 @@ npm install -D del
 // package.json
 
 {
-    "scripts": {
-        "ts:build:src": "gulp clear-dist && gulp -f build/compiler.js --series buildSrc"
-    }
+  "scripts": {
+    "ts:build:src": "gulp clear-dist && gulp -f build/compiler.js --series buildSrc"
+  }
 }
 ```
 
@@ -325,7 +325,7 @@ npm install -D del
 import del from 'del';
 
 gulp.task('clear-dist', () => {
-    return del([`${distDir}/**`]);
+  return del([`${distDir}/**`]);
 });
 ```
 
@@ -346,9 +346,9 @@ gulp.task('clear-dist', () => {
 // package.json
 
 {
-    "scripts": {
-        "ts:watch:src": "gulp -f build/compiler.js --series srcWatch"
-    }
+  "scripts": {
+    "ts:watch:src": "gulp -f build/compiler.js --series srcWatch"
+  }
 }
 ```
 
@@ -358,24 +358,24 @@ gulp.task('clear-dist', () => {
 // build/compiler.js
 
 function watchTsHandler() {
-    const project = typescript.createProject(tsConfig);
-    const compiled = gulp
-        .src([`${srcDir}/**/*.ts`], {
-            // 区别在这里，增加监听的配置项，监听处理函数为自身
-            since: gulp.lastRun(watchTsHandler),
-        })
-        .pipe(project());
+  const project = typescript.createProject(tsConfig);
+  const compiled = gulp
+    .src([`${srcDir}/**/*.ts`], {
+      // 区别在这里，增加监听的配置项，监听处理函数为自身
+      since: gulp.lastRun(watchTsHandler),
+    })
+    .pipe(project());
 
-    return compiled.js
-        .pipe(
-            tap((file) => {
-                file.contents = tsFileHandler({ file });
-            })
-        )
-        .pipe(gulp.dest(distDir));
+  return compiled.js
+    .pipe(
+      tap((file) => {
+        file.contents = tsFileHandler({ file });
+      })
+    )
+    .pipe(gulp.dest(distDir));
 }
 
 tasks.srcWatch = gulp.series(() => {
-    gulp.watch(`${srcDir}/**/*.ts`, watchTsHandler);
+  gulp.watch(`${srcDir}/**/*.ts`, watchTsHandler);
 });
 ```

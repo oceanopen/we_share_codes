@@ -42,8 +42,8 @@
 
 ```js
 const person = {
-    name: '哈哈',
-    age: 18,
+  name: '哈哈',
+  age: 18,
 };
 ```
 
@@ -53,8 +53,8 @@ const person = {
 
 ```js
 const person = {
-    name: '哈哈',
-    age: 18,
+  name: '哈哈',
+  age: 18,
 };
 Object.freeze(person);
 ```
@@ -69,12 +69,12 @@ Object.freeze(person);
 
 ```js
 class A {
-    constructor() {
-        if (!A._singleton) {
-            A._singleton = this;
-        }
-        return A._singleton;
+  constructor() {
+    if (!A._singleton) {
+      A._singleton = this;
     }
+    return A._singleton;
+  }
 }
 
 const a1 = new A();
@@ -86,16 +86,16 @@ console.log(a1 === a2); // true
 
 ```js
 function A(name) {
-    // 如果已存在对应的实例
-    if (typeof A._singleton === 'object') {
-        return A._singleton;
-    }
-    // 否则正常创建实例
-    this.name = name;
+  // 如果已存在对应的实例
+  if (typeof A._singleton === 'object') {
+    return A._singleton;
+  }
+  // 否则正常创建实例
+  this.name = name;
 
-    // 缓存
-    A._singleton = this;
-    return this;
+  // 缓存
+  A._singleton = this;
+  return this;
 }
 
 const a1 = new A();
@@ -113,14 +113,14 @@ console.log(a1 === a2); // true
 
 ```js
 function A(name) {
-    const instance = this;
-    this.name = name;
+  const instance = this;
+  this.name = name;
 
-    // 重写构造函数
-    A = function () {
-        return instance;
-    };
-    // 重写构造函数之后，实际上原先的A指针对应的函数还在内存中(因为instance变量还在被引用着)，但是此时A指针已经指向了一个新的函数了。
+  // 重写构造函数
+  A = function () {
+    return instance;
+  };
+  // 重写构造函数之后，实际上原先的A指针对应的函数还在内存中(因为instance变量还在被引用着)，但是此时A指针已经指向了一个新的函数了。
 }
 
 A.prototype.pro1 = 'from prototype1';
@@ -140,25 +140,25 @@ console.log(a1.constructor === A); // false
 
 ```js
 function A(name) {
-    let instance = this;
-    this.name = name;
+  let instance = this;
+  this.name = name;
 
-    // 重写构造函数
-    A = function () {
-        return instance;
-    };
-
-    // 第一种写法，这里实际上实现了一次原型链继承，如果不想这样实现，也可以直接指向旧的原型
-    A.prototype = this;
-    // 或者 第二种写法，直接指向旧的原型
-    A.prototype = this.constructor.prototype;
-
-    instance = new A();
-
-    // 调整构造函数指针
-    instance.constructor = A;
-
+  // 重写构造函数
+  A = function () {
     return instance;
+  };
+
+  // 第一种写法，这里实际上实现了一次原型链继承，如果不想这样实现，也可以直接指向旧的原型
+  A.prototype = this;
+  // 或者 第二种写法，直接指向旧的原型
+  A.prototype = this.constructor.prototype;
+
+  instance = new A();
+
+  // 调整构造函数指针
+  instance.constructor = A;
+
+  return instance;
 }
 
 A.prototype.pro1 = 'from prototype1';
@@ -178,18 +178,18 @@ console.log(a2.pro2); // from prototype2
 ```js
 let A
 ;(function () {
-    let instance;
-    A = function (name) {
-        if (instance) {
-            return instance;
-        }
+  let instance;
+  A = function (name) {
+    if (instance) {
+      return instance;
+    }
 
-        // 赋值给私有变量
-        instance = this;
+    // 赋值给私有变量
+    instance = this;
 
-        // 自身属性
-        this.name = name;
-    };
+    // 自身属性
+    this.name = name;
+  };
 })();
 
 A.prototype.pro1 = 'from prototype1';
@@ -212,16 +212,16 @@ console.log(a2.pro2); // from protptype2
 
 ```js
 function Singleton(name) {
-    this.name = name;
+  this.name = name;
 }
 const ProxySingleton = (function () {
-    let instance = null;
-    return function (name) {
-        if (!instance) {
-            instance = new Singleton(name);
-        }
-        return instance;
-    };
+  let instance = null;
+  return function (name) {
+    if (!instance) {
+      instance = new Singleton(name);
+    }
+    return instance;
+  };
 })();
 
 const a1 = new ProxySingleton('a1');
@@ -237,15 +237,15 @@ console.log(a1 === a2); // true
 ```js
 let logger = null;
 class Logger {
-    log(...args) {
-        console.log(...args);
-    }
+  log(...args) {
+    console.log(...args);
+  }
 }
 function CreateLogger() {
-    if (!logger) {
-        logger = new Logger();
-    }
-    return logger;
+  if (!logger) {
+    logger = new Logger();
+  }
+  return logger;
 }
 
 const a = new CreateLogger().log('123'); // 123
@@ -271,23 +271,23 @@ console.log(a === b); // true
 ```js
 // User类
 class User {
-    // 构造器
-    constructor(options) {
-        this.name = options.name;
-        this.viewPageList = options.viewPageList;
-    }
+  // 构造器
+  constructor(options) {
+    this.name = options.name;
+    this.viewPageList = options.viewPageList;
+  }
 
-    // 静态方法
-    static getInstance(role) {
-        switch (role) {
-            case 'admin':
-                return new User({ name: '管理员', viewPageList: ['首页', '应用数据', '权限管理'] });
-            case 'user':
-                return new User({ name: '普通用户', viewPageList: ['首页', '应用数据'] });
-            default:
-                throw new Error('参数错误 || 可选参数：admin、user');
-        }
+  // 静态方法
+  static getInstance(role) {
+    switch (role) {
+      case 'admin':
+        return new User({ name: '管理员', viewPageList: ['首页', '应用数据', '权限管理'] });
+      case 'user':
+        return new User({ name: '普通用户', viewPageList: ['首页', '应用数据'] });
+      default:
+        throw new Error('参数错误 || 可选参数：admin、user');
     }
+  }
 }
 
 // 调用
@@ -321,30 +321,30 @@ const normalUser = User.getInstance('user');
 
 ```js
 class User {
-    constructor(name = '', viewPageList = []) {
-        if (new.target === User) {
-            throw new Error('抽象类不能实例化!');
-        }
-        this.name = name;
-        this.viewPageList = viewPageList;
+  constructor(name = '', viewPageList = []) {
+    if (new.target === User) {
+      throw new Error('抽象类不能实例化!');
     }
+    this.name = name;
+    this.viewPageList = viewPageList;
+  }
 }
 
 class UserFactory extends User {
-    constructor(name, viewPageList) {
-        super(name, viewPageList);
-    }
+  constructor(name, viewPageList) {
+    super(name, viewPageList);
+  }
 
-    create(role) {
-        switch (role) {
-            case 'admin':
-                return new UserFactory('管理员', ['首页', '应用数据', '权限管理']);
-            case 'user':
-                return new UserFactory('普通用户', ['首页', '应用数据', '权限管理']);
-            default:
-                throw new Error('参数错误 || 可选参数：admin、user');
-        }
+  create(role) {
+    switch (role) {
+      case 'admin':
+        return new UserFactory('管理员', ['首页', '应用数据', '权限管理']);
+      case 'user':
+        return new UserFactory('普通用户', ['首页', '应用数据', '权限管理']);
+      default:
+        throw new Error('参数错误 || 可选参数：admin、user');
     }
+  }
 }
 
 const userFactory = new UserFactory();
@@ -364,16 +364,16 @@ const user = userFactory.create('user');
 
 ```js
 function getAbstractUserFactory(type) {
-    switch (type) {
-        case 'wechat':
-            return UserOfWechat;
-        case 'qq':
-            return UserOfQq;
-        case 'weibo':
-            return UserOfWeibo;
-        default:
-            throw new Error('参数错误, 可选参数: wechat, qq, weibo');
-    }
+  switch (type) {
+    case 'wechat':
+      return UserOfWechat;
+    case 'qq':
+      return UserOfQq;
+    case 'weibo':
+      return UserOfWeibo;
+    default:
+      throw new Error('参数错误, 可选参数: wechat, qq, weibo');
+  }
 }
 
 const WechatUserClass = getAbstractUserFactory('wechat');
@@ -416,15 +416,15 @@ const weiboUser = new WeiboUserClass('微博小李');
 
   ```js
   class jQuery {
-      constructor(selector) {
+    constructor(selector) {
       // super(selector)
-      }
-      //  ....
+    }
+    //  ....
   }
 
   window.$ = function (selector) {
-      // eslint-disable-next-line new-cap
-      return new jQuery(selector);
+    // eslint-disable-next-line new-cap
+    return new jQuery(selector);
   };
   ```
 
@@ -434,10 +434,10 @@ const weiboUser = new WeiboUserClass('微博小李');
 
   ```js
   const profile = React.createElement(
-      'div',
-      null,
-      React.createElement('img', { src: 'avatar.png', className: 'profile' }),
-      React.createElement('h3', null, [user.firstName, user.lastName].join(' '))
+    'div',
+    null,
+    React.createElement('img', { src: 'avatar.png', className: 'profile' }),
+    React.createElement('h3', null, [user.firstName, user.lastName].join(' '))
   );
   ```
 
@@ -445,10 +445,10 @@ const weiboUser = new WeiboUserClass('微博小李');
 
   ```jsx
   const profile = (
-      <div>
-          <img src="avatar.png" className="profile" />
-          <h3>{[user.firstName, user.lastName].join(' ')}</h3>
-      </div>
+    <div>
+      <img src="avatar.png" className="profile" />
+      <h3>{[user.firstName, user.lastName].join(' ')}</h3>
+    </div>
   );
   ```
 
@@ -456,14 +456,14 @@ const weiboUser = new WeiboUserClass('微博小李');
 
   ```js
   class Vnode {
-      constructor(tag, attrs, children) {
-          //  ....
-      }
+    constructor(tag, attrs, children) {
       //  ....
+    }
+    //  ....
   }
 
   React.createElement = function (tag, attrs, children) {
-      return new Vnode(tag, attrs, children);
+    return new Vnode(tag, attrs, children);
   };
   ```
 
@@ -510,7 +510,7 @@ const weiboUser = new WeiboUserClass('微博小李');
 
 ```js
 function Subject() {
-    this.observers = [];
+  this.observers = [];
 }
 function Observer() {}
 ```
@@ -519,11 +519,11 @@ function Observer() {}
 
 ```js
 Subject.prototype.addObserver = function (observer) {
-    this.observers.push(observer);
+  this.observers.push(observer);
 };
 
 Subject.prototype.removeObserver = function (observer) {
-    this.observers.splice(this.observers.indexOf(observer), 1);
+  this.observers.splice(this.observers.indexOf(observer), 1);
 };
 ```
 
@@ -536,10 +536,10 @@ Subject.prototype.removeObserver = function (observer) {
 
 ```js
 Subject.prototype.notify = function (context) {
-    const observerCount = this.observers.length;
-    for (let i = 0; i < observerCount; i++) {
-        this.observers[i].update(context);
-    }
+  const observerCount = this.observers.length;
+  for (let i = 0; i < observerCount; i++) {
+    this.observers[i].update(context);
+  }
 };
 ```
 
@@ -548,9 +548,9 @@ Subject.prototype.notify = function (context) {
 
 ```js
 function Observer() {
-    this.update = function () {
+  this.update = function () {
     // ...
-    };
+  };
 }
 ```
 
@@ -560,63 +560,63 @@ function Observer() {
 
 ```js
 function ObserverList() {
-    this.observerList = [];
+  this.observerList = [];
 }
 
 ObserverList.prototype.add = function (obj) {
-    return this.observerList.push(obj);
+  return this.observerList.push(obj);
 };
 
 ObserverList.prototype.count = function () {
-    return this.observerList.length;
+  return this.observerList.length;
 };
 
 ObserverList.prototype.get = function (index) {
-    if (index > -1 && index < this.observerList.length) {
-        return this.observerList[index];
-    }
+  if (index > -1 && index < this.observerList.length) {
+    return this.observerList[index];
+  }
 };
 
 ObserverList.prototype.indexOf = function (obj, startIndex) {
-    let i = startIndex;
+  let i = startIndex;
 
-    while (i < this.observerList.length) {
-        if (this.observerList[i] === obj) {
-            return i;
-        }
-        i++;
+  while (i < this.observerList.length) {
+    if (this.observerList[i] === obj) {
+      return i;
     }
-    return -1;
+    i++;
+  }
+  return -1;
 };
 
 ObserverList.prototype.removeAt = function (index) {
-    this.observerList.splice(index, 1);
+  this.observerList.splice(index, 1);
 };
 
 function Subject() {
-    this.observers = new ObserverList();
+  this.observers = new ObserverList();
 }
 
 Subject.prototype.addObserver = function (observer) {
-    this.observers.add(observer);
+  this.observers.add(observer);
 };
 
 Subject.prototype.removeObserver = function (observer) {
-    this.observers.removeAt(this.observers.indexOf(observer, 0));
+  this.observers.removeAt(this.observers.indexOf(observer, 0));
 };
 
 Subject.prototype.notify = function (context) {
-    const observerCount = this.observers.count();
-    for (let i = 0; i < observerCount; i++) {
-        this.observers.get(i).update(context);
-    }
+  const observerCount = this.observers.count();
+  for (let i = 0; i < observerCount; i++) {
+    this.observers.get(i).update(context);
+  }
 };
 
 // The Observer
 function Observer() {
-    this.update = function () {
+  this.update = function () {
     // ...
-    };
+  };
 }
 ```
 
@@ -648,15 +648,15 @@ function Observer() {
 ```js
 const pubsub = {}
 ;(function (myObject) {
-    const topics = {};
-    const subUid = -1;
+  const topics = {};
+  const subUid = -1;
 
-    // 发布消息
-    myObject.publish = function () {};
-    // 订阅消息
-    myObject.subscribe = function () {};
-    // 取消订阅
-    myObject.unsubscribe = function () {};
+  // 发布消息
+  myObject.publish = function () {};
+  // 订阅消息
+  myObject.subscribe = function () {};
+  // 取消订阅
+  myObject.unsubscribe = function () {};
 })(pubsub);
 ```
 
@@ -668,21 +668,21 @@ const pubsub = {}
 
 ```js
 topics = {
-    topicA: [
-        {
-            token: subuid,
-            function: func,
-        },
+  topicA: [
+    {
+      token: subuid,
+      function: func,
+    },
     // ...
-    ],
-    topicB: [
-        {
-            token: subuid,
-            function: func,
-        },
+  ],
+  topicB: [
+    {
+      token: subuid,
+      function: func,
+    },
     // ...
-    ],
-    // ...
+  ],
+  // ...
 };
 ```
 
@@ -692,18 +692,18 @@ topics = {
 
 ```js
 myObject.subscribe = function (topic, func) {
-    // 如果不存在相应事件就创建一个
-    if (!topics[topic]) {
-        topics[topic] = [];
-    }
-    // 将订阅对象信息记录下来
-    const token = (++subUid).toString();
-    topics[topic].push({
-        token,
-        func,
-    });
-    // 返回订阅者标识，方标在取消订阅的时候使用
-    return token;
+  // 如果不存在相应事件就创建一个
+  if (!topics[topic]) {
+    topics[topic] = [];
+  }
+  // 将订阅对象信息记录下来
+  const token = (++subUid).toString();
+  topics[topic].push({
+    token,
+    func,
+  });
+  // 返回订阅者标识，方标在取消订阅的时候使用
+  return token;
 };
 ```
 
@@ -713,17 +713,17 @@ myObject.subscribe = function (topic, func) {
 
 ```js
 myObject.unsubscribe = function (token) {
-    for (const m in topics) {
-        if (topics[m]) {
-            for (let i = 0, j = topics[m].length; i < j; i++) {
-                if (topics[m][i].token === token) {
-                    topics[m].splice(i, 1);
-                    return token;
-                }
-            }
+  for (const m in topics) {
+    if (topics[m]) {
+      for (let i = 0, j = topics[m].length; i < j; i++) {
+        if (topics[m][i].token === token) {
+          topics[m].splice(i, 1);
+          return token;
         }
+      }
     }
-    return this;
+  }
+  return this;
 };
 ```
 
@@ -733,15 +733,15 @@ myObject.unsubscribe = function (token) {
 
 ```js
 myObject.publish = function (topic, args) {
-    if (!topics[topic]) {
-        return false;
-    }
-    const subscribers = topics[topic];
-    let len = subscribers ? subscribers.length : 0;
-    while (len--) {
-        subscribers[len].func(args);
-    }
-    return this;
+  if (!topics[topic]) {
+    return false;
+  }
+  const subscribers = topics[topic];
+  let len = subscribers ? subscribers.length : 0;
+  while (len--) {
+    subscribers[len].func(args);
+  }
+  return this;
 };
 ```
 
@@ -767,7 +767,7 @@ myObject.publish = function (topic, args) {
 
 ```js
 subject.addEventListener('click', () => {
-    // ...
+  // ...
 });
 ```
 
@@ -783,7 +783,7 @@ const template = `<span><% this.value %></span>`;
 
 ```js
 const data = {
-    value: 0,
+  value: 0,
 };
 ```
 
@@ -791,7 +791,7 @@ const data = {
 
 ```js
 setInterval(() => {
-    data.value++;
+  data.value++;
 }, 1000);
 ```
 
@@ -799,8 +799,8 @@ setInterval(() => {
 
 ```js
 setInterval(() => {
-    data.value++;
-    document.body.innerHTML = TemplateEngine(template, data);
+  data.value++;
+  document.body.innerHTML = TemplateEngine(template, data);
 }, 1000);
 ```
 
@@ -809,20 +809,20 @@ setInterval(() => {
 ```js
 const template = `<span><% this.value %></span>`;
 const data = {
-    value: 0,
+  value: 0,
 };
 function render() {
-    document.body.innerHTML = TemplateEngine(template, data);
+  document.body.innerHTML = TemplateEngine(template, data);
 }
 window.onload = function () {
-    // 初始化渲染
-    render();
+  // 初始化渲染
+  render();
 
-    pubsub.subscribe('change', render); // 订阅更新渲染的消息
-    setInterval(() => {
-        data.value++;
-        pubsub.publish('change'); // 发布更新事件
-    }, 1000);
+  pubsub.subscribe('change', render); // 订阅更新渲染的消息
+  setInterval(() => {
+    data.value++;
+    pubsub.publish('change'); // 发布更新事件
+  }, 1000);
 };
 ```
 
@@ -856,12 +856,12 @@ window.onload = function () {
 
 ```js
 class Bicycle {
-    wash() {} // 清洗
-    ride() {} // 骑车
-    // 其它方法
-    getPrice() {
-        return 200;
-    }
+  wash() {} // 清洗
+  ride() {} // 骑车
+  // 其它方法
+  getPrice() {
+    return 200;
+  }
 }
 ```
 
@@ -869,24 +869,24 @@ class Bicycle {
 
 ```js
 class BicycleDecotator {
-    constructor(bicycle) {
-        this.bicycle = bicycle;
-    }
+  constructor(bicycle) {
+    this.bicycle = bicycle;
+  }
 
-    /**
-     * 以下为实现基类方法
-     */
-    wash() {
-        return this.bicycle.wash();
-    }
+  /**
+   * 以下为实现基类方法
+   */
+  wash() {
+    return this.bicycle.wash();
+  }
 
-    ride() {
-        return this.bicycle.ride();
-    }
+  ride() {
+    return this.bicycle.ride();
+  }
 
-    getPrice() {
-        return this.bicycle.getPrice();
-    }
+  getPrice() {
+    return this.bicycle.getPrice();
+  }
 }
 ```
 
@@ -897,22 +897,22 @@ class BicycleDecotator {
 
 ```js
 class HeadLightDecorator extends BicycleDecorator {
-    constructor(bicycle) {
-        super(bicycle);
-    }
+  constructor(bicycle) {
+    super(bicycle);
+  }
 
-    getPrice() {
-        return this.bicycle.getPrice() + 20;
-    }
+  getPrice() {
+    return this.bicycle.getPrice() + 20;
+  }
 }
 class TailLightDecorator extends BicycleDecorator {
-    constructor(bicycle) {
-        super(bicycle);
-    }
+  constructor(bicycle) {
+    super(bicycle);
+  }
 
-    getPrice() {
-        return this.bicycle.getPrice() + 20;
-    }
+  getPrice() {
+    return this.bicycle.getPrice() + 20;
+  }
 }
 ```
 
@@ -945,15 +945,15 @@ console.log(bicycle.getPrice()); // 240
 
 ```js
 function func() {
-    console.log('func');
+  console.log('func');
 }
 function timeProfileDecorator(func) {
-    return function (...args) {
-        const startTime = new Date();
-        func.call(this, ...args);
-        const elapsedTime = new Date().getTime() - startTime.getTime();
-        console.log(`该函数消耗了${elapsedTime}ms`);
-    };
+  return function (...args) {
+    const startTime = new Date();
+    func.call(this, ...args);
+    const elapsedTime = new Date().getTime() - startTime.getTime();
+    console.log(`该函数消耗了${elapsedTime}ms`);
+  };
 }
 const newFunc = timeProfileDecorator(func);
 console.log(newFunc());
@@ -967,45 +967,45 @@ console.log(newFunc());
 
 ```js
 class TimeProfileDecorator {
-    constructor(component, keys) {
-        this.component = component;
-        this.timers = {};
-        const self = this;
-        for (const i in keys) {
-            const key = keys[i];
-            if (typeof component[key] === 'function') {
-                self[key] = function (...args) {
-                    self.startTimer(key);
-                    component[key]?.(...args);
-                    self.logTimer(key);
-                };
-            }
-        }
+  constructor(component, keys) {
+    this.component = component;
+    this.timers = {};
+    const self = this;
+    for (const i in keys) {
+      const key = keys[i];
+      if (typeof component[key] === 'function') {
+        self[key] = function (...args) {
+          self.startTimer(key);
+          component[key]?.(...args);
+          self.logTimer(key);
+        };
+      }
     }
+  }
 
-    startTimer(namespace) {
-        this.timers[namespace] = new Date();
-    }
+  startTimer(namespace) {
+    this.timers[namespace] = new Date();
+  }
 
-    logTimer(namespace) {
-        const elapsedTime = new Date().getTime() - this.timers[namespace].getTime();
-        console.log(`该函数消耗了${elapsedTime}ms`);
-    }
+  logTimer(namespace) {
+    const elapsedTime = new Date().getTime() - this.timers[namespace].getTime();
+    console.log(`该函数消耗了${elapsedTime}ms`);
+  }
 }
 // example
 class Test {
-    constructor() {
-        this.name = 'Jony';
-        this.age = 22;
-    }
+  constructor() {
+    this.name = 'Jony';
+    this.age = 22;
+  }
 
-    sayName() {
-        console.log(this.name);
-    }
+  sayName() {
+    console.log(this.name);
+  }
 
-    sayAge() {
-        console.log(this.age);
-    }
+  sayAge() {
+    console.log(this.age);
+  }
 }
 
 let test1 = new Test();
@@ -1021,34 +1021,34 @@ console.log(test1.sayAge());
 ```js
 // 节流
 function throttle(func, delay) {
-    const self = this;
-    let tid;
-    return function (...args) {
+  const self = this;
+  let tid;
+  return function (...args) {
     // delay 时间内不会重复执行
-        if (tid) {
-            return;
-        }
-        tid = setTimeout(() => {
-            func.call(self, ...args);
-            tid = null;
-        }, delay);
-    };
+    if (tid) {
+      return;
+    }
+    tid = setTimeout(() => {
+      func.call(self, ...args);
+      tid = null;
+    }, delay);
+  };
 }
 
 // 防抖
 function debounce(func, delay) {
-    const self = this;
-    let tid;
-    return function (...args) {
+  const self = this;
+  let tid;
+  return function (...args) {
     // delay 时间内共用一个计时器
-        if (tid) {
-            clearTimeout(tid);
-        }
-        tid = setTimeout(() => {
-            func.call(self, ...args);
-            tid = null;
-        }, delay);
-    };
+    if (tid) {
+      clearTimeout(tid);
+    }
+    tid = setTimeout(() => {
+      func.call(self, ...args);
+      tid = null;
+    }, delay);
+  };
 }
 ```
 
@@ -1057,21 +1057,21 @@ function debounce(func, delay) {
 ```js
 // 缓存函数结果，对于一些计算量比较大的函数效果比较明显。
 function memorize(func) {
-    const cache = {};
-    return function (...args) {
-        const key = JSON.stringify(args);
-        if (cache[key]) {
-            console.log('缓存中返回');
-            return cache[key];
-        }
-        const result = func.call(this, ...args);
-        cache[key] = result;
-        return result;
-    };
+  const cache = {};
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache[key]) {
+      console.log('缓存中返回');
+      return cache[key];
+    }
+    const result = func.call(this, ...args);
+    cache[key] = result;
+    return result;
+  };
 }
 
 function fib(num) {
-    return num < 2 ? num : fib(num - 1) + fib(num - 2);
+  return num < 2 ? num : fib(num - 1) + fib(num - 2);
 }
 
 const enhanceFib = memorize(fib);
@@ -1133,16 +1133,16 @@ const proxy = new Proxy(target, handler);
 
 ```js
 let dataStore = {
-    name: 'Billy Bob',
-    age: 15,
+  name: 'Billy Bob',
+  age: 15,
 };
 
 const handler = {
-    get(target, key, proxy) {
-        const today = new Date();
-        console.log(`GET request made for ${key} at ${today}`);
-        return Reflect.get(target, key, proxy);
-    },
+  get(target, key, proxy) {
+    const today = new Date();
+    console.log(`GET request made for ${key} at ${today}`);
+    return Reflect.get(target, key, proxy);
+  },
 };
 
 dataStore = new Proxy(dataStore, handler);
@@ -1164,18 +1164,18 @@ const name = dataStore.name; // > GET request made for name at Wed Jul 07 2021 1
 
 ```js
 let numericDataStore = {
-    count: 0,
-    amount: 1234,
-    total: 14,
+  count: 0,
+  amount: 1234,
+  total: 14,
 };
 
 numericDataStore = new Proxy(numericDataStore, {
-    set(target, key, value, proxy) {
-        if (typeof value !== 'number') {
-            throw new TypeError('Properties in numericDataStore can only be numbers');
-        }
-        return Reflect.set(target, key, value, proxy);
-    },
+  set(target, key, value, proxy) {
+    if (typeof value !== 'number') {
+      throw new TypeError('Properties in numericDataStore can only be numbers');
+    }
+    return Reflect.set(target, key, value, proxy);
+  },
 });
 
 // 这会抛出异常
@@ -1194,41 +1194,41 @@ numericDataStore.count = 333;
 ```js
 // 定义一个接收自定义校验规则并返回一个 proxy 的校验器
 function createValidator(target, validators) {
-    return new Proxy(target, {
-        _validators: validators,
-        set(target, key, value, proxy) {
-            if (Object.prototype.hasOwnProperty.call(target, key)) {
-                const validator = this._validators[key];
-                if (validator(value)) {
-                    return Reflect.set(target, key, value, proxy);
-                }
-                else {
-                    throw new Error(`Cannot set ${key} to ${value}. Invalid.`);
-                }
-            }
-            else {
-                // 防止创建一个不存在的属性
-                throw new Error(`${key} is not a valid property`);
-            }
-        },
-    });
+  return new Proxy(target, {
+    _validators: validators,
+    set(target, key, value, proxy) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
+        const validator = this._validators[key];
+        if (validator(value)) {
+          return Reflect.set(target, key, value, proxy);
+        }
+        else {
+          throw new Error(`Cannot set ${key} to ${value}. Invalid.`);
+        }
+      }
+      else {
+        // 防止创建一个不存在的属性
+        throw new Error(`${key} is not a valid property`);
+      }
+    },
+  });
 }
 
 // 定义每个属性的校验规则
 const personValidators = {
-    name(val) {
-        return typeof val === 'string';
-    },
-    age(val) {
-        return typeof age === 'number' && age >= 0;
-    },
+  name(val) {
+    return typeof val === 'string';
+  },
+  age(val) {
+    return typeof age === 'number' && age >= 0;
+  },
 };
 class Person {
-    constructor(name, age) {
-        this.name = name || '';
-        this.age = age || 0;
-        return createValidator(this, personValidators);
-    }
+  constructor(name, age) {
+    this.name = name || '';
+    this.age = age || 0;
+    return createValidator(this, personValidators);
+  }
 }
 
 const bill = new Person();
@@ -1245,34 +1245,34 @@ bill.age = 'Bill'; // > Uncaught Error: Cannot set age to Bill. Invalid.
 
 ```js
 let obj = {
-    pickyMethodOne(obj, str, num) {
+  pickyMethodOne(obj, str, num) {
     /* ... */
-    },
+  },
 };
 
 const argTypes = {
-    pickyMethodOne: ['object', 'string', 'number'],
+  pickyMethodOne: ['object', 'string', 'number'],
 };
 
 obj = new Proxy(obj, {
-    get(target, key, proxy) {
-        const value = target[key];
-        return function (...args) {
-            console.log('ddd', args);
-            const checkArgs = argChecker(key, args, argTypes[key]);
-            return Reflect.apply(value, target, args);
-        };
-    },
+  get(target, key, proxy) {
+    const value = target[key];
+    return function (...args) {
+      console.log('ddd', args);
+      const checkArgs = argChecker(key, args, argTypes[key]);
+      return Reflect.apply(value, target, args);
+    };
+  },
 });
 
 function argChecker(name, args, checkers) {
-    for (let idx = 0; idx < args.length; idx++) {
-        const arg = args[idx];
-        const type = checkers[idx];
-        if (!arg || typeof arg !== type) {
-            console.warn(`You are incorrectly implementing the signature of ${name}. Check param ${idx + 1}`);
-        }
+  for (let idx = 0; idx < args.length; idx++) {
+    const arg = args[idx];
+    const type = checkers[idx];
+    if (!arg || typeof arg !== type) {
+      console.warn(`You are incorrectly implementing the signature of ${name}. Check param ${idx + 1}`);
     }
+  }
 }
 
 // 不会输出警告信息
@@ -1292,28 +1292,28 @@ obj.pickyMethodOne({}, 'a little string', 123);
 ```js
 // 表单对象
 const userForm = {
-    account: '',
-    password: '',
+  account: '',
+  password: '',
 };
 
 // 验证方法
 const validators = {
-    account(value) {
+  account(value) {
     // account 只允许为中文
-        const re = /^[\u4E00-\u9FA5]+$/;
-        return {
-            valid: re.test(value),
-            error: '"account" is only allowed to be Chinese',
-        };
-    },
+    const re = /^[\u4E00-\u9FA5]+$/;
+    return {
+      valid: re.test(value),
+      error: '"account" is only allowed to be Chinese',
+    };
+  },
 
-    password(value) {
+  password(value) {
     // password 的长度应该大于6个字符
-        return {
-            valid: value.length >= 6,
-            error: '"password "should more than 6 character',
-        };
-    },
+    return {
+      valid: value.length >= 6,
+      error: '"password "should more than 6 character',
+    };
+  },
 };
 ```
 
@@ -1321,23 +1321,23 @@ const validators = {
 
 ```js
 function getValidateProxy(target, validators) {
-    return new Proxy(target, {
-        _validators: validators,
-        set(target, prop, value) {
-            if (value === '') {
-                console.error(`"${prop}" is not allowed to be empty`);
-                return (target[prop] = false);
-            }
-            const validResult = this._validators[prop](value);
-            if (validResult.valid) {
-                return Reflect.set(target, prop, value);
-            }
-            else {
-                console.error(`${validResult.error}`);
-                return (target[prop] = false);
-            }
-        },
-    });
+  return new Proxy(target, {
+    _validators: validators,
+    set(target, prop, value) {
+      if (value === '') {
+        console.error(`"${prop}" is not allowed to be empty`);
+        return (target[prop] = false);
+      }
+      const validResult = this._validators[prop](value);
+      if (validResult.valid) {
+        return Reflect.set(target, prop, value);
+      }
+      else {
+        console.error(`${validResult.error}`);
+        return (target[prop] = false);
+      }
+    },
+  });
 }
 
 const userFormProxy = getValidateProxy(userForm, validators);
@@ -1357,11 +1357,11 @@ userFormProxy.password = 'he'; // "password "should more than 6 character
 
 ```js
 const api = {
-    _apiKey: '123abc456def',
-    /* mock methods that use this._apiKey */
-    getUsers() {},
-    getUser(userId) {},
-    setUser(userId, config) {},
+  _apiKey: '123abc456def',
+  /* mock methods that use this._apiKey */
+  getUsers() {},
+  getUser(userId) {},
+  setUser(userId, config) {},
 };
 
 // logs '123abc456def';
@@ -1378,29 +1378,29 @@ api._apiKey = '987654321';
 
 ```js
 let api = {
-    _apiKey: '123abc456def',
-    /* mock methods that use this._apiKey */
-    getUsers() {},
-    getUser(userId) {},
-    setUser(userId, config) {},
+  _apiKey: '123abc456def',
+  /* mock methods that use this._apiKey */
+  getUsers() {},
+  getUser(userId) {},
+  setUser(userId, config) {},
 };
 
 // Add other restricted properties to this array
 const RESTRICTED = ['_apiKey'];
 
 api = new Proxy(api, {
-    get(target, key, proxy) {
-        if (RESTRICTED.includes(key)) {
-            throw new Error(`get ${key} is restricted. Please see api documentation for further info.`);
-        }
-        return Reflect.get(target, key, proxy);
-    },
-    set(target, key, value, proxy) {
-        if (RESTRICTED.includes(key)) {
-            throw new Error(`set ${key} is restricted. Please see api documentation for further info.`);
-        }
-        return Reflect.set(target, key, value, proxy);
-    },
+  get(target, key, proxy) {
+    if (RESTRICTED.includes(key)) {
+      throw new Error(`get ${key} is restricted. Please see api documentation for further info.`);
+    }
+    return Reflect.get(target, key, proxy);
+  },
+  set(target, key, value, proxy) {
+    if (RESTRICTED.includes(key)) {
+      throw new Error(`set ${key} is restricted. Please see api documentation for further info.`);
+    }
+    return Reflect.set(target, key, value, proxy);
+  },
 });
 
 // throws an error
@@ -1422,32 +1422,32 @@ api._apiKey = '987654321';
 
 ```js
 let api = {
-    _apiKey: '123abc456def',
-    getUsers() {
+  _apiKey: '123abc456def',
+  getUsers() {
     /* ... */
-    },
-    getUser(userId) {
+  },
+  getUser(userId) {
     /* ... */
-    },
-    setUser(userId, config) {
+  },
+  setUser(userId, config) {
     /* ... */
-    },
+  },
 };
 
 api = new Proxy(api, {
-    get(target, key, proxy) {
-        const value = target[key];
-        return function (...args) {
-            logMethodAsync(new Date(), key);
-            return Reflect.apply(value, target, args);
-        };
-    },
+  get(target, key, proxy) {
+    const value = target[key];
+    return function (...args) {
+      logMethodAsync(new Date(), key);
+      return Reflect.apply(value, target, args);
+    };
+  },
 });
 
 function logMethodAsync(timestamp, method) {
-    setTimeout(() => {
-        console.log(`${timestamp} - Logging ${method} request asynchronously.`);
-    }, 0);
+  setTimeout(() => {
+    console.log(`${timestamp} - Logging ${method} request asynchronously.`);
+  }, 0);
 }
 
 // executes apply trap in the background
@@ -1464,11 +1464,11 @@ api.getUsers();
 
 ```js
 let dataStore = {
-    noDelete: 1235,
-    oldMethod() {
+  noDelete: 1235,
+  oldMethod() {
     /* ... */
-    },
-    doNotChange: 'tried and true',
+  },
+  doNotChange: 'tried and true',
 };
 
 const NODELETE = ['noDelete'];
@@ -1476,30 +1476,30 @@ const DEPRECATED = ['oldMethod'];
 const NOCHANGE = ['doNotChange'];
 
 dataStore = new Proxy(dataStore, {
-    set(target, key, value, proxy) {
-        if (NOCHANGE.includes(key)) {
-            throw new Error(`Error! ${key} is immutable.`);
-        }
-        return Reflect.set(target, key, value, proxy);
-    },
-    deleteProperty(target, key) {
-        if (NODELETE.includes(key)) {
-            throw new Error(`Error! ${key} cannot be deleted.`);
-        }
-        return Reflect.deleteProperty(target, key);
-    },
-    get(target, key, proxy) {
-        if (DEPRECATED.includes(key)) {
-            console.warn(`Warning! ${key} is deprecated.`);
-        }
-        const val = target[key];
+  set(target, key, value, proxy) {
+    if (NOCHANGE.includes(key)) {
+      throw new Error(`Error! ${key} is immutable.`);
+    }
+    return Reflect.set(target, key, value, proxy);
+  },
+  deleteProperty(target, key) {
+    if (NODELETE.includes(key)) {
+      throw new Error(`Error! ${key} cannot be deleted.`);
+    }
+    return Reflect.deleteProperty(target, key);
+  },
+  get(target, key, proxy) {
+    if (DEPRECATED.includes(key)) {
+      console.warn(`Warning! ${key} is deprecated.`);
+    }
+    const val = target[key];
 
-        return typeof val === 'function'
-            ? function (...args) {
-                Reflect.apply(target[key], target, args);
-            }
-            : val;
-    },
+    return typeof val === 'function'
+      ? function (...args) {
+        Reflect.apply(target[key], target, args);
+      }
+      : val;
+  },
 });
 
 // these will throw errors or log warnings, respectively
@@ -1520,12 +1520,12 @@ dataStore.oldMethod();
 
 ```js
 function getFib(number) {
-    if (number <= 2) {
-        return 1;
-    }
-    else {
-        return getFib(number - 1) + getFib(number - 2);
-    }
+  if (number <= 2) {
+    return 1;
+  }
+  else {
+    return getFib(number - 1) + getFib(number - 2);
+  }
 }
 ```
 
@@ -1533,19 +1533,19 @@ function getFib(number) {
 
 ```js
 function getCacheProxy(fn, cache = new Map()) {
-    return new Proxy(fn, {
-        apply(target, context, args) {
-            const argsString = args.join(' ');
-            if (cache.has(argsString)) {
-                // 如果有缓存,直接返回缓存数据
-                console.log(`输出${args}的缓存结果: ${cache.get(argsString)}`);
-                return cache.get(argsString);
-            }
-            const result = fn(...args);
-            cache.set(argsString, result);
-            return result;
-        },
-    });
+  return new Proxy(fn, {
+    apply(target, context, args) {
+      const argsString = args.join(' ');
+      if (cache.has(argsString)) {
+        // 如果有缓存,直接返回缓存数据
+        console.log(`输出${args}的缓存结果: ${cache.get(argsString)}`);
+        return cache.get(argsString);
+      }
+      const result = fn(...args);
+      cache.set(argsString, result);
+      return result;
+    },
+  });
 }
 
 const getFibProxy = getCacheProxy(getFib);
@@ -1566,14 +1566,14 @@ getFibProxy(40); // 输出40的缓存结果: 102334155
 
 ```js
 const sensitiveData = {
-    username: 'John',
+  username: 'John',
 };
 const handler = {};
 
 const { proxy, revoke } = Proxy.revocable(sensitiveData, handler);
 
 function handleSuspectedHack() {
-    revoke();
+  revoke();
 }
 
 // logs 'John'
@@ -1635,15 +1635,15 @@ console.log(proxy.username);
 
 ```js
 const calculateBonus = function (performanceLevel, salary) {
-    if (performanceLevel === 'S') {
-        return salary * 4;
-    }
-    if (performanceLevel === 'A') {
-        return salary * 3;
-    }
-    if (performanceLevel === 'B') {
-        return salary * 2;
-    }
+  if (performanceLevel === 'S') {
+    return salary * 4;
+  }
+  if (performanceLevel === 'A') {
+    return salary * 3;
+  }
+  if (performanceLevel === 'B') {
+    return salary * 2;
+  }
 };
 
 console.log(calculateBonus('B', 20000)); // > 40000
@@ -1660,25 +1660,25 @@ console.log(calculateBonus('S', 6000)); // > 24000
 
 ```js
 const performanceS = function (salary) {
-    return salary * 4;
+  return salary * 4;
 };
 const performanceA = function (salary) {
-    return salary * 3;
+  return salary * 3;
 };
 const performanceB = function (salary) {
-    return salary * 2;
+  return salary * 2;
 };
 
 const calculateBonus = function (performanceLevel, salary) {
-    if (performanceLevel === 'S') {
-        return performanceS(salary);
-    }
-    if (performanceLevel === 'A') {
-        return performanceA(salary);
-    }
-    if (performanceLevel === 'B') {
-        return performanceB(salary);
-    }
+  if (performanceLevel === 'S') {
+    return performanceS(salary);
+  }
+  if (performanceLevel === 'A') {
+    return performanceA(salary);
+  }
+  if (performanceLevel === 'B') {
+    return performanceB(salary);
+  }
 };
 console.log(calculateBonus('A', 10000)); // > 30000
 ```
@@ -1693,18 +1693,18 @@ console.log(calculateBonus('A', 10000)); // > 30000
 
   ```js
   const strategies = {
-      S(salary) {
-          return salary * 4;
-      },
-      A(salary) {
-          return salary * 3;
-      },
-      B(salary) {
-          return salary * 2;
-      },
+    S(salary) {
+      return salary * 4;
+    },
+    A(salary) {
+      return salary * 3;
+    },
+    B(salary) {
+      return salary * 2;
+    },
   };
   const calculateBonus = function (level, salary) {
-      return strategies[level](salary);
+    return strategies[level](salary);
   };
 
   console.log(calculateBonus('S', 20000)); // 输出：80000
@@ -1716,36 +1716,36 @@ console.log(calculateBonus('A', 10000)); // > 30000
   ```js
   const PerformanceS = function () {};
   PerformanceS.prototype.calculate = function (salary) {
-      return salary * 4;
+    return salary * 4;
   };
   const PerformanceA = function () {};
   PerformanceA.prototype.calculate = function (salary) {
-      return salary * 3;
+    return salary * 3;
   };
   const PerformanceB = function () {};
   PerformanceB.prototype.calculate = function (salary) {
-      return salary * 2;
+    return salary * 2;
   };
 
   // 接下来定义奖金类 Bonus
   class Bonus {
-      constructor() {
-          this.salary = null; // 原始工资
-          this.strategy = null; // 绩效等级对应的策略对象
-      }
+    constructor() {
+      this.salary = null; // 原始工资
+      this.strategy = null; // 绩效等级对应的策略对象
+    }
 
-      setSalary(salary) {
-          this.salary = salary; // 设置员工的原始工资
-      }
+    setSalary(salary) {
+      this.salary = salary; // 设置员工的原始工资
+    }
 
-      setStrategy(strategy) {
-          this.strategy = strategy; // 设置员工绩效等级对应的策略对象
-      }
+    setStrategy(strategy) {
+      this.strategy = strategy; // 设置员工绩效等级对应的策略对象
+    }
 
-      getBonus() {
+    getBonus() {
       // 取得奖金数额
-          return this.strategy.calculate(this.salary); // 把计算奖金的操作委托给对应的策略对象
-      }
+      return this.strategy.calculate(this.salary); // 把计算奖金的操作委托给对应的策略对象
+    }
   }
 
   const bonus = new Bonus();
@@ -1770,62 +1770,62 @@ console.log(calculateBonus('A', 10000)); // > 30000
 
 ```js
 class Programmer {
-    constructor(options = {}) {
-        this.age = options.age;
-        this.username = options.username;
-        this.color = options.color;
-        this.area = options.area;
-    }
+  constructor(options = {}) {
+    this.age = options.age;
+    this.username = options.username;
+    this.color = options.color;
+    this.area = options.area;
+  }
 
-    toString() {
-        console.log(JSON.stringify(this));
-    }
+  toString() {
+    console.log(JSON.stringify(this));
+  }
 }
 
 class Builder {
-    build() {
-        if (this.age && this.username && this.color && this.area) {
-            return new Programmer(this);
-        }
-        else {
-            throw new Error('缺少信息');
-        }
+  build() {
+    if (this.age && this.username && this.color && this.area) {
+      return new Programmer(this);
     }
+    else {
+      throw new Error('缺少信息');
+    }
+  }
 
-    setAge(age) {
-        if (age > 18 && age < 36) {
-            this.age = age;
-            return this;
-        }
-        else {
-            throw new Error('年龄不合适');
-        }
+  setAge(age) {
+    if (age > 18 && age < 36) {
+      this.age = age;
+      return this;
     }
+    else {
+      throw new Error('年龄不合适');
+    }
+  }
 
-    setUsername(username) {
-        if (username !== '小明') {
-            this.username = username;
-            return this;
-        }
-        else {
-            throw new Error('小明不合适');
-        }
+  setUsername(username) {
+    if (username !== '小明') {
+      this.username = username;
+      return this;
     }
+    else {
+      throw new Error('小明不合适');
+    }
+  }
 
-    setColor(color) {
-        if (color !== 'yellow') {
-            this.color = color;
-            return this;
-        }
-        else {
-            throw new Error('yellow不合适');
-        }
+  setColor(color) {
+    if (color !== 'yellow') {
+      this.color = color;
+      return this;
     }
+    else {
+      throw new Error('yellow不合适');
+    }
+  }
 
-    setArea(area) {
-        this.area = area;
-        return this;
-    }
+  setArea(area) {
+    this.area = area;
+    return this;
+  }
 }
 
 const p = new Builder().setAge(10);

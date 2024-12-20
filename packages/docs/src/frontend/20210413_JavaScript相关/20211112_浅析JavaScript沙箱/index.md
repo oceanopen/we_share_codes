@@ -33,7 +33,7 @@ window.location.href = 'www.diaoyu.com';
 
 // eslint-disable-next-line no-extend-native
 Object.prototype.toString = () => {
-    console.log('You are a fool :)');
+  console.log('You are a fool :)');
 };
 
 document.querySelectorAll('div').forEach(node => node.classList.add('hhh'));
@@ -54,16 +54,16 @@ sendRequest(document.cookie);
 
 // 执行上下文对象
 const ctx = {
-    func: (variable) => {
-        console.log(variable);
-    },
-    foo: 'foo',
+  func: (variable) => {
+    console.log(variable);
+  },
+  foo: 'foo',
 };
 
 // 最简陋的沙箱
 function poorestSandbox(code, ctx) {
-    // eslint-disable-next-line no-eval
-    eval(code); // 为执行程序构造了一个函数作用域
+  // eslint-disable-next-line no-eval
+  eval(code); // 为执行程序构造了一个函数作用域
 }
 
 // 待执行程序
@@ -91,11 +91,11 @@ poorestSandbox(code, ctx); // bar
 
 // 非常简陋的沙箱
 function veryPoorSandbox(_code, _ctx) {
-    // Parsing error: 'with' in strict mode eslint
-    // with (_ctx) {
-    //    // Add with
-    //    eval(_code)
-    // }
+  // Parsing error: 'with' in strict mode eslint
+  // with (_ctx) {
+  //    // Add with
+  //    eval(_code)
+  // }
 }
 
 // 省略...
@@ -120,8 +120,8 @@ function veryPoorSandbox(_code, _ctx) {
 
 // 构造一个 with 来包裹需要执行的代码，返回 with 代码块的一个函数实例
 function withedYourCode(code) {
-    code = `with(globalObj) {${code}}`;
-    return new Function('globalObj', code);
+  code = `with(globalObj) {${code}}`;
+  return new Function('globalObj', code);
 }
 
 // 可访问全局作用域的白名单列表
@@ -136,34 +136,34 @@ const code = `
 
 // 执行上下文对象
 const ctx = {
-    func: (variable) => {
-        console.log(variable);
-    },
-    foo: 'foo',
+  func: (variable) => {
+    console.log(variable);
+  },
+  foo: 'foo',
 };
 
 // 执行上下文对象的代理对象
 const ctxProxy = new Proxy(ctx, {
-    has: (target, prop) => {
+  has: (target, prop) => {
     // has 可以拦截 with 代码块中任意属性的访问
-        if (access_white_list.includes(prop)) {
-            // 在可访问的白名单内，可沿着作用域链继续向上查找
-            return false;
-        }
+    if (access_white_list.includes(prop)) {
+      // 在可访问的白名单内，可沿着作用域链继续向上查找
+      return false;
+    }
 
-        if (!Object.prototype.hasOwnProperty.call(target, prop)) {
-            throw new Error(`Invalid expression - ${prop}! You can not do that!`);
-        }
+    if (!Object.prototype.hasOwnProperty.call(target, prop)) {
+      throw new Error(`Invalid expression - ${prop}! You can not do that!`);
+    }
 
-        return true;
-    },
+    return true;
+  },
 });
 
 // 没那么简陋的沙箱
 function littlePoorSandbox(code, ctx) {
-    // 将 this 指向手动构造的全局代理对象
-    // 将 with 作用域 指向手动构造的全局代理对象
-    withedYourCode(code).call(ctx, ctx);
+  // 将 this 指向手动构造的全局代理对象
+  // 将 with 作用域 指向手动构造的全局代理对象
+  withedYourCode(code).call(ctx, ctx);
 }
 
 littlePoorSandbox(code, ctxProxy);
@@ -198,35 +198,35 @@ littlePoorSandbox(code, ctxProxy);
 
 // 沙箱全局代理对象类
 class SandboxGlobalProxy {
-    constructor(sharedState) {
+  constructor(sharedState) {
     // 创建一个 iframe 对象，取出其中的原生浏览器全局对象作为沙箱的全局对象
-        const iframe = document.createElement('iframe', { url: 'about:blank' });
-        iframe.style.display = 'none'; // 不可见
-        document.body.appendChild(iframe);
-        const sandboxGlobal = iframe.contentWindow; // 沙箱运行时的全局对象
+    const iframe = document.createElement('iframe', { url: 'about:blank' });
+    iframe.style.display = 'none'; // 不可见
+    document.body.appendChild(iframe);
+    const sandboxGlobal = iframe.contentWindow; // 沙箱运行时的全局对象
 
-        return new Proxy(sandboxGlobal, {
-            has: (target, prop) => {
-                // has 可以拦截 with 代码块中任意属性的访问
-                if (sharedState.includes(prop)) {
-                    // 如果属性存在于共享的全局状态中，则让其沿着作用域链在外层查找
-                    return false;
-                }
+    return new Proxy(sandboxGlobal, {
+      has: (target, prop) => {
+        // has 可以拦截 with 代码块中任意属性的访问
+        if (sharedState.includes(prop)) {
+          // 如果属性存在于共享的全局状态中，则让其沿着作用域链在外层查找
+          return false;
+        }
 
-                if (!Object.prototype.hasOwnProperty.call(target, prop)) {
-                    throw new Error(`Invalid expression - ${prop}! You can not do that!`);
-                }
+        if (!Object.prototype.hasOwnProperty.call(target, prop)) {
+          throw new Error(`Invalid expression - ${prop}! You can not do that!`);
+        }
 
-                return true;
-            },
-        });
-    }
+        return true;
+      },
+    });
+  }
 }
 
 function maybeAvailableSandbox(code, ctx) {
-    // 将 this 指向手动构造的全局代理对象
-    // 将 with 作用域 指向手动构造的全局代理对象
-    withedYourCode(code).call(ctx, ctx);
+  // 将 this 指向手动构造的全局代理对象
+  // 将 with 作用域 指向手动构造的全局代理对象
+  withedYourCode(code).call(ctx, ctx);
 }
 
 const code_1 = `
@@ -296,7 +296,7 @@ Object.prototype.toString(); // [object Object] 并没有打印 Traped
 
 ```js
 function almostPerfectSandbox(code, ctx, illegalOperations) {
-    return myInterpreter(code, ctx, illegalOperations); // 自定义解释器
+  return myInterpreter(code, ctx, illegalOperations); // 自定义解释器
 }
 ```
 

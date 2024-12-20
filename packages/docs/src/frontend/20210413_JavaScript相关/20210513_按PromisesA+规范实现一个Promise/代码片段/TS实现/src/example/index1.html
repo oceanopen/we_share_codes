@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,26 +9,26 @@
 
   <body>
     <script type="module">
-      import { _Promise } from '../../dist/example/index1.js'
+      import { _Promise } from "../../dist/example/index1.js";
 
       const p1 = new _Promise((resolve, reject) => {
-        resolve(1)
-      })
+        resolve(1);
+      });
 
       p1.then((res) => {
-        console.log(res, 'then ok 1')
-      })
+        console.log(res, "then ok 1");
+      });
 
       const p2 = new _Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(2)
-        }, 1000)
-      })
+          resolve(2);
+        }, 1000);
+      });
 
       p2.then((res) => {
         // 不支持异步
-        console.log(res, 'then ok 2')
-      })
+        console.log(res, "then ok 2");
+      });
     </script>
   </body>
 </html>

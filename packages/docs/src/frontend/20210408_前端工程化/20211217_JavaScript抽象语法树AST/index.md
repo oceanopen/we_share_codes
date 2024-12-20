@@ -18,38 +18,38 @@ const tree = 'this is tree';
 
 ```json
 {
-    "type": "Program",
-    "start": 0,
-    "end": 25,
-    "body": [
+  "type": "Program",
+  "start": 0,
+  "end": 25,
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "start": 0,
+      "end": 25,
+      "declarations": [
         {
-            "type": "VariableDeclaration",
-            "start": 0,
+          "type": "VariableDeclarator",
+          "start": 4,
+          "end": 25,
+          "id": {
+            "type": "Identifier",
+            "start": 4,
+            "end": 8,
+            "name": "tree"
+          },
+          "init": {
+            "type": "Literal",
+            "start": 11,
             "end": 25,
-            "declarations": [
-                {
-                    "type": "VariableDeclarator",
-                    "start": 4,
-                    "end": 25,
-                    "id": {
-                        "type": "Identifier",
-                        "start": 4,
-                        "end": 8,
-                        "name": "tree"
-                    },
-                    "init": {
-                        "type": "Literal",
-                        "start": 11,
-                        "end": 25,
-                        "value": "this is tree",
-                        "raw": "'this is tree'"
-                    }
-                }
-            ],
-            "kind": "var"
+            "value": "this is tree",
+            "raw": "'this is tree'"
+          }
         }
-    ],
-    "sourceType": "module"
+      ],
+      "kind": "var"
+    }
+  ],
+  "sourceType": "module"
 }
 ```
 
@@ -81,25 +81,25 @@ const tree = 'this is tree';
 
 ```json
 {
-    "type": "Program",
-    "start": 0,
-    "end": 25,
-    "body": [
+  "type": "Program",
+  "start": 0,
+  "end": 25,
+  "body": [
     // ...
-    ],
-    "sourceType": "module"
+  ],
+  "sourceType": "module"
 }
 ```
 
 ```json
 {
-    "type": "VariableDeclaration",
-    "start": 0,
-    "end": 25,
-    "declarations": [
+  "type": "VariableDeclaration",
+  "start": 0,
+  "end": 25,
+  "declarations": [
     // ...
-    ],
-    "kind": "var"
+  ],
+  "kind": "var"
 }
 ```
 
@@ -162,37 +162,37 @@ import foo from 'mod';
 
 ```json
 {
-    "type": "Program",
-    "start": 0,
-    "end": 22,
-    "body": [
+  "type": "Program",
+  "start": 0,
+  "end": 22,
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 22,
+      "specifiers": [
         {
-            "type": "ImportDeclaration",
-            "start": 0,
-            "end": 22,
-            "specifiers": [
-                {
-                    "type": "ImportDefaultSpecifier",
-                    "start": 7,
-                    "end": 10,
-                    "local": {
-                        "type": "Identifier",
-                        "start": 7,
-                        "end": 10,
-                        "name": "foo"
-                    }
-                }
-            ],
-            "source": {
-                "type": "Literal",
-                "start": 16,
-                "end": 21,
-                "value": "mod",
-                "raw": "'mod'"
-            }
+          "type": "ImportDefaultSpecifier",
+          "start": 7,
+          "end": 10,
+          "local": {
+            "type": "Identifier",
+            "start": 7,
+            "end": 10,
+            "name": "foo"
+          }
         }
-    ],
-    "sourceType": "module"
+      ],
+      "source": {
+        "type": "Literal",
+        "start": 16,
+        "end": 21,
+        "value": "mod",
+        "raw": "'mod'"
+      }
+    }
+  ],
+  "sourceType": "module"
 }
 ```
 
@@ -200,18 +200,18 @@ import foo from 'mod';
 
 ```js
 const visitor = {
-    Program: {
-        enter(path, state) {
-            console.log('start processing this module...');
-        },
-        exit(path, state) {
-            console.log('end processing this module!');
-        },
+  Program: {
+    enter(path, state) {
+      console.log('start processing this module...');
     },
-    ImportDeclaration(path, state) {
-        console.log('processing ImportDeclaration...');
+    exit(path, state) {
+      console.log('end processing this module!');
+    },
+  },
+  ImportDeclaration(path, state) {
+    console.log('processing ImportDeclaration...');
     // do something
-    },
+  },
 };
 ```
 
@@ -220,16 +220,16 @@ const visitor = {
 
 ```js
 const visitor = {
-    ImportDeclaration: {
-        enter(path, state) {
-            console.log('start processing ImportDeclaration...');
-            // do something
-        },
-        exit(path, state) {
-            console.log('end processing ImportDeclaration!');
-            // do something
-        },
+  ImportDeclaration: {
+    enter(path, state) {
+      console.log('start processing ImportDeclaration...');
+      // do something
     },
+    exit(path, state) {
+      console.log('end processing ImportDeclaration!');
+      // do something
+    },
+  },
 };
 ```
 
@@ -293,15 +293,15 @@ import foo from 'mod'
 
 // 1. 源代码解析成 ast
 const ast = parser.parse(code, {
-    allowImportExportEverywhere: true,
+  allowImportExportEverywhere: true,
 });
 
 // 2. 转换
 const visitor = {
-    ImportDeclaration(path, state) {
-        console.log(path.node);
+  ImportDeclaration(path, state) {
+    console.log(path.node);
     // do something
-    },
+  },
 };
 traverse.default(ast, visitor);
 ```
@@ -358,12 +358,12 @@ import { foo as foo2 } from 'mod'
 
 // 2. 转换
 const visitor = {
-    ImportDeclaration(path, state) {
-        console.log('node:', path.node);
-        console.log('imported:', path.node.specifiers[0].imported);
-        console.log('local:', path.node.specifiers[0].local);
+  ImportDeclaration(path, state) {
+    console.log('node:', path.node);
+    console.log('imported:', path.node.specifiers[0].imported);
+    console.log('local:', path.node.specifiers[0].local);
     // do something
-    },
+  },
 };
 ```
 
@@ -406,9 +406,9 @@ local: Node {
 
 ```js
 function fn() {
-    console.log('debugger');
-    // eslint-disable-next-line no-debugger
-    debugger;
+  console.log('debugger');
+  // eslint-disable-next-line no-debugger
+  debugger;
 }
 ```
 
@@ -422,78 +422,78 @@ function fn() {
 
 ```json
 {
-    "type": "Program",
-    "start": 0,
-    "end": 54,
-    "body": [
-        {
-            "type": "FunctionDeclaration",
-            "start": 0,
-            "end": 54,
-            "id": {
-                "type": "Identifier",
-                "start": 9,
-                "end": 11,
-                "name": "fn"
-            },
-            "expression": false,
-            "generator": false,
-            "async": false,
-            "params": [],
-            "body": {
-                "type": "BlockStatement",
-                "start": 14,
-                "end": 54,
-                "body": [
-                    {
-                        "type": "ExpressionStatement",
-                        "start": 18,
-                        "end": 41,
-                        "expression": {
-                            "type": "CallExpression",
-                            "start": 18,
-                            "end": 41,
-                            "callee": {
-                                "type": "MemberExpression",
-                                "start": 18,
-                                "end": 29,
-                                "object": {
-                                    "type": "Identifier",
-                                    "start": 18,
-                                    "end": 25,
-                                    "name": "console"
-                                },
-                                "property": {
-                                    "type": "Identifier",
-                                    "start": 26,
-                                    "end": 29,
-                                    "name": "log"
-                                },
-                                "computed": false,
-                                "optional": false
-                            },
-                            "arguments": [
-                                {
-                                    "type": "Literal",
-                                    "start": 30,
-                                    "end": 40,
-                                    "value": "debugger",
-                                    "raw": "'debugger'"
-                                }
-                            ],
-                            "optional": false
-                        }
-                    },
-                    {
-                        "type": "DebuggerStatement",
-                        "start": 44,
-                        "end": 52
-                    }
-                ]
+  "type": "Program",
+  "start": 0,
+  "end": 54,
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "start": 0,
+      "end": 54,
+      "id": {
+        "type": "Identifier",
+        "start": 9,
+        "end": 11,
+        "name": "fn"
+      },
+      "expression": false,
+      "generator": false,
+      "async": false,
+      "params": [],
+      "body": {
+        "type": "BlockStatement",
+        "start": 14,
+        "end": 54,
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "start": 18,
+            "end": 41,
+            "expression": {
+              "type": "CallExpression",
+              "start": 18,
+              "end": 41,
+              "callee": {
+                "type": "MemberExpression",
+                "start": 18,
+                "end": 29,
+                "object": {
+                  "type": "Identifier",
+                  "start": 18,
+                  "end": 25,
+                  "name": "console"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "start": 26,
+                  "end": 29,
+                  "name": "log"
+                },
+                "computed": false,
+                "optional": false
+              },
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "start": 30,
+                  "end": 40,
+                  "value": "debugger",
+                  "raw": "'debugger'"
+                }
+              ],
+              "optional": false
             }
-        }
-    ],
-    "sourceType": "module"
+          },
+          {
+            "type": "DebuggerStatement",
+            "start": 44,
+            "end": 52
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
 }
 ```
 
@@ -501,9 +501,9 @@ function fn() {
 
 ```json
 {
-    "type": "DebuggerStatement",
-    "start": 44,
-    "end": 52
+  "type": "DebuggerStatement",
+  "start": 44,
+  "end": 52
 }
 ```
 
@@ -534,11 +534,11 @@ const ast = parser.parse(code);
 
 // 2. 转换
 const visitor = {
-    // traverse 会遍历树节点，只要节点的 type 在 visitor 对象中出现，便会调用该方法
-    DebuggerStatement(path) {
+  // traverse 会遍历树节点，只要节点的 type 在 visitor 对象中出现，便会调用该方法
+  DebuggerStatement(path) {
     // 删除该抽象语法树节点
-        path.remove();
-    },
+    path.remove();
+  },
 };
 traverse.default(ast, visitor);
 
@@ -568,14 +568,14 @@ node debugger/index.js
 
 ```js
 function funA() {
-    console.log(1);
+  console.log(1);
 }
 ```
 
 ```js
 // 转换成
 function funA() {
-    console.log('from function funA:', 1);
+  console.log('from function funA:', 1);
 }
 ```
 
@@ -583,80 +583,80 @@ function funA() {
 
 ```json
 {
-    "type": "Program",
-    "start": 0,
-    "end": 59,
-    "body": [
-        {
-            "type": "FunctionDeclaration",
-            "start": 0,
-            "end": 59,
-            "id": {
-                "type": "Identifier",
-                "start": 9,
-                "end": 13,
-                "name": "funA"
-            },
-            "expression": false,
-            "generator": false,
-            "async": false,
-            "params": [],
-            "body": {
-                "type": "BlockStatement",
-                "start": 16,
-                "end": 59,
-                "body": [
-                    {
-                        "type": "ExpressionStatement",
-                        "start": 20,
-                        "end": 57,
-                        "expression": {
-                            "type": "CallExpression",
-                            "start": 20,
-                            "end": 57,
-                            "callee": {
-                                "type": "MemberExpression",
-                                "start": 20,
-                                "end": 31,
-                                "object": {
-                                    "type": "Identifier",
-                                    "start": 20,
-                                    "end": 27,
-                                    "name": "console"
-                                },
-                                "property": {
-                                    "type": "Identifier",
-                                    "start": 28,
-                                    "end": 31,
-                                    "name": "log"
-                                },
-                                "computed": false,
-                                "optional": false
-                            },
-                            "arguments": [
-                                {
-                                    "type": "Literal",
-                                    "start": 32,
-                                    "end": 53,
-                                    "value": "from function funA:",
-                                    "raw": "'from function funA:'"
-                                },
-                                {
-                                    "type": "Literal",
-                                    "start": 55,
-                                    "end": 56,
-                                    "value": 1,
-                                    "raw": "1"
-                                }
-                            ],
-                            "optional": false
-                        }
-                    }
-                ]
+  "type": "Program",
+  "start": 0,
+  "end": 59,
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "start": 0,
+      "end": 59,
+      "id": {
+        "type": "Identifier",
+        "start": 9,
+        "end": 13,
+        "name": "funA"
+      },
+      "expression": false,
+      "generator": false,
+      "async": false,
+      "params": [],
+      "body": {
+        "type": "BlockStatement",
+        "start": 16,
+        "end": 59,
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "start": 20,
+            "end": 57,
+            "expression": {
+              "type": "CallExpression",
+              "start": 20,
+              "end": 57,
+              "callee": {
+                "type": "MemberExpression",
+                "start": 20,
+                "end": 31,
+                "object": {
+                  "type": "Identifier",
+                  "start": 20,
+                  "end": 27,
+                  "name": "console"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "start": 28,
+                  "end": 31,
+                  "name": "log"
+                },
+                "computed": false,
+                "optional": false
+              },
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "start": 32,
+                  "end": 53,
+                  "value": "from function funA:",
+                  "raw": "'from function funA:'"
+                },
+                {
+                  "type": "Literal",
+                  "start": 55,
+                  "end": 56,
+                  "value": 1,
+                  "raw": "1"
+                }
+              ],
+              "optional": false
             }
-        }
-    ],
-    "sourceType": "module"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
 }
 ```
 
@@ -664,24 +664,24 @@ function funA() {
 
 ```json
 {
-    // ...
-    "arguments": [
-        {
-            "type": "Literal",
-            "start": 32,
-            "end": 53,
-            "value": "from function funA:",
-            "raw": "'from function funA:'"
-        },
-        {
-            "type": "Literal",
-            "start": 55,
-            "end": 56,
-            "value": 1,
-            "raw": "1"
-        }
-    ]
-    // ...
+  // ...
+  "arguments": [
+    {
+      "type": "Literal",
+      "start": 32,
+      "end": 53,
+      "value": "from function funA:",
+      "raw": "'from function funA:'"
+    },
+    {
+      "type": "Literal",
+      "start": 55,
+      "end": 56,
+      "value": 1,
+      "raw": "1"
+    }
+  ]
+  // ...
 }
 ```
 
@@ -718,10 +718,10 @@ const ast = parser.parse(code);
 
 // 2. 转换
 const visitor = {
-    // 当遍历到 CallExpression 时候触发
-    CallExpression(path) {
-        const callee = path.node.callee;
-        /**
+  // 当遍历到 CallExpression 时候触发
+  CallExpression(path) {
+    const callee = path.node.callee;
+    /**
          "callee": {
             "type": "MemberExpression",
             "start": 20,
@@ -741,12 +741,12 @@ const visitor = {
             "computed": false,
             "optional": false
          }
-         */
-        // 判断当前执行的函数是否是 MemberExpression
-        if (types.isMemberExpression(callee)) {
-            const { object, property } = callee;
-            if (types.isIdentifier(object, { name: 'console' }) && types.isIdentifier(property, { name: 'log' })) {
-                /**
+     */
+    // 判断当前执行的函数是否是 MemberExpression
+    if (types.isMemberExpression(callee)) {
+      const { object, property } = callee;
+      if (types.isIdentifier(object, { name: 'console' }) && types.isIdentifier(property, { name: 'log' })) {
+        /**
                  "type": "FunctionDeclaration",
                  "id": {
                     "type": "Identifier",
@@ -754,11 +754,11 @@ const visitor = {
                     "end": 13,
                     "name": "funA"
                  }
-                 */
-                // 查找最接近的父函数或程序
-                const parent = path.getFunctionParent();
-                const parentFunName = parent.node.id.name;
-                /**
+         */
+        // 查找最接近的父函数或程序
+        const parent = path.getFunctionParent();
+        const parentFunName = parent.node.id.name;
+        /**
                  "arguments": [
                     {
                     "type": "Literal",
@@ -775,11 +775,11 @@ const visitor = {
                     "raw": "1"
                     }
                  ],
-                 */
-                path.node.arguments.unshift(types.stringLiteral(`from function ${parentFunName}`));
-            }
-        }
-    },
+         */
+        path.node.arguments.unshift(types.stringLiteral(`from function ${parentFunName}`));
+      }
+    }
+  },
 };
 traverse.default(ast, visitor);
 
@@ -812,60 +812,60 @@ const assert = require('node:assert');
 const types = require('@babel/types');
 
 function camel2Underline(_str) {
-    const str = _str[0].toLowerCase() + _str.substr(1);
-    return str.replace(/([A-Z])/g, $1 => `_${$1.toLowerCase()}`);
+  const str = _str[0].toLowerCase() + _str.substr(1);
+  return str.replace(/([A-Z])/g, $1 => `_${$1.toLowerCase()}`);
 }
 
 function camel2Dash(_str) {
-    const str = _str[0].toLowerCase() + _str.substr(1);
-    return str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+  const str = _str[0].toLowerCase() + _str.substr(1);
+  return str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }
 
 module.exports = function core() {
-    return () => ({
-        visitor: {
-            ImportDeclaration(path, { opts }) {
-                const specifiers = path.node.specifiers;
-                const source = path.node.source;
+  return () => ({
+    visitor: {
+      ImportDeclaration(path, { opts }) {
+        const specifiers = path.node.specifiers;
+        const source = path.node.source;
 
-                if (Array.isArray(opts)) {
-                    opts.forEach((opt) => {
-                        assert(opt.libraryName, 'libraryName should be provided');
-                    });
-                    if (!opts.find(opt => opt.libraryName === source.value)) {
-                        return;
-                    }
-                }
-                else {
-                    assert(opts.libraryName, 'libraryName should be provided');
-                    if (opts.libraryName !== source.value) {
-                        return;
-                    }
-                }
+        if (Array.isArray(opts)) {
+          opts.forEach((opt) => {
+            assert(opt.libraryName, 'libraryName should be provided');
+          });
+          if (!opts.find(opt => opt.libraryName === source.value)) {
+            return;
+          }
+        }
+        else {
+          assert(opts.libraryName, 'libraryName should be provided');
+          if (opts.libraryName !== source.value) {
+            return;
+          }
+        }
 
-                const opt = Array.isArray(opts) ? opts.find(opt => opt.libraryName === source.value) : opts;
-                opt.camel2UnderlineComponentName
+        const opt = Array.isArray(opts) ? opts.find(opt => opt.libraryName === source.value) : opts;
+        opt.camel2UnderlineComponentName
           = typeof opt.camel2UnderlineComponentName === 'undefined' ? false : opt.camel2UnderlineComponentName;
-                opt.camel2DashComponentName
+        opt.camel2DashComponentName
           = typeof opt.camel2DashComponentName === 'undefined' ? false : opt.camel2DashComponentName;
 
-                if (!types.isImportDefaultSpecifier(specifiers[0]) && !types.isImportNamespaceSpecifier(specifiers[0])) {
-                    const declarations = specifiers.map((specifier) => {
-                        const transformedSourceName = opt.camel2UnderlineComponentName
-                            ? camel2Underline(specifier.imported.name)
-                            : opt.camel2DashComponentName
-                                ? camel2Dash(specifier.imported.name)
-                                : specifier.imported.name;
-                        return types.importDeclaration(
-                            [types.importDefaultSpecifier(specifier.local)],
-                            types.stringLiteral(opt.customSourceFunc(transformedSourceName))
-                        );
-                    });
-                    path.replaceWithMultiple(declarations);
-                }
-            },
-        },
-    });
+        if (!types.isImportDefaultSpecifier(specifiers[0]) && !types.isImportNamespaceSpecifier(specifiers[0])) {
+          const declarations = specifiers.map((specifier) => {
+            const transformedSourceName = opt.camel2UnderlineComponentName
+              ? camel2Underline(specifier.imported.name)
+              : opt.camel2DashComponentName
+                ? camel2Dash(specifier.imported.name)
+                : specifier.imported.name;
+            return types.importDeclaration(
+              [types.importDefaultSpecifier(specifier.local)],
+              types.stringLiteral(opt.customSourceFunc(transformedSourceName))
+            );
+          });
+          path.replaceWithMultiple(declarations);
+        }
+      },
+    },
+  });
 };
 ```
 
@@ -886,16 +886,16 @@ const code = `
 `;
 
 const result = babel.transform(code, {
-    plugins: [
-        [
-            visitor,
-            {
-                libraryName: 'xxx-ui',
-                camel2DashComponentName: true,
-                customSourceFunc: componentName => `xxx-ui/src/components/ui-base/${componentName}/${componentName}`,
-            },
-        ],
+  plugins: [
+    [
+      visitor,
+      {
+        libraryName: 'xxx-ui',
+        camel2DashComponentName: true,
+        customSourceFunc: componentName => `xxx-ui/src/components/ui-base/${componentName}/${componentName}`,
+      },
     ],
+  ],
 });
 
 console.log(result.code);

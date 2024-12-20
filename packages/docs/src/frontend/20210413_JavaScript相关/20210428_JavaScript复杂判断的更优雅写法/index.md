@@ -16,24 +16,24 @@
  * @param {number} status 活动状态：1-开团进行中；2-开团失败；3-商品售罄；4-开团成功；5-系统取消；
  */
 function onButtonClick(status) {
-    if (status === 1) {
-        console.log('processing');
-    }
-    else if (status === 2) {
-        console.log('fail');
-    }
-    else if (status === 3) {
-        console.log('fail');
-    }
-    else if (status === 4) {
-        console.log('success');
-    }
-    else if (status === 5) {
-        console.log('cancel');
-    }
-    else {
-        console.log('other');
-    }
+  if (status === 1) {
+    console.log('processing');
+  }
+  else if (status === 2) {
+    console.log('fail');
+  }
+  else if (status === 3) {
+    console.log('fail');
+  }
+  else if (status === 4) {
+    console.log('success');
+  }
+  else if (status === 5) {
+    console.log('cancel');
+  }
+  else {
+    console.log('other');
+  }
 }
 ```
 
@@ -46,24 +46,24 @@ function onButtonClick(status) {
  * @param {number} status 活动状态：1-开团进行中；2-开团失败；3-商品售罄；4-开团成功；5-系统取消；
  */
 function onButtonClick(status) {
-    switch (status) {
-        case 1:
-            console.log('processing');
-            break;
-        case 2:
-        case 3:
-            console.log('fail');
-            break;
-        case 4:
-            console.log('success');
-            break;
-        case 5:
-            console.log('cancel');
-            break;
-        default:
-            console.log('other');
-            break;
-    }
+  switch (status) {
+    case 1:
+      console.log('processing');
+      break;
+    case 2:
+    case 3:
+      console.log('fail');
+      break;
+    case 4:
+      console.log('success');
+      break;
+    case 5:
+      console.log('cancel');
+      break;
+    default:
+      console.log('other');
+      break;
+  }
 }
 ```
 
@@ -74,21 +74,21 @@ function onButtonClick(status) {
 
 ```javascript
 const actions = {
-    1: ['processing'],
-    2: ['fail'],
-    3: ['fail'],
-    4: ['success'],
-    5: ['cancel'],
-    default: ['other'],
+  1: ['processing'],
+  2: ['fail'],
+  3: ['fail'],
+  4: ['success'],
+  5: ['cancel'],
+  default: ['other'],
 };
 /**
  * 按钮点击事件
  * @param {number} status 活动状态：1-开团进行中；2-开团失败；3-商品售罄；4-开团成功；5-系统取消；
  */
 function onButtonClick(status) {
-    const action = actions[status] || actions.default;
+  const action = actions[status] || actions.default;
 
-    console.log(action[0]);
+  console.log(action[0]);
 }
 ```
 
@@ -99,21 +99,21 @@ function onButtonClick(status) {
 
 ```javascript
 const actions = new Map([
-    [1, ['processing']],
-    [2, ['fail']],
-    [3, ['fail']],
-    [4, ['success']],
-    [5, ['cancel']],
-    ['default', ['other']],
+  [1, ['processing']],
+  [2, ['fail']],
+  [3, ['fail']],
+  [4, ['success']],
+  [5, ['cancel']],
+  ['default', ['other']],
 ]);
 /**
  * 按钮点击事件
  * @param {number} status 活动状态：1-开团进行中；2-开团失败；3-商品售罄；4-开团成功；5-系统取消；
  */
 function onButtonClick(status) {
-    const action = actions.get(status) || actions.get('default');
+  const action = actions.get(status) || actions.get('default');
 
-    console.log(action[0]);
+  console.log(action[0]);
 }
 ```
 
@@ -142,49 +142,49 @@ function onButtonClick(status) {
  * @param {string} identity 身份标识：guest-客态；master-主态；
  */
 function onButtonClick(status, identity) {
-    if (identity === 'guest') {
-        if (status === 1) {
-            // do sth
-        }
-        else if (status === 2) {
-            // do sth
-        }
-        else if (status === 3) {
-            // do sth
-        }
-        else if (status === 4) {
-            // do sth
-        }
-        else if (status === 5) {
-            // do sth
-        }
-        else {
-            // default
-        }
+  if (identity === 'guest') {
+    if (status === 1) {
+      // do sth
     }
-    else if (identity === 'master') {
-        if (status === 1) {
-            // do sth
-        }
-        else if (status === 2) {
-            // do sth
-        }
-        else if (status === 3) {
-            // do sth
-        }
-        else if (status === 4) {
-            // do sth
-        }
-        else if (status === 5) {
-            // do sth
-        }
-        else {
-            // default
-        }
+    else if (status === 2) {
+      // do sth
+    }
+    else if (status === 3) {
+      // do sth
+    }
+    else if (status === 4) {
+      // do sth
+    }
+    else if (status === 5) {
+      // do sth
     }
     else {
-    // default
+      // default
     }
+  }
+  else if (identity === 'master') {
+    if (status === 1) {
+      // do sth
+    }
+    else if (status === 2) {
+      // do sth
+    }
+    else if (status === 3) {
+      // do sth
+    }
+    else if (status === 4) {
+      // do sth
+    }
+    else if (status === 5) {
+      // do sth
+    }
+    else {
+      // default
+    }
+  }
+  else {
+    // default
+  }
 }
 ```
 
@@ -194,26 +194,26 @@ function onButtonClick(status, identity) {
 
 ```javascript
 const actions = new Map([
-    [
-        'guest_1',
-        () => {
-            // do sth
-        },
-    ],
-    // ...
-    [
-        'master_1',
-        () => {
-            // do sth
-        },
-    ],
-    // ...
-    [
-        'default',
-        () => {
-            // do sth
-        },
-    ],
+  [
+    'guest_1',
+    () => {
+      // do sth
+    },
+  ],
+  // ...
+  [
+    'master_1',
+    () => {
+      // do sth
+    },
+  ],
+  // ...
+  [
+    'default',
+    () => {
+      // do sth
+    },
+  ],
 ]);
 
 /**
@@ -222,8 +222,8 @@ const actions = new Map([
  * @param {number} status 活动状态：1 开团进行中 2 开团失败 3 开团成功 4 商品售罄 5 有库存未开团
  */
 function onButtonClick(identity, status) {
-    const action = actions.get(`${identity}_${status}`) || actions.get('default');
-    action.call(this);
+  const action = actions.get(`${identity}_${status}`) || actions.get('default');
+  action.call(this);
 }
 ```
 
@@ -234,21 +234,21 @@ function onButtonClick(identity, status) {
 
 ```javascript
 const actions = {
-    guest_1: () => {
+  guest_1: () => {
     // do sth
-    },
-    guest_2: () => {
+  },
+  guest_2: () => {
     // do sth
-    },
-    // ...
-    default: () => {
+  },
+  // ...
+  default: () => {
     // do sth
-    },
+  },
 };
 
 function onButtonClick(identity, status) {
-    const action = actions[`${identity}_${status}`] || actions.default;
-    action.call(this);
+  const action = actions[`${identity}_${status}`] || actions.default;
+  action.call(this);
 }
 ```
 
@@ -256,24 +256,24 @@ function onButtonClick(identity, status) {
 
 ```javascript
 const actions = new Map([
-    [
-        { identity: 'guest', status: 1 },
-        () => {
-            // do sth
-        },
-    ],
-    [
-        { identity: 'guest', status: 2 },
-        () => {
-            // do sth
-        },
-    ],
-    // ...
+  [
+    { identity: 'guest', status: 1 },
+    () => {
+      // do sth
+    },
+  ],
+  [
+    { identity: 'guest', status: 2 },
+    () => {
+      // do sth
+    },
+  ],
+  // ...
 ]);
 
 function onButtonClick(identity, status) {
-    const action = [...actions].filter(([key, value]) => key.identity === identity && key.status === status);
-    action.forEach(([key, value]) => value.call(this));
+  const action = [...actions].filter(([key, value]) => key.identity === identity && key.status === status);
+  action.forEach(([key, value]) => value.call(this));
 }
 ```
 
@@ -285,26 +285,26 @@ function onButtonClick(identity, status) {
 
 ```javascript
 const actions = new Map([
-    [
-        { identity: 'guest', status: 1 },
-        () => {
-            /* functionA */
-        },
-    ],
-    [
-        { identity: 'guest', status: 2 },
-        () => {
-            /* functionA */
-        },
-    ],
-    // ...
-    [
-        { identity: 'guest', status: 5 },
-        () => {
-            /* functionB */
-        },
-    ],
-    // ...
+  [
+    { identity: 'guest', status: 1 },
+    () => {
+      /* functionA */
+    },
+  ],
+  [
+    { identity: 'guest', status: 2 },
+    () => {
+      /* functionA */
+    },
+  ],
+  // ...
+  [
+    { identity: 'guest', status: 5 },
+    () => {
+      /* functionB */
+    },
+  ],
+  // ...
 ]);
 ```
 
@@ -312,25 +312,25 @@ const actions = new Map([
 
 ```javascript
 function actions() {
-    const functionA = () => {
+  const functionA = () => {
     // do sth
-    };
-    const functionB = () => {
+  };
+  const functionB = () => {
     // do sth
-    };
-    return new Map([
-        [{ identity: 'guest', status: 1 }, functionA],
-        [{ identity: 'guest', status: 2 }, functionA],
-        [{ identity: 'guest', status: 3 }, functionA],
-        [{ identity: 'guest', status: 4 }, functionA],
-        [{ identity: 'guest', status: 5 }, functionB],
+  };
+  return new Map([
+    [{ identity: 'guest', status: 1 }, functionA],
+    [{ identity: 'guest', status: 2 }, functionA],
+    [{ identity: 'guest', status: 3 }, functionA],
+    [{ identity: 'guest', status: 4 }, functionA],
+    [{ identity: 'guest', status: 5 }, functionB],
     // ...
-    ]);
+  ]);
 }
 
 function onButtonClick(identity, status) {
-    const action = [...actions()].filter(([key, value]) => key.identity === identity && key.status === status);
-    action.forEach(([key, value]) => value.call(this));
+  const action = [...actions()].filter(([key, value]) => key.identity === identity && key.status === status);
+  action.forEach(([key, value]) => value.call(this));
 }
 ```
 
@@ -338,22 +338,22 @@ function onButtonClick(identity, status) {
 
 ```javascript
 function actions() {
-    const functionA = () => {
+  const functionA = () => {
     // do sth
-    };
-    const functionB = () => {
+  };
+  const functionB = () => {
     // do sth
-    };
-    return new Map([
-        [/^guest_[1-4]$/, functionA],
-        [/^guest_5$/, functionB],
+  };
+  return new Map([
+    [/^guest_[1-4]$/, functionA],
+    [/^guest_5$/, functionB],
     // ...
-    ]);
+  ]);
 }
 
 function onButtonClick(identity, status) {
-    const action = [...actions()].filter(([key, value]) => key.test(`${identity}_${status}`));
-    action.forEach(([key, value]) => value.call(this));
+  const action = [...actions()].filter(([key, value]) => key.test(`${identity}_${status}`));
+  action.forEach(([key, value]) => value.call(this));
 }
 ```
 
@@ -362,26 +362,26 @@ function onButtonClick(identity, status) {
 
 ```javascript
 function actions() {
-    const functionA = () => {
+  const functionA = () => {
     // do single sth
-    };
-    const functionB = () => {
+  };
+  const functionB = () => {
     // do single sth
-    };
-    const functionC = () => {
+  };
+  const functionC = () => {
     // do common sth
-    };
-    return new Map([
-        [/^guest_[1-4]$/, functionA],
-        [/^guest_5$/, functionB],
-        [/^guest_.*$/, functionC],
+  };
+  return new Map([
+    [/^guest_[1-4]$/, functionA],
+    [/^guest_5$/, functionB],
+    [/^guest_.*$/, functionC],
     // ...
-    ]);
+  ]);
 }
 
 function onButtonClick(identity, status) {
-    const action = [...actions()].filter(([key, value]) => key.test(`${identity}_${status}`));
-    action.forEach(([key, value]) => value.call(this));
+  const action = [...actions()].filter(([key, value]) => key.test(`${identity}_${status}`));
+  action.forEach(([key, value]) => value.call(this));
 }
 ```
 

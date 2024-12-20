@@ -69,15 +69,15 @@ set -u ./未定义变量使用.sh
 const { exec } = require('node:child_process');
 
 exec('ls -la', (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
+  if (error) {
+    console.log(`error: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.log(`stderr: ${stderr}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
 });
 
 console.log('async run');
@@ -107,11 +107,11 @@ node child_process.js
 const { execSync } = require('node:child_process');
 
 try {
-    const stdout = execSync('ls -la');
-    console.log(`stdout: ${stdout}`);
+  const stdout = execSync('ls -la');
+  console.log(`stdout: ${stdout}`);
 }
 catch (err) {
-    console.log(`err: ${err}`);
+  console.log(`err: ${err}`);
 }
 
 console.log('sync run');
@@ -156,17 +156,17 @@ npm install -D shelljs
 const shell = require('shelljs');
 
 if (!shell.which('git')) {
-    shell.echo('Sorry, this script requires git');
-    shell.exit(1);
+  shell.echo('Sorry, this script requires git');
+  shell.exit(1);
 }
 else {
-    shell.echo('which git:', shell.which('git'));
+  shell.echo('which git:', shell.which('git'));
 }
 
 // 遍历文件
 shell.cd('./');
 shell.ls('*.js').forEach((file) => {
-    console.log('filename:', file);
+  console.log('filename:', file);
 });
 
 shell.echo('run complete');
@@ -273,11 +273,11 @@ import { $ } from 'zx';
 // import 'zx/globals'
 
 void (async function () {
-    console.log('start');
+  console.log('start');
 
-    await Promise.all([$`sleep 1; echo 1`, $`sleep 2; echo 2`, $`sleep 3; echo 3`]);
+  await Promise.all([$`sleep 1; echo 1`, $`sleep 2; echo 2`, $`sleep 3; echo 3`]);
 
-    console.log('end');
+  console.log('end');
 })();
 ```
 

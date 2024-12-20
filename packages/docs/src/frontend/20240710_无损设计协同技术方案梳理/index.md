@@ -150,8 +150,8 @@
 
 ```ts
 interface NodeDSL {
-    componentName: string;
-    props?: Record<string, any>;
+  componentName: string;
+  props?: Record<string, any>;
 }
 
 type DSL = NodeDSL[];
@@ -163,48 +163,48 @@ type DSL = NodeDSL[];
 type Page = DSL[];
 
 const page: Page = [
-    {
-        componentName: 'StatusBar',
-        props: {
-            title: '歌单列表 & 专辑卡片',
-        },
+  {
+    componentName: 'StatusBar',
+    props: {
+      title: '歌单列表 & 专辑卡片',
     },
-    {
-        componentName: 'List',
-        props: {
-            title: '歌单列表',
-            content: [
-                {
-                    title: '说唱力 MAX',
-                    subTitle: '曲风：说唱',
-                    icon: '🔥',
-                },
-                {
-                    title: '粤语老歌',
-                    subTitle: '曲风：粤语',
-                    icon: '🎵',
-                },
-            ],
+  },
+  {
+    componentName: 'List',
+    props: {
+      title: '歌单列表',
+      content: [
+        {
+          title: '说唱力 MAX',
+          subTitle: '曲风：说唱',
+          icon: '🔥',
         },
-    },
-    {
-        componentName: 'Card',
-        props: {
-            title: '推荐专辑',
-            content: [
-                {
-                    title: '语重心长',
-                    tag: '林宥嘉',
-                    icon: '🎵',
-                },
-                {
-                    title: '灿烂人生',
-                    tag: '林忆莲',
-                    icon: '🎧',
-                },
-            ],
+        {
+          title: '粤语老歌',
+          subTitle: '曲风：粤语',
+          icon: '🎵',
         },
+      ],
     },
+  },
+  {
+    componentName: 'Card',
+    props: {
+      title: '推荐专辑',
+      content: [
+        {
+          title: '语重心长',
+          tag: '林宥嘉',
+          icon: '🎵',
+        },
+        {
+          title: '灿烂人生',
+          tag: '林忆莲',
+          icon: '🎧',
+        },
+      ],
+    },
+  },
 ];
 ```
 

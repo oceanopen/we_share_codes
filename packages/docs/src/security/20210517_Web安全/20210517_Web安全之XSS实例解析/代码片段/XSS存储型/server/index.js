@@ -11,17 +11,17 @@ let currentUserName = '';
 app.use(bodyParser()); // 处理post请求的参数
 
 function login(ctx) {
-    const req = ctx.request.body;
-    const userName = req.userName;
-    currentUserName = userName;
+  const req = ctx.request.body;
+  const userName = req.userName;
+  currentUserName = userName;
 
-    ctx.response.body = {
-        msg: '登录成功',
-    };
+  ctx.response.body = {
+    msg: '登录成功',
+  };
 }
 
 function home(ctx) {
-    ctx.body = currentUserName;
+  ctx.body = currentUserName;
 }
 
 app.use(cors());
@@ -30,5 +30,5 @@ app.use(route.post('/login', login));
 app.use(route.get('/home', home));
 
 app.listen(3200, () => {
-    console.log('启动成功');
+  console.log('启动成功');
 });

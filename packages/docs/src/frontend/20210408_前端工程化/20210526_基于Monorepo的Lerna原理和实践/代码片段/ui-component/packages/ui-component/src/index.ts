@@ -4,12 +4,12 @@ import Button from './components/button/index';
 const components = [Button];
 
 const install = function (app: App) {
-    components.forEach((component) => {
-        app.component(component.name as string, component);
-    });
+  components.forEach((component) => {
+    app.component(component.name as string, component);
+  });
 };
 
 export default {
-    install,
-    Button,
+  install,
+  Button,
 };

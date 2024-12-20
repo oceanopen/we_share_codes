@@ -46,27 +46,27 @@ yarn add -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-v
 
 ```json
 {
-    // #定义一个默认格式化程序, 该格式化程序优先于所有其他格式化程序设置。必须是提供格式化程序的扩展的标识符。
-    "editor.defaultFormatter": null,
-    // #每次保存的时候自动格式化
-    "editor.formatOnSave": true,
-    // #每次保存的时候将代码按eslint格式进行修复
-    "editor.codeActionsOnSave": {
+  // #定义一个默认格式化程序, 该格式化程序优先于所有其他格式化程序设置。必须是提供格式化程序的扩展的标识符。
+  "editor.defaultFormatter": null,
+  // #每次保存的时候自动格式化
+  "editor.formatOnSave": true,
+  // #每次保存的时候将代码按eslint格式进行修复
+  "editor.codeActionsOnSave": {
     // For ESLint
-        "source.fixAll.eslint": "explicit"
-    },
-    "eslint.run": "onType",
-    "eslint.options": {
-        "extensions": [".js", ".ts"]
-    },
-    "eslint.validate": ["javascript", "typescript"],
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "html.format.enable": false,
-    // #Vue3 报错：[vue/no-multiple-template-root] The template root requires exactly one element.[eslint-plugin-vue]
-    // 所以需要去掉 Vuex 中 eslint-plugin-vue 校验。
-    "vetur.validation.template": false
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.run": "onType",
+  "eslint.options": {
+    "extensions": [".js", ".ts"]
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.format.enable": false,
+  // #Vue3 报错：[vue/no-multiple-template-root] The template root requires exactly one element.[eslint-plugin-vue]
+  // 所以需要去掉 Vuex 中 eslint-plugin-vue 校验。
+  "vetur.validation.template": false
 }
 ```
 
@@ -76,14 +76,14 @@ yarn add -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-v
 // ESLint 检查 .vue 文件需要单独配置编辑器：
 // https://eslint.vuejs.org/user-guide/#editor-integrations
 module.exports = {
-    root: true,
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-        sourceType: 'module',
-    },
-    extends: ['prettier', 'plugin:@typescript-eslint/eslint-recommended'],
-    // 插件
-    plugins: ['prettier', '@typescript-eslint'],
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    sourceType: 'module',
+  },
+  extends: ['prettier', 'plugin:@typescript-eslint/eslint-recommended'],
+  // 插件
+  plugins: ['prettier', '@typescript-eslint'],
 };
 ```
 
@@ -118,19 +118,19 @@ const count = ref(0);
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-    props: {
-        msg: {
-            type: String,
-            required: true,
-        },
+  props: {
+    msg: {
+      type: String,
+      required: true,
     },
-    setup() {
-        const count = ref(0);
-        return {
-            ref,
-            count,
-        };
-    },
+  },
+  setup() {
+    const count = ref(0);
+    return {
+      ref,
+      count,
+    };
+  },
 });
 </script>
 ```
@@ -176,14 +176,14 @@ yarn add -D stylelint stylelint-order stylelint-prettier stylelint-config-standa
 
 ```js
 module.exports = {
-    extends: ['stylelint-config-standard', 'stylelint-config-rational-order', 'stylelint-prettier/recommended'],
-    plugins: ['stylelint-scss', 'stylelint-declaration-block-no-ignored-properties'],
-    // https://stylelint.docschina.org/user-guide/rules/
-    rules: {
-        'no-empty-source': null, // 允许空文件
-        'at-rule-no-unknown': null, // 允许未知的@规则。
-    },
-    ignoreFiles: [],
+  extends: ['stylelint-config-standard', 'stylelint-config-rational-order', 'stylelint-prettier/recommended'],
+  plugins: ['stylelint-scss', 'stylelint-declaration-block-no-ignored-properties'],
+  // https://stylelint.docschina.org/user-guide/rules/
+  rules: {
+    'no-empty-source': null, // 允许空文件
+    'at-rule-no-unknown': null, // 允许未知的@规则。
+  },
+  ignoreFiles: [],
 };
 ```
 
@@ -191,7 +191,7 @@ module.exports = {
 
 ```json
 {
-    "extends": ["stylelint-prettier/recommended"]
+  "extends": ["stylelint-prettier/recommended"]
 }
 ```
 
@@ -211,16 +211,16 @@ This does three things:
 
 ```json
 {
-    // #每次保存的时候将代码进行修复
-    "editor.codeActionsOnSave": {
+  // #每次保存的时候将代码进行修复
+  "editor.codeActionsOnSave": {
     // 文件保存时开启 stylelint 自动修复程序
-        "source.fixAll.stylelint": "explicit"
-    },
-    // 禁用 Vetur，启用 Volar 即可
-    "vetur.format.enable": false,
-    // 防止编辑器内置 linter 与插件冲突设置
-    "css.validate": false,
-    "less.validate": false
+    "source.fixAll.stylelint": "explicit"
+  },
+  // 禁用 Vetur，启用 Volar 即可
+  "vetur.format.enable": false,
+  // 防止编辑器内置 linter 与插件冲突设置
+  "css.validate": false,
+  "less.validate": false
 }
 ```
 
