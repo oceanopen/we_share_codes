@@ -15,6 +15,9 @@
 docker --version
 # Docker version 27.3.1, build ce12230
 
+docker compose version
+# Docker Compose version v2.30.3-desktop.1
+
 which docker
 # /usr/local/bin/docker
 
