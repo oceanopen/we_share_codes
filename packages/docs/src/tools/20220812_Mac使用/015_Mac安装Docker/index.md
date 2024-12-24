@@ -73,3 +73,43 @@ cd /usr/local/bin && ll
 ```
 
 发现 `docker-compose` 可正常使用了。
+
+## 4. 手动安装 docker-compose
+
+如果是 `linux` 环境执行以下命令即可:
+
+```bash
+# 下载 Docker Compose 的当前稳定版本
+curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
+
+# 将二进制文件移动到/usr/local/bin目录
+sudo mv docker-compose /usr/local/bin
+
+# 更改文件权限
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+如果是 `macos` 环境，则需要手动下载了 https://github.com/docker/compose/releases。
+
+下载对应的文件为:
+
+```bash
+echo docker-compose-$(uname -s)-$(uname -m)
+# docker-compose-Darwin-arm64
+```
+
+然后:
+
+```bash
+# 将下载的文件放入指定的目录
+mv docker-compose-darwin-aarch64 /usr/local/bin
+
+# 将文件名修改成 docker-compose
+mv docker-compose-darwin-aarch64 docker-compose
+
+# 修改文件权限
+sudo chmod +x /usr/local/bin/docker-compose
+
+# 查看版本
+docker-compose --version
+```
