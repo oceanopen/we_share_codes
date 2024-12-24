@@ -10,7 +10,7 @@ on:
         paths:
             - packages/docs/**/**
             - package.json
-            - .github/workflows/docs.yml
+            - .github/workflows/deploy-docs.yml
 
 jobs:
     run:
