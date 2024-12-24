@@ -103,6 +103,10 @@ export default [
         text: 'Mac iTerm2 安装及配置',
         link: '/tools/20220812_Mac使用/014_Mac_iTerm2_安装及配置/',
       },
+      {
+        text: 'Mac 安装 Docker',
+        link: '/tools/20220812_Mac使用/015_Mac安装Docker/',
+      },
     ],
   },
 ];
