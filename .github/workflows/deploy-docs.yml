@@ -65,7 +65,10 @@ jobs:
                   REMOTE_USER: ${{ secrets.CVM_USER_NAME }}
                   # 本地 .ssh 文件下的私钥 id_rsa，存在 secrets 的 TOKEN 中
                   SSH_PRIVATE_KEY: ${{ secrets.CVM_PRIVATE_KEY }}
-                  # 复制操作的参数。"-avzr --delete" 意味部署时清空服务器目标目录下的文件
+                  # 复制操作的参数。For any initial/required rsync flags.
+                  # 默认为 "-rlgoDzvc -i", 表示保留已有的文件
+                  # "-avzr --delete" 意味部署时清空服务器目标目录下的文件
+                  ARGS: -avzr --delete
                   # 源目录，相对于 $GITHUB_WORKSPACE 根目录的路径
                   SOURCE: packages/docs/dist/
                   # 目标目录
