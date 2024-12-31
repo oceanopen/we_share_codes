@@ -8,6 +8,10 @@ export default [
     link: '/tools/20210525_Git支持多用户/',
   },
   {
+    text: 'Mac Github using SSH over the HTTPS port',
+    link: '/tools/20241231_Mac_Github_using_SSH_over_the_HTTPS_port/',
+  },
+  {
     text: 'Git 常用命令总结',
     link: '/tools/20210804_Git常用命令总结/',
   },
