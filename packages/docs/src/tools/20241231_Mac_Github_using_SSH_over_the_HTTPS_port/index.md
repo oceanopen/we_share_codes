@@ -42,6 +42,8 @@ ssh -T -p 443 git@ssh.github.com
 # provide shell access.
 ```
 
+端口 `443` 的主机名是 `ssh.github.com`，而不是 `github.com`。
+
 If that worked, then skip this step. if not, will this:
 
 ```bash
