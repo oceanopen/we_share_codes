@@ -9,7 +9,8 @@
 
 # github
 Host github.com
-Hostname github.com
+Hostname ssh.github.com
+Port 22
 PreferredAuthentications publickey
 IdentityFile ~/.ssh/id_rsa_github
 
