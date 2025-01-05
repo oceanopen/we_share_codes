@@ -6,6 +6,7 @@
 - [Podman 在受限环境中安装](https://desktop.podman.org.cn/docs/proxy)
 - [Podman Macos Install](https://desktop.podman.org.cn/docs/installation/macos-install)
 - [Github Podman Tags](https://github.com/podman-desktop/podman-desktop/tags)
+- [Podman Compose Installation](https://github.com/containers/podman-compose#installation)
 
 ## 1. 下载安装
 
@@ -235,3 +236,94 @@ podman search mysql
 `Podman Desktop` 执行：
 
 ![](./images/004_Podman执行命令.png)
+
+## 9. 安装 Compose
+
+### 9.1 安装 docker-compose
+
+![](./images/005_Podman安装docker_compose.png)
+
+安装后，`/usr/local/bin` 下会多一个 `docker-compose` 脚本。
+
+```bash
+# The compose binary has been installed into /usr/local/bin but it is not in the system path. You should add it manually if you want to use compose from cli.
+# 可以查看环境变量路径是否包含 /usr/local/bin
+echo $PATH
+```
+
+若不在，则需要：
+
+```bash
+# For Bash, open `~/.bashrc` or `~/.bash_profile`.
+# For Zsh, open `~/.zshrc`.
+vim ~/.bashrc
+
+# Add the following line to the file:
+# export PATH="/usr/local/bin:$PATH"
+
+# Reload the configuration file:
+source ~/.bashrc
+```
+
+验证：
+
+```bash
+docker-compose version
+# Docker Compose version v2.32.1
+
+podman compose --version
+# >>>> Executing external compose provider "/usr/local/bin/docker-compose". Please see podman-compose(1) for how to disable this message. <<<<
+
+# Docker Compose version v2.32.1
+```
+
+### 9.2 安装 podman-compose
+
+因为本地已经有 `python3` 环境，所以这里直接用 `pip3` 进行安装。
+
+```bash
+python3 --version
+# Python 3.11.6
+
+pip3 --version
+# pip 23.3.1 from /usr/local/lib/python3.11/site-packages/pip (python 3.11)
+
+pip3 install podman-compose
+# Looking in indexes: https://mirrors.aliyun.com/pypi/simple/
+# Collecting podman-compose
+#   Downloading https://mirrors.aliyun.com/pypi/packages/84/41/ea0faa54a9a115245256fbd6e70894050e2b79e7881814861b2f5d74ba1a/podman_compose-1.2.0-py2.py3-none-any.whl (39 kB)
+# Collecting pyyaml (from podman-compose)
+#   Downloading https://mirrors.aliyun.com/pypi/packages/f8/aa/7af4e81f7acba21a4c6be026da38fd2b872ca46226673c89a758ebdc4fd2/PyYAML-6.0.2-cp311-cp311-macosx_10_9_x86_64.whl (184 kB)
+#      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 184.6/184.6 kB 2.3 MB/s eta 0:00:00
+# Collecting python-dotenv (from podman-compose)
+#   Downloading https://mirrors.aliyun.com/pypi/packages/6a/3e/b68c118422ec867fa7ab88444e1274aa40681c606d59ac27de5a5588f082/python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+# Installing collected packages: pyyaml, python-dotenv, podman-compose
+# Successfully installed podman-compose-1.2.0 python-dotenv-1.0.1 pyyaml-6.0.2
+
+# [notice] A new release of pip is available: 23.3.1 -> 24.3.1
+# [notice] To update, run: python3.11 -m pip install --upgrade pip
+
+python3.11 -m pip install --upgrade pip
+# Looking in indexes: https://mirrors.aliyun.com/pypi/simple/
+# Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (23.3.1)
+# Collecting pip
+#   Downloading https://mirrors.aliyun.com/pypi/packages/ef/7d/500c9ad20238fcfcb4cb9243eede163594d7020ce87bd9610c9e02771876/pip-24.3.1-py3-none-any.whl (1.8 MB)
+#      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 2.8 MB/s eta 0:00:00
+# Installing collected packages: pip
+#   Attempting uninstall: pip
+#     Found existing installation: pip 23.3.1
+#     Uninstalling pip-23.3.1:
+#       Successfully uninstalled pip-23.3.1
+# Successfully installed pip-24.3.1
+
+pip3 --version
+# pip 24.3.1 from /usr/local/lib/python3.11/site-packages/pip (python 3.11)
+```
+
+看下效果：
+
+```bash
+podman-compose --version
+# podman-compose version 1.2.0
+# podman version 5.3.1
+```
