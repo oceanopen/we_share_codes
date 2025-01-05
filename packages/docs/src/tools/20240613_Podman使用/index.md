@@ -1,14 +1,21 @@
-# 20240613_Podman 使用
+# Podman 安装及配置
+
+## 0. 相关链接
+
+- [Docker Getting Started](https://docs.docker.com/get-started/)
+- [Podman 在受限环境中安装](https://desktop.podman.org.cn/docs/proxy)
+- [Podman Macos Install](https://desktop.podman.org.cn/docs/installation/macos-install)
+- [Github Podman Tags](https://github.com/podman-desktop/podman-desktop/tags)
 
 ## 1. 下载安装
 
 [podman-desktop 下载地址](https://podman-desktop.io/downloads)
-如果点不了，或者下载指定版本，可以 [Github](https://github.com/containers/podman-desktop/releases/tag/v1.13.2)下载。
+如果点不了，或者下载指定版本，可以 [Github](https://github.com/podman-desktop/podman-desktop/tags)下载。
 
-也可以，但没有试过:
+通过命令行安装也可以，但没有试过:
 
 ```bash
-brew install podman
+brew install podman-desktop
 ```
 
 ## 2. 虚拟机配置
@@ -69,8 +76,11 @@ Mac 对此的解释:
 
 ![](./images/002_Rosetta_disabled.png)
 
-在 `M1` 芯片低版本 `Podman` 才会出现这个提示，试了下 `install Rosetta` 没有反应，后续步骤无法继续执行。
-后面 `Podman` 版本升级后，这个提示已经没有了。
+在 `M1` 芯片低版本 `Podman` 才会出现这个提示，试了下点击 `install Rosetta` 但没有反应，不知道后面版本会不会正常。
+
+这个提示是因为 `docker` 镜像默认构建的是 `amd64` 镜像。而 `M1` 芯片需要 `arm64` 镜像。由于并不是所有镜像都有 `arm64` 版本，所以为了保证 `amd64` 镜像也能在 `M1` 环境上运行，那么就需要 `Rosetta` 这个适配器来做处理。
+
+对于后面构建镜像会同时有 `amd64` 和 `arm64` 的情况越来越多，那么这个 `M1` 上缺少常见镜像(如 nginx, mysql等)的问题会逐渐解决。
 
 ## 3. 配置镜像仓库源
 
@@ -188,19 +198,40 @@ podman pull mysql:8
 # 3218b38490cec8d31976a40b92e09d61377359eab878db49f025e5d464367f3b
 ```
 
-## 启动镜像
+## 7. 启动镜像
 
 ```bash
 podman run \
     -d \
     -p 3309:3306 \
-    --name podman_mysql_80_we_low_code \
-    -v /Users/[user]/MyFiles/Podman/podman_mysql_80_we_low_code/data:/var/lib/mysql \
-    -v /Users/[user]/MyFiles/Podman/podman_mysql_80_we_low_code/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+    --name podman_mysql_80_app \
+    -v /Users/[user]/MyFiles/Podman/podman_mysql_80_app/data:/var/lib/mysql \
+    -v /Users/[user]/MyFiles/Podman/podman_mysql_80_app/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
     -e MYSQL_ROOT_PASSWORD=root \
     docker.io/library/mysql:8
 ```
 
-## 更多
-
 解下来就可以验证是否可以正常访问 mysql 来验证是否正常了。
+
+## 8. 设置 Podman 代理
+
+![](./images/003_Podman设置Proxy.png)
+
+配置后重启 `Poadman Desktop`。
+
+命令行执行：
+
+```bash
+podman search mysql
+# NAME                            DESCRIPTION
+# docker.io/library/mysql         MySQL is a widely used, open-source relation...
+# docker.io/bitnami/mysql         Bitnami container image for MySQL
+# docker.io/circleci/mysql        MySQL is a widely used, open-source relation...
+# docker.io/cimg/mysql
+# docker.io/bitnamicharts/mysql   Bitnami Helm chart for MySQL
+# docker.io/ubuntu/mysql          MySQL open source fast, stable, multi-thread...
+```
+
+`Podman Desktop` 执行：
+
+![](./images/004_Podman执行命令.png)
