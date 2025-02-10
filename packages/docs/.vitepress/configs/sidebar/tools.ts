@@ -52,6 +52,10 @@ export default [
     link: '/tools/20240923_Nvm设置镜像源/',
   },
   {
+    text: '科学上网',
+    link: '/tools/20250210_科学上网/',
+  },
+  {
     text: 'Mac 使用',
     collapsed: false,
     items: [
