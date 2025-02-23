@@ -115,6 +115,10 @@ export default [
         text: 'Mac 安装 Docker',
         link: '/tools/20220812_Mac使用/015_Mac安装Docker/',
       },
+      {
+        text: 'Mac 终端支持 tree 命令',
+        link: '/tools/20220812_Mac使用/016_Mac终端支持tree命令/',
+      },
     ],
   },
 ];
