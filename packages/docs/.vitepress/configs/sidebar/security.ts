@@ -15,6 +15,10 @@ export default [
         text: 'CSRF实例解析',
         link: '/security/20210517_Web安全/20210518_Web安全之CSRF实例解析/',
       },
+      {
+        text: 'CSP策略',
+        link: '/security/20210517_Web安全/20250305_Web安全之CSP策略/',
+      },
     ],
   },
 ];
