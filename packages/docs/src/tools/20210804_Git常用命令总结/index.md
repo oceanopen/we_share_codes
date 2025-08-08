@@ -73,6 +73,13 @@ git remote set-url origin [git仓库地址]
 
 # 根据远程分支自动创建本地关联分支
 git checkout -t origin/[远程分支名]
+
+# Git仓库迁移保留历史记录
+# 1. 添加新仓库为远程
+git remote add new-origin git@xxx.git
+# 2. 推送所有分支和标签
+git push --all new-origin
+git push --tags new-origin
 ```
 
 ### 2.1 创建 SSH Key
