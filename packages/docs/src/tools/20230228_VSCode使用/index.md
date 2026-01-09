@@ -25,3 +25,31 @@
 > 设置 -> 用户 -> 功能 -> 资源管理器 -> Compact Folders
 
 ![](./images/003_设置文件夹取消折叠.png)
+
+## 3. Command line extension management
+
+[Command line extension management](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace)
+
+```bash
+code --extensions-dir <dir>
+    Set the root path for extensions.
+code --list-extensions
+    List the installed extensions.
+code --show-versions
+    Show versions of installed extensions, when using --list-extension.
+code --install-extension (<extension-id> | <extension-vsix-path>)
+    Installs an extension.
+code --uninstall-extension (<extension-id>)
+    Uninstalls an extension.
+code --enable-proposed-api (<extension-id>)
+    Enables proposed API features for extensions. Can receive one or more extension IDs to enable individually.
+```
+
+如:
+
+```bash
+$ code --install-extension anthropic.claude-code
+# Installing extensions...
+# Installing extension 'anthropic.claude-code'...
+# Extension 'anthropic.claude-code' v2.1.3 was successfully installed.
+```
