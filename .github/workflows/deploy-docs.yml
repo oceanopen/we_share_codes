@@ -30,7 +30,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v4 # https://github.com/marketplace/actions/setup-node-js-environment
               with:
-                  node-version: 20
+                  node-version: 24
 
             - name: Cache node_modules
               id: cache-node-modules
