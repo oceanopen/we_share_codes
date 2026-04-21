@@ -6,7 +6,7 @@
 
 组合快捷键：`Command + Option + Shift + Esc`
 
-### 2.2 启动台有异常图标
+### 1.2 启动台有异常图标
 
 ```bash
 defaults write com.apple.dock ResetLaunchPad -bool true
@@ -16,21 +16,21 @@ killall Dock
 
 这个时候，启动台会重新启动，也会重新排序，需要自己再重新调整。
 
-### 2.3 查看用户主目录
+### 1.3 查看用户主目录
 
 ```bash
 echo $HOME
 # [~User]
 ```
 
-### 2.4 查看环境变量
+### 1.4 查看环境变量
 
 ```bash
 echo $PATH
 # [~User]/.yarn/bin:[~User]/.config/yarn/global/node_modules/.bin:[~User]/.nvm/versions/node/v16.14.0/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
 ```
 
-### 2.5 iTerm 快捷键
+### 1.5 iTerm 快捷键
 
 `iTerm` 当前窗口分屏:
 
@@ -44,7 +44,7 @@ echo $PATH
 
 ![](./images/002_iTerm新建tab窗口.png)
 
-### 2.6 iTerm 设置默认窗口大小
+### 1.6 iTerm 设置默认窗口大小
 
 1. 打开工具 `iTerm`
 2. 点击 `mac` 左上角的 `iTerm2 --> Preferences`
@@ -52,6 +52,16 @@ echo $PATH
 4. `Windows` 设置
 
 ![](./images/003_iTerm设置window.png)
+
+### 1.7 macOS 系统升级后，找不到钥匙串访问
+
+之前的 macOS 在 实用工具中 直接就有 `钥匙串访问.app` ,升级到新版的 `macOS` 后，就找不到，其实新版的系统并没有删除这个 app,只是给隐藏了，打开 `/System/Library/CoreServices/Applications` 文件目录就可以看到。
+
+打开终端 输入 `open /System/Library/CoreServices/Applications/` 回车即可快速打开文件夹。
+
+```bash
+open /System/Library/CoreServices/Applications/
+```
 
 ## 2. Mac 设置 ssh 连接检测，保持连接
 
