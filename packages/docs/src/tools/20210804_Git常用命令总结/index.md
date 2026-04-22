@@ -309,6 +309,7 @@ git remote -v
 git remote --verbose
 
 # 显示某个远程仓库的信息
+# 这里 [remote] 指的是 远程仓库的别名
 git remote show [remote]
 
 # 增加一个新的远程仓库，并命名
@@ -321,6 +322,7 @@ git remote rename [原远程仓库的别名] [新的别名]
 git remote remove [远程仓库的别名]
 
 # 修改远程仓库的 URL 地址
+# 如: git remote set-url origin git@xxx.git
 git remote set-url [远程仓库的别名] [新的远程仓库URL地址]
 
 # 取回远程仓库的变化，并与本地分支合并
