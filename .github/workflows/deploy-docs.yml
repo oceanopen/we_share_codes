@@ -49,7 +49,7 @@ jobs:
               run: echo "cache-node-modules:${{ steps.cache-node-modules.outputs.cache-hit }}"
 
             - name: Install pnpm
-              run: npm install -g pnpm
+              run: npm install -g pnpm@9.15.9
 
             # This project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
             - name: Install dependencies and Build 🔧

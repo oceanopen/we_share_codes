@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "@vite-pwa/vitepress": "^1.1.0",
-    "vitepress": "1.5.0"
+    "vitepress": "^1.6.4"
   }
 }
