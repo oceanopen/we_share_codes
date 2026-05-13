@@ -28,7 +28,9 @@ export default withPwa(
         rollupOptions: {
           external: ['vue/server-renderer'],
         },
-        chunkSizeWarningLimit: 1000, // 默认 500KB
+        // 是本地搜索方案的固有特征——将全站内容预构建为一个 JS 文件以支持离线搜索，无法通过 manualChunks 拆分。
+        // 默认 500KB
+        chunkSizeWarningLimit: 2500,
       },
     },
 
