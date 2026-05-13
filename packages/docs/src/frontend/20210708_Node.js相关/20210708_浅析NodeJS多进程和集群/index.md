@@ -101,6 +101,7 @@ ps aux | grep worker.js
 ```js
 // parent.js
 const { fork } = require('node:child_process');
+
 const sender = fork(path.resolve(__dirname, 'child.js'));
 
 sender.on('message', (msg) => {

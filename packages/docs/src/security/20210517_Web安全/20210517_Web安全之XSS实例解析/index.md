@@ -9,7 +9,6 @@
 页面被注入了恶意 JavaScript 脚本，浏览器无法判断区分这些脚本是被恶意注入的，还是正常的页面内容，所以恶意注入 Javascript 脚本也拥有了所有的脚本权限。如果页面被注入了恶意 JavaScript 脚本，它可以做哪些事情呢？
 
 - `可以窃取 cookie 信息`。
-
   - 恶意 JavaScript 可以通过“doccument.cookie“获取 cookie 信息，然后通过 XMLHttpRequest 或者 Fetch 加上`CORS （Cross-Origin Resource Sharing，跨域资源共享）`功能将数据发送给恶意服务器；
   - 恶意服务器拿到用户的 cookie 信息之后，就可以在其他电脑上模拟用户的登录，然后进行转账操作。
 
@@ -30,7 +29,8 @@ XSS 攻击可以分为三类：`反射型`，`存储型`，`基于 DOM 型(DOM b
 ```js
 // server.js
 
-const Koa = require('koa'); // Koa官网：https://koa.bootcss.com/
+const Koa = require('koa');
+// Koa官网：https://koa.bootcss.com/
 const app = new Koa();
 const cors = require('@koa/cors'); // https://github.com/koajs/cors/
 const bodyParser = require('koa-bodyparser');
@@ -189,6 +189,7 @@ app.use(route.get('/xss-params', xssParams));
 // web/index.js
 
 const Koa = require('koa');
+
 const app = new Koa();
 const route = require('koa-route');
 const KoaStatic = require('koa-static');
@@ -206,6 +207,7 @@ app.listen(8080, () => {
 // server/index.js
 
 const Koa = require('koa');
+
 const app = new Koa();
 const cors = require('@koa/cors');
 const bodyParser = require('koa-bodyparser');

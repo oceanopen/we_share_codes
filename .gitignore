@@ -47,3 +47,5 @@ dist
 # Jest
 #
 coverage
+
+.claude/settings.local.json

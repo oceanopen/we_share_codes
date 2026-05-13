@@ -21,7 +21,7 @@ class SandboxGlobalProxy {
           return false;
         }
 
-        if (!Object.prototype.hasOwnProperty.call(target, prop)) {
+        if (!Object.hasOwn(target, prop)) {
           throw new Error(`Invalid expression - ${prop}! You can not do that!`);
         }
 

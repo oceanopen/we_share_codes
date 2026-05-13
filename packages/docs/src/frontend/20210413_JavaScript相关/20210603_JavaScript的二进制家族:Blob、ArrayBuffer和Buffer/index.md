@@ -397,7 +397,6 @@ npx http-server -p 3100 -c-1
   通过 `FileReader` 将文件转化为 ArrayBuffer 数据。
 
 - 写入
-
   - 通过 `TypeArray` 对象进行操作；
   - 通过 `DataView` 对象进行操作；
 

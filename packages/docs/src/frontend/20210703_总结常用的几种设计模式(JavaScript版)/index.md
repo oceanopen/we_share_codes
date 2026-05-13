@@ -951,7 +951,7 @@ function timeProfileDecorator(func) {
   return function (...args) {
     const startTime = new Date();
     func.call(this, ...args);
-    const elapsedTime = new Date().getTime() - startTime.getTime();
+    const elapsedTime = Date.now() - startTime.getTime();
     console.log(`该函数消耗了${elapsedTime}ms`);
   };
 }
@@ -988,7 +988,7 @@ class TimeProfileDecorator {
   }
 
   logTimer(namespace) {
-    const elapsedTime = new Date().getTime() - this.timers[namespace].getTime();
+    const elapsedTime = Date.now() - this.timers[namespace].getTime();
     console.log(`该函数消耗了${elapsedTime}ms`);
   }
 }
@@ -1197,7 +1197,7 @@ function createValidator(target, validators) {
   return new Proxy(target, {
     _validators: validators,
     set(target, key, value, proxy) {
-      if (Object.prototype.hasOwnProperty.call(target, key)) {
+      if (Object.hasOwn(target, key)) {
         const validator = this._validators[key];
         if (validator(value)) {
           return Reflect.set(target, key, value, proxy);
@@ -1703,9 +1703,9 @@ console.log(calculateBonus('A', 10000)); // > 30000
       return salary * 2;
     },
   };
-  const calculateBonus = function (level, salary) {
+  function calculateBonus(level, salary) {
     return strategies[level](salary);
-  };
+  }
 
   console.log(calculateBonus('S', 20000)); // 输出：80000
   console.log(calculateBonus('A', 10000)); // 输出：30000
@@ -1714,15 +1714,15 @@ console.log(calculateBonus('A', 10000)); // > 30000
 - `ES6` 类实现
 
   ```js
-  const PerformanceS = function () {};
+  function PerformanceS() {}
   PerformanceS.prototype.calculate = function (salary) {
     return salary * 4;
   };
-  const PerformanceA = function () {};
+  function PerformanceA() {}
   PerformanceA.prototype.calculate = function (salary) {
     return salary * 3;
   };
-  const PerformanceB = function () {};
+  function PerformanceB() {}
   PerformanceB.prototype.calculate = function (salary) {
     return salary * 2;
   };

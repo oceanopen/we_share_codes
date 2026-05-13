@@ -151,7 +151,7 @@ class MeteorShower {
     }
     this.playing = true;
 
-    const now = new Date().getTime();
+    const now = Date.now();
     let last = now;
     let delta;
 

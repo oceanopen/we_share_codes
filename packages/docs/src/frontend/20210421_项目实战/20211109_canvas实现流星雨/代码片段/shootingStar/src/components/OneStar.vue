@@ -101,7 +101,7 @@ export default defineComponent({
       });
 
       const tick = (function () {
-        const now = new Date().getTime();
+        const now = Date.now();
         let last = now;
         let delta: number;
 

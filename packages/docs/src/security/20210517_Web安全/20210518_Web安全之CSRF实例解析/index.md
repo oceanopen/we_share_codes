@@ -178,6 +178,7 @@ CSRF 攻击就是利用了用户的登录状态，并通过第三方的站点来
 // server/server.js
 
 const Koa = require('koa');
+
 const app = new Koa();
 const cors = require('@koa/cors');
 const bodyParser = require('koa-bodyparser');

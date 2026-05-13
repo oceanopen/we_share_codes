@@ -36,7 +36,7 @@
 
 ```js
 window.onload = function () {
-  new Date().getTime() - performance.timing.navigationStart;
+  Date.now() - performance.timing.navigationStart;
 };
 ```
 
@@ -245,9 +245,9 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-const Person = function Person() {
+function Person() {
   _classCallCheck(this, Person);
-};
+}
 ```
 
 这里 `_classCallCheck` 就是一个 `helper` 函数，如果在很多文件里都声明了类，那么就会产生很多个这样的 `helper` 函数。
@@ -257,15 +257,16 @@ const Person = function Person() {
 ```js
 'use strict';
 const _classCallCheck2 = require('@babel/runtime/helpers/classCallCheck');
+
 const _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
-const Person = function Person() {
+function Person() {
   ;(0, _classCallCheck3.default)(this, Person);
-};
+}
 ```
 
 这里就没有再编译出 `helper` 函数 `classCallCheck` 了，而是直接引用了 `@babel/runtime` 中的 `helpers/classCallCheck`。

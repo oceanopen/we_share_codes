@@ -573,7 +573,6 @@ type NotDistributed = Wrapped<number | boolean>;
   其实就是条件类型的判断过程，就像我们前面说的，条件类型需要在收集到足够的推断信息之后才能进行这个过程。
 
 - 分发到联合类型：
-
   - 对于 TypeName，它内部的类型参数 T 是没有被包裹过的，所以 `TypeName<string | (() => void)>` 会被分发为 `TypeName<string> | TypeName<(() => void)>`，然后再次进行判断，最后分发为 `"string" | "function"`。
   - 抽象下具体过程：
 

@@ -297,6 +297,7 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
 
   // 是否包含某项
   contains(value: any) {
+    // eslint-disable-next-line e18e/prefer-array-some
     return !!this.find(value);
   }
 

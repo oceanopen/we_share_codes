@@ -29,7 +29,6 @@ cat /etc/shells
 ```
 
 - 默认的 `zsh` 配置有点麻烦。因此有用户在 `GitHub` 上制作了一个配置文件 `oh-my-zsh`，这是目前为止最流行的 `zsh` `配置，说白了oh-my-zsh` 就是一个人做的 `zsh` 的配置文件，因为配置起来很方便，所以现在几乎成为标配。
-
   - [Github](https://github.com/ohmyzsh/ohmyzsh)
   - [官网](https://ohmyz.sh/)
 

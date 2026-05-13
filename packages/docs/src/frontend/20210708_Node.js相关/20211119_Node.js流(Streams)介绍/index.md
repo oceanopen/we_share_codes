@@ -43,6 +43,7 @@ history.pipe(grep);
 ```js
 // createBigFile.js
 const fs = require('node:fs');
+
 const file = fs.createWriteStream('./big.text');
 for (let i = 0; i <= 1e6; i++) {
   file.write('Lorem ipsum dolor sit amet, consectetur adipisicing elit. \n');
@@ -66,6 +67,7 @@ node createBigFile.js
 // bigFileServer.js
 const fs = require('node:fs');
 const server = require('node:http').createServer();
+
 server.on('request', (req, res) => {
   fs.readFile('./big.text', (err, data) => {
     if (err) { throw err; }
@@ -280,6 +282,7 @@ class myWritableStream extends Writable {}
 ```js
 // outStream.js
 const { Writable } = require('node:stream');
+
 const outStream = new Writable({
   write(chunk, encoding, callback) {
     console.log(chunk.toString());
@@ -335,6 +338,7 @@ node outStream_same.js
 
 ```js
 const { Readable } = require('node:stream');
+
 const inStream = new Readable({});
 ```
 
@@ -343,6 +347,7 @@ const inStream = new Readable({});
 ```js
 // inStream.js
 const { Readable } = require('node:stream');
+
 const inStream = new Readable();
 
 inStream.push('ABCDEFGHIJKLM');
@@ -552,6 +557,7 @@ node commaToObj.js
 // gzipFile.js
 const fs = require('node:fs');
 const zlib = require('node:zlib');
+
 const file = process.argv[2];
 
 fs.createReadStream(file)
@@ -579,6 +585,7 @@ ll | grep big.text
 // streamProcess.js
 const fs = require('node:fs');
 const zlib = require('node:zlib');
+
 const file = process.argv[2];
 
 fs.createReadStream(file)
@@ -604,6 +611,7 @@ node streamProcess.js big.text
 // streamProcess_v2.js
 const fs = require('node:fs');
 const zlib = require('node:zlib');
+
 const file = process.argv[2];
 
 const { Transform } = require('node:stream');

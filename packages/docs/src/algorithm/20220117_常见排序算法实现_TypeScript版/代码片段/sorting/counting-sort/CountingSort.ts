@@ -11,8 +11,8 @@ export default class CountingSort extends Sort {
 
   sort(
     originalArray: TCompareParam[],
-        smallestElement: TCompareParam = undefined as unknown as TCompareParam,
-        biggestElement: TCompareParam = undefined as unknown as TCompareParam,
+    smallestElement: TCompareParam = undefined as unknown as TCompareParam,
+    biggestElement: TCompareParam = undefined as unknown as TCompareParam,
   ) {
     // Init biggest and smallest elements in array in order to build number bucket array later.
     let detectedSmallestElement = smallestElement || 0;
@@ -37,7 +37,7 @@ export default class CountingSort extends Sort {
 
     // Init buckets array.
     // This array will hold frequency of each number from originalArray.
-    const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }, () => 0);
+    const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }).fill(0) as number[];
 
     originalArray.forEach((element) => {
       // Visit element.

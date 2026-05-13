@@ -201,20 +201,20 @@
   optionalTuple = ['Kakuqo'];
   console.log(`optionalTuple : ${optionalTuple}`); // optionalTuple : Kakuqo
 
-    type Point = [number, number?, number?];
-    const pointX: Point = [10]; // 一维坐标点
-    const pointXy: Point = [10, 20]; // 二维坐标点
-    const pointXyz: Point = [10, 20, 10]; // 三维坐标点
-    console.log(pointX.length); // 1
-    console.log(pointXy.length); // 2
-    console.log(pointXyz.length); // 3
+  type Point = [number, number?, number?];
+  const pointX: Point = [10]; // 一维坐标点
+  const pointXy: Point = [10, 20]; // 二维坐标点
+  const pointXyz: Point = [10, 20, 10]; // 三维坐标点
+  console.log(pointX.length); // 1
+  console.log(pointXy.length); // 2
+  console.log(pointXyz.length); // 3
 
-    type RestTupleType = [number, ...string[]];
-    const restTuple: RestTupleType = [666, 'Semlinker', 'Kakuqo', 'Lolo'];
-    console.log(restTuple[0]); // 666
-    console.log(restTuple[1]); // Semlinker
+  type RestTupleType = [number, ...string[]];
+  const restTuple: RestTupleType = [666, 'Semlinker', 'Kakuqo', 'Lolo'];
+  console.log(restTuple[0]); // 666
+  console.log(restTuple[1]); // Semlinker
 
-    const point: readonly [number, number] = [10, 20];
+  const point: readonly [number, number] = [10, 20];
 
   // Cannot assign to '0' because it is a read-only property.
   // point[0] = 1;
@@ -271,28 +271,28 @@
   let e: any;
   // a = e; // 不能将类型“any”分配给类型“never”。ts(2322)
 
-    type Foo = string | number;
-    function controlFlowAnalysisWithNever(foo: Foo) {
-      if (typeof foo === 'string') {
-        // 这里 foo 被收窄为 string 类型
-      } else if (typeof foo === 'number') {
-        // 这里 foo 被收窄为 number 类型
-      } else {
-        // foo 在这里是 never
-        const check: never = foo;
-      }
+  type Foo = string | number;
+  function controlFlowAnalysisWithNever(foo: Foo) {
+    if (typeof foo === 'string') {
+      // 这里 foo 被收窄为 string 类型
+    } else if (typeof foo === 'number') {
+      // 这里 foo 被收窄为 number 类型
+    } else {
+      // foo 在这里是 never
+      const check: never = foo;
     }
+  }
 
-    type Foo2 = string | number | boolean;
-    function controlFlowAnalysisWithNever2(foo: Foo2) {
-      if (typeof foo === 'string') {
-        // 这里 foo 被收窄为 string 类型
-      } else if (typeof foo === 'number') {
-        // 这里 foo 被收窄为 number 类型
-      } else {
-        // const check: never = foo; // 不能将类型“boolean”分配给类型“never”。ts(2322)
-      }
+  type Foo2 = string | number | boolean;
+  function controlFlowAnalysisWithNever2(foo: Foo2) {
+    if (typeof foo === 'string') {
+      // 这里 foo 被收窄为 string 类型
+    } else if (typeof foo === 'number') {
+      // 这里 foo 被收窄为 number 类型
+    } else {
+      // const check: never = foo; // 不能将类型“boolean”分配给类型“never”。ts(2322)
     }
+  }
 }
 
 {
@@ -392,22 +392,22 @@
   // upperCaseObject = undefined; // 不能将类型“undefined”分配给类型“object”。ts(2322)
   upperCaseObject = {};
 
-    type isLowerCaseObjectExtendsUpperCaseObject = object extends object ? true : false; // true
-    type isUpperCaseObjectExtendsLowerCaseObject = object extends object ? true : false; // true
-    upperCaseObject = lowerCaseObject;
-    lowerCaseObject = upperCaseObject;
+  type isLowerCaseObjectExtendsUpperCaseObject = object extends object ? true : false; // true
+  type isUpperCaseObjectExtendsLowerCaseObject = object extends object ? true : false; // true
+  upperCaseObject = lowerCaseObject;
+  lowerCaseObject = upperCaseObject;
 
-    let ObjectLiteral: {};
-    ObjectLiteral = 1;
-    ObjectLiteral = 'a';
-    ObjectLiteral = true;
-    // ObjectLiteral = null; // 不能将类型“null”分配给类型“{}”。
-    // ObjectLiteral = undefined; // 不能将类型“undefined”分配给类型“{}”。
-    ObjectLiteral = {};
-    type isLiteralCaseObjectExtendsUpperCaseObject = {} extends object ? true : false; // true
-    type isUpperCaseObjectExtendsLiteralCaseObject = object extends {} ? true : false; // true
-    upperCaseObject = ObjectLiteral;
-    ObjectLiteral = upperCaseObject;
+  let ObjectLiteral: {};
+  ObjectLiteral = 1;
+  ObjectLiteral = 'a';
+  ObjectLiteral = true;
+  // ObjectLiteral = null; // 不能将类型“null”分配给类型“{}”。
+  // ObjectLiteral = undefined; // 不能将类型“undefined”分配给类型“{}”。
+  ObjectLiteral = {};
+  type isLiteralCaseObjectExtendsUpperCaseObject = {} extends object ? true : false; // true
+  type isUpperCaseObjectExtendsLiteralCaseObject = object extends {} ? true : false; // true
+  upperCaseObject = ObjectLiteral;
+  ObjectLiteral = upperCaseObject;
 }
 
 {
@@ -520,19 +520,19 @@
   // 不能将类型“"hi"”分配给类型“"hello"”。ts(2322)
   // hello = 'hi';
 
-    type Direction = 'up' | 'down';
-    function move(dir: Direction) {
-      // ...
-    }
-    move('up');
-    // 类型“"right"”的参数不能赋给类型“Direction”的参数。ts(2345)
-    // move('right');
+  type Direction = 'up' | 'down';
+  function move(dir: Direction) {
+    // ...
+  }
+  move('up');
+  // 类型“"right"”的参数不能赋给类型“Direction”的参数。ts(2345)
+  // move('right');
 
-    interface Config {
-      size: 'small' | 'big';
-      isEnable: true | false;
-      margin: 0 | 2 | 4;
-    }
+  interface Config {
+    size: 'small' | 'big';
+    isEnable: true | false;
+    margin: 0 | 2 | 4;
+  }
 }
 
 {
@@ -993,83 +993,83 @@
   interface PointX2 {
     x: number;
   }
-    type Point2 = PointX2 & {
-      y: number;
-    };
+  type Point2 = PointX2 & {
+    y: number;
+  };
 
-    interface Point3 extends PointX2 {
-      y: number;
-    }
+  interface Point3 extends PointX2 {
+    y: number;
+  }
 
-    type Point4 = PointX & {
-      y: number;
-    };
+  type Point4 = PointX & {
+    y: number;
+  };
 }
 
 {
   // const identityAny: (arg: any) => any
   const identityAny = arg => arg;
 
-    type idBoolean = (arg: boolean) => boolean;
-    type idNumber = (arg: number) => number;
-    type idString = (arg: string) => string;
-    // ...
+  type idBoolean = (arg: boolean) => boolean;
+  type idNumber = (arg: number) => number;
+  type idString = (arg: string) => string;
+  // ...
 
-    identityAny('string').length;
-    // 构建报错，所以注释掉
-    // TypeError: identityAny(...).toFixed is not a function
-    // identityAny('string').toFixed(2)
-    // 构建报错，所以注释掉
-    // TypeError: Cannot read property 'toString' of null
-    // identityAny(null).toString()
-    // ...
+  identityAny('string').length;
+  // 构建报错，所以注释掉
+  // TypeError: identityAny(...).toFixed is not a function
+  // identityAny('string').toFixed(2)
+  // 构建报错，所以注释掉
+  // TypeError: Cannot read property 'toString' of null
+  // identityAny(null).toString()
+  // ...
 
-    function identity<T>(arg: T): T {
-      return arg;
-    }
+  function identity<T>(arg: T): T {
+    return arg;
+  }
 
-    function identity2<T, U>(value: T, message: U): T {
-      console.log(message);
-      return value;
-    }
-    console.log(identity2<number, string>(68, 'Semlinker'));
+  function identity2<T, U>(value: T, message: U): T {
+    console.log(message);
+    return value;
+  }
+  console.log(identity2<number, string>(68, 'Semlinker'));
 
-    console.log(identity2(68, 'Semlinker'));
+  console.log(identity2(68, 'Semlinker'));
 
-    function trace<T>(arg: T): T {
-      // Property 'size doesn't exist on type 'T'
-      // console.log(arg.size)
-      return arg;
-    }
+  function trace<T>(arg: T): T {
+    // Property 'size doesn't exist on type 'T'
+    // console.log(arg.size)
+    return arg;
+  }
 
-    interface Sizeable {
-      size: number;
-    }
-    function trace2<T extends Sizeable>(arg: T): T {
-      console.log(arg.size);
-      return arg;
-    }
+  interface Sizeable {
+    size: number;
+  }
+  function trace2<T extends Sizeable>(arg: T): T {
+    console.log(arg.size);
+    return arg;
+  }
 
-    interface HasAge { age: number }
-    function getOldest(items: HasAge[]): HasAge {
-      return items.sort((a, b) => b.age - a.age)[0];
-    }
-    const things = [{ age: 10 }, { age: 20 }, { age: 15 }];
-    const oldestThing = getOldest(things);
-    console.log(oldestThing.age); // 20
-    interface Person { name: string; age: number }
-    const people: Person[] = [
-      { name: 'Amir', age: 10 },
-      { name: 'Betty', age: 20 },
-      { name: 'Cecile', age: 15 },
-    ];
+  interface HasAge { age: number }
+  function getOldest(items: HasAge[]): HasAge {
+    return items.sort((a, b) => b.age - a.age)[0];
+  }
+  const things = [{ age: 10 }, { age: 20 }, { age: 15 }];
+  const oldestThing = getOldest(things);
+  console.log(oldestThing.age); // 20
+  interface Person { name: string; age: number }
+  const people: Person[] = [
+    { name: 'Amir', age: 10 },
+    { name: 'Betty', age: 20 },
+    { name: 'Cecile', age: 15 },
+  ];
     // no type errors
-    const oldestPerson = getOldest(people);
-    // 类型“HasAge”上不存在属性“name”。ts(2339)
-    // console.log(oldestPerson.name)
-    const oldestPerson2 = getOldest(people) as Person;
-    // no type error
-    console.log(oldestPerson2.name);
+  const oldestPerson = getOldest(people);
+  // 类型“HasAge”上不存在属性“name”。ts(2339)
+  // console.log(oldestPerson.name)
+  const oldestPerson2 = getOldest(people) as Person;
+  // no type error
+  console.log(oldestPerson2.name);
 }
 
 {

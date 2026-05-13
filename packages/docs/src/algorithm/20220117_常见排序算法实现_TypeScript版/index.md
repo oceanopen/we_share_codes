@@ -758,7 +758,7 @@ export default class CountingSort extends Sort {
 
     // Init buckets array.
     // This array will hold frequency of each number from originalArray.
-    const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }, () => 0);
+    const buckets = Array.from({ length: detectedBiggestElement - detectedSmallestElement + 1 }).fill(0);
 
     originalArray.forEach((element) => {
       // Visit element.

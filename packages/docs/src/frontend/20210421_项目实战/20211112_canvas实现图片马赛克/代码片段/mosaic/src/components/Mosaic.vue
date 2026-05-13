@@ -61,9 +61,9 @@ export default defineComponent({
       width: number,
       height: number,
     ): {
-        canvas: HTMLCanvasElement;
-        ctx: CanvasRenderingContext2D;
-      } {
+      canvas: HTMLCanvasElement;
+      ctx: CanvasRenderingContext2D;
+    } {
       const canvas = document.createElement('canvas');
 
       canvas.setAttribute('width', `${width}px`);

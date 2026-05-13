@@ -186,7 +186,6 @@ go version
 - `GO111MODULE=off`，无模块支持，go 命令行将不会支持 module 功能，寻找依赖包的方式将会沿用旧版本那种通过 vendor 目录或者 GOPATH 模式来查找。
 - `GO111MODULE=on`，模块支持，go 命令行会使用 modules，而一点也不会去 GOPATH 目录下查找。
 - `GO111MODULE=auto`，默认值，go 命令行将会根据当前目录来决定是否启用 module 功能。这种情况下可以分为两种情形：
-
   - 当前目录在 `GOPATH/src` 之外且该目录包含 `go.mod` 文件，开启模块支持。
   - 当前文件在包含 `go.mod` 文件的目录下面，开启模块支持。
 

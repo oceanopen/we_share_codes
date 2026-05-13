@@ -75,8 +75,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PrimitiveProps } from 'radix-vue';
 import { IconLoading } from 'icon/xxx';
-import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { Primitive } from 'radix-vue';
 
 interface ButtonProps extends PrimitiveProps {
   loading?: boolean;
@@ -161,14 +162,14 @@ pnpm story:dev
 // index.ts
 
 export {
-  type ButtonContentProps,
   default as ButtonContent,
+  type ButtonContentProps,
 } from './ButtonContent.vue';
 export {
-  type ButtonLoadingProps,
   default as ButtonLoading,
+  type ButtonLoadingProps,
 } from './ButtonLoading.vue';
-export { type ButtonRootProps, default as ButtonRoot } from './ButtonRoot.vue';
+export { default as ButtonRoot, type ButtonRootProps } from './ButtonRoot.vue';
 ```
 
 ```vue
@@ -181,14 +182,14 @@ export { type ButtonRootProps, default as ButtonRoot } from './ButtonRoot.vue';
 </template>
 
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
 import type { Ref } from 'vue';
+import type { PrimitiveProps } from '@/Primitive';
 import { createContext, useForwardExpose } from '@/shared';
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
 import { toRefs } from 'vue';
+import { Primitive } from '@/Primitive';
 
 export interface ButtonRootProps extends PrimitiveProps {
   loading?: boolean;

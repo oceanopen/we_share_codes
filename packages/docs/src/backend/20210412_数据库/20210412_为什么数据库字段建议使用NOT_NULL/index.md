@@ -72,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `t_test` (
 >
 > - 第一个字母`F`代表字段`Field`；
 > - 第二个字母
->
 >   - `ui`代表无符号整数类型`unsigned integer`
 >   - `str`代表字符串类型`string`
 

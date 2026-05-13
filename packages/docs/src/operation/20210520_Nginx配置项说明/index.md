@@ -275,7 +275,6 @@ server {
 ```
 
 - 3、访问分析
-
   - 当访问 `www.nginx-test.com` 时，都可以被匹配上，因此选择优先级最高的“完全匹配”；
   - 当访问 `mail.nginx-test.com` 时，会进行“左匹配”；
   - 当访问 `www.nginx-test.org` 时，会进行“右匹配”；

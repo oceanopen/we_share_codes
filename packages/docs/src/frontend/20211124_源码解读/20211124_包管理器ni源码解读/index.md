@@ -264,6 +264,7 @@ export async function runCli(fn: Runner, options: DetectOptions = {}) {
 // 源码有删减
 
 import execa from 'execa';
+
 const DEBUG_SIGN = '?';
 
 export async function run(fn: Runner, args: string[], options: DetectOptions = {}) {

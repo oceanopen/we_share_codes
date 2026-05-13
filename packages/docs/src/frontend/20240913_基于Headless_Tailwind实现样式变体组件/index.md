@@ -117,8 +117,9 @@ function buttonVariants({ variant, size, fill, shape, inline }) {
 </template>
 
 <script setup lang="ts">
+import type { VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'vue';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import IconLoading from './IconLoading.vue';
@@ -359,6 +360,7 @@ const buttonVariants = cva('ui-inline-flex ui-rounded-lg ui-items-center ui-just
 
 // 修改后
 import { extendTailwindMerge } from 'tailwind-merge';
+
 export const twMerge = extendTailwindMerge({ prefix: 'ui-' });
 ```
 

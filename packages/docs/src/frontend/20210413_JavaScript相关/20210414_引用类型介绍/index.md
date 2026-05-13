@@ -428,7 +428,9 @@ console.log(new Date(Date.parse('2021-04-18'))); // Sun Apr 18 2021 08:00:00 GMT
 
 ```javascript
 console.log(Date.now()); // 1618736991485
+// eslint-disable-next-line e18e/prefer-date-now
 console.log(+new Date()); // 1618736991485
+// eslint-disable-next-line e18e/prefer-date-now
 console.log(new Date().getTime()); // 1618736991485
 ```
 

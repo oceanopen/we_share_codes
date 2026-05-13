@@ -832,7 +832,7 @@ module.exports = function core() {
           opts.forEach((opt) => {
             assert(opt.libraryName, 'libraryName should be provided');
           });
-          if (!opts.find(opt => opt.libraryName === source.value)) {
+          if (!opts.some(opt => opt.libraryName === source.value)) {
             return;
           }
         }
