@@ -56,6 +56,10 @@ export default [
     link: '/tools/20250210_科学上网/',
   },
   {
+    text: 'Rust 开发环境安装',
+    link: '/tools/20260609_Rust开发环境安装/',
+  },
+  {
     text: 'Mac 使用',
     collapsed: false,
     items: [
