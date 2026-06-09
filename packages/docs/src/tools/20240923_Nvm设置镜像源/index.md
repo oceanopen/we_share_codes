@@ -1,63 +1,116 @@
 # Nvm 设置镜像源
 
-## 1. Mac 设置
+在国内使用 nvm 安装 Node.js 时，默认从 `nodejs.org` 下载，速度较慢。通过配置镜像源可以显著加速下载。
 
-在使用 `NVM（Node Version Manager）` 管理 `Node.js` 版本时，可以使用 `NVM_NODEJS_ORG_MIRROR` 环境变量来指定 `Node.js` 安装包的镜像源地址。
+## 1. Mac / Linux 设置
+
+通过 `NVM_NODEJS_ORG_MIRROR` 环境变量指定 Node.js 下载镜像。
+
+在 `~/.zshrc`（macOS 默认）或 `~/.bashrc`（Linux）中添加：
 
 ```bash
-vim ~/.bash_profile
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
 ```
 
-增加以下内容：
+保存后执行：
 
 ```bash
-export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/ # 切换为国内镜像
-```
-
-保存退出，执行以下命令使配置生效：
-
-```bash
-source ~/.bash_profile
+source ~/.zshrc
 ```
 
 验证：
 
 ```bash
 echo $NVM_NODEJS_ORG_MIRROR
-# https://npmmirror.com/mirrors/node/
+# https://npmmirror.com/mirrors/node
 
 nvm ls-remote
-# v0.1.14
-# ...
+# 正常列出所有 Node.js 版本
 ```
 
-另外也可以在终端直接执行：
+也可以临时使用（仅当前终端生效）：
 
 ```bash
-export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/
+NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node nvm install 22
 ```
-
-这样设置后，在当前终端窗口，nvm 就会使用 npmmirror.com 的镜像源了。
 
 ## 2. Windows 设置
 
-在 `nvm` 的安装路径下，找到 `settings.txt` 文件，设置 `node_mirror` 与 `npm_mirror` 为国内镜像地址。
+### 方式一：命令行配置（推荐）
+
+nvm-windows 支持 `nvm node_mirror` 命令直接设置：
 
 ```bash
-# 1. 使用 nvm root 命令 找到 nvm 所在位置
+# 设置 Node 镜像
+nvm node_mirror https://npmmirror.com/mirrors/node/
+
+# 设置 npm 镜像
+nvm npm_mirror https://npmmirror.com/mirrors/npm/
+```
+
+设置后验证：
+
+```bash
+nvm install 22
+```
+
+### 方式二：修改配置文件
+
+找到 nvm 安装目录下的 `settings.txt` 文件：
+
+```bash
+# 查看 nvm 安装路径
 nvm root
-# Current Root: C:\Users\[user]\AppData\Roaming\nvm
+# 输出: C:\Users\[user]\AppData\Roaming\nvm
 ```
 
-```bash
-# 2. 找到 settings.txt
-cd C:/Users/[user]/AppData/Roaming/nvm/
-ll
-# -rw-r--r-- 1 [user] 1049089      75 3月  29 15:12 settings.txt
-```
+编辑 `settings.txt`，添加或修改以下内容：
 
-```bash
-# 3. 在 settings.txt 末尾加上：
+```txt
 node_mirror: https://npmmirror.com/mirrors/node/
 npm_mirror: https://npmmirror.com/mirrors/npm/
 ```
+
+## 3. npm / pnpm 镜像源设置
+
+nvm 镜像源仅加速 Node.js 二进制文件下载。npm 包的下载需要单独配置 registry 镜像。
+
+### npm
+
+```bash
+# 查看当前 registry
+npm config get registry
+
+# 设置为国内镜像
+npm config set registry https://registry.npmmirror.com
+
+# 恢复为官方源
+npm config set registry https://registry.npmjs.org
+```
+
+### pnpm
+
+```bash
+# 查看当前 registry
+pnpm config get registry
+
+# 设置为国内镜像
+pnpm config set registry https://registry.npmmirror.com
+
+# 恢复为官方源
+pnpm config set registry https://registry.npmjs.org
+```
+
+### 使用 .npmrc 文件（项目级）
+
+在项目根目录创建 `.npmrc` 文件：
+
+```txt
+registry=https://registry.npmmirror.com
+```
+
+## 4. 相关链接
+
+- [npmmirror 镜像站](https://npmmirror.com/)
+- [nvm 官方文档 - Use a mirror of node binaries](https://github.com/nvm-sh/nvm#use-a-mirror-of-node-binaries)
+- [nvm-windows](https://github.com/coreybutler/nvm-windows)
