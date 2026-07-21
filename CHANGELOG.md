@@ -1,3 +1,24 @@
+# [1.0.0](https://github.com/oceanopen/we_share_codes/compare/v0.0.4...v1.0.0) (2026-07-21)
+
+
+### Features
+
+* @antfu/eslint-config 升级到 v9.0.0 版本 ([6911639](https://github.com/oceanopen/we_share_codes/commit/69116397b8b14c61034bc28e1c0068f4454ab16b))
+* 科学上网 ([2be2906](https://github.com/oceanopen/we_share_codes/commit/2be290643299707f49d5f09c728f3b329b715df9))
+* add Mac 终端支持 tree 命令 ([953adc2](https://github.com/oceanopen/we_share_codes/commit/953adc2d0c175259d8f3d7cab028832463856dca))
+* add Web 安全之 CSP 策略 ([62cb9e9](https://github.com/oceanopen/we_share_codes/commit/62cb9e93f88288255af012dc1efd59281bf39e84))
+* docs 增加 Mac 安装 Docker ([b9e552c](https://github.com/oceanopen/we_share_codes/commit/b9e552c6558d9d92643d1e43000dcb5dbbe00817))
+* git 如何同步本地、远程的分支和 tag 信息 ([#8](https://github.com/oceanopen/we_share_codes/issues/8)) ([4c691c4](https://github.com/oceanopen/we_share_codes/commit/4c691c4f4d8d5ac89d75ba725bd28895fe40084f))
+* mac Github using SSH over the HTTPS port ([2ad9781](https://github.com/oceanopen/we_share_codes/commit/2ad9781a5579d4ce3af2db89269edc6cf0e279c5))
+* mac iTerm2 安装及配置 ([81a4bd7](https://github.com/oceanopen/we_share_codes/commit/81a4bd7dac17d775899cfe41ca55ac4673b81733))
+* **tools:** 新增 Rust 开发环境安装教程 ([6a6f5f8](https://github.com/oceanopen/we_share_codes/commit/6a6f5f819ef43b39ed1c2118b15304713e48e5c1))
+* update package.json ([5290d60](https://github.com/oceanopen/we_share_codes/commit/5290d60d0bb548c66a564f8b8b3d0dd477faf05a))
+* vitepress 升级到 v1.6.4 ([f1ddfe1](https://github.com/oceanopen/we_share_codes/commit/f1ddfe1250c249156ea7afe9ab53004ae71df871))
+* vitepress pwa 配置优化 ([d43069c](https://github.com/oceanopen/we_share_codes/commit/d43069c72862031c760587ead74fb64bc3370394))
+* vscode 命令行安装库宗 ([05d4ab3](https://github.com/oceanopen/we_share_codes/commit/05d4ab3c415194d28af53dd6648de6e7c792c0f9))
+
+
+
 ## [0.0.4](https://github.com/oceanopen/we_share_codes/compare/v0.0.3...v0.0.4) (2024-12-04)
 
 
