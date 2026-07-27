@@ -228,9 +228,22 @@ git push [remote] [tag]
 # 提交所有 tag
 git push [remote] --tags
 
+# 拉取远程所有 tag 到本地（仅新增，不会删除本地多余的 tag）
+git fetch [remote] --tags
+
+# 真正的「同步」—— 一并删除远程已删除的 tags
+# --tags 只增不删，远程删了的 tag 本地还在；加 --prune-tags 才会清理
+git fetch --prune --prune-tags
+
+# 设为默认行为：每次 fetch 自动清理远程已删除的分支与 tag
+git config remote.origin.prune true
+git config remote.origin.pruneTags true
+
 # 新建一个分支，指向某个 tag
 git checkout -b [branch] [tag]
 ```
+
+> ⚠️ 注意：`pruneTags` 通常需要和 `prune` 一起开启，单独开启 `pruneTags` 在某些 git 版本上不生效。
 
 ### 2.7 查看信息
 
