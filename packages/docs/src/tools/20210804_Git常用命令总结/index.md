@@ -387,6 +387,24 @@ git stash
 git stash pop
 ```
 
+### 2.10 自定义日志日期格式
+
+```bash
+# 使用 Git 内置的 ISO 格式，输出接近 YYYY-MM-DD HH:MM:SS +时区
+git log --date=iso
+git log --date=iso8601 # 等价写法
+
+# 自定义日期格式（最精确），完全符合 YYYY-MM-DD HH:MM:SS，不含时区
+git log --date=format:'%Y-%m-%d %H:%M:%S'
+
+# 设为全局默认，之后 git log 直接生效，无需每次加 --date
+git config --global log.date "format:%Y-%m-%d %H:%M:%S"
+# 或直接使用内置 ISO 格式
+git config --global log.date "iso"
+```
+
+> ⚠️ 注意：`--date=format:` 后接的是 `strftime` 格式符，`%Y` 年、`%m` 月、`%d` 日、`%H` 时、`%M` 分、`%S` 秒。
+
 ## 3. 常见操作
 
 ### 3.1 Git 修改已经提交的用户名信息
